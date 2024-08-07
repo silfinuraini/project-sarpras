@@ -18,13 +18,15 @@ class ItemFactory extends Factory
     {
         return [
             'nama' => $this->faker->word(),
-            'kode' => 'item-' . $this->faker->numberBetween(1, 10),
-            'merek' => $this->faker->word(),
-            'unit' => 'unit',
+            'kode' => 'BRG' . str_pad($this->faker->unique()->numberBetween(1, 999), 3, '0', STR_PAD_LEFT),
+            'merk' => $this->faker->word(),
+            'satuan' => 'pcs',
+            'gambar' => $this->faker->imageUrl(640, 480, 'person', true),
             'harga' => $this->faker->numberBetween(2000, 5000),
-            'kategori_id' => $this->faker->numberBetween(1, 10),
             'stok' => $this->faker->numberBetween(10, 100),
             'stok_minimum' => $this->faker->numberBetween(10, 100),
+            'kategori_id' => $this->faker->numberBetween(1, 10),
+            'deskripsi' => $this->faker->text(),
         ];
     }
 }

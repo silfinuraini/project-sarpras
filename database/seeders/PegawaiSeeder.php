@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Unit;
+use App\Models\Pegawai;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class UnitSeeder extends Seeder
+class PegawaiSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Unit::factory(10)->create();
+        Pegawai::factory(10)->create();
     }
 }

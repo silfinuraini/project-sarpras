@@ -10,4 +10,7 @@ class Permintaan extends Model
     use HasFactory;
     public $table = "permintaan";
 
+    protected $guarded = ['id'];
+
+
 }

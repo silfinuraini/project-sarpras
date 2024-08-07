@@ -10,4 +10,7 @@ class Supplier extends Model
     use HasFactory;
     public $table = "supplier";
 
+    protected $guarded = ['id'];
+
+
 }

@@ -12,16 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('detail_permintaan', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('permintaan_id');
-            $table->unsignedBigInteger('item_id');
+            $table->string('kode_permintaan', 20)->primary();
+            $table->string('kode_item', 20)->unique();
             $table->integer('kuantiti');
             $table->integer('kuantiti_disetujui');
             $table->timestamps();
 
-            $table->foreign('permintaan_id')->references('id')->on('permintaan')->onDelete('cascade');
-            $table->foreign('item_id')->references('id')->on('item')->onDelete('cascade');
+            $table->foreign('kode_permintaan')->references('kode')->on('permintaan')->onDelete('cascade');
+            $table->foreign('kode_item')->references('kode')->on('item')->onDelete('cascade');
         });
+
     }
 
     /**

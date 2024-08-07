@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pengajuan', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('unit_id');
+        
+        Schema::create('pengadaan', function (Blueprint $table) {
+            $table->string('kode', 20)->primary();
+            $table->string('nip', 20)->unique();
+            $table->integer('jumlah_barang')->default(0);
             $table->timestamps();
             
-            $table->foreign('unit_id')->references('id')->on('unit')->cascadeOnDelete();
+            $table->foreign('nip')->references('nip')->on('pegawai')->cascadeOnDelete();
         });
+
     }
 
     /**
@@ -25,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pengajuans');
+        Schema::dropIfExists('pengadaan');
     }
 };

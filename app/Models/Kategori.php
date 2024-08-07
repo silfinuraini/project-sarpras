@@ -10,4 +10,7 @@ class Kategori extends Model
     use HasFactory;
     public $table = "kategori";
 
+    protected $guarded = ['id'];
+    
+
 }

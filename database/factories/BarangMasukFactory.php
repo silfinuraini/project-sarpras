@@ -17,8 +17,10 @@ class BarangMasukFactory extends Factory
     public function definition(): array
     {
         return [
-            'unit_id' => $this->faker->numberBetween(1, 10),
-            'supplier_id' => $this->faker->numberBetween(1, 10),
+            'kode' => 'BM' . str_pad($this->faker->unique()->numberBetween(1, 999), 3, '0', STR_PAD_LEFT),
+            'nip' => $this->faker->randomNumber(10),
+            'kode_supplier' => $this->faker->numberBetween(1, 10),
+            'jumlah_item' => $this->faker->numberBetween(1, 10),
         ];
     }
 }

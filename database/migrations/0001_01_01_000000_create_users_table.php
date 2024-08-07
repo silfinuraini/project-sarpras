@@ -11,17 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
+        
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama', 50);
-            $table->string('email', 50)->unique();
-            $table->string('nomer_induk', 10)->unique();
-            $table->enum('role', ['admin', 'pengawas', 'unit']);
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('username', 50);
             $table->string('password');
+            $table->enum('role', ['admin', 'unit', 'pengawas'])->default('unit');
+            $table->string('nip', 20)->primary();
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('nip')->references('nip')->on('pegawai')->onDelete('cascade');
+            
         });
+
 
         // Schema::create('users', function (Blueprint $table) {
         //     $table->id();

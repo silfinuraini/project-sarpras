@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('unit', function (Blueprint $table) {
-            $table->id();
+        Schema::create('pegawai', function (Blueprint $table) {
+            $table->string('nip', 20)->primary();
+            $table->string('email', 50)->unique();
+            $table->string('avatar')->nullable();
             $table->string('nama', 50);
-            $table->string('nama_ketua', 50);
-            $table->unsignedBigInteger('user_id');
+            $table->rememberToken();
             $table->timestamps();
-            
-            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });
+
     }
 
     /**
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('units');
+        Schema::dropIfExists('pegawai');
     }
 };

@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Permintaan>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Pegawai>
  */
-class PermintaanFactory extends Factory
+class PegawaiFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,8 +18,9 @@ class PermintaanFactory extends Factory
     {
         return [
             'nip' => $this->faker->randomNumber(5),
-            'kode' => 'PM' . str_pad($this->faker->unique()->numberBetween(1, 999), 3, '0', STR_PAD_LEFT),
-            'jumlah_barang' => $this->faker->numberBetween(1,10),
+            'email' => $this->faker->email(),
+            'avatar' => $this->faker->imageUrl(640, 480, 'person', true),
+            'nama' => $this->faker->name(),
         ];
     }
 }

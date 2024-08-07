@@ -9,5 +9,7 @@ class DetailBarangMasuk extends Model
 {
     use HasFactory;
     public $table = "detail_barang_masuk";
+    protected $guarded = ['id'];
+
 
 }

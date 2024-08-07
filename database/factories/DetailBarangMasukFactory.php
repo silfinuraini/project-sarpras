@@ -17,8 +17,8 @@ class DetailBarangMasukFactory extends Factory
     public function definition(): array
     {
         return [
-            'item_id' => $this->faker->numberBetween(1, 10),
-            'barang_masuk_id' => $this->faker->numberBetween(1, 10),
+            'kode_barang_masuk' => 'BM' . str_pad($this->faker->unique()->numberBetween(1, 999), 3, '0', STR_PAD_LEFT),
+            'kode_item' => $this->faker->numberBetween(1, 10),
             'kuantiti' => $this->faker->numberBetween(1, 10)
         ];
     }

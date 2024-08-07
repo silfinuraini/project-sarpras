@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -12,6 +13,16 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
     public $table = "users";
 
+    protected $guarded = ['nip'];
+    protected $primaryKey = 'nip';
+    public $incrementing = false;
+    protected $keyType = 'string';
+    
+
+    public function pegawai()
+    {
+        return $this->belongsTo(Pegawai::class);
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -19,7 +30,6 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
     ];
@@ -45,5 +55,7 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+
+        
     }
 }
