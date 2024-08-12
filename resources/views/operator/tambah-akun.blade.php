@@ -37,7 +37,7 @@
                     </h3>
                     <div class="avatar my-2 mx-10">
                         <div class="w-full rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
                         </div>
                     </div>
                     <button
@@ -53,29 +53,26 @@
                     <h3 class="mb-8 font-semibold text-gray-800 dark:text-gray-300">
                         Masukkan data akun
                     </h3>
-                    <select id="namaPegawai" class="select select-bordered w-full bg-white mb-2 border-purple-600 text-gray-600">
-                        <option disabled selected>Who shot first?</option>
-                        <option>Han Solo</option>
-                        <option>Greedo</option>
-                    </select>
+
+                    <label class="input input-bordered flex items-center mb-2 bg-white text-gray-600 border-purple-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-70" style="fill: #430A5D;"
+                            viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path
+                                d="M96 0C60.7 0 32 28.7 32 64l0 384c0 35.3 28.7 64 64 64l288 0c35.3 0 64-28.7 64-64l0-384c0-35.3-28.7-64-64-64L96 0zM208 288l64 0c44.2 0 80 35.8 80 80c0 8.8-7.2 16-16 16l-192 0c-8.8 0-16-7.2-16-16c0-44.2 35.8-80 80-80zm-32-96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zM512 80c0-8.8-7.2-16-16-16s-16 7.2-16 16l0 64c0 8.8 7.2 16 16 16s16-7.2 16-16l0-64zM496 192c-8.8 0-16 7.2-16 16l0 64c0 8.8 7.2 16 16 16s16-7.2 16-16l0-64c0-8.8-7.2-16-16-16zm16 144c0-8.8-7.2-16-16-16s-16 7.2-16 16l0 64c0 8.8 7.2 16 16 16s16-7.2 16-16l0-64z" />
+                        </svg>
+                        <select id="namaPegawai"
+                        class="grow ms-4 border-none w-full bg-white text-sm text-gray-600">
+                           
+                        </select>
+                    </label>
                     <label
                         class="input input-bordered flex focus:outline-none items-center mb-2 bg-white text-gray-600 border-purple-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="w-4 h-4 opacity-70"
-                            style="fill: #430A5D;">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-70" style="fill: #430A5D;"
+                            viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                             <path
-                                d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-                            <path
-                                d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
+                                d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
                         </svg>
-                        <input type="text" class="grow ms-4 focus:outline-none border-none" placeholder="Email" />
-                    </label>
-                    <label class="input input-bordered flex items-center mb-2 bg-white text-gray-600 border-purple-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
-                            class="w-4 h-4 opacity-70" style="fill: #430A5D;">
-                            <path
-                                d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
-                        </svg>
-                        <input type="text" class="grow ms-4 border-none" placeholder="Username" />
+                        <input type="text" class="grow ms-4 focus:outline-none border-none" placeholder="Username" />
                     </label>
                     <label class="input input-bordered flex items-center mb-2 bg-white text-gray-600 border-purple-600">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
@@ -84,7 +81,7 @@
                                 d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
                                 clip-rule="evenodd" />
                         </svg>
-                        <input type="password" class="grow ms-4 border-none" value="password" />
+                        <input type="text" class="grow ms-4 border-none" placeholder="Username" />
                     </label>
                 </div>
             </div>
@@ -93,5 +90,20 @@
                 Buat
             </button>
         </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+        <script>
+            $(document).ready(function(){
+                $('#namaPegawai').select2({
+                    placeholder: 'Nama Pegawai',
+                    ajax: {
+                        url: "{{ route('akun.create') }}"
+                    }
+                });
+            });
+
+        </script>
     </main>
 @endsection

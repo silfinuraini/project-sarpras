@@ -9,17 +9,26 @@ class Item extends Model
 {
     use HasFactory;
     public $table = "item";
+    protected $primaryKey = 'kode';
+    protected $keyType = 'string';
+
+    public function getRouteKeyName()
+    {
+        return 'kode';
+    }
 
     protected $fillable =
     [
-        'nama',
         'kode',
-        'merek',
+        'nama',
+        'merk',
         'satuan',
+        'gambar',
         'harga',
         'stok',
         'stok_minimum',
-        'kategori_id',  
+        'kategori_id', 
+        'deskripsi' 
         
     ];
 

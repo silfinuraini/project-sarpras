@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pegawai;
 use App\Models\Unit;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,7 +23,8 @@ class KelolaAkunController extends Controller
      */
     public function create()
     {
-        //
+        $pegawai = Pegawai::paginate(3);
+        return view('operator.tambah-akun', compact('pegawai'));
     }
 
     /**
@@ -30,8 +32,7 @@ class KelolaAkunController extends Controller
      */
     public function store(Request $request)
     {
-        // $users = User::create($request->all());
-        return view('operator.tambah-akun');
+        // 
     }
 
     /**

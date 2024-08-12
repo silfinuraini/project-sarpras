@@ -14,6 +14,7 @@
     <script src="{{ asset('src/js/charts-pie.js') }}" defer></script>
     <script src="{{ asset('src/js/focus-trap.js') }}" defer></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     @vite('resources/css/app.css')
 </head>
 
@@ -21,25 +22,20 @@
     <div class="flex h-screen bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
         <!-- Desktop sidebar -->
         @include('patrials.sidebar')
-        
+
         <!-- Mobile sidebar -->
         <!-- Backdrop -->
         @include('patrials.mobile-hamburger')
-        
+
         <div class="flex flex-col flex-1 w-full">
             @include('patrials.navbar')
-            
+
             @yield('content')
-            
+
         </div>
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#namaPegawai').select2();
-        });
-    </script>
+
+
 </body>
 
 </html>

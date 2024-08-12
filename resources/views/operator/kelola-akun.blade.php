@@ -60,7 +60,7 @@
                                 <div class="avatar ">
                                     <div class="w-full mask mask-squircle">
                                         <img
-                                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
                                     </div>
                                 </div>
                                 <div class="my-6 ms-2">
@@ -68,7 +68,7 @@
                                         {{ $user->pegawai->nama}}
                                     </h1>
                                     <h6 class="mb-4 text-sm font-bold text-purple-600">
-                                        {{ $user->email }}
+                                        {{ $user->username }}
                                     </h6>
                                     <div class="gap-2" style="display: flex;">
                                         <a class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 active:text-white hover:text-white transition-colors duration-150 bg-transparent border border-purple-600 rounded-box active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"

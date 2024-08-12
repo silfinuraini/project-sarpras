@@ -33,7 +33,7 @@
             <!-- General elements -->
 
             <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
-                <form action="{{ route('item.update', $items->id) }}" method="POST">
+                <form action="{{ route('item.update', $items->kode) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="grid gap-6 mt-4 md:grid-cols-2" style="margin-left: 1%; margin-right: 1%;">
@@ -54,7 +54,7 @@
                         <div>
                             <label class="block text-sm">
                                 <b><span class="text-gray-700 dark:text-gray-400">Merk</span></b>
-                                <input type="text" value="{{ $items->merek }}ron" name="merek"
+                                <input type="text" value="{{ $items->merk }}" name="merk"
                                     class="input input-bordered text-sm block w-full mt-1 max-w-s text-gray-700 bg-white border-purple-300" />
                             </label>
                         </div>
@@ -114,7 +114,7 @@
                                 <b><span class="text-gray-700  dark:text-gray-400">
                                         Upload gambar
                                     </span></b>
-                                <input type="file"
+                                <input type="file" name="gambar" value="{{ $items->gambar }}"
                                     class="block mt-1 file-input file-input-ghost w-full bg-white border-purple-300 text-gray-600" />
                             </label>
                         </div>
@@ -123,9 +123,10 @@
                                     Deskripsi barang
                                 </span></b>
                             <textarea class="block textarea mt-1 textarea-bordered bg-white border-purple-300 text-gray-600" style="width: 100%;"
-                                value="{{ $items->deskripsi }}" name="deskripsi"></textarea>
+                                name="deskripsi">{{ $items->deskripsi }}</textarea>
                         </label>
                     </div>
+                    
                     <button
                         class="mt-2 mb-2 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
                         style="width: 100%;" type="submit">

@@ -18,7 +18,7 @@ class PegawaiFactory extends Factory
     {
         return [
             'nip' => $this->faker->randomNumber(5),
-            'email' => $this->faker->email(),
+            'email' => $this->faker->safeEmail(),
             'avatar' => $this->faker->imageUrl(640, 480, 'person', true),
             'nama' => $this->faker->name(),
         ];

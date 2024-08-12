@@ -28,13 +28,13 @@ Route::get('operator/data-barang', [DataBarangController::class, 'index'])->name
 
 Route::get('operator/tambah-barang', [DataBarangController::class, 'tambahbarang'])->name('item.index');
 Route::post('operator/data-barang', [DataBarangController::class, 'store'])->name('item.store');
-Route::get('operator/{id}/edit-barang', [DataBarangController::class, 'edit'])->name('item.edit');
-Route::put('operator/{id}', [DataBarangController::class, 'update'])->name('item.update');
-Route::delete('operator/{id}', [DataBarangController::class, 'destroy'])->name('item.destroy');
+Route::get('operator/{kode}/edit-barang', [DataBarangController::class, 'edit'])->name('item.edit');
+Route::put('operator/{kode}', [DataBarangController::class, 'update'])->name('item.update');
+Route::delete('operator/{kode}', [DataBarangController::class, 'destroy'])->name('item.destroy');
 
 Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
 Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.store');
 Route::delete('/kategori/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
 
 Route::get('/kelola-akun', [KelolaAkunController::class, 'index'])->name('kelolaakun');
-Route::get('/kelola-akun/tambah-akun', [KelolaAkunController::class, 'store'])->name('akun.store');
+Route::get('/kelola-akun/tambah-akun', [KelolaAkunController::class, 'create'])->name('akun.create');

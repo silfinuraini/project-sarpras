@@ -14,8 +14,11 @@ return new class extends Migration
         Schema::create('barang_keluar', function (Blueprint $table) {
             $table->string('kode', 20)->primary();
             $table->string('nip', 20)->unique();
-            $table->integer('jumlah_barang')->default(0);
+            $table->integer('jumlah_item')->default(0);
             $table->timestamps();
+
+            $table->foreign('nip')->references('nip')->on('pegawai')->cascadeOnDelete();
+
         });
     }
 

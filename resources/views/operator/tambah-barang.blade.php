@@ -53,7 +53,7 @@
                         <div>
                             <label class="block text-sm">
                                 <b><span class="text-gray-700 dark:text-gray-400">Merk</span></b>
-                                <input type="text" placeholder="Ex. Polytron" name="merek"
+                                <input type="text" placeholder="Ex. Polytron" name="merk"
                                     class="input input-bordered text-sm block w-full mt-1 max-w-s text-gray-700 bg-white border-purple-300" />
                             </label>
                         </div>
@@ -101,7 +101,7 @@
                         <div>
                             <label class="block text-sm">
                                 <b><span class="text-gray-700 dark:text-gray-400">Stok Minimum</span></b>
-                                <input type="text" placeholder="Type here" name="stok_minum"
+                                <input type="text" placeholder="Type here" name="stok_minimum"
                                     class="input input-bordered  text-sm block w-full mt-1 max-w-s text-gray-700 bg-white border-purple-300" />
                             </label>
                         </div>
@@ -113,7 +113,7 @@
                                 <b><span class="text-gray-700  dark:text-gray-400">
                                         Upload gambar
                                     </span></b>
-                                <input type="file"
+                                <input type="file" name="gambar"
                                     class="block mt-1 file-input file-input-ghost w-full bg-white border-purple-300 text-gray-600" />
                             </label>
                         </div>

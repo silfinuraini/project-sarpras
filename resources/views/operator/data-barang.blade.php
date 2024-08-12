@@ -172,7 +172,7 @@
                                             </div>
                                         </td>
                                         <td class="px-4 py-3 text-sm">
-                                            {{ $item->merek }}
+                                            {{ $item->merk }}
                                         </td>
                                         <td class="px-4 py-3 text-xs">
                                             {{ $item->stok }}
@@ -196,7 +196,7 @@
                                                     </svg>
                                                 </button>
 
-                                                <a href="{{ route('item.edit', $item->id) }}"
+                                                <a href="{{ route('item.edit', $item->kode) }}"
                                                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                                     aria-label="Edit">
                                                     <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
@@ -285,7 +285,7 @@
                                                     </form>
                                                 </dialog>
 
-                                                <form action="{{ route('item.destroy', $item->id) }}" method="POST">
+                                                <form action="{{ route('item.destroy', $item->kode) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
