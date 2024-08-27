@@ -12,7 +12,7 @@ class Pegawai extends Model
 
     public $table = "pegawai";
 
-    protected $guarded = ['nip'];
+    // protected $guarded = ['nip'];
     protected $primaryKey = "nip";
     protected $keyType = "string";
 
@@ -20,4 +20,11 @@ class Pegawai extends Model
     {
         return $this->hasMany(User::class, 'nip');
     }
+
+    protected $fillable =
+    [
+       'nip',
+       'nama',
+       'email' 
+    ];
 }

@@ -47,11 +47,9 @@
                 </button>
                 <template x-if="isPagesMenuOpen">
                     <ul x-transition:enter="transition-all ease-in-out duration-300"
-                        x-transition:enter-start="opacity-25 max-h-0"
-                        x-transition:enter-end="opacity-100 max-h-xl"
+                        x-transition:enter-start="opacity-25 max-h-0" x-transition:enter-end="opacity-100 max-h-xl"
                         x-transition:leave="transition-all ease-in-out duration-300"
-                        x-transition:leave-start="opacity-100 max-h-xl"
-                        x-transition:leave-end="opacity-0 max-h-0"
+                        x-transition:leave-start="opacity-100 max-h-xl" x-transition:leave-end="opacity-0 max-h-0"
                         class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
                         aria-label="submenu">
                         <li
@@ -60,7 +58,7 @@
                         </li>
                         <li
                             class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                            <a class="w-full" href="kelola-barang.html">Barang masuk</a>
+                            <a class="w-full" href="{{ route('barangmasuk') }}">Barang masuk</a>
                         </li>
                         <li
                             class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
@@ -90,6 +88,18 @@
                         <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
                     </svg>
                     <span class="ml-4">Kategori</span>
+                </a>
+            </li>
+            <li class="relative px-6 py-3">
+                <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                    href="{{ route('supplier') }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" aria-hidden="true" fill="currentColor" stroke-linecap="round"
+                        stroke-linejoin="round" stroke-width="2" stroke="currentColor"
+                        viewBox="0 0 640 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                        <path
+                            d="M256 48c0-26.5 21.5-48 48-48L592 0c26.5 0 48 21.5 48 48l0 416c0 26.5-21.5 48-48 48l-210.7 0c1.8-5 2.7-10.4 2.7-16l0-242.7c18.6-6.6 32-24.4 32-45.3l0-32c0-26.5-21.5-48-48-48l-112 0 0-80zM571.3 347.3c6.2-6.2 6.2-16.4 0-22.6l-64-64c-6.2-6.2-16.4-6.2-22.6 0l-64 64c-6.2 6.2-6.2 16.4 0 22.6s16.4 6.2 22.6 0L480 310.6 480 432c0 8.8 7.2 16 16 16s16-7.2 16-16l0-121.4 36.7 36.7c6.2 6.2 16.4 6.2 22.6 0zM0 176c0-8.8 7.2-16 16-16l352 0c8.8 0 16 7.2 16 16l0 32c0 8.8-7.2 16-16 16L16 224c-8.8 0-16-7.2-16-16l0-32zm352 80l0 224c0 17.7-14.3 32-32 32L64 512c-17.7 0-32-14.3-32-32l0-224 320 0zM144 320c-8.8 0-16 7.2-16 16s7.2 16 16 16l96 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-96 0z" />
+                    </svg>
+                    <span class="ml-4">Supplier</span>
                 </a>
             </li>
             <div class="px-6 my-6 absolute bottom-0 w-full">

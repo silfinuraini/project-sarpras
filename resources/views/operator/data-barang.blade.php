@@ -139,7 +139,6 @@
                                     class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700  dark:text-gray-400 dark:bg-gray-800">
                                     <th class="px-4 py-3">Kode</th>
                                     <th class="px-4 py-3">Barang</th>
-                                    <th class="px-4 py-3">Merk</th>
                                     <th class="px-4 py-3">Stok</th>
                                     <th class="px-4 py-3">Stok Minimum</th>
                                     <th class="px-4 py-3">Satuan</th>
@@ -171,13 +170,10 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="px-4 py-3 text-sm">
-                                            {{ $item->merk }}
-                                        </td>
                                         <td class="px-4 py-3 text-xs">
                                             {{ $item->stok }}
                                         </td>
-                                        <td class="px-4 py-3 text-xs">
+                                        <td class="px-4 py-3 text-xs text-center">
                                             {{ $item->stok_minimum }}
                                         </td>
                                         <td class="px-4 py-3 text-sm">
@@ -185,7 +181,7 @@
                                         </td>
                                         <td class="px-4 py-3">
                                             <div class="flex items-center space-x-4 text-sm">
-                                                <button onclick="my_modal_2.showModal()"
+                                                <button onclick="modalItem{{$item->kode}}.showModal()"
                                                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                                     aria-label="Delete">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
@@ -208,7 +204,7 @@
                                                 </a>
                                                 <!-- Open the modal using ID.showModal() method -->
 
-                                                <dialog id="my_modal_2" class="modal">
+                                                <dialog id="modalItem{{$item->kode}}" class="modal">
                                                     <div class="modal-box w-11/12 max-w-5xl rounded-box bg-white">
                                                         <div class="grid grid-cols-1 gap-1 md:grid-cols-2 lg:grid-cols-2">
                                                             <figure class="px-10 p-4">
@@ -225,7 +221,7 @@
                                                             </figure>
                                                             <div class="card-body">
                                                                 <h2 class="card-title font-bold">
-                                                                    Kertas HVS
+                                                                    {{ $item->nama }}
                                                                     <div class="badge badge-primary badge-outline">ATK
                                                                     </div>
                                                                 </h2>
@@ -236,37 +232,35 @@
                                                                             <tr class="border-none">
                                                                                 <td
                                                                                     class="col-span-3 font-extrabold text-lg">
-                                                                                    Rp56.000,00
+                                                                                    Rp{{ $item->harga }}
                                                                                 </td>
                                                                             </tr>
 
                                                                             <tr class="border-none">
                                                                                 <td class="col-span-3 font-semibold">
-                                                                                    Ketebalan 70 gsm, ukuran A4 (21 x
-                                                                                    29,7
-                                                                                    cm), 1 rim (500 lembar)
+                                                                                    {{$item->deskripsi}}
                                                                                 </td>
                                                                             </tr>
 
                                                                             <tr class="border-none">
                                                                                 <th>Kode barang</th>
                                                                                 <td>:</td>
-                                                                                <td>ATK001</td>
+                                                                                <td>{{ $item->kode }}</td>
                                                                             </tr>
                                                                             <tr class="border-none">
                                                                                 <th>Merk</th>
                                                                                 <td>:</td>
-                                                                                <td>Sinar Dunia</td>
+                                                                                <td>{{ $item->merk }}</td>
                                                                             </tr>
                                                                             <tr class="border-none">
                                                                                 <th>Stok</th>
                                                                                 <td>:</td>
-                                                                                <td>100</td>
+                                                                                <td>{{ $item->stok }}</td>
                                                                             </tr>
                                                                             <tr class="border-none">
                                                                                 <th>Satuan</th>
                                                                                 <td>:</td>
-                                                                                <td>Rim</td>
+                                                                                <td>{{ $item->satuan }}</td>
                                                                             </tr>
                                                                         </tbody>
                                                                     </table>

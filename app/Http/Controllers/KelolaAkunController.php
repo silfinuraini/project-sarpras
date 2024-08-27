@@ -14,8 +14,9 @@ class KelolaAkunController extends Controller
      */
     public function index()
     {
+        $pegawai = Pegawai::all();
         $users = User::with('pegawai')->get();
-        return view('operator.kelola-akun', compact('users'));
+        return view('operator.kelola-akun', compact('users', 'pegawai'));
     }
 
     /**
@@ -23,7 +24,7 @@ class KelolaAkunController extends Controller
      */
     public function create()
     {
-        $pegawai = Pegawai::paginate(3);
+        $pegawai = Pegawai::all();
         return view('operator.tambah-akun', compact('pegawai'));
     }
 
@@ -32,7 +33,13 @@ class KelolaAkunController extends Controller
      */
     public function store(Request $request)
     {
-        // 
+        $user = User::create([
+            'username' => $request->username,
+            'nip' => $request->nip,
+            'password' => $request->password
+        ]);
+
+        return redirect()->route('kelolaakun');
     }
 
     /**
@@ -46,17 +53,24 @@ class KelolaAkunController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $nip)
     {
-        //
+        $user = User::where('nip', $nip)->first();
+        $pegawai = Pegawai::all();
+
+        return redirect()->back();
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $nip)
     {
-        //
+        $user = User::where('nip', $nip)->first();
+        $user->update($request->all());
+
+        return redirect()->route('kelolaakun');
+
     }
 
     /**

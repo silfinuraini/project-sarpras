@@ -14,7 +14,7 @@ return new class extends Migration
        
         Schema::create('permintaan', function (Blueprint $table) {
             $table->string('kode', 20)->primary();
-            $table->string('nip', 20)->unique();
+            $table->string('nip', 20);
             $table->integer('jumlah_item')->default(0);
             $table->timestamps();
             

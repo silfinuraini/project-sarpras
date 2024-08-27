@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -24,13 +25,20 @@ class User extends Authenticatable
         return $this->belongsTo(Pegawai::class, 'nip');
     }
 
+    public function barangmasuk(): HasOne
+    {
+        return $this->hasOne(BarangMasuk::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'email',
+        'username',
+        'nip',
+        'role',
         'password',
     ];
 

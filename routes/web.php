@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\DataBarangController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KelolaAkunController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -38,3 +41,19 @@ Route::delete('/kategori/{id}', [KategoriController::class, 'destroy'])->name('k
 
 Route::get('/kelola-akun', [KelolaAkunController::class, 'index'])->name('kelolaakun');
 Route::get('/kelola-akun/tambah-akun', [KelolaAkunController::class, 'create'])->name('akun.create');
+Route::get('/kelola-akun/{nip}/edit-akun', [KelolaAkunController::class, 'edit'])->name('akun.edit');
+Route::put('/kelola-akun/{nip}/edit-akun', [KelolaAkunController::class, 'update'])->name('akun.update');
+Route::post('/kelola-akun/tambah-akun', [KelolaAkunController::class, 'store'])->name('akun.store');
+
+Route::get('/supplier', [SupplierController::class, 'index'])->name('supplier');
+Route::post('/supplier', [SupplierController::class, 'store'])->name('supplier.store');
+Route::put('/supplier/{kode}', [SupplierController::class, 'update'])->name('supplier.update');
+Route::delete('/supplier/{kode}', [SupplierController::class, 'destroy'])->name('supplier.destroy');
+
+Route::get('/pegawai', [PegawaiController::class, 'index'])->name('pegawai');
+Route::post('/pegawai', [PegawaiController::class, 'store'])->name('pegawai.store');
+Route::delete('/pegawai/{nip}', [PegawaiController::class, 'destroy'])->name('pegawai.destroy');
+
+
+Route::get('/barang-masuk', [BarangMasukController::class, 'index'])->name('barangmasuk');
+Route::post('/barang-masuk', [BarangMasukController::class, 'store'])->name('barangmasuk.store');

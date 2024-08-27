@@ -36,24 +36,11 @@
                 <form action="{{ route('item.store') }}" method="POST">
                     @csrf
                     <div class="grid gap-6 mt-4 md:grid-cols-2" style="margin-left: 1%; margin-right: 1%;">
-                        <div>
-                            <label class="block text-sm">
-                                <b><span class="text-gray-700 dark:text-gray-400">Kode</span></b>
-                                <input type="text" placeholder="Ex. ATK001" name="kode"
-                                    class="input input-bordered text-sm block w-full mt-1 max-w-s text-gray-700 bg-white border-purple-300" />
-                            </label>
-                        </div>
+                        
                         <div>
                             <label class="block text-sm">
                                 <b><span class="text-gray-700 dark:text-gray-400">Nama</span></b>
                                 <input type="text" placeholder="Type here" name="nama"
-                                    class="input input-bordered text-sm block w-full mt-1 max-w-s text-gray-700 bg-white border-purple-300" />
-                            </label>
-                        </div>
-                        <div>
-                            <label class="block text-sm">
-                                <b><span class="text-gray-700 dark:text-gray-400">Merk</span></b>
-                                <input type="text" placeholder="Ex. Polytron" name="merk"
                                     class="input input-bordered text-sm block w-full mt-1 max-w-s text-gray-700 bg-white border-purple-300" />
                             </label>
                         </div>

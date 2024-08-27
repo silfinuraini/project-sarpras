@@ -47,7 +47,24 @@ class  DataBarangController extends Controller
             //     'kategori_id' => 'required',  
             // ]);
 
-        $item = Item::create($request->all());
+            $kategoriID = $request->input('kategori_id');
+            $kategori = Kategori::find($kategoriID);
+
+            $namaKode = $kategori->alias;
+            $randomNumber = rand(1000, 9999);
+            
+            $code = $namaKode . $randomNumber;
+
+            $item = item::create([
+                'kode' => $code,
+                'nama' => $request->nama,
+                'satuan' => $request->satuan,
+                'harga' => $request->harga,
+                'stok' => $request->stok,
+                'stok_minimum' => $request->stok_minimum,
+                'kategori_id' => $request->kategori_id,
+                'deskripsi' => $request->deskripsi
+            ]);
 
         return redirect()->route('databarang')->with('success', 'Barang berhasil ditambahkan.');
     }
