@@ -35,7 +35,7 @@
             <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
                 <form action="{{ route('item.store') }}" method="POST">
                     @csrf
-                    <div class="grid gap-6 mt-4 md:grid-cols-2" style="margin-left: 1%; margin-right: 1%;">
+                    <div class="grid gap-6 mt-4 md:grid-cols-4" style="margin-left: 1%; margin-right: 1%;">
                         
                         <div>
                             <label class="block text-sm">

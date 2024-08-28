@@ -17,12 +17,13 @@ class BarangMasukController extends Controller
      */
     public function index()
     {
-        $namabarang = Item::all();
+        $item = Item::all();
         $supplier = Supplier::all();
         $user = User::all();
         $barangmasuk = BarangMasuk::with('user', 'supplier')->get();
+        $detailBM = DetailBarangMasuk::with('item')->get();
 
-        return view('operator.barang-masuk', compact('namabarang', 'barangmasuk', 'supplier'));
+        return view('operator.barang-masuk', compact('item', 'barangmasuk', 'supplier', 'detailBM'));
     }
 
     /**
@@ -43,7 +44,7 @@ class BarangMasukController extends Controller
 
         $nip = Auth::user()->nip;
 
-        $kodeBarang = $request->input('namabarang');
+        $kodeBarang = $request->input('item');
         $jumlah = count($kodeBarang);
 
         $kuantiti =  $request->kuantiti;

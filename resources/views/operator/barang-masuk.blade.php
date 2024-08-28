@@ -217,8 +217,8 @@
                                     </td>
                                     <td class="px-4 py-3">
                                         <div class="flex items-center justify-center space-x-4 text-sm">
-                                            <!-- input berita acara -->
-                                            <button onclick="inputFile.showModal()"
+                                            <!-- Button beritaAcara -->
+                                            <button onclick="beritaAcara.showModal()"
                                                 class="flex items-center justify-center w-8 h-8 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                                 aria-label="Upload">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
@@ -228,7 +228,8 @@
                                                 </svg>
                                             </button>
 
-                                            <dialog id="inputFile" class="modal">
+                                            {{-- Modal beritaAcara --}}
+                                            <dialog id="beritaAcara" class="modal">
                                                 <div class="modal-box bg-white">
                                                     <h3 class="font-bold text-lg mb-4">Upload berita acara</h3>
                                                     <label class="text-sm font-semibold mb-2">Pemeriksaan</label>
@@ -299,7 +300,7 @@
                                                 </form>
                                             </dialog>
 
-                                            <!-- lihat berita acara -->
+                                            <!-- Button lihatFile -->
                                             <button onclick="lihatFile.showModal()"
                                                 class="flex items-center justify-center w-8 h-8 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                                 aria-label="View">
@@ -310,6 +311,7 @@
                                                 </svg>
                                             </button>
 
+                                            {{-- Modal lihatFile --}}
                                             <dialog id="lihatFile" class="modal">
                                                 <div class="modal-box w-11/12 max-w-5xl bg-white text-gray-700">
                                                     <h3 class="font-bold text-lg">Berita acara</h3>
@@ -334,8 +336,8 @@
                                                 </form>
                                             </dialog>
 
-                                            <!-- detail barang masuk-->
-                                            <button onclick="my_modal_2.showModal()"
+                                            <!-- Button detailBM-->
+                                            <button onclick="detailBM{{ $bm->kode }}.showModal()"
                                                 class="flex items-center justify-center w-8 h-8 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                                 aria-label="Details">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
@@ -345,79 +347,53 @@
                                                 </svg>
                                             </button>
 
-                                            <dialog id="my_modal_2" class="modal">
-                                                <div class="modal-box bg-white">
+                                            {{-- Modal detailBM --}}
+                                            <dialog id="detailBM{{ $bm->kode }}" class="modal">
+                                                <div class="modal-box bg-gray-100">
                                                     <div class="flex gap-1 mb-2">
-                                                        <label
-                                                            class="input w-full input-bordered flex items-center gap-2 bg-white">
-                                                            <input type="text" class="grow" placeholder="Search"
-                                                                fdprocessedid="irihe">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
-                                                                fill="currentColor" class="w-4 h-4 opacity-70">
+                                                        <label class="input w-full flex items-center gap-2 bg-white ">
+                                                            <input type="text" class="grow border-none" placeholder="Search" />
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill=""
+                                                                class="h-4 w-4 opacity-70">
                                                                 <path fill-rule="evenodd"
                                                                     d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                                                                    clip-rule="evenodd"></path>
+                                                                    clip-rule="evenodd" />
                                                             </svg>
                                                         </label>
                                                     </div>
-                                                    <table class="w-full mt-2 whitespace-no-wrap">
-                                                        <thead>
-                                                            <tr
-                                                                class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700  dark:text-gray-400 dark:bg-gray-800">
-                                                                <th class="px-4 py-3">Kode</th>
-                                                                <th class="px-4 py-3">Nama</th>
-                                                                <th class="px-4 py-3">Stok masuk</th>
-                                                                <th class="px-4 py-3">Satuan</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody
-                                                            class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-
-                                                            <tr class="text-gray-700 dark:text-gray-400">
-                                                                <td class="px-4 py-3 text-sm font-semibold">
-                                                                    AKT001
-                                                                </td>
-                                                                <td class="px-4 py-3 text-xs">
-                                                                    Kertas HVS
-                                                                </td>
-                                                                <td class="px-4 py-3 text-sm">
-                                                                    79
-                                                                </td>
-                                                                <td class="px-4 py-3 text-sm">
-                                                                    Rim
-                                                                </td>
-                                                            </tr>
-                                                            <tr class="text-gray-700 dark:text-gray-400">
-                                                                <td class="px-4 py-3 text-sm font-semibold">
-                                                                    AKB001
-                                                                </td>
-                                                                <td class="px-4 py-3 text-xs">
-                                                                    Sapu
-                                                                </td>
-                                                                <td class="px-4 py-3 text-sm">
-                                                                    80
-                                                                </td>
-                                                                <td class="px-4 py-3 text-sm">
-                                                                    Pcs
-                                                                </td>
-                                                            </tr>
-                                                            <tr class="text-gray-700 dark:text-gray-400">
-                                                                <td class="px-4 py-3 text-sm font-semibold">
-                                                                    ABG001
-                                                                </td>
-                                                                <td class="px-4 py-3 text-xs">
-                                                                    Cat tembok
-                                                                </td>
-                                                                <td class="px-4 py-3 text-sm">
-                                                                    30
-                                                                </td>
-                                                                <td class="px-4 py-3 text-sm">
-                                                                    Pcs
-                                                                </td>
-                                                            </tr>
-
-                                                        </tbody>
-                                                    </table>
+                                                    <div class="flex items-center p-4 bg-white rounded-btn shadow-xs dark:bg-gray-800">
+                                                        <table class="w-full mt-2 whitespace-no-wrap">
+                                                            <thead>
+                                                                <tr
+                                                                    class="text-xs font-semibold tracking-wide text-left text-gray-500 bg-white uppercase border-b dark:border-gray-700  dark:text-gray-400 dark:bg-gray-800">
+                                                                    <th class="px-4 py-3">Kode</th>
+                                                                    <th class="px-4 py-3">Nama</th>
+                                                                    <th class="px-4 py-3 text-center">Stok masuk</th>
+                                                                    <th class="px-4 py-3">Satuan</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody
+                                                                class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+    
+                                                                @foreach ($detailBM as $dbm )
+                                                                <tr class="text-gray-700 dark:text-gray-400">
+                                                                    <td class="px-4 py-3 text-sm font-semibold">
+                                                                        {{ $dbm->item->kode }}
+                                                                    </td>
+                                                                    <td class="px-4 py-3 text-xs">
+                                                                        {{ $dbm->item->nama }}
+                                                                    </td>
+                                                                    <td class="px-4 py-3 text-sm text-center">
+                                                                        {{ $dbm->kuantiti }}
+                                                                    </td>
+                                                                    <td class="px-4 py-3 text-sm">
+                                                                        {{ $dbm->item->satuan }}
+                                                                    </td>
+                                                                </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                     <div
                                                         class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700  sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
                                                         <span class="flex items-center col-span-3">
@@ -607,9 +583,9 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-70" style="fill: #430A5D;" viewBox="0 0 16 16">
                             <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464z" />
                         </svg>
-                        <select name="namabarang[]" class="bg-white ms-2 outline-none border-none text-sm w-full text-gray-700">
-                            @foreach ($namabarang as $nb)
-                                <option value="{{ $nb->kode }}">{{ $nb->nama }}</option>
+                        <select name="item[]" class="bg-white ms-2 outline-none border-none text-sm w-full text-gray-700">
+                            @foreach ($item as $item)
+                                <option value="{{ $item->kode }}">{{ $item->nama }}</option>
                             @endforeach
                         </select>
                     </label>
