@@ -13,7 +13,9 @@ class  DataBarangController extends Controller
      */
     public function index()
     {
-        $items = Item::paginate(5);    
+        $kategori = Kategori::all();
+        $items = Item::with('kategori')->paginate(5);    
+
         return view('operator.data-barang', compact('items'));
     }
 
@@ -58,6 +60,9 @@ class  DataBarangController extends Controller
             $item = item::create([
                 'kode' => $code,
                 'nama' => $request->nama,
+                'jenis' => $request->jenis,
+                'merk' => $request->merk,
+                'warna' => $request->warna,
                 'satuan' => $request->satuan,
                 'harga' => $request->harga,
                 'stok' => $request->stok,

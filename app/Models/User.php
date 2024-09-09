@@ -25,11 +25,7 @@ class User extends Authenticatable
         return $this->belongsTo(Pegawai::class, 'nip');
     }
 
-    public function barangmasuk(): HasOne
-    {
-        return $this->hasOne(BarangMasuk::class);
-    }
-
+    
     /**
      * The attributes that are mass assignable.
      *

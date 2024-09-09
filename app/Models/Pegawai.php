@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Pegawai extends Model
 {
@@ -20,6 +21,12 @@ class Pegawai extends Model
     {
         return $this->hasMany(User::class, 'nip');
     }
+
+    public function barangmasuk(): HasOne
+    {
+        return $this->hasOne(BarangMasuk::class);
+    }
+
 
     protected $fillable =
     [

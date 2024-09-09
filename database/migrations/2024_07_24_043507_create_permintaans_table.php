@@ -15,6 +15,9 @@ return new class extends Migration
         Schema::create('permintaan', function (Blueprint $table) {
             $table->string('kode', 20)->primary();
             $table->string('nip', 20);
+            $table->string('perihal', 20);
+            $table->string('sifat', 20);
+            $table->enum('status', ['menunggu', 'disetujui', 'ditolak'])->default('menunggu');
             $table->integer('jumlah_item')->default(0);
             $table->timestamps();
             

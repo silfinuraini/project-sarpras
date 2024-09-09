@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BarangMasuk;
 use App\Models\DetailBarangMasuk;
 use App\Models\Item;
+use App\Models\Pegawai;
 use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -19,8 +20,8 @@ class BarangMasukController extends Controller
     {
         $item = Item::all();
         $supplier = Supplier::all();
-        $user = User::all();
-        $barangmasuk = BarangMasuk::with('user', 'supplier')->get();
+        $pegawai = Pegawai::all();
+        $barangmasuk = BarangMasuk::with('pegawai', 'supplier')->get();
         $detailBM = DetailBarangMasuk::with('item')->get();
 
         return view('operator.barang-masuk', compact('item', 'barangmasuk', 'supplier', 'detailBM'));

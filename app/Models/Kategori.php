@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Kategori extends Model
 {
@@ -12,5 +13,9 @@ class Kategori extends Model
 
     protected $guarded = ['id'];
     
+    public function item(): HasOne
+    {
+        return $this->hasOne(Item::class);
+    }
 
 }

@@ -24,9 +24,9 @@ class BarangMasuk extends Model
         return $this->belongsTo(Supplier::class, 'kode_supplier');
     }
 
-    public function user(): BelongsTo
+    public function pegawai(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'nip');
+        return $this->belongsTo(Pegawai::class, 'nip');
     }
 
     public function detailBM(): HasMany

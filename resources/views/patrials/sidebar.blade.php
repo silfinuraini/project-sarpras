@@ -14,7 +14,7 @@
                 <span class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
                     aria-hidden="true"></span>
                 <a class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                    href="dashboard">
+                    href="{{ route('dashboardOP') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round"
                         stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path
@@ -62,7 +62,7 @@
                         </li>
                         <li
                             class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                            <a class="w-full" href="barang-keluar.html">
+                            <a class="w-full" href="{{ route('barangkeluar') }}">
                                 Barang Keluar
                             </a>
                         </li>
@@ -71,10 +71,6 @@
                             <a class="w-full" href="laporan.html">
                                 Laporan
                             </a>
-                        </li>
-                        <li
-                            class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                            <a class="w-full" href="stock-opname.html">Stock opname</a>
                         </li>
                     </ul>
                 </template>

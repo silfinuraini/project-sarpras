@@ -18,7 +18,7 @@ class Login
     {
         if (Auth::user()->role != 'admin' && Auth::user()->role != 'pengawas')
         {
-            return redirect('dashboard');
+            return redirect()->route('dashboardUnit');
         }
 
         return $next($request);

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BarangKeluarController;
 use App\Http\Controllers\BarangMasukController;
 use App\Http\Controllers\DataBarangController;
 use App\Http\Controllers\KategoriController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\Unit\PengadaanController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,7 +28,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('operator/dashboard', [LoginController::class, 'index'])->middleware(['auth', 'operator']);
+Route::get('operator/dashboard', [LoginController::class, 'index'])->middleware(['auth', 'operator'])->name('dashboardOP');
 Route::get('operator/data-barang', [DataBarangController::class, 'index'])->name('databarang');
 
 Route::get('operator/tambah-barang', [DataBarangController::class, 'tambahbarang'])->name('item.index');
@@ -54,6 +56,14 @@ Route::get('/pegawai', [PegawaiController::class, 'index'])->name('pegawai');
 Route::post('/pegawai', [PegawaiController::class, 'store'])->name('pegawai.store');
 Route::delete('/pegawai/{nip}', [PegawaiController::class, 'destroy'])->name('pegawai.destroy');
 
-
 Route::get('/barang-masuk', [BarangMasukController::class, 'index'])->name('barangmasuk');
 Route::post('/barang-masuk', [BarangMasukController::class, 'store'])->name('barangmasuk.store');
+
+Route::get('/barang-keluar', [BarangKeluarController::class, 'index'])->name('barangkeluar');
+
+
+
+// UNIT
+Route::get('unit/dashboard', [LoginController::class, 'unit'])->name('dashboardUnit');
+
+Route::get('unit/pengajuan', [PengadaanController::class, 'index'])->name('pengadaan');
