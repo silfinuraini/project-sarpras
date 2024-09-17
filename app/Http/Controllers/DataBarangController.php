@@ -61,6 +61,7 @@ class  DataBarangController extends Controller
                 'kode' => $code,
                 'nama' => $request->nama,
                 'jenis' => $request->jenis,
+                'ukuran' => $request->ukuran,
                 'merk' => $request->merk,
                 'warna' => $request->warna,
                 'satuan' => $request->satuan,

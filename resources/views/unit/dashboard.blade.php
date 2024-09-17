@@ -316,9 +316,7 @@
                                 </div>
                             </a>
                         </div>
-
                         <h3 class="text-xl font-bold text-gray-900 mb-2 mt-2">Produk Display</h3>
-
                         <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
                             @foreach ($item as $item)
                                 <div

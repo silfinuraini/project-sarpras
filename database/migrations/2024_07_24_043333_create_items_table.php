@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('item', function (Blueprint $table) {
             $table->string('kode', 10)->primary();
             $table->string('nama', 100);
-            $table->string('jenis', 20);
-            $table->string('warna', 20);
-            $table->string('ukuran', 20);
+            $table->string('jenis', 20)->nullable();
+            $table->string('warna', 20)->nullable();
+            $table->string('ukuran', 20)->nullable();
             $table->string('merk', 20);
             $table->string('satuan', 10);
             $table->string('gambar')->nullable();

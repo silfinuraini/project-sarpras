@@ -24,6 +24,7 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Pegawai::class, 'nip');
     }
+    
 
     
     /**

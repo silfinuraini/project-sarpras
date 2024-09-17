@@ -71,7 +71,7 @@
                                         Satuan
                                     </span></b>
                                 <select class="block mt-1 select select-bordered bg-white border-purple-300 text-gray-600"
-                                    style="width: 100%;" name="satuan">
+                                    style="width: 100%;" name="satuan" >
                                     <option>Pcs</option>
                                     <option>Rim</option>
                                     <option>Lusin</option>

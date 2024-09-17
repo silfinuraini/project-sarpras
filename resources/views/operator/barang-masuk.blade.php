@@ -364,7 +364,7 @@
                                                 </button>
 
                                                 {{-- Modal detailBM --}}
-                                                <dialog id="detailBM{{ $bm->kode }}" class="modal">
+                                                 <dialog id="detailBM{{ $bm->kode }}" class="modal">
                                                     <div class="modal-box bg-gray-100">
                                                         <div class="flex gap-1 mb-2">
                                                             <label class="input w-full flex items-center gap-2 bg-white ">
@@ -394,6 +394,7 @@
                                                                 <tbody
                                                                     class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
 
+                                                                    {{-- {{ dd($detailBM) }} --}}
                                                                     @foreach ($detailBM as $dbm)
                                                                         @if ($dbm->kode_barang_masuk == $bm->kode)
                                                                             <tr class="text-gray-700 dark:text-gray-400">

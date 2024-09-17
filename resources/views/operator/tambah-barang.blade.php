@@ -126,12 +126,26 @@
                                     Jenis
                                 </h4>
                                 <p class="text-gray-700 text-sm dark:text-gray-400">
-                                    Jenis barang dapat berupa <b>ukuran, ketebalan, tekstur,</b> dsb.
+                                    Jenis barang dapat berupa <b>kegunaan, ketebalan, tekstur,</b> dsb.
                                 </p>
                             </div>
                         </div>
                         <div class="p-4 col-span-3 justify-center items-center">
-                            <input type="text" placeholder="A4 (21,0 x 29,7 cm)" name="jenis"
+                            <input type="text" placeholder="HVS/Kertas foto" name="jenis"
+                                class="input text-sm  input-bordered w-full text-gray-700 bg-white" />
+                        </div>
+                        <div>
+                            <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+                                <h4 class="mb-4 font-semibold text-sm text-gray-800 dark:text-gray-300">
+                                    Ukuran
+                                </h4>
+                                <p class="text-gray-700 text-sm dark:text-gray-400">
+                                    Ukuran barang dapat berbentuk <b>ukuran kertas, cM, mL</b> dsb.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="p-4 col-span-3 justify-center items-center">
+                            <input type="text" placeholder="A4 (21,0 x 29,7 cm)" name="ukuran"
                                 class="input text-sm  input-bordered w-full text-gray-700 bg-white" />
                         </div>
                         <div>

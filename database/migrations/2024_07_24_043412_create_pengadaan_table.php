@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('kode', 20)->primary();
             $table->string('nip', 20);
             $table->string('perihal', 25);
-            $table->string('sifat', 25);
+            $table->string('sifat', 25)->nullable();
             $table->enum('status', ['menunggu', 'disetujui', 'ditolak'])->default('menunggu');
-            $table->integer('jumlah_item')->default(0);
+            $table->integer('jumlah_item')->default(value: 0);
             $table->timestamps();
             
             $table->foreign('nip')->references('nip')->on('pegawai')->cascadeOnDelete();

@@ -27,6 +27,16 @@ class Pegawai extends Model
         return $this->hasOne(BarangMasuk::class);
     }
 
+    public function pengadaan(): HasMany
+    {
+        return $this->hasMany(Pengadaan::class);
+    }
+
+    public function keranjang(): HasOne
+    {
+        return $this->hasOne(Keranjang::class);
+    }
+
 
     protected $fillable =
     [

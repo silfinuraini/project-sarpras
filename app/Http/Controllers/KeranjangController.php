@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Supplier;
 use Illuminate\Http\Request;
 
-class SupplierController extends Controller
+class KeranjangController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $supplier = Supplier::all();
-        return view('operator.supplier', compact('supplier'));
+        //
     }
 
     /**
@@ -29,9 +27,7 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        $supplier = Supplier::create($request->all());
-
-        return redirect()->back();
+        //
     }
 
     /**
@@ -53,27 +49,16 @@ class SupplierController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $kode)
+    public function update(Request $request, string $id)
     {
-        // dd($request);
-        $supplier = Supplier::where('kode', $kode)->first();
-        $supplier->update($request->all());
-
-        return redirect()->back();
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $kode)
+    public function destroy(string $id)
     {
-        $supplier = Supplier::find($kode);
-
-        if($supplier){
-            $supplier->delete();
-            return redirect()->back();
-        }
-
-        return redirect()->back();
+        //
     }
 }

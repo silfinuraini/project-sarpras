@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Item extends Model
+class   Item extends Model
 {
     use HasFactory;
     public $table = "item";
@@ -25,6 +25,7 @@ class Item extends Model
         'kode',
         'nama',
         'jenis',
+        'ukuran',
         'warna',
         'merk',
         'satuan',
