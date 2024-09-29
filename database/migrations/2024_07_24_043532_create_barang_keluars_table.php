@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('barang_keluar', function (Blueprint $table) {
             $table->string('kode', 20)->primary();
             $table->string('nip', 20);
-            $table->integer('jumlah_item')->default(0);
+            $table->string('kode_item', 20);
+            $table->integer('kuantiti')->default(0);
             $table->timestamps();
 
             $table->foreign('nip')->references('nip')->on('pegawai')->cascadeOnDelete();
+            $table->foreign('kode_item')->references('kode')->on('item')->cascadeOnDelete();
 
         });
     }

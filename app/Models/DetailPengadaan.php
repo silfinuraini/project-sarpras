@@ -18,9 +18,9 @@ class DetailPengadaan extends Model
         return $this->belongsTo(Item::class, 'kode_item');
     }
 
-    public function pengadaan(): HasMany
+    public function pengadaan(): BelongsTo
     {
-        return $this->hasMany(Pengadaan::class, 'nip');
+        return $this->belongsTo(Pengadaan::class, 'kode_pengadaan');
     }
 
 }

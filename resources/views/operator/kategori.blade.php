@@ -33,7 +33,7 @@
                     <div class="flex gap-2">
                         <label
                             class="input input-bordered flex w-full focus:outline-none items-center mb-2 bg-white text-gray-700 border-purple-600">
-                            <input type="text" name="nama" class=" input border-none text-sm"
+                            <input type="text" name="nama" class="w-full input border-none text-sm"
                                 placeholder="Nama kategori" />
                         </label>
                         <label

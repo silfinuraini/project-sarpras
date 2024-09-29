@@ -1,7 +1,7 @@
 @extends('layouts.operator-main')
 
 @section('content')
-    <main class="h-full my-4 bg-gray-100 overflow-y-auto">
+    <main class="h-full my-4 bg-gray-50 overflow-y-auto">
         <div class="container my-4 grid px-6 mx-auto">
 
             <div class="text-sm mb-4 breadcrumbs text-gray-800">
@@ -51,7 +51,7 @@
                                             :
                                         </td>
                                         <td class="px-4 py-4 font-semi">
-                                            {{ $pengadaan->pegawai->nama }}
+                                            {{ $permintaan->pegawai->nama }}
                                         </td>
                                     </tr>
 
@@ -63,7 +63,7 @@
                                             :
                                         </td>
                                         <td class="px-4 py-4 ">
-                                            {{ $pengadaan->sifat }}
+                                            {{ $permintaan->sifat }}
                                         </td>
                                     </tr>
                                     <tr class="text-gray-700 dark:text-gray-400">
@@ -74,7 +74,7 @@
                                             :
                                         </td>
                                         <td class="px-4 py-4">
-                                            {{ $pengadaan->perihal }}
+                                            {{ $permintaan->perihal }}
                                         </td>
                                     </tr>
                                 </tbody>
@@ -106,13 +106,13 @@
                                     <th class="px-4 py-3 text-center">Jumlah</th>
                                     <th class="px-4 py-3 text-center">Disetujui</th>
                                     <th class="px-4 py-3 text-center">Satuan</th>
-                                    @if ($pengadaan->status == 'menunggu')
+                                    @if ($permintaan->status == 'menunggu')
                                         <th class="px-4 py-3 text-center">Aksi</th>
                                     @endif
                                 </tr>
                             </thead>
-                            @foreach ($detailPengadaan as $dp)
-                                @if ($dp->kode_pengadaan == $pengadaan->kode)
+                            @foreach ($detailPermintaan as $dp)
+                                @if ($dp->kode_permintaan == $permintaan->kode)
                                     <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
 
                                         <tr class="text-gray-700 dark:text-gray-400">
@@ -150,10 +150,11 @@
                                             </td>
 
                                             <td class="px-4 py-3">
-                                                @if ($pengadaan->status == 'menunggu')
-                                                    <div class="flex justify-center items-center space-x-4 text-sm">
-                                                        <form
-                                                            action="{{ route('operator.updatekuantitipengadaan', $dp->id) }}"
+                                                <div class="flex justify-center items-center space-x-4 text-sm">
+                                                    @if ($permintaan->status == 'menunggu')
+                                                        <!-- Modal -->
+                                                        <form class="flex gap-3.5"
+                                                            action="{{ route('operator.updatekuantitipermintaan', $dp->id) }}"
                                                             method="POST">
                                                             @csrf
 
@@ -213,7 +214,7 @@
 
                                                             <button value=0 name="kuantiti_disetujui"
                                                                 class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-xl active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-                                                                aria-label="Like" type="submit">
+                                                                aria-label="Like" type="button">
 
                                                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4"
                                                                     aria-hidden="true" fill="currentColor"
@@ -223,8 +224,8 @@
                                                                 </svg>
                                                             </button>
                                                         </form>
-                                                    </div>
-                                                @endif
+                                                    @endif
+                                                </div>
                                             </td>
                                         </tr>
 
@@ -313,8 +314,8 @@
                 </div>
             </div>
 
-            @if ($pengadaan->status == 'menunggu')
-                <form action="{{ route('operator.updatepengadaan', $pengadaan->kode) }}" method="POST">
+            @if ($permintaan->status == 'menunggu')
+                <form action="{{ route('operator.updatepermintaan', $permintaan->kode) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="grid grid-cols-2 gap-2">

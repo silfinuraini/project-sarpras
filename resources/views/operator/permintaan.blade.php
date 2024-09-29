@@ -51,7 +51,7 @@
                 <!-- Open the modal using ID.showModal() method -->
                 <dialog id="formPengadaan" class="modal">
                     <div class="modal-box bg-white text-gray-800 ">
-                        <form action="{{ route('operator.tambahpengadaan') }}" method="POST">
+                        <form action="{{ route('operator.tambahpermintaan') }}" method="POST">
                             @csrf
                             <div class="grid mx-4 mt-2 md:grid-cols-4">
                                 <div class="col-span-2">
@@ -72,7 +72,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="mb-1 form-control w-full relative col-span-4">
+                                <div class="mb-2 form-control w-full relative col-span-4">
                                     <input type="text" placeholder="" name="sifat"
                                         class="input text-sm bg-white text-gray-800 input-bordered w-full pt-4 pb-1"
                                         fdprocessedid="51tx8d">
@@ -145,11 +145,13 @@
                                     <th class="px-4 py-3">Unit</th>
                                     <th class="px-4 py-3">Status</th>
                                     <th class="px-4 py-3">Tanggal</th>
-                                        <th class="px-4 py-3">Aksi</th>
+                                    {{-- @if ($permintaan->status == 'menunggu') --}}
+                                    <th class="px-4 py-3">Aksi</th>
+                                    {{-- @endif --}}
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y dark:divide-gray-800 dark:bg-gray-800">
-                                @foreach ($pengadaan as $p)
+                                @foreach ($permintaan as $p)
                                     <tr class="text-gray-800 dark:text-gray-400">
                                         <td class="px-4 py-3 text-sm font-semibold">
                                             {{ $p->kode }}
@@ -180,7 +182,7 @@
                                         </td>
                                         <td class="px-4 py-3">
                                             <div class="flex items-center space-x-4 text-sm">
-                                                <a href={{ route('operator.detailpengadaan', $p->kode) }}
+                                                <a href={{ route('operator.detailpermintaan', $p->kode) }}
                                                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                                     aria-label="Delete">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
@@ -304,7 +306,7 @@
                                 <path d="M5 12h14"></path>
                             </svg>
                         </button>
-                        <input class="p-0 w-8 bg-transparent border-0 text-gray-800 text-center focus:ring-0" type="text" name="kuantiti[]" value="0">
+                        <input class="p-0 w-8 bg-transparent border-0 text-gray-800 text-center focus:ring-0" type="number" name="kuantiti[]" value="1" min=1 >
                         <button type="button" class="px-2 h-full inline-flex justify-center items-center text-sm font-medium rounded-r-xl border-l border-gray-200 bg-white text-gray-800 hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none increment-btn">
                             <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M5 12h14"></path>

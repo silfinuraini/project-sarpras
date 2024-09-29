@@ -1,7 +1,7 @@
 @extends('layouts.operator-main')
 
 @section('content')
-    <main class="h-full bg-gray-100 my-4 overflow-y-auto">
+    <main class="h-full bg-gray-50 my-4 overflow-y-auto">
         <div class="container px-6 mx-auto grid">
             <div class="text-sm mb-4 breadcrumbs">
                 <ul class="text-gray-700">

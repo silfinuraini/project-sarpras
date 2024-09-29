@@ -5,8 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Windmill Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     {{-- <link rel="stylesheet" href="../src/css/output.css" /> --}}
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="{{ asset('src/js/init-alpine.js') }}"></script>
@@ -18,7 +17,7 @@
 </head>
 
 <body>
-    <div class="flex h-screen bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen}">
+    <div class="flex h-screen bg-gray-100 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
 
         <div class="flex flex-col flex-1 w-full">
             <header class="z-10 py-4 bg-white border dark:bg-gray-800">
@@ -79,7 +78,8 @@
                                                     :
                                                 </td>
                                                 <td class="px-4 py-1">
-                                                    <input type="text" value="RPL" class="input input-ghost w-full" />
+                                                    <input type="text" value="RPL"
+                                                        class="input input-ghost w-full" />
                                                 </td>
                                             </tr>
 
@@ -138,7 +138,7 @@
 
                     <div class="w-full overflow-hidden rounded-box shadow-xs">
                         <div class="">
-                           
+
                             <div class="flex items-center mb-5 p-4 bg-white rounded-box shadow-xs dark:bg-gray-800"
                                 style="height:100%;">
                                 <!-- content -->
@@ -153,7 +153,7 @@
                                                     <th class="px-4 py-3">Merk</th>
                                                     <th class="px-4 py-3">Jumlah</th>
                                                     <th class="px-4 py-3">Satuan</th>
-                                                    <th class="px-4 py-3">Aksi</th>
+                                                        <th class="px-4 py-3">Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -192,24 +192,29 @@
                                                                     class="size-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
                                                                     data-hs-input-number-decrement="">
                                                                     <svg class="flex-shrink-0 size-3.5"
-                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        width="24" height="24"
+                                                                        viewBox="0 0 24 24" fill="none"
                                                                         stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round">
+                                                                        stroke-linecap="round"
+                                                                        stroke-linejoin="round">
                                                                         <path d="M5 12h14"></path>
                                                                     </svg>
                                                                 </button>
                                                                 <input
                                                                     class="p-0 w-6 bg-transparent border-0 text-gray-800 text-center focus:ring-0"
-                                                                    type="text" value="0" data-hs-input-number-input="">
+                                                                    type="text" value="0"
+                                                                    data-hs-input-number-input="">
                                                                 <button type="button"
                                                                     class="size-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
                                                                     data-hs-input-number-increment="">
                                                                     <svg class="flex-shrink-0 size-3.5"
-                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        width="24" height="24"
+                                                                        viewBox="0 0 24 24" fill="none"
                                                                         stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round">
+                                                                        stroke-linecap="round"
+                                                                        stroke-linejoin="round">
                                                                         <path d="M5 12h14"></path>
                                                                         <path d="M12 5v14"></path>
                                                                     </svg>
@@ -271,24 +276,29 @@
                                                                     class="size-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
                                                                     data-hs-input-number-decrement="">
                                                                     <svg class="flex-shrink-0 size-3.5"
-                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        width="24" height="24"
+                                                                        viewBox="0 0 24 24" fill="none"
                                                                         stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round">
+                                                                        stroke-linecap="round"
+                                                                        stroke-linejoin="round">
                                                                         <path d="M5 12h14"></path>
                                                                     </svg>
                                                                 </button>
                                                                 <input
                                                                     class="p-0 w-6 bg-transparent border-0 text-gray-800 text-center focus:ring-0"
-                                                                    type="text" value="0" data-hs-input-number-input="">
+                                                                    type="text" value="0"
+                                                                    data-hs-input-number-input="">
                                                                 <button type="button"
                                                                     class="size-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
                                                                     data-hs-input-number-increment="">
                                                                     <svg class="flex-shrink-0 size-3.5"
-                                                                        xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                        width="24" height="24"
+                                                                        viewBox="0 0 24 24" fill="none"
                                                                         stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round" stroke-linejoin="round">
+                                                                        stroke-linecap="round"
+                                                                        stroke-linejoin="round">
                                                                         <path d="M5 12h14"></path>
                                                                         <path d="M12 5v14"></path>
                                                                     </svg>

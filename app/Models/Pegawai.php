@@ -37,7 +37,6 @@ class Pegawai extends Model
         return $this->hasOne(Keranjang::class);
     }
 
-
     protected $fillable =
     [
        'nip',
