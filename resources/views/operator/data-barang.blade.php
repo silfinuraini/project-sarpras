@@ -140,8 +140,8 @@
                                     <th class="px-4 py-3">Kode</th>
                                     <th class="px-4 py-3">Barang</th>
                                     <th class="px-4 py-3">Merk</th>
-                                    <th class="px-4 py-3">Jenis</th>
-                                    <th class="px-4 py-3">Stok</th>
+                                    <th class="px-4 py-3">Sok</th>
+                                    <th class="px-4 py-3">Satuan</th>
                                     <th class="px-4 py-3">Aksi</th>
                                 </tr>
                             </thead>
@@ -171,12 +171,12 @@
                                             </div>
                                         </td>
                                         <td class="px-4 py-3 text-xs">
+                                            {{ $item->merk }}
+                                        </td>
+                                        <td class="px-4 py-3 text-xs">
                                             {{ $item->stok }}
                                         </td>
-                                        <td class="px-4 py-3 text-xs text-center">
-                                            {{ $item->stok_minimum }}
-                                        </td>
-                                        <td class="px-4 py-3 text-sm">
+                                        <td class="px-4 py-3 text-xs">
                                             {{ $item->satuan }}
                                         </td>
                                         <td class="px-4 py-3">
@@ -428,6 +428,7 @@
                                                                                 <td>:</td>
                                                                                 <td>{{ $item->kode }}</td>
                                                                             </tr>
+
                                                                             <tr class="border-none">
                                                                                 <th>Merk</th>
                                                                                 <td>:</td>

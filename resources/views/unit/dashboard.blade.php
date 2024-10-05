@@ -45,12 +45,96 @@
                     </div>
                     <a class="btn btn-ghost text-xl font-bold">Sarpras </a>
                 </div>
-                <div class="navbar-center hidden lg:flex">
-                    <ul
+                <div class="navbar-center hidden gap-1 lg:flex">
+                    <label class="input input-bordered flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                            class="h-4 w-4 opacity-70">
+                            <path fill-rule="evenodd"
+                                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                                clip-rule="evenodd" />
+                        </svg>
+
+                        <input type="text" class="grow border-none input input-sm w-80" placeholder="Cari.." />
+                    </label>
+
+                    {{-- <button
+                        class="btn flex items-center justify-between px-4 py-2 text-sm font-medium  text-purple-700 transition-colors duration-150 bg-transparent border border-gray-300 rounded-lg active:bg-transparent hover:bg-transparent focus:outline-none focus:shadow-outline-transparent">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 opacity-70" viewBox="0 0 16 16">
+                            <path
+                                d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5" />
+                        </svg>
+                    </button> --}}
+
+                    <div class="dropdown dropdown-hover">
+                        <div tabindex="0" role="button"
+                            class="btn m-1 flex items-center justify-between px-4 py-2 text-sm font-medium text-purple-700 transition-colors duration-150 bg-transparent border border-gray-300 rounded-lg active:bg-transparent hover:bg-transparent focus:outline-none focus:shadow-outline-transparent">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-70" viewBox="0 0 16 16">
+                                <path
+                                    d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z" />
+                            </svg>
+                        </div>
+                        <div tabindex="0"
+                            class="dropdown-content card card-compact text-sm bg-white z-[1] w-80 p-4 shadow">
+                            <div class="card-body">
+                                <h3 class="card-title text-lg font-semibold mb-4">Filter</h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <p class="mb-1 font-medium">Kategori</p>
+                                        <select class="select bg-white select-bordered w-full">
+                                            <option disabled selected>Tampilkan semua</option>
+                                            @foreach ($kategori as $k)
+                                                <option>{{ $k->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <div>
+                                            <p class="mb-1 font-medium">Merk</p>
+                                            <select class="select bg-white select-bordered w-full">
+                                                <option disabled selected>All</option>
+                                                <option>Han Solo</option>
+                                                <option>Greedo</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <p class="mb-1 font-medium">Jenis</p>
+                                            <select class="select bg-white select-bordered w-full">
+                                                <option disabled selected>All</option>
+                                                <option>Han Solo</option>
+                                                <option>Greedo</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <p class="mb-1 font-medium">Warna</p>
+                                            <select class="select bg-white select-bordered w-full">
+                                                <option disabled selected>All</option>
+                                                <option>Han Solo</option>
+                                                <option>Greedo</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <p class="mb-1 font-medium">Ukuran</p>
+                                            <select class="select bg-white select-bordered w-full">
+                                                <option disabled selected>All</option>
+                                                <option>Han Solo</option>
+                                                <option>Greedo</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="submit"
+                                    class="btn btn-primary w-full mt-6 text-white bg-purple-600 hover:bg-purple-700">
+                                    Pakai
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- <ul
                         class="flex flex-col md:p-0 mt-4 font-medium border text-sm border-gray-100 rounded-box bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                         <li>
                             <a href="kepala-unit-index.html"
-                                class="block py-2 px-3 font-bold bg-purple-700 rounded md:bg-transparent text-purple-700 md:p-0 md:dark:text-purple-500"
+                                class="block py-2 px-3 font-bold bg-transparent rounded md:bg-transparent text-purple-700 md:p-0 md:dark:text-purple-500"
                                 aria-current="page">Home</a>
                         </li>
                         <li>
@@ -61,7 +145,7 @@
                             <a href="kontak.html"
                                 class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-purple-700 md:p-0 md:dark:hover:purple-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Kontak</a>
                         </li>
-                    </ul>
+                    </ul> --}}
                 </div>
                 <div class="navbar-end mr-6">
                     <ul class="flex items-center flex-shrink-0 space-x-6">
@@ -144,17 +228,25 @@
                                         </a>
                                     </li>
                                     <li class="flex">
-                                        <a class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                                            href="#">
-                                            <svg class="w-4 h-4 mr-3" aria-hidden="true" fill="none"
-                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                viewBox="0 0 24 24" stroke="currentColor">
-                                                <path
-                                                    d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1">
-                                                </path>
-                                            </svg>
-                                            <span>Log out</span>
-                                        </a>
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <a href="route('logout')"
+                                                onclick="event.preventDefault();
+                                                            this.closest('form').submit();"
+                                                class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
+                                                href="#">
+                                                <svg class="w-4 h-4 mr-3" aria-hidden="true" fill="none"
+                                                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path
+                                                        d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1">
+                                                    </path>
+                                                </svg>
+                                                <span>
+                                                    Log out
+                                                </span>
+                                            </a>
+                                        </form>
                                     </li>
                                 </ul>
                             </template>

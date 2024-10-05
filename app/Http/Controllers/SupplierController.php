@@ -29,7 +29,15 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        $supplier = Supplier::create($request->all());
+
+        $randomNumber = rand(1000, 9999);
+        $kode = 'SP' . $randomNumber;
+
+        $supplier = Supplier::create([
+            'kode' => $kode,
+            'nama' => $request->nama,
+            'alamat' => $request->alamat
+        ]);
 
         return redirect()->back();
     }

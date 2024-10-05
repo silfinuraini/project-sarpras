@@ -157,7 +157,7 @@
                                             {{ $p->kode }}
                                         </td>
                                         <td class="px-4 py-3 text-sm">
-                                            {{ $p->pegawai_nama }}
+                                            {{ $p->pegawai->nama }}
                                         </td>
                                         <td class="px-4 py-3 text-xs">
                                             @if ($p->status == 'menunggu')

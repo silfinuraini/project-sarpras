@@ -18,11 +18,22 @@ class PermintaanController extends Controller
     public function index()
     {
         $item = Item::all();
-        $pegawai = Pegawai::all(); 
+        $pegawai = Pegawai::all();
         $user = User::with('pegawai')->get();
-        $permintaan = Permintaan::withAggregate('pegawai', 'nama')->get();
 
-        return view('operator.permintaan', compact('item', 'permintaan','pegawai', 'user'));
+        $menunggu = Permintaan::with('pegawai')
+            ->where('status', 'menunggu')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $others = Permintaan::with('pegawai')
+            ->whereIn('status', ['ditolak', 'disetujui'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $permintaan = $menunggu->concat($others);
+
+        return view('operator.permintaan', compact('item', 'permintaan', 'pegawai', 'user'));
     }
 
     /**
@@ -42,7 +53,7 @@ class PermintaanController extends Controller
 
         $kodePermintaan = $request->input('item');
         $jumlah = count($kodePermintaan);
-        
+
         $permintaan = Permintaan::create([
             'kode' => $kode,
             'nip' => $request->nip,
@@ -73,11 +84,11 @@ class PermintaanController extends Controller
         $detailPermintaan = DetailPermintaan::with('item')->get();
         $pegawai = Pegawai::all();
 
-        $permintaan = Permintaan::with( 'pegawai')
-        ->where('kode', $kode)
-        ->first();  
+        $permintaan = Permintaan::with('pegawai')
+            ->where('kode', $kode)
+            ->first();
 
-        return view('operator.detail-permintaan', compact('detailPermintaan', 'permintaan', 'pegawai', 'item'));   
+        return view('operator.detail-permintaan', compact('detailPermintaan', 'permintaan', 'pegawai', 'item'));
     }
 
     /**
@@ -97,7 +108,7 @@ class PermintaanController extends Controller
             'status' => $request->input('status'),
         ]);
 
-        
+
         if ($request->input('status') === 'ditolak') {
             DetailPermintaan::where('kode_permintaan', $kode)->update([
                 'kuantiti_disetujui' => 0,
@@ -114,18 +125,26 @@ class PermintaanController extends Controller
         $detailPermintaan->update([
             'kuantiti_disetujui' => $request->input('kuantiti_disetujui'),
         ]);
-        
+
         $permintaan = Permintaan::where('kode', $detailPermintaan->kode_permintaan)->first();
         // dd($permintaan);
 
         $kode = 'BK' . rand(1000, 9999);
 
-        if($request->input('kuantiti_disetujui') >= 1) {
+        if ($request->input('kuantiti_disetujui') >= 1) {
             BarangKeluar::create([
                 'kode' => $kode,
                 'nip' => $permintaan->nip,
                 'kode_item' => $detailPermintaan->kode_item,
                 'kuantiti' => $detailPermintaan->kuantiti_disetujui
+            ]);
+        }
+
+        $item = Item::where('kode', $detailPermintaan->kode_item)->first();
+
+        if ($item) {
+            $item->update([
+                'stok' => $item->stok - $detailPermintaan->kuantiti
             ]);
         }
 

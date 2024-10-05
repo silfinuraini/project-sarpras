@@ -6,6 +6,7 @@ use App\Models\BarangMasuk;
 use App\Models\DetailBarangMasuk;
 use App\Models\Item;
 use App\Models\Pegawai;
+use App\Models\Pengadaan;
 use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -57,7 +58,6 @@ class BarangMasukController extends Controller
             'jumlah_item' => $jumlah
         ]);
 
-        // dd($barangmasuk);
 
         for ($i = 0; $i < count($kodeBarang); $i++) {
             $detailBM = DetailBarangMasuk::create([
@@ -67,15 +67,62 @@ class BarangMasukController extends Controller
             ]);
         }
 
+        // dd($detailBM->kode_item);
+
+        $item = Item::where('kode', $detailBM->kode_item)->first();
+
+        if ($item) {
+            $item->update([
+                'stok' => $item->stok + $detailBM->kuantiti
+            ]);
+        }
+
+        // $randomNumber = rand(1000, 9999);
+        // $kode = 'BM' . $randomNumber;
+        // $nip = Auth::user()->nip;
+        // $kodeBarang = $request->input('item', []);
+        // $jumlah = count($kodeBarang);
+        // $kuantiti = $request->input('kuantiti', []);
+
+        // $barangmasuk = BarangMasuk::create([
+        //     'kode' => $kode,
+        //     'nip' => $nip,
+        //     'kode_supplier' => $request->kode_supplier,
+        //     'jumlah_item' => $jumlah
+        // ]);
+
+        // foreach ($kodeBarang as $i => $kode) {
+        //     if (isset($kuantiti[$i])) {
+        //         $detailBM = DetailBarangMasuk::create([
+        //             'kode_barang_masuk' => $barangmasuk->kode,
+        //             'kode_item' => $kode,
+        //             'kuantiti' => $kuantiti[$i]
+        //         ]);
+
+        //         $barang = Item::where('kode', $kode)->first();
+        //         if ($barang) {
+        //             $barang->stok += $kuantiti[$i];
+        //             $barang->save();
+        //         }
+        //     }
+        // }
+
+
         return redirect()->back();
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        //
+
+        $supplier = Supplier::all();
+        $item = Item::all();
+        $pengadaan = Pengadaan::withAggregate('pegawai', 'nama')->get();
+        // dd($pengadaan);
+
+        return view('operator.barang-masuk-pengajuan', compact('supplier', 'item', 'pengadaan'));
     }
 
     /**

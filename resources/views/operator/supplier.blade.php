@@ -52,7 +52,7 @@
                         <h3 class="mb-8 font-semibold text-gray-800 dark:text-gray-300">
                             Masukkan data akun
                         </h3>
-                        <label
+                        {{-- <label
                             class="input input-bordered flex focus:outline-none items-center mb-2 bg-white text-gray-700 border-purple-600">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-70" style="fill: #430A5D;"
                                 viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
@@ -61,7 +61,7 @@
                             </svg>
                             <input type="text" name="kode" id="kode-supplier" class=" input border-none text-sm"
                                 placeholder="Kode supplier" />
-                        </label>
+                        </label> --}}
                         <label
                             class="input input-bordered flex focus:outline-none items-center mb-2 bg-white text-gray-700 border-purple-600">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-70" style="fill: #430A5D;"
@@ -69,7 +69,7 @@
                                 <path
                                     d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
                             </svg>
-                            <input type="text" name="nama" id="nama-supplier" class=" input border-none text-sm"
+                            <input type="text" name="nama" id="nama-supplier" class=" w-full input border-none text-sm"
                                 placeholder="Nama supplier" />
                         </label>
                         <textarea name="alamat" id="alamat-supplier"
@@ -113,7 +113,7 @@
                                                 <button
                                                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                                     aria-label="Edit"
-                                                    onclick="addDataToForm('{{ $supp->kode }}', '{{ $supp->nama }}', '{{ $supp->alamat }}')">
+                                                    onclick="addDataToForm('{{ $supp->nama }}', '{{ $supp->alamat }}')">
                                                     <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
                                                         viewBox="0 0 20 20">
                                                         <path
@@ -155,8 +155,8 @@
 @endif
 
 <script>
-    function addDataToForm(kode, nama, alamat) {
-        document.getElementById('kode-supplier').value = kode
+    function addDataToForm(nama, alamat) {
+        // document.getElementById('kode-supplier').value = kode
         document.getElementById('nama-supplier').value = nama
         document.getElementById('alamat-supplier').value = alamat
     }

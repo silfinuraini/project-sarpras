@@ -70,7 +70,15 @@
                 {{-- Modal formTambah --}}
                 <dialog id="formTambah" class="modal">
                     <div class="modal-box bg-gray-100 text-gray-700">
-                        <h3 class="text-lg font-bold mb-2">Barang Masuk</h3>
+                        <div class="flex justify-between mb-2">
+                            <h3 class="text-lg font-bold">Barang Masuk</h3>
+                            <p class="mt-1">
+                                <a class="text-sm font-normal text-purple-600 dark:text-purple-400 hover:underline"
+                                    href="{{ route('barangmasuk.pengajuan') }}">
+                                    Tambah dari pengajuan
+                                </a>
+                            </p>
+                        </div>
                         <form action="{{ route('barangmasuk.store') }}" method="POST">
                             @csrf
                             <label
@@ -307,7 +315,7 @@
                                                         <div class="flex">
                                                             <button
                                                                 class="mt-4 ml-auto btn flex items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                                                                <span>Import</span>
+                                                                <span>Kirim</span>
                                                             </button>
                                                         </div>
                                                     </div>
@@ -364,7 +372,7 @@
                                                 </button>
 
                                                 {{-- Modal detailBM --}}
-                                                 <dialog id="detailBM{{ $bm->kode }}" class="modal">
+                                                <dialog id="detailBM{{ $bm->kode }}" class="modal">
                                                     <div class="modal-box bg-gray-100">
                                                         <div class="flex gap-1 mb-2">
                                                             <label class="input w-full flex items-center gap-2 bg-white ">

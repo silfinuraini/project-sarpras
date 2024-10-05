@@ -113,6 +113,7 @@ class PengadaanController extends Controller
             'kuantiti_disetujui' => $request->input('kuantiti_disetujui'),
         ]);
 
+
         return redirect()->back();
     }
 

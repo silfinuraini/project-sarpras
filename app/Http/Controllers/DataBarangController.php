@@ -15,6 +15,7 @@ class  DataBarangController extends Controller
     {
         $kategori = Kategori::all();
         $items = Item::with('kategori')->paginate(5);    
+        
 
         return view('operator.data-barang', compact('items'));
     }
