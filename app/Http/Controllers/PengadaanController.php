@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BarangKeluar;
 use App\Models\DetailPengadaan;
 use App\Models\Item;
 use App\Models\Pegawai;
@@ -84,9 +85,9 @@ class PengadaanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $kode)
     {
-        //
+        
     }
 
     /**
@@ -97,7 +98,7 @@ class PengadaanController extends Controller
         Pengadaan::where('kode', $kode)->update([
             'status' => $request->input('status'),
         ]);
-        
+
         if ($request->input('status') === 'ditolak') {
             DetailPengadaan::where('kode_pengadaan', $kode)->update([
                 'kuantiti_disetujui' => 0,

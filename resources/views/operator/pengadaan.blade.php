@@ -72,12 +72,12 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="mb-1 form-control w-full relative col-span-4">
+                                <div class="mb-2 form-control w-full relative col-span-4">
                                     <input type="text" placeholder="" name="sifat"
                                         class="input text-sm bg-white text-gray-800 input-bordered w-full pt-4 pb-1"
                                         fdprocessedid="51tx8d">
                                     <label
-                                        class="absolute text-md text-bold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">SIfat</label>
+                                        class="absolute text-md text-bold text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Sifat</label>
                                 </div>
                                 <div class="mb-1 form-control w-full relative col-span-4">
                                     <input type="text" placeholder="" name="perihal"

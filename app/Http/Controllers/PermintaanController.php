@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BarangKeluar;
+use App\Models\DetailBarangKeluar;
 use App\Models\DetailPermintaan;
 use App\Models\Item;
 use App\Models\Pegawai;
@@ -115,6 +116,20 @@ class PermintaanController extends Controller
             ]);
         }
 
+        $permintaan = Permintaan::where('kode', $kode)->first();
+        $kodebk = 'BK' . rand(1000, 9999);
+
+        $jumlahitem = Permintaan::select("jumlah_item")->where('kode', $kode)->get();
+
+        $barangkeluar = BarangKeluar::create([
+            'kode' => $kodebk,
+            'nip' => $permintaan->nip,
+            'perihal' => $permintaan->perihal,
+            'sifat' => $permintaan->sifat,
+            'status' => $permintaan->status,
+            'jumlah_item' => 0,
+        ]);
+
         return redirect()->route('operator.permintaan');
     }
 
@@ -126,23 +141,9 @@ class PermintaanController extends Controller
             'kuantiti_disetujui' => $request->input('kuantiti_disetujui'),
         ]);
 
-        $permintaan = Permintaan::where('kode', $detailPermintaan->kode_permintaan)->first();
-        // dd($permintaan);
-
-        $kode = 'BK' . rand(1000, 9999);
-
-        if ($request->input('kuantiti_disetujui') >= 1) {
-            BarangKeluar::create([
-                'kode' => $kode,
-                'nip' => $permintaan->nip,
-                'kode_item' => $detailPermintaan->kode_item,
-                'kuantiti' => $detailPermintaan->kuantiti_disetujui
-            ]);
-        }
-
         $item = Item::where('kode', $detailPermintaan->kode_item)->first();
-
-        if ($item) {
+        // dd($item);
+        if ($item == true) {
             $item->update([
                 'stok' => $item->stok - $detailPermintaan->kuantiti
             ]);

@@ -82,8 +82,9 @@ Route::post('operator/pegawai', [PegawaiController::class, 'store'])->name('pega
 Route::delete('operator/pegawai/{nip}', [PegawaiController::class, 'destroy'])->name('pegawai.destroy');
 
 Route::get('operator/barang-masuk', [BarangMasukController::class, 'index'])->name('barangmasuk');
-Route::get('operator/barang-masuk/pengajuan', [BarangMasukController::class, 'show'])->name('barangmasuk.pengajuan');
-Route::post('operator/barang-masuk', [BarangMasukController::class, 'store'])->name('barangmasuk.store');
+Route::get('operator/{kode}/barang-masuk', [BarangMasukController::class, 'edit'])->name('barangmasuk.edit');
+Route::put('operator/{kode}/barang-masuk', [BarangMasukController::class, 'update'])->name('barangmasuk.update');
+Route::post('operator/barang-masuk', action: [BarangMasukController::class, 'store'])->name('barangmasuk.store');
 
 Route::get('operator/pengadaan', [App\Http\Controllers\PengadaanController::class, 'index'])->name('operator.pengadaan');
 Route::post('operator/pengadaan', [App\Http\Controllers\PengadaanController::class, 'store'])->name('operator.tambahpengadaan');

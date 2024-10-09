@@ -43,6 +43,11 @@ class   Item extends Model
         return $this->HasMany(DetailBarangMasuk::class);
     }
 
+    public function detailbarangkeluar(): HasMany
+    {
+        return $this->HasMany(DetailBarangKeluar::class);
+    }
+
     public function kategori():BelongsTo
     {
         return $this->belongsTo(Kategori::class, 'kategori_id');

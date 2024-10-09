@@ -22,4 +22,11 @@ class DetailBarangMasuk extends Model
     {
         return $this->belongsTo(BarangMasuk::class,'kode_barang_masuk');
     }
+
+    protected $fillable = [
+        'kode_barang_masuk',
+        'kode_item',
+        'kuantiti'
+    ];
+
 }

@@ -47,7 +47,7 @@
 
                 {{-- Button formImport --}}
                 <button onclick="formImport.showModal()"
-                    class="ml-auto btn flex items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                    class="ml-auto btn border-none flex items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 -ml-1" fill="currentColor"
                         aria-hidden="true"
                         viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
@@ -59,7 +59,7 @@
 
                 {{-- Button export --}}
                 <button
-                    class=" btn flex items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple ml-auto">
+                    class=" btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple ml-auto">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" aria-hidden="true"
                         viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                         <path
@@ -72,12 +72,6 @@
                     <div class="modal-box bg-gray-100 text-gray-700">
                         <div class="flex justify-between mb-2">
                             <h3 class="text-lg font-bold">Barang Masuk</h3>
-                            <p class="mt-1">
-                                <a class="text-sm font-normal text-purple-600 dark:text-purple-400 hover:underline"
-                                    href="{{ route('barangmasuk.pengajuan') }}">
-                                    Tambah dari pengajuan
-                                </a>
-                            </p>
                         </div>
                         <form action="{{ route('barangmasuk.store') }}" method="POST">
                             @csrf
@@ -175,7 +169,7 @@
             <div class="flex mb-2 gap-2">
                 {{-- Search bar --}}
                 <label class="input w-full flex items-center gap-2 bg-white ">
-                    <input type="text" class="grow border-none" placeholder="Search" />
+                    <input type="text" class="grow border-none input" placeholder="Search" />
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill=""
                         class="h-4 w-4 opacity-70">
                         <path fill-rule="evenodd"
@@ -374,9 +368,17 @@
                                                 {{-- Modal detailBM --}}
                                                 <dialog id="detailBM{{ $bm->kode }}" class="modal">
                                                     <div class="modal-box bg-gray-100">
+                                                        <div class="flex justify-between mb-2">
+                                                            <h3 class="text-lg font-bold">Barang Masuk</h3>
+                                                            <p class="mt-1">
+                                                                <a class="text-sm font-normal text-purple-600 dark:text-purple-400 hover:underline" href="{{ route('barangmasuk.edit', $bm->kode) }}">
+                                                                    Edit barang masuk
+                                                                </a>
+                                                            </p>
+                                                        </div>
                                                         <div class="flex gap-1 mb-2">
                                                             <label class="input w-full flex items-center gap-2 bg-white ">
-                                                                <input type="text" class="grow border-none"
+                                                                <input type="text" class="grow input border-none"
                                                                     placeholder="Search" />
                                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                                     viewBox="0 0 16 16" fill=""

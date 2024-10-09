@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class DetailBarangKeluar extends Model
 {
@@ -12,4 +13,13 @@ class DetailBarangKeluar extends Model
 
     protected $guarded = ['id'];
 
+    public function barangkeluar(): BelongsTo
+    {
+        return $this->belongsTo(BarangKeluar::class, 'kode_barang_keluar');
+    }
+
+    public function item(): BelongsTo
+    {
+        return $this->belongsTo(Item::class, 'kode_item');
+    }
 }

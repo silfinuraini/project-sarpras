@@ -19,10 +19,10 @@ class BarangMasuk extends Model
     protected $keyType = 'string';    
     public $incrementing = false;
 
-    public function supplier(): BelongsTo
-    {
+    public function supplier() {
         return $this->belongsTo(Supplier::class, 'kode_supplier');
     }
+    
 
     public function pegawai(): BelongsTo
     {

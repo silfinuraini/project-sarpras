@@ -53,8 +53,9 @@
                         <h3 class="mb-8 font-semibold text-gray-800 dark:text-gray-300">
                             Masukkan data akun
                         </h3>
-                        <label
-                            class="input input-bordered flex items-center mb-2 bg-white text-gray-600 border-purple-600">
+
+
+                        <label class="input input-bordered flex items-center mb-2 bg-white text-gray-600 border-purple-600">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-70" style="fill: #430A5D;"
                                 viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                                 <path
@@ -67,6 +68,7 @@
                                 @endforeach
                             </select>
                         </label>
+
                         <label
                             class="input input-bordered flex focus:outline-none items-center mb-2 bg-white text-gray-700 border-purple-600">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 opacity-70" style="fill: #430A5D;"

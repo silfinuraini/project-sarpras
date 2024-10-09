@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BarangMasuk;
 use App\Models\DetailBarangMasuk;
+use App\Models\DetailPengadaan;
 use App\Models\Item;
 use App\Models\Pegawai;
 use App\Models\Pengadaan;
@@ -117,29 +118,89 @@ class BarangMasukController extends Controller
     public function show()
     {
 
-        $supplier = Supplier::all();
-        $item = Item::all();
-        $pengadaan = Pengadaan::withAggregate('pegawai', 'nama')->get();
-        // dd($pengadaan);
-
-        return view('operator.barang-masuk-pengajuan', compact('supplier', 'item', 'pengadaan'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    
+    // public function edit(string $kode)
+    // {
+    //     $supplier = Supplier::all();
+    //     $item = Item::all();
+    //     $barangmasuk = BarangMasuk::withAggregate('pegawai', 'nama')->get();
+    //     $detailBM = DetailBarangMasuk::where('kode_barang_masuk', $kode)
+    //     ->with('item')
+    //     ->get();
+
+
+    //     return view('operator.edit-barang-masuk', compact('supplier', 'item', 'barangmasuk', 'detailBM'));
+    // }
+
+    public function edit(string $kode)
     {
-        //
+        $supplier = Supplier::all();
+        $item = Item::all();
+        $barangmasuk = BarangMasuk::where('kode', $kode)->with('supplier')->where('kode', $kode)->first();
+        $detailBM = DetailBarangMasuk::where('kode_barang_masuk', $kode)
+        ->with('item')
+        ->get();
+
+        return view('operator.edit-barang-masuk', compact('supplier', 'item', 'barangmasuk', 'detailBM'));
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $kode)
     {
-        //
+        $detailBM = DetailBarangMasuk::where('kode_barang_masuk', $kode)->first();
+
+        $item = Item::where('kode', $detailBM->kode_item)->first();
+        if ($item == true) {
+            // dd($request->kuantiti);
+            if ($detailBM->kuantiti > $request->kuantiti) {
+                $item->update([
+                    'stok' => $item->stok -  (abs($detailBM->kuantiti - $request->kuantiti)),
+                ]);
+            }
+            else if ($detailBM->kuantiti < $request->kuantiti) {
+                $item->update([
+                    'stok' => $item->stok +  (abs($detailBM->kuantiti - $request->kuantiti)),
+                ]);
+            }
+            else if ($detailBM->kuantiti == $request->kuantiti) {
+                $item->update([
+                    'stok' => $item->stok,
+                ]);
+            }
+        }
+        
+        $detailBM->update([
+            'kuantiti' => $request->kuantiti,
+        ]); 
+        
+        return redirect()->route('barangmasuk');
     }
+
+
+    /**
+     * Update the specified resource in storage.
+     */
+
+    // public function update(Request $request, string $kode)
+    // {
+    //     $barangmasuk = BarangMasuk::where('kode', $kode)->first();
+    //     dd($barangmasuk);
+    //     $barang = Item::where('kode', $request->item)->first();
+
+    //     $barangmasuk->update([
+    //         'jumlah_item' => ''
+    //     ]);
+        
+    //     return redirect()->back();
+    // }
 
     /**
      * Remove the specified resource from storage.

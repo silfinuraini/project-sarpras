@@ -20,7 +20,7 @@
             {{-- Stats --}}
             <div class="stats shadow my-5 bg-white text-gray-700">
                 <div class="stat">
-                    <div class="stat-figure text-primary">
+                    <div class="stat-figure text-teal-500">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             class="inline-block h-8 w-8 stroke-current">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -28,8 +28,8 @@
                             </path>
                         </svg>
                     </div>
-                    <div class="stat-title text-gray-700">Pengajuan</div>
-                    <div class="stat-value text-primary">25</div>
+                    <div class="stat-title text-gray-700">Barang masuk</div>
+                    <div class="stat-value text-teal-500">576</div>
                     {{-- <div class="stat-desc text-gray-700">19 pegajuan telah disetujui</div> --}}
                 </div>
 
@@ -41,8 +41,8 @@
                                 d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                         </svg>
                     </div>
-                    <div class="stat-title text-gray-700">Permintaan</div>
-                    <div class="stat-value text-secondary">89</div>
+                    <div class="stat-title text-gray-700">Barang keluar</div>
+                    <div class="stat-value text-secondary">189</div>
                 </div>
 
                 <div class="stat">
@@ -53,7 +53,7 @@
                                 d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                         </svg>
                     </div>
-                    <div class="stat-title text-gray-700">Barang</div>
+                    <div class="stat-title text-gray-700">Item</div>
                     <div class="stat-value text-purple-700">189</div>
                 </div>
 
@@ -70,7 +70,7 @@
                     <div class="stat-desc text-secondary">31 tasks remaining</div>
                 </div>
             </div>
-            
+
             <div class="grid gap-6 mb-6 md:grid-cols-3">
 
                 {{-- Chart --}}
@@ -103,12 +103,12 @@
                     </div>
                 </div>
 
-                {{-- Tabel Pengadaan--}}
+                {{-- Tabel Pengadaan --}}
                 <div class="w-full overflow-hidden rounded-box shadow-xs">
                     <div class="min-w-0 p-4 bg-white rounded-box shadow-xs dark:bg-gray-800">
 
                         <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-                            Pengadaan 
+                            Pengadaan
                         </h4>
                         <div class="w-full overflow-x-auto">
                             <table class="w-full whitespace-no-wrap">
@@ -169,12 +169,24 @@
             </div>
 
             {{-- Tabel Permintaan --}}
-            <div class="w-full overflow-hidden rounded-box shadow-xs">
+            <div class="w-full overflow-hidden rounded-box shadow-xs mb-6">
                 <div class="min-w-0 p-4 bg-white rounded-box shadow-xs dark:bg-gray-800">
 
-                    <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-                        Permintaan Terkini
-                    </h4>
+                    <div class="flex justify-between items-center">
+                        <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+                            Permintaan Terkini
+                        </h4>
+                        <label class="input input-bordered flex items-center gap-2 bg-white text-gray-700">
+                            <input type="text" class="grow border-none input" placeholder="Search" />
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                class="h-4 w-4 opacity-70">
+                                <path fill-rule="evenodd"
+                                    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </label>
+
+                    </div>
                     <div class="w-full overflow-x-auto">
                         <table class="w-full whitespace-no-wrap">
                             <thead>
@@ -230,7 +242,7 @@
                                     </tr>
                                 @endforeach
                             </tbody>
-                        </table>    
+                        </table>
                     </div>
                 </div>
             </div>
