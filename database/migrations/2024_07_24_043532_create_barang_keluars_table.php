@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('barang_keluar', function (Blueprint $table) {
             $table->string('kode', 20)->primary();
+            $table->string('kode_permintaan', 20);
             $table->string('nip', 20);
             $table->string('perihal', 50);
             $table->string('sifat', 20);
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->timestamps();
         
             $table->foreign('nip')->references('nip')->on('pegawai')->cascadeOnDelete();
+            $table->foreign('kode_permintaan')->references('kode')->on('permintaan')->cascadeOnDelete();
         });
     }
 

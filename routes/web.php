@@ -13,6 +13,7 @@ use App\Http\Controllers\PermintaanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\Unit\PengadaanController;
+use App\Models\Keranjang;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -90,6 +91,7 @@ Route::get('operator/pengadaan', [App\Http\Controllers\PengadaanController::clas
 Route::post('operator/pengadaan', [App\Http\Controllers\PengadaanController::class, 'store'])->name('operator.tambahpengadaan');
 
 Route::get('operator/detailpengadaan/{kode}', [App\Http\Controllers\PengadaanController::class, 'show'])->name('operator.detailpengadaan');
+Route::get('operator/editpengadaan/{kode}', [App\Http\Controllers\PengadaanController::class, 'edit'])->name('operator.editpengadaan');
 Route::put('operator/{kode}/detailpengadaan', [App\Http\Controllers\PengadaanController::class, 'update'])->name('operator.updatepengadaan');
 Route::post('operator/{id}/detailpengadaan', [App\Http\Controllers\PengadaanController::class, 'updateKuantiti'])->name('operator.updatekuantitipengadaan');
 
@@ -113,6 +115,8 @@ Route::get('unit/pengadaan', [PengadaanController::class, 'index'])->name('penga
 Route::middleware(['auth'])->group(function () {
     Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang.index');
     Route::post('/keranjang/tambah', [KeranjangController::class, 'store'])->name('keranjang.store');
-    Route::patch('/keranjang/{keranjang}', [KeranjangController::class, 'update'])->name('keranjang.update');
-    Route::delete('/keranjang/{keranjang}', [KeranjangController::class, 'destroy'])->name('keranjang.dstroy');
+    Route::patch('/keranjang/{id}', [KeranjangController::class, 'update'])->name('keranjang.update');
+    Route::delete('/keranjang/{id}', [KeranjangController::class, 'destroy'])->name('keranjang.destroy');
 });
+
+

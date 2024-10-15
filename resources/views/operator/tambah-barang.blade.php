@@ -30,7 +30,7 @@
                 </ul>
             </div>
 
-            <form action="{{ route('item.store') }}" id="formStoreItem" method="POST">
+            <form action="{{ route('item.store') }}" id="formStoreItem" method="POST" enctype="multipart/form-data">
                 @csrf
                 {{-- Form kategori --}}
                 <div class="px-4 py-3 mb-6 bg-white rounded-lg shadow-xl dark:bg-gray-800">

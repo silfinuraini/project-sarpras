@@ -23,7 +23,7 @@ class BarangMasukController extends Controller
         $item = Item::all();
         $supplier = Supplier::all();
         $pegawai = Pegawai::all();
-        $barangmasuk = BarangMasuk::with('pegawai', 'supplier')->get();
+        $barangmasuk = BarangMasuk::with('pegawai', 'supplier')->orderBy('created_at', 'DESC')->get();
         $detailBM = DetailBarangMasuk::with('item')->get();
 
         return view('operator.barang-masuk', compact('item', 'barangmasuk', 'supplier', 'detailBM'));
@@ -66,17 +66,18 @@ class BarangMasukController extends Controller
                 'kode_item' => $kodeBarang[$i],
                 'kuantiti' => $kuantiti[$i]
             ]);
+
+            $item = Item::where('kode', $detailBM->kode_item)->first();
+    
+            if ($item) {
+                $item->update([
+                    'stok' => $item->stok + $detailBM->kuantiti
+                ]);
+            }
         }
 
         // dd($detailBM->kode_item);
 
-        $item = Item::where('kode', $detailBM->kode_item)->first();
-
-        if ($item) {
-            $item->update([
-                'stok' => $item->stok + $detailBM->kuantiti
-            ]);
-        }
 
         // $randomNumber = rand(1000, 9999);
         // $kode = 'BM' . $randomNumber;
@@ -143,7 +144,7 @@ class BarangMasukController extends Controller
         $item = Item::all();
         $barangmasuk = BarangMasuk::where('kode', $kode)->with('supplier')->where('kode', $kode)->first();
         $detailBM = DetailBarangMasuk::where('kode_barang_masuk', $kode)
-        ->with('item')
+        ->with('item') 
         ->get();
 
         return view('operator.edit-barang-masuk', compact('supplier', 'item', 'barangmasuk', 'detailBM'));
@@ -155,6 +156,7 @@ class BarangMasukController extends Controller
      */
     public function update(Request $request, string $kode)
     {
+        // dd($request);
         $detailBM = DetailBarangMasuk::where('kode_barang_masuk', $kode)->first();
 
         $item = Item::where('kode', $detailBM->kode_item)->first();

@@ -3,8 +3,13 @@
 namespace App\Http\Controllers\Unit;
 
 use App\Http\Controllers\Controller;
+use App\Models\DetailPengadaan;
 use App\Models\Item;
+use App\Models\Keranjang;
+use App\Models\Pegawai;
+use App\Models\Pengadaan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PengadaanController extends Controller
 {
@@ -14,8 +19,13 @@ class PengadaanController extends Controller
     public function index()
     {
         $item = Item::all();
-        
-        return view ('unit.pengadaan', compact('item'));
+        $nip = Auth::user()->nip;
+
+        $pegawai = Pegawai::where('nip', $nip)->get();
+
+        $keranjang = Keranjang::where('nip', $nip)->get();
+
+        return view('unit.pengadaan', compact('item', 'keranjang', 'nip'));
     }
 
     /**
@@ -31,7 +41,33 @@ class PengadaanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nip = Auth::user()->nip;
+        $kode = 'PGD' . rand(1000, 9999);
+
+        $keranjang = Keranjang::where('nip', $nip)->get();
+        $jumlah = count($keranjang);
+
+        dd($jumlah);
+
+        $pengadaan = Pengadaan::create([
+            'kode' => $kode,
+            'nip' => $request->nip,
+            'status' => 'menunggu',
+            'sifat' => $request->sifat,
+            'perihal' => $request->perihal,
+            'jumlah_item'  => $jumlah
+        ]);
+
+        for ($i = 0; $i < count($keranjang); $i++) {
+            $detailPengadaan = DetailPengadaan::create([
+                'kode_pengadaan' => $pengadaan->kode,
+                'kode_item' => $keranjang[$i],
+                'kuantiti' => $request->kuantiti[$i],
+                'kuantiti_disetujui' => 0
+            ]);
+        }
+
+        return redirect()->back();
     }
 
     /**
@@ -53,10 +89,7 @@ class PengadaanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        
-    }
+    public function update(Request $request, string $id) {}
 
     /**
      * Remove the specified resource from storage.

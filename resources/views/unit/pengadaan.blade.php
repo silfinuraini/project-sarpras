@@ -26,17 +26,16 @@
 
                     <!-- Search input -->
                     <div class="flex justify-center flex-1">
-                        <div class="relative w-full max-w-xl focus-within:text-purple-500">
-                            <label class="input input-bordered flex items-center gap-2">
-                                <input type="text" class="grow" placeholder="Search" />
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
-                                    class="w-4 h-4 opacity-70">
-                                    <path fill-rule="evenodd"
-                                        d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </label>
-                        </div>
+                        <label class="input input-bordered flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                                class="h-4 w-4 opacity-70">
+                                <path fill-rule="evenodd"
+                                    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+
+                            <input type="text" class="grow border-none input input-sm w-80" placeholder="Cari.." />
+                        </label>
                     </div>
                 </div>
             </header>
@@ -47,7 +46,7 @@
                 <div class=" mx-4 text-sm breadcrumbs">
                     <ul>
                         <li><a href="kepala-unit-index.html" class="font-semibold text-purple-600">Home</a></li>
-                        <li>Pengajuan</li>
+                        <li>Pengadaan</li>
                     </ul>
                 </div>
             </div>
@@ -78,8 +77,8 @@
                                                     :
                                                 </td>
                                                 <td class="px-4 py-1">
-                                                    <input type="text" value="RPL"
-                                                        class="input input-ghost w-full" />
+                                                    <input type="text" value="{{ $keranjang[0]->pegawai->nama }}"
+                                                        class="input input-ghost input-sm w-full" />
                                                 </td>
                                             </tr>
 
@@ -91,7 +90,7 @@
                                                     :
                                                 </td>
                                                 <td class="px-4 py-1">
-                                                    <input type="text" class="input input-ghost w-full" />
+                                                    <input type="text" class="input input-ghost input-sm w-full" />
                                                 </td>
                                             </tr>
                                             <tr class="text-gray-700 dark:text-gray-400">
@@ -102,7 +101,7 @@
                                                     :
                                                 </td>
                                                 <td class="px-4 py-1">
-                                                    <input type="text" class="input input-ghost w-full" />
+                                                    <input type="text" class="input input-ghost input-sm w-full" />
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -153,180 +152,132 @@
                                                     <th class="px-4 py-3">Merk</th>
                                                     <th class="px-4 py-3">Jumlah</th>
                                                     <th class="px-4 py-3">Satuan</th>
-                                                        <th class="px-4 py-3">Aksi</th>
+                                                    <th class="px-4 py-3">Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                                                <tr class="text-gray-700 dark:text-gray-400">
-                                                    <td class="px-4 py-3 text-sm font-semibold">
-                                                        ATK001
-                                                    </td>
-                                                    <td class="px-4 py-3">
-                                                        <div class="flex items-center text-sm">
-                                                            <!-- Avatar with inset shadow -->
-                                                            <div
-                                                                class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                                                <img class="object-cover w-full h-full rounded-full"
-                                                                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&facepad=3&fit=facearea&s=707b9c33066bf8808c934c8ab394dff6"
-                                                                    alt="" loading="lazy" />
-                                                                <div class="absolute inset-0 rounded-full shadow-inner"
-                                                                    aria-hidden="true"></div>
+                                                @foreach ($keranjang as $krj)
+                                                    <tr class="text-gray-700 dark:text-gray-400">
+                                                        <td class="px-4 py-3 text-sm font-semibold">
+                                                            {{ $krj->item->kode }}
+                                                        </td>
+                                                        <td class="px-4 py-3">
+                                                            <div class="flex items-center text-sm">
+                                                                <!-- Avatar with inset shadow -->
+                                                                <div
+                                                                    class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+                                                                    <img class="object-cover w-full h-full rounded-full"
+                                                                        src={{ asset('storage/' . $krj->item->gambar) }}
+                                                                        alt="" loading="lazy" />
+                                                                    <div class="absolute inset-0 rounded-full shadow-inner"
+                                                                        aria-hidden="true"></div>
+                                                                </div>
+                                                                <div>
+                                                                    <p class="font-semibold">{{ $krj->item->nama }}</p>
+                                                                    <p class="text-xs text-gray-600 dark:text-gray-400">
+                                                                        {{ $krj->item->kategori->nama }}
+                                                                    </p>
+                                                                </div>
                                                             </div>
-                                                            <div>
-                                                                <p class="font-semibold">Kertas HVS</p>
-                                                                <p class="text-xs text-gray-600 dark:text-gray-400">
-                                                                    ATK
-                                                                </p>
+                                                        </td>
+                                                        <td class="px-4 py-3 text-sm">
+                                                            {{ $krj->item->merk }}
+                                                        </td>
+                                                        <td class="px-4 py-3 text-xs">
+                                                            <!-- Input Number -->
+                                                            <div class="py-2 px-3 inline-block bg-white border border-gray-200 rounded-box"
+                                                                data-hs-input-number="">
+                                                                <div class="flex items-center gap-x-1.5">
+                                                                    <button type="button"
+                                                                        class="size-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                                                                        data-hs-input-number-decrement>
+                                                                        <svg class="flex-shrink-0 size-3.5"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            width="24" height="24"
+                                                                            viewBox="0 0 24 24" fill="none"
+                                                                            stroke="currentColor" stroke-width="2"
+                                                                            stroke-linecap="round"
+                                                                            stroke-linejoin="round">
+                                                                            <path d="M5 12h14"></path>
+                                                                        </svg>
+                                                                    </button>
+                                                                    <input
+                                                                        class="p-0 w-6 bg-transparent border-0 text-gray-800 text-center focus:ring-0"
+                                                                        type="text" value="{{ $krj->kuantiti }}"
+                                                                        data-hs-input-number-input="">
+                                                                    <button type="button"
+                                                                        class="size-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                                                                        data-hs-input-number-increment="">
+                                                                        <svg class="flex-shrink-0 size-3.5"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            width="24" height="24"
+                                                                            viewBox="0 0 24 24" fill="none"
+                                                                            stroke="currentColor" stroke-width="2"
+                                                                            stroke-linecap="round"
+                                                                            stroke-linejoin="round">
+                                                                            <path d="M5 12h14"></path>
+                                                                            <path d="M12 5v14"></path>
+                                                                        </svg>
+                                                                    </button>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="px-4 py-3 text-sm">
-                                                        Sinar Dunia
-                                                    </td>
-                                                    <td class="px-4 py-3 text-xs">
-                                                        <!-- Input Number -->
-                                                        <div class="py-2 px-3 inline-block bg-white border border-gray-200 rounded-box"
-                                                            data-hs-input-number="">
-                                                            <div class="flex items-center gap-x-1.5">
-                                                                <button type="button"
-                                                                    class="size-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
-                                                                    data-hs-input-number-decrement="">
-                                                                    <svg class="flex-shrink-0 size-3.5"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        width="24" height="24"
-                                                                        viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round"
-                                                                        stroke-linejoin="round">
-                                                                        <path d="M5 12h14"></path>
-                                                                    </svg>
-                                                                </button>
-                                                                <input
-                                                                    class="p-0 w-6 bg-transparent border-0 text-gray-800 text-center focus:ring-0"
-                                                                    type="text" value="0"
-                                                                    data-hs-input-number-input="">
-                                                                <button type="button"
-                                                                    class="size-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
-                                                                    data-hs-input-number-increment="">
-                                                                    <svg class="flex-shrink-0 size-3.5"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        width="24" height="24"
-                                                                        viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round"
-                                                                        stroke-linejoin="round">
-                                                                        <path d="M5 12h14"></path>
-                                                                        <path d="M12 5v14"></path>
-                                                                    </svg>
-                                                                </button>
+                                                            <!-- End Input Number -->
+                                                        </td>
+                                                        <td class="px-4 py-3 text-sm">
+                                                            {{ $krj->item->satuan }}
+                                                        </td>
+                                                        <td class="px-4 py-3">
+                                                            <div class="flex items-center space-x-4 text-sm">
+                                                                <form
+                                                                    action="{{ route('keranjang.destroy', $krj->id) }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    @method('DELETE')
+
+                                                                    <button type="submit"
+                                                                        class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-box dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                                                                        aria-label="Delete">
+                                                                        <svg class="w-5 h-5" aria-hidden="true"
+                                                                            fill="currentColor" viewBox="0 0 20 20">
+                                                                            <path fill-rule="evenodd"
+                                                                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                                                clip-rule="evenodd"></path>
+                                                                        </svg>
+                                                                    </button>
+                                                                </form>
                                                             </div>
-                                                        </div>
-                                                        <!-- End Input Number -->
-                                                    </td>
-                                                    <td class="px-4 py-3 text-sm">
-                                                        Rim
-                                                    </td>
-                                                    <td class="px-4 py-3">
-                                                        <div class="flex items-center space-x-4 text-sm">
-                                                            <button
-                                                                class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-box dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                                                                aria-label="Delete">
-                                                                <svg class="w-5 h-5" aria-hidden="true"
-                                                                    fill="currentColor" viewBox="0 0 20 20">
-                                                                    <path fill-rule="evenodd"
-                                                                        d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                                                        clip-rule="evenodd"></path>
-                                                                </svg>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr class="text-gray-700 dark:text-gray-400">
-                                                    <td class="px-4 py-3 text-sm font-semibold">
-                                                        AKB001
-                                                    </td>
-                                                    <td class="px-4 py-3">
-                                                        <div class="flex items-center text-sm">
-                                                            <!-- Avatar with inset shadow -->
-                                                            <div
-                                                                class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                                                <img class="object-cover w-full h-full rounded-full"
-                                                                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&facepad=3&fit=facearea&s=707b9c33066bf8808c934c8ab394dff6"
-                                                                    alt="" loading="lazy" />
-                                                                <div class="absolute inset-0 rounded-full shadow-inner"
-                                                                    aria-hidden="true"></div>
-                                                            </div>
-                                                            <div>
-                                                                <p class="font-semibold">Sapu</p>
-                                                                <p class="text-xs text-gray-600 dark:text-gray-400">
-                                                                    Alat kebersihan
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="px-4 py-3 text-sm">
-                                                        Polytron
-                                                    </td>
-                                                    <td class="px-4 py-3 text-xs">
-                                                        <!-- Input Number -->
-                                                        <div class="py-2 px-3 inline-block bg-white border border-gray-200 rounded-box"
-                                                            data-hs-input-number="">
-                                                            <div class="flex items-center gap-x-1.5">
-                                                                <button type="button"
-                                                                    class="size-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
-                                                                    data-hs-input-number-decrement="">
-                                                                    <svg class="flex-shrink-0 size-3.5"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        width="24" height="24"
-                                                                        viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round"
-                                                                        stroke-linejoin="round">
-                                                                        <path d="M5 12h14"></path>
-                                                                    </svg>
-                                                                </button>
-                                                                <input
-                                                                    class="p-0 w-6 bg-transparent border-0 text-gray-800 text-center focus:ring-0"
-                                                                    type="text" value="0"
-                                                                    data-hs-input-number-input="">
-                                                                <button type="button"
-                                                                    class="size-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-md border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
-                                                                    data-hs-input-number-increment="">
-                                                                    <svg class="flex-shrink-0 size-3.5"
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        width="24" height="24"
-                                                                        viewBox="0 0 24 24" fill="none"
-                                                                        stroke="currentColor" stroke-width="2"
-                                                                        stroke-linecap="round"
-                                                                        stroke-linejoin="round">
-                                                                        <path d="M5 12h14"></path>
-                                                                        <path d="M12 5v14"></path>
-                                                                    </svg>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                        <!-- End Input Number -->
-                                                    </td>
-                                                    <td class="px-4 py-3 text-sm">
-                                                        Pcs
-                                                    </td>
-                                                    <td class="px-4 py-3">
-                                                        <div class="flex items-center space-x-4 text-sm">
-                                                            <button
-                                                                class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-box dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                                                                aria-label="Delete">
-                                                                <svg class="w-5 h-5" aria-hidden="true"
-                                                                    fill="currentColor" viewBox="0 0 20 20">
-                                                                    <path fill-rule="evenodd"
-                                                                        d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                                                        clip-rule="evenodd"></path>
-                                                                </svg>
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
+
+                                        <script>
+                                            // Fitur Kuantiti
+                                            document.addEventListener('DOMContentLoaded', function() {
+                                                // Select all increment and decrement buttons
+                                                const decrementButtons = document.querySelectorAll('[data-hs-input-number-decrement]');
+                                                const incrementButtons = document.querySelectorAll('[data-hs-input-number-increment]');
+
+                                                decrementButtons.forEach(button => {
+                                                    button.addEventListener('click', function() {
+                                                        const input = this.nextElementSibling;
+                                                        let currentValue = parseInt(input.value);
+                                                        if (currentValue > 0) {
+                                                            input.value = currentValue - 1;
+                                                        }
+                                                    });
+                                                });
+
+                                                incrementButtons.forEach(button => {
+                                                    button.addEventListener('click', function() {
+                                                        const input = this.previousElementSibling;
+                                                        let currentValue = parseInt(input.value);
+                                                        input.value = currentValue + 1;
+                                                    });
+                                                });
+                                            });
+                                        </script>
                                     </div>
                                     <div
                                         class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">

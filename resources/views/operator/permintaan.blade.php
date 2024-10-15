@@ -306,7 +306,7 @@
                                 <path d="M5 12h14"></path>
                             </svg>
                         </button>
-                        <input class="p-0 w-8 bg-transparent border-0 text-gray-800 text-center focus:ring-0" type="number" name="kuantiti[]" value="1" min=1 >
+                        <input class="p-0 w-8 bg-transparent border-0 text-gray-800 text-center focus:ring-0" name="kuantiti[]" value="1" min=1 >
                         <button type="button" class="px-2 h-full inline-flex justify-center items-center text-sm font-medium rounded-r-xl border-l border-gray-200 bg-white text-gray-800 hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none increment-btn">
                             <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M5 12h14"></path>

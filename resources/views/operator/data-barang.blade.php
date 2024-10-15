@@ -27,7 +27,7 @@
             <!-- CTA -->
             <div class="flex gap-2">
 
-                <a class="flex w-full items-center justify-between p-4 mb-2 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
+                {{-- <a class="flex w-full items-center justify-between p-4 mb-2 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
                     href="tambah-barang">
                     <div class="flex items-center">
                         <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -38,9 +38,92 @@
                         <span>Tambah barang</span>
                     </div>
                     <span> &RightArrow;</span>
+                </a> --}}
+                <label class="input w-full flex items-center gap-2 bg-white ">
+                    <input type="text" class="grow border-none" placeholder="Search" />
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="" class="h-4 w-4 opacity-70">
+                        <path fill-rule="evenodd"
+                            d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </label>
+                <div class="dropdown dropdown-end dropdown-hover">
+                    <div tabindex="0" role="button"
+                        class="btn border-purple-700 bg-white flex items-center justify-between px-4 py-2 text-sm font-medium text-purple-700 transition-colors duration-150 bg-transparent border rounded-lg active:bg-transparent hover:bg-transparent focus:outline-none focus:shadow-outline-transparent">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-70" fill="currentColor"
+                            viewBox="0 0 16 16">
+                            <path
+                                d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z" />
+                        </svg>
+                    </div>
+                    <div tabindex="0"
+                        class="dropdown-content card card-compact text-sm bg-white text-gray-700 z-[1] w-80 p-4 shadow">
+                        <div class="card-body">
+                            <h3 class="card-title text-lg font-semibold mb-4">Filter</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="mb-1 font-medium">Kategori</p>
+                                    <select class="select bg-white select-bordered w-full">
+                                        <option disabled selected>Tampilkan semua</option>
+                                        @foreach ($kategori as $k)
+                                            <option>{{ $k->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div>
+                                        <p class="mb-1 font-medium">Merk</p>
+                                        <select class="select bg-white select-bordered w-full">
+                                            <option disabled selected>All</option>
+                                            <option>Han Solo</option>
+                                            <option>Greedo</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <p class="mb-1 font-medium">Jenis</p>
+                                        <select class="select bg-white select-bordered w-full">
+                                            <option disabled selected>All</option>
+                                            <option>Han Solo</option>
+                                            <option>Greedo</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <p class="mb-1 font-medium">Warna</p>
+                                        <select class="select bg-white select-bordered w-full">
+                                            <option disabled selected>All</option>
+                                            <option>Han Solo</option>
+                                            <option>Greedo</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <p class="mb-1 font-medium">Ukuran</p>
+                                        <select class="select bg-white select-bordered w-full">
+                                            <option disabled selected>All</option>
+                                            <option>Han Solo</option>
+                                            <option>Greedo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit"
+                                class="btn btn-primary w-full mt-6 text-white bg-purple-600 hover:bg-purple-700">
+                                Pakai
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <a href="tambah-barang"
+                    class=" btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1 -ml-1" fill="currentColor"
+                        aria-hidden="true" viewBox="0 0 16 16">
+                        <path
+                            d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0" />
+                    </svg>
+                    <span>Tambah barang</span>
                 </a>
                 <button onclick="my_modal_1.showModal()"
-                    class="ml-auto btn flex items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                    class=" btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 -ml-1" fill="currentColor"
                         aria-hidden="true"
                         viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
@@ -92,7 +175,7 @@
 
                         <div class="flex">
                             <button
-                                class="mt-4 ml-auto btn flex items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                                class="mt-4  btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                                 <span>Import</span>
                             </button>
                         </div>
@@ -104,7 +187,7 @@
                 </dialog>
 
                 <button
-                    class=" btn flex items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple ml-auto">
+                    class=" btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple ml-auto">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" aria-hidden="true"
                         viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                         <path
@@ -114,7 +197,7 @@
             </div>
 
 
-            <div class="flex mb-2 gap-2">
+            {{-- <div class="flex mb-2 gap-2">
                 <label class="input w-full flex items-center gap-2 bg-white ">
                     <input type="text" class="grow border-none" placeholder="Search" />
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="" class="h-4 w-4 opacity-70">
@@ -123,12 +206,72 @@
                             clip-rule="evenodd" />
                     </svg>
                 </label>
-                <select class="ml-auto select select-bordered max-w-xs bg-white text-gray-800 ">
-                    <option disabled selected>Kategori </option>
-                    <option>ATK</option>
-                    <option>Alat kebersihan</option>
-                </select>
-            </div>
+                <div class="dropdown dropdown-end dropdown-hover">
+                    <div tabindex="0" role="button"
+                        class="btn m-1 flex items-center justify-between px-4 py-2 text-sm font-medium text-purple-700 transition-colors duration-150 bg-transparent border border-gray-300 rounded-lg active:bg-transparent hover:bg-transparent focus:outline-none focus:shadow-outline-transparent">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-70" viewBox="0 0 16 16">
+                            <path
+                                d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z" />
+                        </svg>
+                    </div>
+                    <div tabindex="0"
+                        class="dropdown-content card card-compact text-sm bg-white text-gray-700 z-[1] w-80 p-4 shadow">
+                        <div class="card-body">
+                            <h3 class="card-title text-lg font-semibold mb-4">Filter</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="mb-1 font-medium">Kategori</p>
+                                    <select class="select bg-white select-bordered w-full">
+                                        <option disabled selected>Tampilkan semua</option>
+                                        @foreach ($kategori as $k)
+                                            <option>{{ $k->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div>
+                                        <p class="mb-1 font-medium">Merk</p>
+                                        <select class="select bg-white select-bordered w-full">
+                                            <option disabled selected>All</option>
+                                            <option>Han Solo</option>
+                                            <option>Greedo</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <p class="mb-1 font-medium">Jenis</p>
+                                        <select class="select bg-white select-bordered w-full">
+                                            <option disabled selected>All</option>
+                                            <option>Han Solo</option>
+                                            <option>Greedo</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <p class="mb-1 font-medium">Warna</p>
+                                        <select class="select bg-white select-bordered w-full">
+                                            <option disabled selected>All</option>
+                                            <option>Han Solo</option>
+                                            <option>Greedo</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <p class="mb-1 font-medium">Ukuran</p>
+                                        <select class="select bg-white select-bordered w-full">
+                                            <option disabled selected>All</option>
+                                            <option>Han Solo</option>
+                                            <option>Greedo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit"
+                                class="btn btn-primary w-full mt-6 text-white bg-purple-600 hover:bg-purple-700">
+                                Pakai
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div> --}}
             <!-- Table With Action -->
             <div class="flex items-center p-4 bg-white rounded-box shadow-xs dark:bg-gray-800">
                 <div class="w-full overflow-hidden rounded-lg shadow-xs mb-2">
@@ -140,7 +283,7 @@
                                     <th class="px-4 py-3">Kode</th>
                                     <th class="px-4 py-3">Barang</th>
                                     <th class="px-4 py-3">Merk</th>
-                                    <th class="px-4 py-3">Sok</th>
+                                    <th class="px-4 py-3">Stok</th>
                                     <th class="px-4 py-3">Satuan</th>
                                     <th class="px-4 py-3">Aksi</th>
                                 </tr>
@@ -157,7 +300,7 @@
                                                 <!-- Avatar with inset shadow -->
                                                 <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
                                                     <img class="object-cover w-full h-full rounded-full"
-                                                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&facepad=3&fit=facearea&s=707b9c33066bf8808c934c8ab394dff6"
+                                                        src={{ asset('storage/' . $item->gambar) }}
                                                         alt="" loading="lazy" />
                                                     <div class="absolute inset-0 rounded-full shadow-inner"
                                                         aria-hidden="true"></div>
@@ -223,7 +366,7 @@
                                                                     </h4>
                                                                     <h2
                                                                         class="font-bold text-lg text-gray-800 dark:text-gray-300">
-                                                                        {{ strtoupper($item->merk)}}
+                                                                        {{ strtoupper($item->merk) }}
                                                                     </h2>
                                                                     <div
                                                                         class="badge bg-purple-700 text-white border-none text-xs">
@@ -448,11 +591,11 @@
                                                                     </table>
                                                                 </div>
                                                                 <!-- <p class="font-semibold">Kode barang: </p>
-                                                                                                                            <p class="font-semibold">Merk       : </p>
-                                                                                                                            <p class="font-semibold">Stok       : </p>
-                                                                                                                            <p class="font-semibold">Satuan     : </p>
-                                                                                                                            <p class="font-semibold">Harga      : </p>
-                                                                                                                            <p class="font-semibold">Deskripsi  : </p> -->
+                                                                                                                                        <p class="font-semibold">Merk       : </p>
+                                                                                                                                        <p class="font-semibold">Stok       : </p>
+                                                                                                                                        <p class="font-semibold">Satuan     : </p>
+                                                                                                                                        <p class="font-semibold">Harga      : </p>
+                                                                                                                                        <p class="font-semibold">Deskripsi  : </p> -->
                                                             </div>
                                                         </div>
                                                     </div>

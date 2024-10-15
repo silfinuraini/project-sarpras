@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Keranjang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KeranjangController extends Controller
 {
@@ -27,7 +29,24 @@ class KeranjangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $keranjangs = Keranjang::where('nip', Auth::id())
+        //     ->where('kode_item', $request->kode_item)
+        //     ->first();
+
+        //     dd($keranjangs);
+
+        // if ($keranjangs) {
+        //     //
+        // } else {
+            $keranjang = Keranjang::create([
+                'kode_item' => $request->kode_item,
+                'kuantiti' => 1,
+                'nip' => Auth::id()
+            ]);
+        // }
+
+
+        return redirect()->route('dashboard.unit');
     }
 
     /**
@@ -59,6 +78,15 @@ class KeranjangController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $keranjang = Keranjang::find($id);
+
+        // dd($keranjang);
+
+        if ($keranjang) {
+            $keranjang->delete();
+            return redirect()->back();
+        }
+
+        return redirect()->back();
     }
 }

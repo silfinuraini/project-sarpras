@@ -78,7 +78,7 @@ class PengadaanController extends Controller
         $pengadaan = Pengadaan::with('pegawai')
             ->where('kode', $kode)
             ->first();
-
+ 
         return view('operator.detailpengadaan', compact('detailPengadaan', 'pengadaan', 'pegawai', 'item'));
     }
 
@@ -87,7 +87,9 @@ class PengadaanController extends Controller
      */
     public function edit(string $kode)
     {
-        
+        $pengadaan = Pengadaan::with('pegawai')->where('kode', $kode)->first();
+        $detailPengadaan = DetailPengadaan::where('kode_pengadaan', $kode)->get();
+        return view('operator.edit-pengadaan', compact('pengadaan', 'detailPengadaan'));
     }
 
     /**

@@ -121,14 +121,14 @@ class PermintaanController extends Controller
 
         $jumlahitem = Permintaan::select("jumlah_item")->where('kode', $kode)->get();
 
-        $barangkeluar = BarangKeluar::create([
-            'kode' => $kodebk,
-            'nip' => $permintaan->nip,
-            'perihal' => $permintaan->perihal,
-            'sifat' => $permintaan->sifat,
-            'status' => $permintaan->status,
-            'jumlah_item' => 0,
-        ]);
+        // $barangkeluar = BarangKeluar::create([
+        //     'kode' => $kodebk,
+        //     'nip' => $permintaan->nip,
+        //     'perihal' => $permintaan->perihal,
+        //     'sifat' => $permintaan->sifat,
+        //     'status' => $permintaan->status,
+        //     'jumlah_item' => 0,
+        // ]);
 
         return redirect()->route('operator.permintaan');
     }

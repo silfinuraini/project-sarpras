@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamps();
         
             $table->foreign('nip')->references('nip')->on('pegawai')->cascadeOnDelete();
+            $table->foreign('kode_item')->references('kode')->on('item')->cascadeOnDelete();
         });
         
     }
