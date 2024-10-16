@@ -47,11 +47,9 @@ class PengadaanController extends Controller
         $keranjang = Keranjang::where('nip', $nip)->get();
         $jumlah = count($keranjang);
 
-        dd($jumlah);
-
         $pengadaan = Pengadaan::create([
             'kode' => $kode,
-            'nip' => $request->nip,
+            'nip' => $nip,
             'status' => 'menunggu',
             'sifat' => $request->sifat,
             'perihal' => $request->perihal,
@@ -61,11 +59,14 @@ class PengadaanController extends Controller
         for ($i = 0; $i < count($keranjang); $i++) {
             $detailPengadaan = DetailPengadaan::create([
                 'kode_pengadaan' => $pengadaan->kode,
-                'kode_item' => $keranjang[$i],
+                'kode_item' => $keranjang[$i]->kode_item,
                 'kuantiti' => $request->kuantiti[$i],
                 'kuantiti_disetujui' => 0
             ]);
+
+            $keranjang[$i]->delete();
         }
+
 
         return redirect()->back();
     }

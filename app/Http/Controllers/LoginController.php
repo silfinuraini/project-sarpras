@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use App\Models\Kategori;
+use App\Models\Keranjang;
 use App\Models\Pengadaan;
 use App\Models\Permintaan;
 use App\Models\User;
@@ -50,6 +51,11 @@ class LoginController extends Controller
             return view('operator.dashboard', compact('permintaan', 'pengadaan' ));
         }
 
-        return view('unit.dashboard', compact('item', 'kategori'));
+        $nip = Auth::user()->nip;
+
+        $keranjang = Keranjang::where('nip', $nip)->get();
+        $jumlah = count($keranjang);
+        
+        return view('unit.dashboard', compact('item', 'kategori', 'jumlah'));
     }
 }

@@ -50,113 +50,118 @@
                     </ul>
                 </div>
             </div>
+            @if (isset($item))
+
             <main class="h-full pb-16 overflow-y-auto">
                 <div class="container grid px-6 mx-auto">
                     <!-- With actions -->
-                    <div class="grid mt-6 gap-6 mb-6 md:grid-cols-2 xl:grid-cols-4">
-                        <div class="col-span-3">
-                            <div class="items-center p-4 bg-white rounded-box shadow-xs dark:bg-gray-800"
-                                style="height:100%;">
-                                <div class="flex">
-                                    <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-                                        Nota Dinas
-                                    </h4>
-                                    <h4 class="mb-4 flex ml-auto font-sans text-gray-800 dark:text-gray-300">
-                                        20/02/24
-                                    </h4>
-                                </div>
+                    <form action="{{ route('pengadaan.store') }}" method="POST">
+                        @csrf
 
-                                <div class="w-full overflow-x-auto">
-                                    <table class="w-full whitespace-no-wrap text-sm">
-                                        <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                                            <tr class="text-gray-700 dark:text-gray-400">
-                                                <td class="px-4 py-1 font-semibold">
-                                                    Dari
-                                                </td>
-                                                <td class="px-4 py-1">
-                                                    :
-                                                </td>
-                                                <td class="px-4 py-1">
-                                                    <input type="text" value="{{ $keranjang[0]->pegawai->nama }}"
-                                                        class="input input-ghost input-sm w-full" />
-                                                </td>
-                                            </tr>
-
-                                            <tr class="text-gray-700 dark:text-gray-400">
-                                                <td class="px-4 py-1 font-semibold">
-                                                    Sifat
-                                                </td>
-                                                <td class="px-4 py-1">
-                                                    :
-                                                </td>
-                                                <td class="px-4 py-1">
-                                                    <input type="text" class="input input-ghost input-sm w-full" />
-                                                </td>
-                                            </tr>
-                                            <tr class="text-gray-700 dark:text-gray-400">
-                                                <td class="px-4 py-1 font-semibold">
-                                                    Perihal
-                                                </td>
-                                                <td class="px-4 py-1">
-                                                    :
-                                                </td>
-                                                <td class="px-4 py-1">
-                                                    <input type="text" class="input input-ghost input-sm w-full" />
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="min-w-0 p-4 bg-white rounded-box shadow-xs dark:bg-gray-800">
-                                <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-                                    Kategori
-                                </h4>
-                                <canvas id="pie"></canvas>
-                                <div
-                                    class="flex justify-center mt-4 mb-1 space-x-3 text-sm text-gray-600 dark:text-gray-400">
-                                    <!-- Chart legend -->
-                                    <div class="flex items-center">
-                                        <span class="inline-block w-3 h-3 mr-1 bg-blue-500 rounded-full"></span>
-                                        <span>ATK</span>
+                        <div class="grid mt-6 gap-6 mb-6 md:grid-cols-2 xl:grid-cols-4">
+                            <div class="col-span-3">
+                                <div class="items-center p-4 bg-white rounded-box shadow-xs dark:bg-gray-800"
+                                    style="height:100%;">
+                                    <div class="flex">
+                                        <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+                                            Nota Dinas
+                                        </h4>
+                                        <h4 class="mb-4 flex ml-auto font-sans text-gray-800 dark:text-gray-300">
+                                            20/02/24
+                                        </h4>
                                     </div>
-                                    <div class="flex items-center">
-                                        <span class="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
-                                        <span>Kebersihan</span>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <span class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
-                                        <span>Alat bangunan</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="w-full overflow-hidden rounded-box shadow-xs">
-                        <div class="">
-
-                            <div class="flex items-center mb-5 p-4 bg-white rounded-box shadow-xs dark:bg-gray-800"
-                                style="height:100%;">
-                                <!-- content -->
-                                <div class="w-full overflow-hidden rounded-box shadow-xs">
                                     <div class="w-full overflow-x-auto">
-                                        <table class="w-full whitespace-no-wrap">
-                                            <thead>
-                                                <tr
-                                                    class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                                                    <th class="px-4 py-3">Kode</th>
-                                                    <th class="px-4 py-3">Barang</th>
-                                                    <th class="px-4 py-3">Merk</th>
-                                                    <th class="px-4 py-3">Jumlah</th>
-                                                    <th class="px-4 py-3">Satuan</th>
-                                                    <th class="px-4 py-3">Aksi</th>
-                                                </tr>
-                                            </thead>
+                                        <table class="w-full whitespace-no-wrap text-sm">
                                             <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                                                @foreach ($keranjang as $krj)
+                                                <tr class="text-gray-700 dark:text-gray-400">
+                                                    <td class="px-4 py-1 font-semibold">
+                                                        Dari
+                                                    </td>
+                                                    <td class="px-4 py-1">
+                                                        :
+                                                    </td>
+                                                    <td class="px-4 py-1">
+                                                        <input type="text" value="{{ $keranjang[0]->pegawai->nama }}"
+                                                            class="input input-ghost input-sm w-full" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="text-gray-700 dark:text-gray-400">
+                                                    <td class="px-4 py-1 font-semibold">
+                                                        Sifat
+                                                    </td>
+                                                    <td class="px-4 py-1">
+                                                        :
+                                                    </td>
+                                                    <td class="px-4 py-1">
+                                                        <input type="text" name="sifat" class="input input-ghost input-sm w-full" />
+                                                    </td>
+                                                </tr>
+                                                <tr class="text-gray-700 dark:text-gray-400">
+                                                    <td class="px-4 py-1 font-semibold">
+                                                        Perihal
+                                                    </td>
+                                                    <td class="px-4 py-1">
+                                                        :
+                                                    </td>
+                                                    <td class="px-4 py-1">
+                                                        <input type="text" name="perihal" class="input input-ghost input-sm w-full" />
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="min-w-0 p-4 bg-white rounded-box shadow-xs dark:bg-gray-800">
+                                    <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+                                        Kategori
+                                    </h4>
+                                    <canvas id="pie"></canvas>
+                                    <div
+                                        class="flex justify-center mt-4 mb-1 space-x-3 text-sm text-gray-600 dark:text-gray-400">
+                                        <!-- Chart legend -->
+                                        <div class="flex items-center">
+                                            <span class="inline-block w-3 h-3 mr-1 bg-blue-500 rounded-full"></span>
+                                            <span>ATK</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <span class="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
+                                            <span>Kebersihan</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <span class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
+                                            <span>Alat bangunan</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="w-full overflow-hidden rounded-box shadow-xs">
+                            <div class="">
+
+                                <div class="flex items-center mb-5 p-4 bg-white rounded-box shadow-xs dark:bg-gray-800"
+                                    style="height:100%;">
+                                    <!-- content -->
+                                    <div class="w-full overflow-hidden rounded-box shadow-xs">
+                                        <div class="w-full overflow-x-auto">
+                                            <table class="w-full whitespace-no-wrap">
+                                                <thead>
+                                                    <tr
+                                                        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-white dark:text-gray-400 dark:bg-gray-800">
+                                                        <th class="px-4 py-3">Kode</th>
+                                                        <th class="px-4 py-3">Barang</th>
+                                                        <th class="px-4 py-3">Merk</th>
+                                                        <th class="px-4 py-3">Jumlah</th>
+                                                        <th class="px-4 py-3">Satuan</th>
+                                                        <th class="px-4 py-3">Aksi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                                                    @foreach ($keranjang as $krj)
                                                     <tr class="text-gray-700 dark:text-gray-400">
                                                         <td class="px-4 py-3 text-sm font-semibold">
                                                             {{ $krj->item->kode }}
@@ -201,7 +206,7 @@
                                                                             <path d="M5 12h14"></path>
                                                                         </svg>
                                                                     </button>
-                                                                    <input
+                                                                    <input name="kuantiti[]"
                                                                         class="p-0 w-6 bg-transparent border-0 text-gray-800 text-center focus:ring-0"
                                                                         type="text" value="{{ $krj->kuantiti }}"
                                                                         data-hs-input-number-input="">
@@ -227,8 +232,8 @@
                                                             {{ $krj->item->satuan }}
                                                         </td>
                                                         <td class="px-4 py-3">
-                                                            <div class="flex items-center space-x-4 text-sm">
-                                                                <form
+                                                            <div class="flex items-center  text-sm">
+                                                                <!-- <form
                                                                     action="{{ route('keranjang.destroy', $krj->id) }}"
                                                                     method="POST">
                                                                     @csrf
@@ -244,131 +249,297 @@
                                                                                 clip-rule="evenodd"></path>
                                                                         </svg>
                                                                     </button>
-                                                                </form>
+                                                                </form> -->
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                @endforeach
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+
+                                            <script>
+                                                // Fitur Kuantiti
+                                                document.addEventListener('DOMContentLoaded', function() {
+                                                    // Select all increment and decrement buttons
+                                                    const decrementButtons = document.querySelectorAll('[data-hs-input-number-decrement]');
+                                                    const incrementButtons = document.querySelectorAll('[data-hs-input-number-increment]');
+
+                                                    decrementButtons.forEach(button => {
+                                                        button.addEventListener('click', function() {
+                                                            const input = this.nextElementSibling;
+                                                            let currentValue = parseInt(input.value);
+                                                            if (currentValue > 0) {
+                                                                input.value = currentValue - 1;
+                                                            }
+                                                        });
+                                                    });
+
+                                                    incrementButtons.forEach(button => {
+                                                        button.addEventListener('click', function() {
+                                                            const input = this.previousElementSibling;
+                                                            let currentValue = parseInt(input.value);
+                                                            input.value = currentValue + 1;
+                                                        });
+                                                    });
+                                                });
+                                            </script>
+                                        </div>
+                                        <div
+                                            class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-white sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+                                            <span class="flex items-center col-span-3">
+                                                Showing 21-30 of 100
+                                            </span>
+                                            <span class="col-span-2"></span>
+                                            <!-- Pagination -->
+                                            <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+                                                <nav aria-label="Table navigation">
+                                                    <ul class="inline-flex items-center">
+                                                        <li>
+                                                            <button
+                                                                class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
+                                                                aria-label="Previous">
+                                                                <svg class="w-4 h-4 fill-current" aria-hidden="true"
+                                                                    viewBox="0 0 20 20">
+                                                                    <path
+                                                                        d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                                                        clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                                </svg>
+                                                            </button>
+                                                        </li>
+                                                        <li>
+                                                            <button
+                                                                class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                                                1
+                                                            </button>
+                                                        </li>
+                                                        <li>
+                                                            <button
+                                                                class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                                                2
+                                                            </button>
+                                                        </li>
+                                                        <li>
+                                                            <button
+                                                                class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                                                3
+                                                            </button>
+                                                        </li>
+                                                        <li>
+                                                            <button
+                                                                class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                                                4
+                                                            </button>
+                                                        </li>
+                                                        <li>
+                                                            <span class="px-3 py-1">...</span>
+                                                        </li>
+                                                        <li>
+                                                            <button
+                                                                class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                                                8
+                                                            </button>
+                                                        </li>
+                                                        <li>
+                                                            <button
+                                                                class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                                                9
+                                                            </button>
+                                                        </li>
+                                                        <li>
+                                                            <button
+                                                                class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
+                                                                aria-label="Next">
+                                                                <svg class="w-4 h-4 fill-current" aria-hidden="true"
+                                                                    viewBox="0 0 20 20">
+                                                                    <path
+                                                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                                        clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                                </svg>
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-span-3">
+                                    <button type="submit"
+                                        class="px-4 py-2 text-sm w-full font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-box active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                                        Kirim
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                    <!-- <form id="deleteForm" method="POST" style="display: none;">
+                        @csrf
+                        @method('DELETE')
+                    </form> -->
+
+                    <script>
+                        function deleteItem(id) {
+                            if (confirm('Are you sure you want to delete this item?')) {
+                                var form = document.getElementById('deleteForm');
+                                form.action = "{{ route('keranjang.destroy', '') }}/" + id;
+                                form.submit();
+                            }
+                        }
+
+                        // ... (other JavaScript code remains unchanged) ...
+                    </script>
+                </div>
+            </main>
+
+            @else
+
+            <main class="h-full pb-16 overflow-y-auto">
+                <div class="container grid px-6 mx-auto">
+                    <!-- With actions -->
+
+                        <div class="grid mt-6 gap-6 mb-6 md:grid-cols-2 xl:grid-cols-4">
+                            <div class="col-span-3">
+                                <div class="items-center p-4 bg-white rounded-box shadow-xs dark:bg-gray-800"
+                                    style="height:100%;">
+                                    <div class="flex">
+                                        <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+                                            Nota Dinas
+                                        </h4>
+                                        <h4 class="mb-4 flex ml-auto font-sans text-gray-800 dark:text-gray-300">
+                                            20/02/24
+                                        </h4>
+                                    </div>
+
+                                    <div class="w-full overflow-x-auto">
+                                        <table class="w-full whitespace-no-wrap text-sm">
+                                            <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                                                <tr class="text-gray-700 dark:text-gray-400">
+                                                    <td class="px-4 py-1 font-semibold">
+                                                        Dari
+                                                    </td>
+                                                    <td class="px-4 py-1">
+                                                        :
+                                                    </td>
+                                                    <td class="px-4 py-1">
+                                                        <input type="text"
+                                                            class="input input-ghost input-sm w-full" />
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="text-gray-700 dark:text-gray-400">
+                                                    <td class="px-4 py-1 font-semibold">
+                                                        Sifat
+                                                    </td>
+                                                    <td class="px-4 py-1">
+                                                        :
+                                                    </td>
+                                                    <td class="px-4 py-1">
+                                                        <input type="text" name="sifat" class="input input-ghost input-sm w-full" />
+                                                    </td>
+                                                </tr>
+                                                <tr class="text-gray-700 dark:text-gray-400">
+                                                    <td class="px-4 py-1 font-semibold">
+                                                        Perihal
+                                                    </td>
+                                                    <td class="px-4 py-1">
+                                                        :
+                                                    </td>
+                                                    <td class="px-4 py-1">
+                                                        <input type="text" name="perihal" class="input input-ghost input-sm w-full" />
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                         </table>
-
-                                        <script>
-                                            // Fitur Kuantiti
-                                            document.addEventListener('DOMContentLoaded', function() {
-                                                // Select all increment and decrement buttons
-                                                const decrementButtons = document.querySelectorAll('[data-hs-input-number-decrement]');
-                                                const incrementButtons = document.querySelectorAll('[data-hs-input-number-increment]');
-
-                                                decrementButtons.forEach(button => {
-                                                    button.addEventListener('click', function() {
-                                                        const input = this.nextElementSibling;
-                                                        let currentValue = parseInt(input.value);
-                                                        if (currentValue > 0) {
-                                                            input.value = currentValue - 1;
-                                                        }
-                                                    });
-                                                });
-
-                                                incrementButtons.forEach(button => {
-                                                    button.addEventListener('click', function() {
-                                                        const input = this.previousElementSibling;
-                                                        let currentValue = parseInt(input.value);
-                                                        input.value = currentValue + 1;
-                                                    });
-                                                });
-                                            });
-                                        </script>
-                                    </div>
-                                    <div
-                                        class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-                                        <span class="flex items-center col-span-3">
-                                            Showing 21-30 of 100
-                                        </span>
-                                        <span class="col-span-2"></span>
-                                        <!-- Pagination -->
-                                        <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
-                                            <nav aria-label="Table navigation">
-                                                <ul class="inline-flex items-center">
-                                                    <li>
-                                                        <button
-                                                            class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
-                                                            aria-label="Previous">
-                                                            <svg class="w-4 h-4 fill-current" aria-hidden="true"
-                                                                viewBox="0 0 20 20">
-                                                                <path
-                                                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                                                    clip-rule="evenodd" fill-rule="evenodd"></path>
-                                                            </svg>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <button
-                                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                            1
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <button
-                                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                            2
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <button
-                                                            class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                            3
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <button
-                                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                            4
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <span class="px-3 py-1">...</span>
-                                                    </li>
-                                                    <li>
-                                                        <button
-                                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                            8
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <button
-                                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                            9
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <button
-                                                            class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
-                                                            aria-label="Next">
-                                                            <svg class="w-4 h-4 fill-current" aria-hidden="true"
-                                                                viewBox="0 0 20 20">
-                                                                <path
-                                                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                                                    clip-rule="evenodd" fill-rule="evenodd"></path>
-                                                            </svg>
-                                                        </button>
-                                                    </li>
-                                                </ul>
-                                            </nav>
-                                        </span>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-span-3">
-                                <button
-                                    class="px-4 py-2 text-sm w-full font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-box active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                                    Kirim
-                                </button>
+                            <div>
+                                <div class="min-w-0 p-4 bg-white rounded-box shadow-xs dark:bg-gray-800">
+                                    <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+                                        Kategori
+                                    </h4>
+                                    <canvas id="pie"></canvas>
+                                    <div
+                                        class="flex justify-center mt-4 mb-1 space-x-3 text-sm text-gray-600 dark:text-gray-400">
+                                        <!-- Chart legend -->
+                                        <div class="flex items-center">
+                                            <span class="inline-block w-3 h-3 mr-1 bg-blue-500 rounded-full"></span>
+                                            <span>ATK</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <span class="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
+                                            <span>Kebersihan</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <span class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
+                                            <span>Alat bangunan</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+
+                        <div class="w-full overflow-hidden rounded-box shadow-xs">
+                            <div class="">
+
+                                <div class="flex items-center mb-5 p-4 bg-white rounded-box shadow-xs dark:bg-gray-800"
+                                    style="height:100%;">
+                                    <!-- content -->
+                                    <div class="w-full overflow-hidden rounded-box shadow-xs">
+                                        <div class="w-full overflow-x-auto">
+                                            <table class="w-full whitespace-no-wrap">
+                                                <thead>
+                                                    <tr
+                                                        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-white dark:text-gray-400 dark:bg-gray-800">
+                                                        <th class="px-4 py-3">Kode</th>
+                                                        <th class="px-4 py-3">Barang</th>
+                                                        <th class="px-4 py-3">Merk</th>
+                                                        <th class="px-4 py-3">Jumlah</th>
+                                                        <th class="px-4 py-3">Satuan</th>
+                                                        <th class="px-4 py-3">Aksi</th>
+                                                    </tr>
+                                                </thead>
+                                                
+                                            </table>
+
+                                        </div>
+                                    
+                                    </div>
+                                </div>
+
+                                <div class="col-span-3">
+                                    <button type="submit"
+                                        class="px-4 py-2 text-sm w-full font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-box active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                                        Kirim
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                    <!-- <form id="deleteForm" method="POST" style="display: none;">
+                        @csrf
+                        @method('DELETE')
+                    </form> -->
+
+                    <script>
+                        function deleteItem(id) {
+                            if (confirm('Are you sure you want to delete this item?')) {
+                                var form = document.getElementById('deleteForm');
+                                form.action = "{{ route('keranjang.destroy', '') }}/" + id;
+                                form.submit();
+                            }
+                        }
+
+                        // ... (other JavaScript code remains unchanged) ...
+                    </script>
                 </div>
             </main>
+
+
+            @endif
         </div>
 
 

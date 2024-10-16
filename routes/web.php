@@ -111,6 +111,7 @@ Route::get('/barang-keluar', [BarangKeluarController::class, 'index'])->name('ba
 // Route::get('unit/dashboard', [LoginController::class, 'unit'])->name('dashboard.unit');
 
 Route::get('unit/pengadaan', [PengadaanController::class, 'index'])->name('pengadaan');
+Route::post('unit/pengadaan', [PengadaanController::class, 'store'])->name('pengadaan.store');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang.index');
