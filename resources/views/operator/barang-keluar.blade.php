@@ -79,344 +79,207 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                                <tr class="text-gray-700 dark:text-gray-400">
-                                    <td class="px-4 py-3 text-sm font-semibold">
-                                        BK001
-                                    </td>
-                                    <td class="px-4 py-3 text-sm">
-                                        RPL
-                                    </td>
-                                    <td class="px-4 py-3 text-sm">
-                                        18/05/2024
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <div class="flex items-center space-x-4 text-sm">
+                                @foreach ($barangKeluar as $bk)
+                                    <tr class="text-gray-700 dark:text-gray-400">
+                                        <td class="px-4 py-3 text-sm font-semibold">
+                                            {{ $bk->kode }}
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            {{ $bk->pegawai->nama }}
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            {{ $bk->created_at }}
+                                        </td>
+                                        <td class="px-4 py-3">
+                                            <div class="flex items-center space-x-4 text-sm">
 
-                                            <button onclick="my_modal_2.showModal()"
-                                                class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                                                aria-label="Delete">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" aria-hidden="true"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                                    <path
-                                                        d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z" />
-                                                </svg>
-                                            </button>
-
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr class="text-gray-700 dark:text-gray-400">
-                                    <td class="px-4 py-3 text-sm font-semibold">
-                                        BK002
-                                    </td>
-                                    <td class="px-4 py-3 text-sm">
-                                        Kesiswaan
-                                    </td>
-                                    <td class="px-4 py-3 text-sm">
-                                        18/02/2024
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <div class="flex items-center space-x-4 text-sm text">
-
-                                            <button onclick="my_modal_2.showModal()"
-                                                class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                                                aria-label="Delete">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" aria-hidden="true"
-                                                    fill="currentColor"
-                                                    viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                                    <path
-                                                        d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z" />
-                                                </svg>
-                                            </button>
-                                            <dialog id="my_modal_2" class="modal">
-                                                <div class="modal-box bg-white">
-                                                    <label
-                                                        class="input input-bordered flex items-center gap-2 bg-white text-gray-700">
-                                                        <input type="text" class="grow border-none input"
-                                                            placeholder="Search" />
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
-                                                            fill="currentColor" class="h-4 w-4 opacity-70">
-                                                            <path fill-rule="evenodd"
-                                                                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                                                                clip-rule="evenodd" />
-                                                        </svg>
-                                                    </label>
-
-                                                    <table class="w-full mt-2 whitespace-no-wrap">
-                                                        <thead>
-                                                            <tr
-                                                                class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700  dark:text-gray-400 dark:bg-gray-800">
-                                                                <th class="px-4 py-3">Kode</th>
-                                                                <th class="px-4 py-3">Nama</th>
-                                                                <th class="px-4 py-3">Satuan</th>
-                                                                <th class="px-4 py-3">Jumlah</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody
-                                                            class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-
-                                                            <tr class="text-gray-700 dark:text-gray-400">
-                                                                <td class="px-4 py-3 text-sm font-semibold">
-                                                                    AKT001
-                                                                </td>
-                                                                <td class="px-4 py-3 text-xs">
-                                                                    Kertas HVS
-                                                                </td>
-                                                                <td class="px-4 py-3 text-sm">
-                                                                    Rim
-                                                                </td>
-                                                                <td class="px-4 py-3 text-sm">
-                                                                    79
-                                                                </td>
-                                                            </tr>
-                                                            <tr class="text-gray-700 dark:text-gray-400">
-                                                                <td class="px-4 py-3 text-sm font-semibold">
-                                                                    AKB001
-                                                                </td>
-                                                                <td class="px-4 py-3 text-xs">
-                                                                    Sapu
-                                                                </td>
-                                                                <td class="px-4 py-3 text-sm">
-                                                                    80
-                                                                </td>
-                                                                <td class="px-4 py-3 text-sm">
-                                                                    Pcs
-                                                                </td>
-                                                            </tr>
-                                                            <tr class="text-gray-700 dark:text-gray-400">
-                                                                <td class="px-4 py-3 text-sm font-semibold">
-                                                                    ABG001
-                                                                </td>
-                                                                <td class="px-4 py-3 text-xs">
-                                                                    Cat tembok
-                                                                </td>
-                                                                <td class="px-4 py-3 text-sm">
-                                                                    30
-                                                                </td>
-                                                                <td class="px-4 py-3 text-sm">
-                                                                    Pcs
-                                                                </td>
-                                                            </tr>
-
-                                                        </tbody>
-                                                    </table>
-                                                    <div
-                                                        class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700  sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-                                                        <span class="flex items-center col-span-3">
-                                                            Showing 21-30 of 100
-                                                        </span>
-                                                        <span class="col-span-2"></span>
-                                                        <!-- Pagination -->
-                                                        <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
-                                                            <nav aria-label="Table navigation">
-                                                                <ul class="inline-flex items-center">
-                                                                    <li>
-                                                                        <button
-                                                                            class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
-                                                                            aria-label="Previous">
-                                                                            <svg aria-hidden="true"
-                                                                                class="w-4 h-4 fill-current"
-                                                                                viewBox="0 0 20 20">
-                                                                                <path
-                                                                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                                                                    clip-rule="evenodd"
-                                                                                    fill-rule="evenodd">
-                                                                                </path>
-                                                                            </svg>
-                                                                        </button>
-                                                                    </li>
-                                                                    <li>
-                                                                        <button
-                                                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                                            1
-                                                                        </button>
-                                                                    </li>
-                                                                    <li>
-                                                                        <button
-                                                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                                            2
-                                                                        </button>
-                                                                    </li>
-                                                                    <li>
-                                                                        <button
-                                                                            class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                                            3
-                                                                        </button>
-                                                                    </li>
-                                                                    <li>
-                                                                        <button
-                                                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                                            4
-                                                                        </button>
-                                                                    </li>
-                                                                    <li>
-                                                                        <span class="px-3 py-1">...</span>
-                                                                    </li>
-                                                                    <li>
-                                                                        <button
-                                                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                                            8
-                                                                        </button>
-                                                                    </li>
-                                                                    <li>
-                                                                        <button
-                                                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                                                            9
-                                                                        </button>
-                                                                    </li>
-                                                                    <li>
-                                                                        <button
-                                                                            class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
-                                                                            aria-label="Next">
-                                                                            <svg class="w-4 h-4 fill-current"
-                                                                                aria-hidden="true" viewBox="0 0 20 20">
-                                                                                <path
-                                                                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                                                                    clip-rule="evenodd"
-                                                                                    fill-rule="evenodd">
-                                                                                </path>
-                                                                            </svg>
-                                                                        </button>
-                                                                    </li>
-                                                                </ul>
-                                                            </nav>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <form method="dialog" class="modal-backdrop">
-                                                    <button>close</button>
-                                                </form>
-                                            </dialog>
-                                            <dialog id="my_modal_3" class="modal">
-                                                <div class="modal-box bg-white">
-                                                    <h3 class="font-bold text-lg mb-4">Upload berita acara</h3>
-
-                                                    <label class="text-sm font-semibold mb-2">Pemeriksaan</label>
-                                                    <div class="flex items-center justify-center w-full">
-                                                        <label for="dropzone-file"
-                                                            class="flex flex-col items-center justify-center w-full h-55 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer  dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                                            <div
-                                                                class="flex flex-col items-center justify-center pt-5 pb-6">
-                                                                <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                                    fill="none" viewBox="0 0 20 16">
-                                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                                        stroke-linejoin="round" stroke-width="2"
-                                                                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                                                </svg>
-                                                                <p
-                                                                    class="mb-2 text-sm text-gray-800 dark:text-gray-800 font-medium">
-                                                                    <span class="font-semibold text-purple-600">Click
-                                                                        to upload</span> or drag
-                                                                    and drop
-                                                                </p>
-                                                                <p class="text-xs text-gray-500 dark:text-gray-400">
-                                                                    SVG, PNG, JPG or GIF
-                                                                    (MAX. 800x400px)</p>
+                                                <button onclick=" detailBarangKeluar{{ $bk->kode }}.showModal()"
+                                                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                                                    aria-label="Delete">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
+                                                        aria-hidden="true" fill="currentColor"
+                                                        viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                                        <path
+                                                            d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z" />
+                                                    </svg>
+                                                </button>
+                                                <dialog id="detailBarangKeluar{{ $bk->kode }}" class="modal">
+                                                    <div class="modal-box bg-gray-100">
+                                                        <div class="min-w-0 p-4 bg-white rounded-box shadow-xs dark:bg-gray-800">
+                                                            <h3 class="text-lg font-bold text-gray-800 mb-2">Barang Keluar</h3>
+                                                            <div class="grid mt-2 md:grid-cols-4">
+                                                                <div class="mx-4">
+                                                                    <div class="min-w-0 my-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+                                                                        <h4 class="mb-1 font-semibold text-sm text-gray-800 dark:text-gray-300">
+                                                                            Unit
+                                                                        </h4>
+                                                                        <p class="text-gray-800 text-sm dark:text-gray-400">
+                                                                            Nama unit
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-span-3 p-4 justify-center items-center">
+                                                                    <input type="text" placeholder="" value=": {{ $bk->pegawai->nama }}" readonly
+                                                                        class="input w-full input-bordered flex focus:outline-none items-center border-none text-sm bg-white text-gray-700 h-10"
+                                                                        fdprocessedid="dee09r">
+                                                                    </input>
+                                                                </div>
+                                                                <div class="mx-4">
+                                                                    <div class="min-w-0 mb-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+                                                                        <h4 class="mb-1 font-semibold text-sm text-gray-800 dark:text-gray-300">
+                                                                            Sifat
+                                                                        </h4>
+                                                                        <p class="text-gray-800 text-sm dark:text-gray-400">
+                                                                            Urgensi pengajuan
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-span-3 px-4 justify-center items-center">
+                                                                    <input type="text" placeholder="" value=": {{ $bk->sifat }}" name="sifat"
+                                                                        class="input max-w-xs input-bordered flex focus:outline-none items-center text-sm bg-white border-none text-gray-700 h-10"
+                                                                        fdprocessedid="dee09r" readonly>
+                                                                    </input>
+                                                                </div>
+                                                                <div class="mx-4">
+                                                                    <div class="min-w-0 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+                                                                        <h4 class="mb-1 font-semibold text-sm text-gray-800 dark:text-gray-300">
+                                                                            Perihal
+                                                                        </h4>
+                                                                        <p class="text-gray-800 text-sm dark:text-gray-400">
+                                                                            Alasan mengajukan
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-span-3 px-4 justify-center items-center">
+                                                                    <textarea type="text" placeholder="" name="perihal" value="{{ $bk->perihal }}"
+                                                                        class="input min-h-20 max-h-20 textarea w-full input-bordered flex focus:outline-none items-center text-sm bg-white border-none text-gray-700 h-10"
+                                                                        fdprocessedid="dee09r" readonly>: {{ $bk->perihal }}</textarea>
+                                                                </div>
                                                             </div>
-                                                            <input id="dropzone-file" type="file" class="hidden" />
-                                                        </label>
-                                                    </div>
-
-                                                    <hr class="my-4">
-
-                                                    <label class="text-sm font-semibold mb-2">Serah terima</label>
-                                                    <div class="flex items-center justify-center w-full">
-                                                        <label for="dropzone-file"
-                                                            class="flex flex-col items-center justify-center w-full h-55 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer  dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                                            <div
-                                                                class="flex flex-col items-center justify-center pt-5 pb-6">
-                                                                <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                                    fill="none" viewBox="0 0 20 16">
-                                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                                        stroke-linejoin="round" stroke-width="2"
-                                                                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                                        </div>
+                                                        {{-- <div class="flex gap-1 mb-2 mt-2">
+                                                            <label class="input w-full flex items-center gap-2 bg-white ">
+                                                                <input type="text" class="grow input border-none"
+                                                                    placeholder="Search" />
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                    viewBox="0 0 16 16" fill=""
+                                                                    class="h-4 w-4 opacity-70">
+                                                                    <path fill-rule="evenodd"
+                                                                        d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                                                                        clip-rule="evenodd" />
                                                                 </svg>
-                                                                <p
-                                                                    class="mb-2 text-sm text-gray-800 dark:text-gray-800 font-medium">
-                                                                    <span class="font-semibold text-purple-600">Click
-                                                                        to upload</span> or drag
-                                                                    and drop
-                                                                </p>
-                                                                <p class="text-xs text-gray-500 dark:text-gray-400">
-                                                                    SVG, PNG, JPG or GIF
-                                                                    (MAX. 800x400px)</p>
-                                                            </div>
-                                                            <input id="dropzone-file" type="file" class="hidden" />
-                                                        </label>
+                                                            </label>
+                                                        </div> --}}
+                                                        
+                                                        <div
+                                                            class="flex items-center p-4 bg-white rounded-btn shadow-xs dark:bg-gray-800 mt-2">
+                                                            <table class="w-full mt-2 whitespace-no-wrap">
+                                                                <thead>
+                                                                    <tr
+                                                                        class="text-xs font-semibold tracking-wide text-left text-gray-500 bg-white uppercase border-b dark:border-gray-700  dark:text-gray-400 dark:bg-gray-800">
+                                                                        <th class="px-4 py-3">Kode</th>
+                                                                        <th class="px-4 py-3">Nama</th>
+                                                                        <th class="px-4 py-3 text-center">Kuantiti</th>
+                                                                        <th class="px-4 py-3">Satuan</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody
+                                                                    class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+
+                                                                    {{-- {{ dd($detailBarangKeluar) }} --}}
+                                                                    @foreach ($detailBarangKeluar as $dbk)
+                                                                        @if ($dbk->kode_barang_keluar == $bk->kode)
+                                                                            <tr class="text-gray-700 dark:text-gray-400">
+                                                                                <td
+                                                                                    class="px-4 py-3 text-sm font-semibold">
+                                                                                    {{ $dbk->item->kode }}
+                                                                                </td>
+                                                                                <td class="px-4 py-3 text-xs">
+                                                                                    {{ $dbk->item->nama }}
+                                                                                </td>
+                                                                                <td class="px-4 py-3 text-sm text-center">
+                                                                                    {{ $dbk->kuantiti }}
+                                                                                </td>
+                                                                                <td class="px-4 py-3 text-sm">
+                                                                                    {{ $dbk->item->satuan }}
+                                                                                </td>
+                                                                            </tr>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700  sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+                                                            <span class="flex items-center col-span-3">
+                                                                Showing 21-30 of 100
+                                                            </span>
+                                                            <span class="col-span-2"></span>
+                                                            <!-- Pagination -->
+                                                            <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+                                                                <nav aria-label="Table navigation">
+                                                                    <ul class="inline-flex items-center">
+                                                                        <li>
+                                                                            <button class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple" aria-label="Previous" fdprocessedid="0ffo2g">
+                                                                                <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
+                                                                                    <path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                                                </svg>
+                                                                            </button>
+                                                                        </li>
+                                                                        <li>
+                                                                            <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple" fdprocessedid="fci40c">
+                                                                                1
+                                                                            </button>
+                                                                        </li>
+                                                                        <li>
+                                                                            <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple" fdprocessedid="57ijqj">
+                                                                                2
+                                                                            </button>
+                                                                        </li>
+                                                                        <li>
+                                                                            <button class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple" fdprocessedid="2vj34">
+                                                                                3
+                                                                            </button>
+                                                                        </li>
+                                                                        <li>
+                                                                            <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple" fdprocessedid="3z4m9c">
+                                                                                4
+                                                                            </button>
+                                                                        </li>
+                                                                        <li>
+                                                                            <span class="px-3 py-1">...</span>
+                                                                        </li>
+                                                                        <li>
+                                                                            <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple" fdprocessedid="1rsyf">
+                                                                                8
+                                                                            </button>
+                                                                        </li>
+                                                                        <li>
+                                                                            <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple" fdprocessedid="uvwxme">
+                                                                                9
+                                                                            </button>
+                                                                        </li>
+                                                                        <li>
+                                                                            <button class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple" aria-label="Next" fdprocessedid="9t5y1">
+                                                                                <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
+                                                                                    <path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                                                                                </svg>
+                                                                            </button>
+                                                                        </li>
+                                                                    </ul>
+                                                                </nav>
+                                                            </span>
+                                                        </div>
                                                     </div>
+                                                    <form method="dialog" class="modal-backdrop">
+                                                        <button>close</button>
+                                                    </form>
+                                                </dialog>
 
-                                                    <div class="flex">
-                                                        <button
-                                                            class="mt-4 ml-auto btn flex items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                                                            <span>Import</span>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <form method="dialog" class="modal-backdrop">
-                                                    <button>close</button>
-                                                </form>
-                                            </dialog>
-                                        </div>
-                                    </td>
-                                </tr>
 
-                                <tr class="text-gray-700 dark:text-gray-400">
-                                    <td class="px-4 py-3 text-sm font-semibold">
-                                        BK003
-                                    </td>
-                                    <td class="px-4 py-3 text-sm">
-                                        BK
-                                    </td>
-                                    <td class="px-4 py-3 text-sm">
-                                        31/03/2023
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <div class="flex items-center space-x-4 text-sm">
-
-                                            <button onclick="my_modal_2.showModal()"
-                                                class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                                                aria-label="Delete">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
-                                                    aria-hidden="true" fill="currentColor"
-                                                    viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                                    <path
-                                                        d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr class="text-gray-700 dark:text-gray-400">
-                                    <td class="px-4 py-3 text-sm font-semibold">
-                                        BK004
-                                    </td>
-                                    <td class="px-4 py-3 text-sm">
-                                        DKV
-                                    </td>
-                                    <td class="px-4 py-3 text-sm">
-                                        31/01/2023
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <div class="flex items-center space-x-4 text-sm">
-
-                                            <button onclick="my_modal_2.showModal()"
-                                                class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                                                aria-label="Delete">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
-                                                    aria-hidden="true" fill="currentColor"
-                                                    viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                                    <path
-                                                        d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z" />
-                                                </svg>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -442,14 +305,12 @@
                                         </button>
                                     </li>
                                     <li>
-                                        <button
-                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                        <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
                                             1
                                         </button>
                                     </li>
                                     <li>
-                                        <button
-                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                        <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
                                             2
                                         </button>
                                     </li>
@@ -460,8 +321,7 @@
                                         </button>
                                     </li>
                                     <li>
-                                        <button
-                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                        <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
                                             4
                                         </button>
                                     </li>
@@ -469,14 +329,12 @@
                                         <span class="px-3 py-1">...</span>
                                     </li>
                                     <li>
-                                        <button
-                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                        <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
                                             8
                                         </button>
                                     </li>
                                     <li>
-                                        <button
-                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
+                                        <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
                                             9
                                         </button>
                                     </li>

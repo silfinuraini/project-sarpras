@@ -13,6 +13,8 @@ use App\Http\Controllers\PermintaanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\Unit\PengadaanController;
+use App\Http\Controllers\Unit\PermintaanController as UnitPermintaanController;
+use App\Http\Controllers\Unit\TransaksiController;
 use App\Models\Keranjang;
 use Illuminate\Support\Facades\Route;
 
@@ -35,17 +37,17 @@ require __DIR__.'/auth.php';
 Route::middleware(['auth'])->group(function() {
     //Route admin
     Route::group(['prefix' => '/admin', 'middleware' => ['can:isAdmin']], function() {
-        Route::get('/', LoginController::class)->name('dashboard.admin');
+        Route::get('/', [LoginController::class, 'index'])->name('dashboard.admin');
     });
 
     // Route pengawas
     Route::group(['prefix' => '/pengawas', 'middleware' => ['can:isPengawas']], function() {
-        Route::get('/', LoginController::class)->name('dashboard.pengawas');
+        Route::get('/', [LoginController::class, 'index'])->name('dashboard.pengawas');
     });
     
     // Route unit
     Route::group(['prefix' => '/unit', 'middleware' => ['can:isUnit']], function() {
-        Route::get('/', LoginController::class)->name('dashboard.unit');
+        Route::get('/', [LoginController::class, 'index'])->name('dashboard.unit');
     });
 
     Route::middleware(['can:buatTransaksi'])->group(function() {
@@ -56,6 +58,7 @@ Route::middleware(['auth'])->group(function() {
 // Route::get('admin/dashboard', [LoginController::class, 'index'])->middleware(['auth', 'operator'])->name('dashboard.admin');
 // Route::get('pengawas/dashboard', [LoginController::class, 'index'])->middleware(['auth', 'operator'])->name('dashboard.pengawas');
 Route::get('operator/data-barang', [DataBarangController::class, 'index'])->name('databarang');
+
 
 Route::get('operator/tambah-barang', [DataBarangController::class, 'tambahbarang'])->name('item.index');
 Route::post('operator/data-barang', [DataBarangController::class, 'store'])->name('item.store');
@@ -111,7 +114,19 @@ Route::get('/barang-keluar', [BarangKeluarController::class, 'index'])->name('ba
 // Route::get('unit/dashboard', [LoginController::class, 'unit'])->name('dashboard.unit');
 
 Route::get('unit/pengadaan', [PengadaanController::class, 'index'])->name('pengadaan');
+Route::get('unit/detail-pengadaan/{kode}', [PengadaanController::class, 'show'])->name('pengadaan.show');
 Route::post('unit/pengadaan', [PengadaanController::class, 'store'])->name('pengadaan.store');
+
+Route::get('unit/permintaan', [UnitPermintaanController::class, 'index'])->name('permintaan');
+Route::get('unit/detail-permintaan/{kode}', [UnitPermintaanController::class, 'show'])->name('permintaan.show');
+Route::post('unit/permintaan/tambah', [UnitPermintaanController::class, 'store'])->name('permintaan.store');
+
+Route::get('unit/menunggu', [TransaksiController::class, 'menunggu'])->name('menunggu');
+Route::get('unit/disetujui', [TransaksiController::class, 'disetujui'])->name('disetujui');
+
+Route::get('unit/pengambilan/{kode}', [TransaksiController::class, 'barangKeluar'])->name('pengambilan');
+Route::post('unit/diambil/{kode}', [TransaksiController::class, 'updatePengambilan'])->name('pengambilan.update');
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/keranjang', [KeranjangController::class, 'index'])->name('keranjang.index');

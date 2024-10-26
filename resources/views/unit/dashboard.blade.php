@@ -372,7 +372,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="menunggu-acc.html">
+                            <a href="{{ route('menunggu') }}">
                                 <div class="bg-white shadow rounded-box p-4 sm:p-6 xl:p-8">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0">
@@ -384,7 +384,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="permintaan.html">
+                            <a href="{{ route('permintaan') }}">
                                 <div class="bg-white shadow rounded-box p-4 sm:p-6 xl:p-8">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0">
@@ -396,7 +396,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="disetujui.html">
+                            <a href="{{ route('disetujui') }}">
                                 <div class="bg-white shadow rounded-box p-4 sm:p-6 xl:p-8">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0">

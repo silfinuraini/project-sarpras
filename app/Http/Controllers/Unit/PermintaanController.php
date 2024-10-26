@@ -3,32 +3,30 @@
 namespace App\Http\Controllers\Unit;
 
 use App\Http\Controllers\Controller;
-use App\Models\DetailPengadaan;
+use App\Models\DetailPermintaan;
 use App\Models\Item;
 use App\Models\Kategori;
-use App\Models\Keranjang;
 use App\Models\Pegawai;
-use App\Models\Pengadaan;
+use App\Models\Permintaan;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PengadaanController extends Controller
+class PermintaanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $item = Item::all();
         $nip = Auth::user()->nip;
-        $kategori = Kategori::all(); 
 
+        $kategori = Kategori::all();
+        $unit = Pegawai::where('nip', $nip)->get();
+        // dd($unit);   
+        $item = Item::all();
 
-        $pegawai = Pegawai::where('nip', $nip)->get();
-
-        $keranjang = Keranjang::where('nip', $nip)->get();
-
-        return view('unit.pengadaan', compact('item', 'keranjang', 'nip', 'kategori', 'pegawai'));
+        return view('unit.permintaan', compact('kategori', 'unit', 'item'));
     }
 
     /**
@@ -44,32 +42,28 @@ class PengadaanController extends Controller
      */
     public function store(Request $request)
     {
-        $nip = Auth::user()->nip;
-        $kode = 'PGD' . rand(1000, 9999);
+        $kode = 'PM' . rand(1000, 9999);
 
-        $keranjang = Keranjang::where('nip', $nip)->get();
-        $jumlah = count($keranjang);
+        $kodePermintaan = $request->input('item');
+        $jumlah = count($kodePermintaan);
 
-        $pengadaan = Pengadaan::create([
+        $permintaan = Permintaan::create([
             'kode' => $kode,
-            'nip' => $nip,
+            'nip' => Auth::user()->nip,
             'status' => 'menunggu',
             'sifat' => $request->sifat,
             'perihal' => $request->perihal,
             'jumlah_item'  => $jumlah
         ]);
 
-        for ($i = 0; $i < count($keranjang); $i++) {
-            $detailPengadaan = DetailPengadaan::create([
-                'kode_pengadaan' => $pengadaan->kode,
-                'kode_item' => $keranjang[$i]->kode_item,
+        for ($i = 0; $i < count($kodePermintaan); $i++) {
+            $detailPermintaan = DetailPermintaan::create([
+                'kode_permintaan' => $permintaan->kode,
+                'kode_item' => $kodePermintaan[$i],
                 'kuantiti' => $request->kuantiti[$i],
                 'kuantiti_disetujui' => 0
             ]);
-
-            $keranjang[$i]->delete();
         }
-
 
         return redirect()->route('dashboard.unit');
     }
@@ -80,11 +74,11 @@ class PengadaanController extends Controller
     public function show(string $kode)
     {
         $kategori = Kategori::all();
-        $pengadaan = Pengadaan::with('pegawai')->where('kode', $kode)->first();
-        // dd($pengadaan);
-        $detailPengadaan = DetailPengadaan::where('kode_pengadaan', $kode)->with('item.kategori')->get();
+        $permintaan = Permintaan::with('pegawai')->where('kode', $kode)->first();
+        // dd($permintaan);
+        $detailPermintaan = DetailPermintaan::where('kode_permintaan', $kode)->with('item.kategori')->get();
 
-        return view('unit.detail-pengadaan', compact('pengadaan', 'detailPengadaan', 'kategori'));
+        return view('unit.detail-permintaan', compact('permintaan', 'detailPermintaan', 'kategori'));
     }
 
     /**
@@ -98,7 +92,10 @@ class PengadaanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id) {}
+    public function update(Request $request, string $id)
+    {
+        //
+    }
 
     /**
      * Remove the specified resource from storage.

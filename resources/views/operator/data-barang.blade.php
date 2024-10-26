@@ -4,7 +4,7 @@
     <main class="h-full bg-gray-50 my-4 overflow-y-auto">
         <div class="container px-6 mx-auto grid">
             <div class="text-sm mb-4 breadcrumbs">
-                <ul class="text-gray-700">
+                <ul class="text-gray-600">
                     <li>
                         <a href="index.html">
                             <svg class="w-4 h-4 stroke-current" aria-hidden="true" fill="none" stroke-linecap="round"
@@ -40,7 +40,8 @@
                     <span> &RightArrow;</span>
                 </a> --}}
                 <label class="input w-full flex items-center gap-2 bg-white ">
-                    <input type="text" class="grow border-none" placeholder="Search" />
+                    <input type="text" id="searchInput" onkeyup="filterTable()"
+                        class="input grow  text-sm text-gray-600 border-none" placeholder="Cari..." />
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="" class="h-4 w-4 opacity-70">
                         <path fill-rule="evenodd"
                             d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
@@ -57,20 +58,21 @@
                         </svg>
                     </div>
                     <div tabindex="0"
-                        class="dropdown-content card card-compact text-sm bg-white text-gray-700 z-[1] w-80 p-4 shadow">
+                        class="dropdown-content card card-compact text-sm bg-white text-gray-600 z-[1] w-80 p-4 shadow">
                         <div class="card-body">
                             <h3 class="card-title text-lg font-semibold mb-4">Filter</h3>
                             <div class="space-y-4">
-                                <div>
+                                <form method="GET" action="{{ route('databarang') }}">
                                     <p class="mb-1 font-medium">Kategori</p>
-                                    <select class="select bg-white select-bordered w-full">
-                                        <option disabled selected>Tampilkan semua</option>
-                                        @foreach ($kategori as $k)
-                                            <option>{{ $k->nama }}</option>
+                                    <select class="select bg-white select-bordered w-full" name="category_id" id="category" onchange="this.form.submit()">
+                                        <option value="">Tampilkan semua</option>
+                                        @foreach ($kategori as $category)
+                                            <option value="{{ $category->id }}" {{ $selectedCategory == $category->id ? 'selected' : '' }}>
+                                                {{ $category->nama }}
+                                            </option>
                                         @endforeach
                                     </select>
-                                </div>
-
+                                </form>
                                 <div class="grid grid-cols-2 gap-2">
                                     <div>
                                         <p class="mb-1 font-medium">Merk</p>
@@ -140,9 +142,9 @@
 
                         <div class="flex items-center justify-center w-full">
                             <label for="dropzone-file"
-                                class="flex flex-col items-center justify-center w-full h-55 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-800 dark:hover:border-gray-500 dark:hover:bg-gray-800">
+                                class="flex flex-col items-center justify-center w-full h-55 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:hover:border-gray-600 dark:hover:bg-gray-800">
                                 <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                    <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                    <svg class="w-8 h-8 mb-4 text-gray-600 dark:text-gray-400" aria-hidden="true"
                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                             stroke-width="2"
@@ -151,7 +153,7 @@
                                     <p class="mb-2 text-sm text-gray-800 dark:text-gray-800 font-medium"><span
                                             class="font-semibold text-purple-600">Click to upload</span> or drag
                                         and drop</p>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF
+                                    <p class="text-xs text-gray-600 dark:text-gray-400">SVG, PNG, JPG or GIF
                                         (MAX. 800x400px)</p>
                                 </div>
                                 <input id="dropzone-file" type="file" class="hidden" />
@@ -215,7 +217,7 @@
                         </svg>
                     </div>
                     <div tabindex="0"
-                        class="dropdown-content card card-compact text-sm bg-white text-gray-700 z-[1] w-80 p-4 shadow">
+                        class="dropdown-content card card-compact text-sm bg-white text-gray-600 z-[1] w-80 p-4 shadow">
                         <div class="card-body">
                             <h3 class="card-title text-lg font-semibold mb-4">Filter</h3>
                             <div class="space-y-4">
@@ -273,13 +275,15 @@
                 </div>
             </div> --}}
             <!-- Table With Action -->
-            <div class="flex items-center p-4 bg-white rounded-box shadow-xs dark:bg-gray-800">
+            <!-- Category Filter Dropdown Form -->
+
+            <div class="flex items-center p-4 bg-white rounded-box shadow-xs dark:bg-gray-800 mt-2">
                 <div class="w-full overflow-hidden rounded-lg shadow-xs mb-2">
                     <div class="w-full overflow-x-auto">
-                        <table class="w-full whitespace-no-wrap">
+                        <table class="w-full whitespace-no-wrap" id="itemsTable">
                             <thead>
                                 <tr
-                                    class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700  dark:text-gray-400 dark:bg-gray-800">
+                                    class="text-xs font-semibold tracking-wide text-left text-gray-600 uppercase border-b dark:border-gray-600  dark:text-gray-400 dark:bg-gray-800">
                                     <th class="px-4 py-3">Kode</th>
                                     <th class="px-4 py-3">Barang</th>
                                     <th class="px-4 py-3">Merk</th>
@@ -290,8 +294,8 @@
                             </thead>
 
                             @foreach ($items as $item)
-                                <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                                    <tr class="text-gray-700 dark:text-gray-400">
+                                <tbody class="bg-white divide-y dark:divide-gray-600 dark:bg-gray-800">
+                                    <tr class="text-gray-600 dark:text-gray-400">
                                         <td class="px-4 py-3 text-sm font-semibold">
                                             {{ $item->kode }}
                                         </td>
@@ -300,8 +304,8 @@
                                                 <!-- Avatar with inset shadow -->
                                                 <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
                                                     <img class="object-cover w-full h-full rounded-full"
-                                                        src={{ asset('storage/' . $item->gambar) }}
-                                                        alt="" loading="lazy" />
+                                                        src={{ asset('storage/' . $item->gambar) }} alt=""
+                                                        loading="lazy" />
                                                     <div class="absolute inset-0 rounded-full shadow-inner"
                                                         aria-hidden="true"></div>
                                                 </div>
@@ -435,42 +439,6 @@
                                                                 <div
                                                                     class="min-w-0 p-1 my-2 bg-white border-gray-800 rounded-lg shadow-xs dark:bg-gray-800">
                                                                     <table class="my-2">
-                                                                        {{-- <tr
-                                                                            class="text-gray-800 text-xs dark:text-gray-400 mb-1">
-                                                                            <td class="text-semibold">
-                                                                                Merk
-                                                                            </td>
-                                                                            <td>
-                                                                                :
-                                                                            </td>
-                                                                            <td>
-                                                                                {{ $item->merk }}
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr
-                                                                            class="text-gray-800 text-xs dark:text-gray-400 mb-1">
-                                                                            <td class="text-semibold">
-                                                                                Jenis
-                                                                            </td>
-                                                                            <td>
-                                                                                :
-                                                                            </td>
-                                                                            <td>
-                                                                                {{ $item->jenis }}
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr
-                                                                            class="text-gray-800 text-xs dark:text-gray-400 mb-1">
-                                                                            <td class="text-semibold">
-                                                                                Warna
-                                                                            </td>
-                                                                            <td>
-                                                                                :
-                                                                            </td>
-                                                                            <td>
-                                                                                {{ $item->warna }}
-                                                                            </td>
-                                                                        </tr> --}}
                                                                         <tr
                                                                             class="text-gray-800 text-xs mt-1 dark:text-gray-400 mb-1">
                                                                             <td class="text-semibold">
@@ -590,12 +558,6 @@
                                                                         </tbody>
                                                                     </table>
                                                                 </div>
-                                                                <!-- <p class="font-semibold">Kode barang: </p>
-                                                                                                                                        <p class="font-semibold">Merk       : </p>
-                                                                                                                                        <p class="font-semibold">Stok       : </p>
-                                                                                                                                        <p class="font-semibold">Satuan     : </p>
-                                                                                                                                        <p class="font-semibold">Harga      : </p>
-                                                                                                                                        <p class="font-semibold">Deskripsi  : </p> -->
                                                             </div>
                                                         </div>
                                                     </div>
@@ -631,4 +593,27 @@
             </div>
         </div>
     </main>
+    <script>
+        function filterTable() {
+            // Get the input value and table elements
+            let input = document.getElementById("searchInput");
+            let filter = input.value.toLowerCase();
+            let table = document.getElementById("itemsTable");
+            let tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows and hide those that don't match the search query
+            for (let i = 1; i < tr.length; i++) {
+                let td = tr[i].getElementsByTagName("td");
+                let found = false;
+                for (let j = 0; j < td.length; j++) {
+                    if (td[j] && td[j].innerText.toLowerCase().includes(filter)) {
+                        found = true;
+                        break;
+                    }
+                }
+                tr[i].style.display = found ? "" : "none";
+            }
+        }
+    </script>
+    
 @endsection

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BarangMasuk;
+use App\Models\DetailBarangKeluar;
+use App\Models\DetailBarangMasuk;
 use App\Models\Item;
 use App\Models\Kategori;
 use App\Models\Keranjang;
@@ -13,49 +16,110 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function __invoke()
+    public function index()
     {
         $item = Item::all();
         $kategori = Kategori::all();
-        $user = User::all();
+        // $user = User::all();
 
         $menungguPengadaan = Pengadaan::with('pegawai')
             ->where('status', 'menunggu')
             ->orderBy('created_at', 'desc')
-            ->take(4)
+            ->take(3)
             ->get();
 
         $othersPengadaan = Pengadaan::with('pegawai')
             ->whereIn('status', ['ditolak', 'disetujui'])
             ->orderBy('created_at', 'desc')
-            ->take(4 - $menungguPengadaan->count())
+            ->take(3 - $menungguPengadaan->count())
             ->get();
 
         $pengadaan = $menungguPengadaan->concat($othersPengadaan);
-        
+
         $menunggu = Permintaan::with('pegawai')
             ->where('status', 'menunggu')
             ->orderBy('created_at', 'desc')
-            ->take(4)
+            ->take(3)
             ->get();
 
         $others = Permintaan::with('pegawai')
             ->whereIn('status', ['ditolak', 'disetujui'])
             ->orderBy('created_at', 'desc')
-            ->take(4 - $menunggu->count())
+            ->take(3 - $menunggu->count())
             ->get();
 
         $permintaan = $menunggu->concat($others);
 
         if (Auth::user()->role == 'admin' || Auth::user()->role == 'pengawas') {
-            return view('operator.dashboard', compact('permintaan', 'pengadaan' ));
+            $incomingItems = DetailBarangMasuk::selectRaw('MONTH(created_at) as month, SUM(kuantiti) as total')
+                ->groupBy('month')
+                ->orderBy('month')
+                ->get();
+
+            $outgoingItems = DetailBarangKeluar::selectRaw('MONTH(created_at) as month, SUM(kuantiti) as total')
+                ->groupBy('month')
+                ->orderBy('month')
+                ->get();
+
+            $labels = collect(range(1, 12))->map(function ($month) {
+                return \Carbon\Carbon::create()->month($month)->format('M');
+            })->toArray();
+
+            $incomingData = $this->mapDataByMonth($incomingItems);
+            $outgoingData = $this->mapDataByMonth($outgoingItems);
+
+            $chart = [
+                'labels' => $labels,
+                'datasets' => [
+                    [
+                        'label' => 'Barang Masuk',
+                        'data' => $incomingData,
+                        'backgroundColor' => '#1E201E',
+                        'borderRadius' => 5,
+                        'barThickness' => 23,
+                    ],
+                    [
+                        'label' => 'Barang Keluar',
+                        'data' => $outgoingData,
+                        'backgroundColor' => '#3C3D37',
+                        'borderRadius' => 5,
+                        'barThickness' => 23,
+                    ],
+                ]
+            ];
+
+            $user = User::count();
+            $barangMasuk = DetailBarangMasuk::sum('kuantiti');
+            $barangKeluar = DetailBarangKeluar::sum('kuantiti');
+            $barang = Item::count();
+
+            return view('operator.dashboard', ([
+                'permintaan' => $permintaan,
+                'pengadaan' => $pengadaan,
+                'chart' => $chart,
+                'user' => $user,
+                'barangMasuk' => $barangMasuk,
+                'barangKeluar' => $barangKeluar,
+                'barang' => $barang,
+            ]));
         }
 
         $nip = Auth::user()->nip;
 
         $keranjang = Keranjang::where('nip', $nip)->get();
         $jumlah = count($keranjang);
-        
+
         return view('unit.dashboard', compact('item', 'kategori', 'jumlah'));
+    }
+
+    private function mapDataByMonth($items)
+    {
+        $data = array_fill(0, 12, 0);
+    
+        foreach ($items as $item) {
+            $data[$item->month - 1] = $item->total;
+        }
+    
+        return $data;
     }
 }

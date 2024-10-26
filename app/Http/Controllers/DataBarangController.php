@@ -12,14 +12,32 @@ class  DataBarangController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $kategori = Kategori::all();
-        $items = Item::with('kategori')->paginate(5);
+    public function index(Request $request)
+{
+    // Retrieve all categories for the dropdown
+    $kategori = Kategori::all();
 
+    // Get the selected category ID from the request
+    $selectedCategory = $request->input('category_id');
 
-        return view('operator.data-barang', compact('items', 'kategori'));
+    // Retrieve items, filtered by category if a category is selected
+    $items = Item::with('kategori')
+        ->when($selectedCategory, function ($query) use ($selectedCategory) {
+            $query->where('kategori_id', $selectedCategory);
+        })
+        ->paginate(5); // Paginate to display 5 items per page
+
+    // Check if it's an AJAX request
+    if ($request->ajax()) {
+        return response()->json([
+            'items' => $items
+        ]);
     }
+
+    // Return the view with items, categories, and selected category
+    return view('operator.data-barang', compact('items', 'kategori', 'selectedCategory'));
+}
+
 
     public function tambahbarang()
     {
@@ -64,11 +82,11 @@ class  DataBarangController extends Controller
         // if($request->hasFile('gambar')) {
         //     $gambarPath = $request->file('gambar')->store('images', 'public');
         // };
-        
-        if($request->hasFile('gambar')) {
+
+        if ($request->hasFile('gambar')) {
             $image = ImageHelper::handleImage($request->gambar);
         }
-        
+
         // dd($request->gambar);
         // $gambarPath = null;
         // if ($request->hasFile('gambar')) {
@@ -112,7 +130,7 @@ class  DataBarangController extends Controller
             'kategori_id' => $request->kategori_id,
             'deskripsi' => $request->deskripsi
         ]);
-        
+
 
         return redirect()->route('databarang')->with('success', 'Barang berhasil ditambahkan.');
     }

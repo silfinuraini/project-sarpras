@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BarangKeluar;
+use App\Models\DetailBarangKeluar;
 use Illuminate\Http\Request;
 
 class BarangKeluarController extends Controller
@@ -11,7 +13,13 @@ class BarangKeluarController extends Controller
      */
     public function index()
     {
-        return view('operator.barang-keluar');
+        $barangKeluar = BarangKeluar::all();
+        $barangKeluar = BarangKeluar::all();
+        $detailBarangKeluar = DetailBarangKeluar::all();
+        return view('operator.barang-keluar', [
+            'barangKeluar' => $barangKeluar,
+            'detailBarangKeluar' => $detailBarangKeluar
+        ]);
     }
 
     /**

@@ -14,7 +14,7 @@
                     <h3 class="font-bold">Hampir habis!</h3>
                     <div class="text-xs">Ada .. barang hampir habis</div>
                 </div>
-                <a href="" class="btn btn-link border-none btn-sm">Lihat</a>
+                <a href="{{ route('databarang') }}" class="btn btn-link border-none btn-sm">Lihat</a>
             </div>
 
             {{-- Stats --}}
@@ -29,7 +29,7 @@
                         </svg>
                     </div>
                     <div class="stat-title text-gray-700">Barang masuk</div>
-                    <div class="stat-value text-teal-500">576</div>
+                    <div class="stat-value text-teal-500">{{ $barangMasuk }}</div>
                     {{-- <div class="stat-desc text-gray-700">19 pegajuan telah disetujui</div> --}}
                 </div>
 
@@ -42,7 +42,7 @@
                         </svg>
                     </div>
                     <div class="stat-title text-gray-700">Barang keluar</div>
-                    <div class="stat-value text-secondary">189</div>
+                    <div class="stat-value text-secondary">{{ $barangKeluar }}</div>
                 </div>
 
                 <div class="stat">
@@ -54,7 +54,7 @@
                         </svg>
                     </div>
                     <div class="stat-title text-gray-700">Item</div>
-                    <div class="stat-value text-purple-700">189</div>
+                    <div class="stat-value text-purple-700">{{ $barang }}</div>
                 </div>
 
                 <div class="stat">
@@ -65,7 +65,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="stat-value">86</div>
+                    <div class="stat-value">{{ $user }}</div>
                     <div class="stat-title text-gray-700">Pengguna</div>
                     <div class="stat-desc text-secondary">31 tasks remaining</div>
                 </div>
@@ -87,18 +87,10 @@
                         <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
                             Barang Masuk dan Keluar
                         </h4>
-                        <canvas id="bars" width="479" height="239"
-                            style="display: block; width: 479px; height: 239px;" class="chartjs-render-monitor"></canvas>
-                        <div class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
-                            <!-- Chart legend -->
-                            <div class="flex items-center">
-                                <span class="inline-block w-3 h-3 mr-1 bg-teal-500 rounded-full"></span>
-                                <span>Shoes</span>
-                            </div>
-                            <div class="flex items-center">
-                                <span class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
-                                <span>Bags</span>
-                            </div>
+                        <div style="width: 100%; margin: auto;">
+                            <canvas id="itemChart" width="479" height="364"
+                                style="display: block; width: 479px; height: 299px;"
+                                class="chartjs-render-monitor"></canvas>
                         </div>
                     </div>
                 </div>
@@ -247,5 +239,118 @@
                 </div>
             </div>
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        yg betul
+
+        <script>
+            const chartData = @json($chart);
+
+            // Konfigurasi warna untuk dataset
+            const colors = {
+                primary: '#0694a2', // teal-500
+                secondary: '#7e3af2' // purple-600
+            };
+
+            // Terapkan warna ke dataset
+            chartData.datasets = chartData.datasets.map((dataset, index) => ({
+                ...dataset,
+                backgroundColor: index === 0 ? colors.primary : colors.secondary,
+                borderColor: index === 0 ? colors.primary : colors.secondary,
+                borderWidth: 1,
+                borderRadius: 4,
+            }));
+
+            const ctx = document.getElementById('itemChart').getContext('2d');
+            const chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: chartData.labels,
+                    datasets: chartData.datasets
+                },
+                options: {
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#4B5563', // gray-600
+                                font: {
+                                    size: 12
+                                }
+                            },
+                            barPercentage: 0.7,
+                            categoryPercentage: 0.7
+                        },
+                        y: {
+                            grid: {
+                                display: true,
+                                color: 'rgba(75, 85, 99, 0.2)', // gray-600 with opacity
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: '#4B5563', // gray-600
+                                font: {
+                                    size: 12
+                                },
+                                padding: 10,
+                                callback: function(value) {
+                                    return value;
+                                }
+                            },
+                            beginAtZero: true
+                        }
+                    },
+
+                    plugins: {
+                        legend: {
+                            display: true // Sembunyikan legend bawaan
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            padding: 12,
+                            titleColor: '#fff',
+                            titleFont: {
+                                size: 14,
+                                weight: 'normal'
+                            },
+                            bodyColor: '#fff',
+                            bodyFont: {
+                                size: 13
+                            },
+                            displayColors: false
+                        }
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    layout: {
+                        padding: {
+                            top: 5,
+                            right: 10,
+                            bottom: 0,
+                            left: 10
+                        }
+                    }
+                }
+            });
+
+            // Generate custom legend
+            const legendContainer = document.getElementById('chartLegend');
+            chartData.datasets.forEach((dataset, index) => {
+                const legendItem = document.createElement('div');
+                legendItem.className = 'flex items-center';
+
+                const colorBox = document.createElement('span');
+                colorBox.className = 'inline-block w-3 h-3 mr-1 rounded-full';
+                colorBox.style.backgroundColor = index === 0 ? colors.primary : colors.secondary;
+
+                const labelText = document.createElement('span');
+                labelText.textContent = dataset.label;
+
+                legendItem.appendChild(colorBox);
+                legendItem.appendChild(labelText);
+                legendContainer.appendChild(legendItem);
+            });
+        </script>
     </main>
 @endsection

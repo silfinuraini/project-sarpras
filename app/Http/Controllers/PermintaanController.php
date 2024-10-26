@@ -10,6 +10,7 @@ use App\Models\Pegawai;
 use App\Models\Permintaan;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PermintaanController extends Controller
 {
@@ -105,34 +106,59 @@ class PermintaanController extends Controller
      */
     public function update(Request $request, string $kode)
     {
+        // Update status of Permintaan
         Permintaan::where('kode', $kode)->update([
             'status' => $request->input('status'),
         ]);
-
-
+    
+        // If status is 'ditolak', update the 'kuantiti_disetujui' in DetailPermintaan
         if ($request->input('status') === 'ditolak') {
             DetailPermintaan::where('kode_permintaan', $kode)->update([
                 'kuantiti_disetujui' => 0,
             ]);
         }
-
+    
+        // Get all detail permintaan records based on kode_permintaan
+        $detailPermintaans = DetailPermintaan::where('kode_permintaan', $kode)->get();
+    
+        // Get the related permintaan record
         $permintaan = Permintaan::where('kode', $kode)->first();
-        $kodebk = 'BK' . rand(1000, 9999);
+        
+        // Generate kode for BarangKeluar
+        $kodeBk = 'BK' . rand(1000, 9999);
+    
+        foreach ($detailPermintaans as $detailPermintaan) {
+            // Find if BarangKeluar already exists
+            $barangKeluar = BarangKeluar::where('kode_permintaan', $permintaan->kode)->first();
+    
+            // If it doesn't exist, create it
+            if (!$barangKeluar) {
+                $barangKeluar = BarangKeluar::create([
+                    'kode' => $kodeBk,
+                    'kode_permintaan' => $detailPermintaan->kode_permintaan,
+                    'nip' => $permintaan->nip,
+                    'perihal' => $permintaan->perihal,
+                    'sifat' => $permintaan->sifat,
+                    'status' => 'belum diambil',
+                    'jumlah_item' => 0 // Start with 0, will be updated later
+                ]);
+            }
+    
+            // Create or update the related DetailBarangKeluar entry
+            $barangKeluarDetail = DetailBarangKeluar::create([
+                'kode_barang_keluar' => $barangKeluar->kode,
+                'kode_item' => $detailPermintaan->kode_item,
+                'kuantiti' => $detailPermintaan->kuantiti_disetujui
+            ]);
+    
+            // Update jumlah_item of BarangKeluar based on DetailBarangKeluar
+            BarangKeluar::where('kode_permintaan', $permintaan->kode)
+                ->update(['jumlah_item' => DB::raw('jumlah_item + ' . $barangKeluarDetail->kuantiti)]);
+        }
 
-        $jumlahitem = Permintaan::select("jumlah_item")->where('kode', $kode)->get();
-
-        // $barangkeluar = BarangKeluar::create([
-        //     'kode' => $kodebk,
-        //     'nip' => $permintaan->nip,
-        //     'perihal' => $permintaan->perihal,
-        //     'sifat' => $permintaan->sifat,
-        //     'status' => $permintaan->status,
-        //     'jumlah_item' => 0,
-        // ]);
-
-        return redirect()->route('operator.permintaan');
+        return redirect()->back();
     }
-
+    
     public function updateKuantiti(Request $request, string $id)
     {
         $detailPermintaan = DetailPermintaan::where('id', $id)->first();
