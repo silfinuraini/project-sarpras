@@ -21,7 +21,7 @@
                 <li><a>Item 3</a></li>
             </ul>
         </div>
-        <a class="btn btn-ghost text-xl font-bold">Sarpras </a>
+        <a class="btn btn-ghost text-xl font-bold">Unit</a>
     </div>
     <div class="navbar-center hidden gap-1 lg:flex">
         <label class="input input-bordered flex items-center">

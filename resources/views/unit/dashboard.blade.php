@@ -257,7 +257,97 @@
 
             <!-- Main -->
             <main class="h-full overflow-y-auto bg-gray-50">
+                {{-- <section>
+                    <div class="container mx-auto grid mt-5 my-10 p-2">
+                        <div class="stats shadow-md ">
+                            <div class="stat">
+                                <div class="stat-figure text-secondary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        class="inline-block h-8 w-8 stroke-current">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <div class="stat-title text-gray-500">Downloads</div>
+                                <div class="stat-value">31K</div>
+                                <div class="stat-desc">Jan 1st - Feb 1st</div>
+                            </div>
+
+                            <div class="stat">
+                                <div class="stat-figure text-secondary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        class="inline-block h-8 w-8 stroke-current">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="stat-title text-gray-500">New Users</div>
+                                <div class="stat-value">4,200</div>
+                                <div class="stat-desc">↗︎ 400 (22%)</div>
+                            </div>
+
+                            <div class="stat">
+                                <div class="stat-figure text-secondary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        class="inline-block h-8 w-8 stroke-current">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="stat-title text-gray-500">New Registers</div>
+                                <div class="stat-value">1,200</div>
+                                <div class="stat-desc">↘︎ 90 (14%)</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>  --}}
                 <section class="bg-white dark:bg-gray-900">
+                    <div class="container mx-auto grid py-10 p-6">
+                        <div class="stats shadow-md ">
+                            <div class="stat">
+                                <div class="stat-figure text-secondary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        class="inline-block h-8 w-8 stroke-current">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <div class="stat-title text-gray-500">Pengadaan</div>
+                                <div class="stat-value">{{ $statPengadaan }}</div>
+                                <div class="stat-desc">Jan 1st - Feb 1st</div>
+                            </div>
+
+                            <div class="stat">
+                                <div class="stat-figure text-secondary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        class="inline-block h-8 w-8 stroke-current">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="stat-title text-gray-500">Permintaan</div>
+                                <div class="stat-value">{{ $statPermintaan }}</div>
+                                <div class="stat-desc">↗︎ 400 (22%)</div>
+                            </div>
+
+                            <div class="stat">
+                                <div class="stat-figure text-secondary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        class="inline-block h-8 w-8 stroke-current">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div class="stat-title text-gray-500">Barang belum diambil</div>
+                                <div class="stat-value">{{ $statBarangKeluar }}</div>
+                                <div class="stat-desc">↘︎ 90 (14%)</div>
+                            </div>
+                        </div>
+                    </div>
                     <div
                         class="grid gap-8 max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-6">
                         <div class=" lg:mt-0 lg:col-span-5 lg:flex">
@@ -356,6 +446,8 @@
                     </div>
                 </section>
 
+                
+
                 <section>
                     <div class="container  mx-auto grid mt-5 my-10 p-2 ">
                         <div class="mb-5 min-w-min grid grid-cols-2 md:grid-cols-4 xl:grid-cols-4 gap-4">
@@ -365,7 +457,7 @@
                                         <div class="flex-shrink-0">
                                             <span
                                                 class="text-md leading-none font-bold text-gray-900 mb-1">Pengadaan</span>
-                                                <div class="badge bg-purple-700 text-white">{{$jumlah}}</div>
+                                            <div class="badge bg-purple-700 text-white">{{ $jumlah }}</div>
                                             <h3 class="text-xs xl:text-sm md:text-sm font-semibold text-gray-500">New
                                                 products this week</h3>
                                         </div>
@@ -414,7 +506,7 @@
                             @foreach ($item as $item)
                                 <form action="{{ route('keranjang.store') }}" method="POST">
                                     @csrf
-                                    <input type="hidden"  name="kode_item" value="{{ $item->kode }}" />
+                                    <input type="hidden" name="kode_item" value="{{ $item->kode }}" />
                                     {{-- ganti ke kuantiti yang dinamis --}}
                                     {{-- <input type="hidden" name="kode_item" value=1 /> --}}
 
@@ -422,7 +514,7 @@
                                         class="max-w-sm bg-white border border-gray-200 rounded-box shadow dark:bg-gray-800 dark:border-gray-700">
                                         <a href="#">
                                             <img src={{ asset('storage/' . $item->gambar) }}
-                                                class="rounded-t-lg w-full"
+                                                class="rounded-t-lg w-60 h-60"
                                                 alt="https://i.pinimg.com/564x/84/8e/62/848e62247384ee45350877695994a4cb.jpg" />
                                         </a>
                                         <div class="p-5">
@@ -437,8 +529,8 @@
 
                                             </p>
                                             <div class="flex gap-2">
-
                                                 <button onclick="detailBarang{{ $item->kode }}.showModal()"
+                                                    type="button"
                                                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-full active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
                                                     aria-label="Edit">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="19"

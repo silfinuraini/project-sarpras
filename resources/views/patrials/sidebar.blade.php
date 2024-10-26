@@ -1,8 +1,9 @@
 <!-- Desktop sidebar -->
 <aside class="relative z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
     <div class="py-4 text-gray-500 dark:text-gray-400" x-data="{ isBarangMenuOpen: false, isPengajuanMenuOpen: false }">
+       
         <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
-            Sarpras
+            {{ ucfirst(Auth::user()->role) }}
         </a>
 
         <ul class="mt-6">
