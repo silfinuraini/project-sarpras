@@ -13,30 +13,30 @@ class  DataBarangController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-{
-    // Retrieve all categories for the dropdown
-    $kategori = Kategori::all();
+    {
+        // Retrieve all categories for the dropdown
+        $kategori = Kategori::all();
 
-    // Get the selected category ID from the request
-    $selectedCategory = $request->input('category_id');
+        // Get the selected category ID from the request
+        $selectedCategory = $request->input('category_id');
 
-    // Retrieve items, filtered by category if a category is selected
-    $items = Item::with('kategori')
-        ->when($selectedCategory, function ($query) use ($selectedCategory) {
-            $query->where('kategori_id', $selectedCategory);
-        })
-        ->paginate(5); // Paginate to display 5 items per page
+        // Retrieve items, filtered by category if a category is selected
+        $items = Item::with('kategori')
+            ->when($selectedCategory, function ($query) use ($selectedCategory) {
+                $query->where('kategori_id', $selectedCategory);
+            })
+            ->paginate(6); // Paginate to display 5 items per page
 
-    // Check if it's an AJAX request
-    if ($request->ajax()) {
-        return response()->json([
-            'items' => $items
-        ]);
+        // Check if it's an AJAX request
+        if ($request->ajax()) {
+            return response()->json([
+                'items' => $items
+            ]);
+        }
+
+        // Return the view with items, categories, and selected category
+        return view('operator.data-barang', compact('items', 'kategori', 'selectedCategory'));
     }
-
-    // Return the view with items, categories, and selected category
-    return view('operator.data-barang', compact('items', 'kategori', 'selectedCategory'));
-}
 
 
     public function tambahbarang()
@@ -58,81 +58,52 @@ class  DataBarangController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        // $request->validate([
-        //     // 'kode' => 'required|min:6',
-        //     'nama' => 'required|min:3',
-        //     'merk' => 'required|min:3',
-        //     'satuan' => 'required',
-        //     'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        //     'harga' => 'required|numeric|min:3',
-        //     'stok' => 'required|integer|min:0',
-        //     'stok_minimum' => 'required|integer|min:0',
-        //     'kategori_id' => 'required',  
-        // ]);
+        try {
+            $request->validate([
+                // 'kode' => 'required|min:6',
+                'nama' => 'required|min:3',
+                'merk' => 'required|min:3',
+                'satuan' => 'required',
+                'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'harga' => 'required|numeric|min:3',
+                'stok' => 'required|integer|min:0',
+                'stok_minimum' => 'required|integer|min:0',
+                'kategori_id' => 'required',
+            ]);
 
-        $kategoriID = $request->input('kategori_id');
-        $kategori = Kategori::find($kategoriID);
+            $kategoriID = $request->input('kategori_id');
+            $kategori = Kategori::find($kategoriID);
 
-        $namaKode = $kategori->alias;
-        $randomNumber = rand(1000, 9999);
+            $namaKode = $kategori->alias;
+            $randomNumber = rand(1000, 9999);
 
-        $code = $namaKode . $randomNumber;
+            $code = $namaKode . $randomNumber;
 
-        // if($request->hasFile('gambar')) {
-        //     $gambarPath = $request->file('gambar')->store('images', 'public');
-        // };
+            if ($request->hasFile('gambar')) {
+                $image = ImageHelper::handleImage($request->gambar);
+            }
 
-        if ($request->hasFile('gambar')) {
-            $image = ImageHelper::handleImage($request->gambar);
+            $item = Item::create([
+                'kode' => $code,
+                'gambar' => $image ?? null,
+                'nama' => $request->nama,
+                'jenis' => $request->jenis,
+                'ukuran' => $request->ukuran,
+                'merk' => $request->merk,
+                'warna' => $request->warna,
+                'satuan' => $request->satuan,
+                'harga' => $request->harga,
+                'stok' => $request->stok,
+                'stok_minimum' => $request->stok_minimum,
+                'kategori_id' => $request->kategori_id,
+                'deskripsi' => $request->deskripsi
+            ]);
+
+
+            return redirect()->route('databarang')->with('success', 'Barang berhasil ditambahkan.');
+        } catch (\Throwable $th) {
+            return redirect()->route('databarang')->with('error', $th->getMessage());
         }
-
-        // dd($request->gambar);
-        // $gambarPath = null;
-        // if ($request->hasFile('gambar')) {
-        //     $file = $request->file('gambar');
-        //     if ($file->isValid()) {
-        //         // Generate unique filename
-        //         $fileName = time() . '_' . $file->getClientOriginalName();
-        //         // Store in public/items directory
-        //         $gambarPath = $file->storeAs('items', $fileName, 'public');
-        //     }
-        // }
-
-        // $item = Item::create([
-        //     'kode' => $code,
-        //     'gambar' => $gambarPath ?? null,
-        //     'nama' => $request->nama,
-        //     'jenis' => $request->jenis,
-        //     'ukuran' => $request->ukuran,
-        //     'merk' => $request->merk,
-        //     'warna' => $request->warna,
-        //     'satuan' => $request->satuan,
-        //     'harga' => $request->harga,
-        //     'stok' => $request->stok,
-        //     'stok_minimum' => $request->stok_minimum,
-        //     'kategori_id' => $request->kategori_id,
-        //     'deskripsi' => $request->deskripsi
-        // ]);
-
-        $item = Item::create([
-            'kode' => $code,
-            'gambar' => $image ?? null,
-            'nama' => $request->nama,
-            'jenis' => $request->jenis,
-            'ukuran' => $request->ukuran,
-            'merk' => $request->merk,
-            'warna' => $request->warna,
-            'satuan' => $request->satuan,
-            'harga' => $request->harga,
-            'stok' => $request->stok,
-            'stok_minimum' => $request->stok_minimum,
-            'kategori_id' => $request->kategori_id,
-            'deskripsi' => $request->deskripsi
-        ]);
-
-
-        return redirect()->route('databarang')->with('success', 'Barang berhasil ditambahkan.');
     }
 
     /**
@@ -158,17 +129,6 @@ class  DataBarangController extends Controller
      */
     public function update(Request $request, string $kode)
     {
-        // $request->validate([
-        //     'nama' => 'required|min:3',
-        //     'kode' => 'required|min:6',
-        //     'merk' => 'required|min:3',
-        //     'satuan' => 'required',
-        //     'harga' => 'required|numeric|min:3',
-        //     'stok' => 'required|integer|min:0',
-        //     'stok_minimum' => 'required|integer|min:0',
-        //     'kategori_kode' => 'required',  
-        // ]);
-
         $items = Item::where('kode', $kode)->first();
         $items->update($request->all());
 

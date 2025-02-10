@@ -85,6 +85,8 @@ class PermintaanController extends Controller
         $item = Item::all();
         $detailPermintaan = DetailPermintaan::with('item')->get();
         $pegawai = Pegawai::all();
+        $user = User::all();
+
 
         $permintaan = Permintaan::with('pegawai')
             ->where('kode', $kode)
@@ -156,7 +158,7 @@ class PermintaanController extends Controller
                 ->update(['jumlah_item' => DB::raw('jumlah_item + ' . $barangKeluarDetail->kuantiti)]);
         }
 
-        return redirect()->back();
+        return redirect()->route('operator.permintaan');
     }
     
     public function updateKuantiti(Request $request, string $id)

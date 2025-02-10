@@ -198,85 +198,6 @@
                 </button>
             </div>
 
-
-            {{-- <div class="flex mb-2 gap-2">
-                <label class="input w-full flex items-center gap-2 bg-white ">
-                    <input type="text" class="grow border-none" placeholder="Search" />
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="" class="h-4 w-4 opacity-70">
-                        <path fill-rule="evenodd"
-                            d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                            clip-rule="evenodd" />
-                    </svg>
-                </label>
-                <div class="dropdown dropdown-end dropdown-hover">
-                    <div tabindex="0" role="button"
-                        class="btn m-1 flex items-center justify-between px-4 py-2 text-sm font-medium text-purple-700 transition-colors duration-150 bg-transparent border border-gray-300 rounded-lg active:bg-transparent hover:bg-transparent focus:outline-none focus:shadow-outline-transparent">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-70" viewBox="0 0 16 16">
-                            <path
-                                d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2z" />
-                        </svg>
-                    </div>
-                    <div tabindex="0"
-                        class="dropdown-content card card-compact text-sm bg-white text-gray-600 z-[1] w-80 p-4 shadow">
-                        <div class="card-body">
-                            <h3 class="card-title text-lg font-semibold mb-4">Filter</h3>
-                            <div class="space-y-4">
-                                <div>
-                                    <p class="mb-1 font-medium">Kategori</p>
-                                    <select class="select bg-white select-bordered w-full">
-                                        <option disabled selected>Tampilkan semua</option>
-                                        @foreach ($kategori as $k)
-                                            <option>{{ $k->nama }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                <div class="grid grid-cols-2 gap-2">
-                                    <div>
-                                        <p class="mb-1 font-medium">Merk</p>
-                                        <select class="select bg-white select-bordered w-full">
-                                            <option disabled selected>All</option>
-                                            <option>Han Solo</option>
-                                            <option>Greedo</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <p class="mb-1 font-medium">Jenis</p>
-                                        <select class="select bg-white select-bordered w-full">
-                                            <option disabled selected>All</option>
-                                            <option>Han Solo</option>
-                                            <option>Greedo</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <p class="mb-1 font-medium">Warna</p>
-                                        <select class="select bg-white select-bordered w-full">
-                                            <option disabled selected>All</option>
-                                            <option>Han Solo</option>
-                                            <option>Greedo</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <p class="mb-1 font-medium">Ukuran</p>
-                                        <select class="select bg-white select-bordered w-full">
-                                            <option disabled selected>All</option>
-                                            <option>Han Solo</option>
-                                            <option>Greedo</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <button type="submit"
-                                class="btn btn-primary w-full mt-6 text-white bg-purple-600 hover:bg-purple-700">
-                                Pakai
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div> --}}
-            <!-- Table With Action -->
-            <!-- Category Filter Dropdown Form -->
-
             <div class="flex items-center p-4 bg-white rounded-box shadow-xs dark:bg-gray-800 mt-2">
                 <div class="w-full overflow-hidden rounded-lg shadow-xs mb-2">
                     <div class="w-full overflow-x-auto">
@@ -496,67 +417,155 @@
                                                     </form>
                                                 </dialog>
                                                 <dialog id="" class="modal">
-                                                    <div class="modal-box w-11/12 max-w-5xl rounded-box bg-white">
-                                                        <div class="grid grid-cols-1 gap-1 md:grid-cols-2 lg:grid-cols-2">
-                                                            <figure class="px-10 p-4">
-                                                                <div class="carousel w-full">
-                                                                    <div id="item1" class="carousel-item w-full">
-                                                                        <img src="https://images.tokopedia.net/img/cache/700/VqbcmM/2023/5/1/edcb8105-c50c-4b3f-a8eb-477005e300bb.png"
-                                                                            class="w-full" />
-                                                                    </div>
-                                                                    <div id="item3" class="carousel-item w-full">
-                                                                        <img src="https://images.tokopedia.net/img/cache/500-square/VqbcmM/2022/4/22/7ab00b89-133d-4c05-b5f8-1f1ac075924e.jpg"
-                                                                            class="w-full" />
-                                                                    </div>
+                                                    <div class="modal-box w-11/12 max-w-2xl rounded-box bg-white">
+                                                        <div class="grid grid-cols-2 ">
+                                                            <div
+                                                                class="carousel rounded-box w-64 justify-center items-center">
+                                                                <div class="carousel-item w-full">
+                                                                    <img src="https://i.pinimg.com/564x/84/8e/62/848e62247384ee45350877695994a4cb.jpg"
+                                                                        class="w-full"
+                                                                        alt="Tailwind CSS Carousel component" />
                                                                 </div>
-                                                            </figure>
-
-                                                            <div class="card-body">
-                                                                <h2 class="card-title font-bold">
-                                                                    {{ $item->nama }}
-                                                                    <div class="badge badge-primary badge-outline">ATK
-                                                                    </div>
-                                                                </h2>
-                                                                <div class="overflow-x-auto">
-                                                                    <table class="table">
-                                                                        <tbody>
-                                                                            <!-- row 1 -->
-                                                                            <tr class="border-none">
-                                                                                <td
-                                                                                    class="col-span-3 font-extrabold text-lg">
-                                                                                    Rp{{ number_format($item->harga, 0, ',', '.') }},00
-                                                                                </td>
-                                                                            </tr>
-
-                                                                            <tr class="border-none">
-                                                                                <td class="col-span-3 font-semibold">
-                                                                                    {{ $item->deskripsi }}
-                                                                                </td>
-                                                                            </tr>
-
-                                                                            <tr class="border-none">
-                                                                                <th>Kode barang</th>
-                                                                                <td>:</td>
-                                                                                <td>{{ $item->kode }}</td>
-                                                                            </tr>
-
-                                                                            <tr class="border-none">
-                                                                                <th>Merk</th>
-                                                                                <td>:</td>
-                                                                                <td>{{ $item->merk }}</td>
-                                                                            </tr>
-                                                                            <tr class="border-none">
-                                                                                <th>Stok</th>
-                                                                                <td>:</td>
-                                                                                <td>{{ $item->stok }}</td>
-                                                                            </tr>
-                                                                            <tr class="border-none">
-                                                                                <th>Satuan</th>
-                                                                                <td>:</td>
-                                                                                <td>{{ $item->satuan }}</td>
-                                                                            </tr>
-                                                                        </tbody>
+                                                            </div>
+                                                            <div>
+                                                                <div class="flex gap-1">
+                                                                    <h4
+                                                                        class="mb-4 font-bold text-base text-gray-800 dark:text-gray-300">
+                                                                        {{ $item->nama }}
+                                                                    </h4>
+                                                                    <div
+                                                                        class="badge bg-purple-700 text-white border-none text-xs">
+                                                                        {{ $item->kode }}</div>
+                                                                </div>
+                                                                <p
+                                                                    class="text-gray-800 text-xs dark:text-gray-400 flex gap-1 mb-1">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                        width="16" height="16"
+                                                                        fill="currentColor" class="bi bi-tag"
+                                                                        viewBox="0 0 16 16">
+                                                                        <path
+                                                                            d="M6 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m-1 0a.5.5 0 1 0-1 0 .5.5 0 0 0 1 0" />
+                                                                        <path
+                                                                            d="M2 1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 1 6.586V2a1 1 0 0 1 1-1m0 5.586 7 7L13.586 9l-7-7H2z" />
+                                                                    </svg>
+                                                                    Rp{{ number_format($item->harga, 0, ',', '.') }},00
+                                                                </p>
+                                                                <p
+                                                                    class="text-gray-800 text-xs dark:text-gray-400 flex gap-1 mb-1">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                        width="16" height="16"
+                                                                        fill="currentColor" class="bi bi-puzzle"
+                                                                        viewBox="0 0 16 16">
+                                                                        <path
+                                                                            d="M3.112 3.645A1.5 1.5 0 0 1 4.605 2H7a.5.5 0 0 1 .5.5v.382c0 .696-.497 1.182-.872 1.469a.5.5 0 0 0-.115.118l-.012.025L6.5 4.5v.003l.003.01q.005.015.036.053a.9.9 0 0 0 .27.194C7.09 4.9 7.51 5 8 5c.492 0 .912-.1 1.19-.24a.9.9 0 0 0 .271-.194.2.2 0 0 0 .039-.063v-.009l-.012-.025a.5.5 0 0 0-.115-.118c-.375-.287-.872-.773-.872-1.469V2.5A.5.5 0 0 1 9 2h2.395a1.5 1.5 0 0 1 1.493 1.645L12.645 6.5h.237c.195 0 .42-.147.675-.48.21-.274.528-.52.943-.52.568 0 .947.447 1.154.862C15.877 6.807 16 7.387 16 8s-.123 1.193-.346 1.638c-.207.415-.586.862-1.154.862-.415 0-.733-.246-.943-.52-.255-.333-.48-.48-.675-.48h-.237l.243 2.855A1.5 1.5 0 0 1 11.395 14H9a.5.5 0 0 1-.5-.5v-.382c0-.696.497-1.182.872-1.469a.5.5 0 0 0 .115-.118l.012-.025.001-.006v-.003a.2.2 0 0 0-.039-.064.9.9 0 0 0-.27-.193C8.91 11.1 8.49 11 8 11s-.912.1-1.19.24a.9.9 0 0 0-.271.194.2.2 0 0 0-.039.063v.003l.001.006.012.025c.016.027.05.068.115.118.375.287.872.773.872 1.469v.382a.5.5 0 0 1-.5.5H4.605a1.5 1.5 0 0 1-1.493-1.645L3.356 9.5h-.238c-.195 0-.42.147-.675.48-.21.274-.528.52-.943.52-.568 0-.947-.447-1.154-.862C.123 9.193 0 8.613 0 8s.123-1.193.346-1.638C.553 5.947.932 5.5 1.5 5.5c.415 0 .733.246.943.52.255.333.48.48.675.48h.238zM4.605 3a.5.5 0 0 0-.498.55l.001.007.29 3.4A.5.5 0 0 1 3.9 7.5h-.782c-.696 0-1.182-.497-1.469-.872a.5.5 0 0 0-.118-.115l-.025-.012L1.5 6.5h-.003a.2.2 0 0 0-.064.039.9.9 0 0 0-.193.27C1.1 7.09 1 7.51 1 8s.1.912.24 1.19c.07.14.14.225.194.271a.2.2 0 0 0 .063.039H1.5l.006-.001.025-.012a.5.5 0 0 0 .118-.115c.287-.375.773-.872 1.469-.872H3.9a.5.5 0 0 1 .498.542l-.29 3.408a.5.5 0 0 0 .497.55h1.878c-.048-.166-.195-.352-.463-.557-.274-.21-.52-.528-.52-.943 0-.568.447-.947.862-1.154C6.807 10.123 7.387 10 8 10s1.193.123 1.638.346c.415.207.862.586.862 1.154 0 .415-.246.733-.52.943-.268.205-.415.39-.463.557h1.878a.5.5 0 0 0 .498-.55l-.001-.007-.29-3.4A.5.5 0 0 1 12.1 8.5h.782c.696 0 1.182.497 1.469.872.05.065.091.099.118.115l.025.012.006.001h.003a.2.2 0 0 0 .064-.039.9.9 0 0 0 .193-.27c.14-.28.24-.7.24-1.191s-.1-.912-.24-1.19a.9.9 0 0 0-.194-.271.2.2 0 0 0-.063-.039H14.5l-.006.001-.025.012a.5.5 0 0 0-.118.115c-.287.375-.773.872-1.469.872H12.1a.5.5 0 0 1-.498-.543l.29-3.407a.5.5 0 0 0-.497-.55H9.517c.048.166.195.352.463.557.274.21.52.528.52.943 0 .568-.447.947-.862 1.154C9.193 5.877 8.613 6 8 6s-1.193-.123-1.638-.346C5.947 5.447 5.5 5.068 5.5 4.5c0-.415.246-.733.52-.943.268-.205.415-.39.463-.557z" />
+                                                                    </svg>
+                                                                    {{ $item->kategori->nama }}
+                                                                </p>
+                                                                {{-- <p
+                                                                class="text-gray-800 text-xs dark:text-gray-400 flex gap-1 mb-1">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                    height="16" fill="currentColor"
+                                                                    class="bi bi-palette" viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M8 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3m4 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M5.5 7a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m.5 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3" />
+                                                                    <path
+                                                                        d="M16 8c0 3.15-1.866 2.585-3.567 2.07C11.42 9.763 10.465 9.473 10 10c-.603.683-.475 1.819-.351 2.92C9.826 14.495 9.996 16 8 16a8 8 0 1 1 8-8m-8 7c.611 0 .654-.171.655-.176.078-.146.124-.464.07-1.119-.014-.168-.037-.37-.061-.591-.052-.464-.112-1.005-.118-1.462-.01-.707.083-1.61.704-2.314.369-.417.845-.578 1.272-.618.404-.038.812.026 1.16.104.343.077.702.186 1.025.284l.028.008c.346.105.658.199.953.266.653.148.904.083.991.024C14.717 9.38 15 9.161 15 8a7 7 0 1 0-7 7" />
+                                                                </svg>
+                                                                {{ $item->warna }}
+                                                            </p>
+                                                            <p
+                                                                class="text-gray-800 text-xs dark:text-gray-400 flex gap-1 mb-1">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                    height="16" fill="currentColor"
+                                                                    class="bi bi-gear" viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0" />
+                                                                    <path
+                                                                        d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z" />
+                                                                </svg>
+                                                                {{ $item->jenis }}
+                                                            </p> --}}
+                                                                <div
+                                                                    class="min-w-0 p-1 bg-white border-gray-800 rounded-lg shadow-xs dark:bg-gray-800">
+                                                                    <table class="my-2">
+                                                                        <tr
+                                                                            class="text-gray-800 text-xs dark:text-gray-400 mb-1">
+                                                                            <td class="text-semibold">
+                                                                                Warna
+                                                                            </td>
+                                                                            <td>
+                                                                                :
+                                                                            </td>
+                                                                            <td>
+                                                                                {{ $item->warna }}
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr
+                                                                            class="text-gray-800 text-xs dark:text-gray-400 mb-1">
+                                                                            <td class="text-semibold">
+                                                                                Jenis
+                                                                            </td>
+                                                                            <td>
+                                                                                :
+                                                                            </td>
+                                                                            <td>
+                                                                                {{ $item->jenis }}
+                                                                            </td>
+                                                                        </tr>
                                                                     </table>
+                                                                </div>
+
+                                                                <div
+                                                                    class="min-w-0 p-1 bg-white border-gray-800 rounded-lg shadow-xs dark:bg-gray-800">
+                                                                    <table class="my-2">
+                                                                        <tr
+                                                                            class="text-gray-800 text-xs dark:text-gray-400 mb-1">
+                                                                            <td class="text-semibold">
+                                                                                Stok
+                                                                            </td>
+                                                                            <td>
+                                                                                :
+                                                                            </td>
+                                                                            <td>
+                                                                                {{ $item->stok }}
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr
+                                                                            class="text-gray-800 text-xs dark:text-gray-400 mb-1">
+                                                                            <td class="text-semibold">
+                                                                                Stok minimum
+                                                                            </td>
+                                                                            <td>
+                                                                                :
+                                                                            </td>
+                                                                            <td>
+                                                                                {{ $item->stok_minimum }}
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr
+                                                                            class="text-gray-800 text-xs dark:text-gray-400 mb-1">
+                                                                            <td class="text-semibold">
+                                                                                Satuan
+                                                                            </td>
+                                                                            <td>
+                                                                                :
+                                                                            </td>
+                                                                            <td>
+                                                                                {{ $item->satuan }}
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+
+                                                                <div
+                                                                    class="min-w-0 p-1 text-xs bg-white rounded-lg shadow-xs outline-gray-800 border-gray-800 dark:bg-gray-800">
+                                                                    <h4
+                                                                        class="mb-2 font-semibold text-gray-800 dark:text-gray-300">
+                                                                        Deskripsi
+                                                                    </h4>
+                                                                    <p class="text-gray-800 dark:text-gray-400">
+                                                                        {{ $item->deskripsi }}
+                                                                    </p>
                                                                 </div>
                                                             </div>
                                                         </div>

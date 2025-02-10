@@ -446,20 +446,35 @@
                     </div>
                 </section>
 
-                
+
 
                 <section>
                     <div class="container  mx-auto grid mt-5 my-10 p-2 ">
                         <div class="mb-5 min-w-min grid grid-cols-2 md:grid-cols-4 xl:grid-cols-4 gap-4">
-                            <a href="{{ route('pengadaan') }}">
+                            <div class="indicator">
+                                <span class="indicator-item badge bg-purple-700 text-white">{{ $jumlah }}</span>
+                                <a href="{{ route('pengadaan') }}">
+                                    <div class="bg-white shadow rounded-box p-4 sm:p-6 xl:p-8">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0">
+                                                <span
+                                                    class="text-md leading-none font-bold text-gray-900 mb-1">Pengadaan</span>
+                                                <h3 class="text-xs xl:text-sm md:text-sm font-semibold text-gray-500">New
+                                                    products this week</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            
+                            <a href="{{ route('permintaan') }}">
                                 <div class="bg-white shadow rounded-box p-4 sm:p-6 xl:p-8">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0">
                                             <span
-                                                class="text-md leading-none font-bold text-gray-900 mb-1">Pengadaan</span>
-                                            <div class="badge bg-purple-700 text-white">{{ $jumlah }}</div>
-                                            <h3 class="text-xs xl:text-sm md:text-sm font-semibold text-gray-500">New
-                                                products this week</h3>
+                                                class="text-md leading-none font-bold text-gray-900 mb-1">Permintaan</span>
+                                            <h3 class="text-xs xl:text-sm md:text-sm font-semibold text-gray-500">
+                                                Visitors this week</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -472,18 +487,6 @@
                                                 acc</span>
                                             <h3 class="text-xs xl:text-sm md:text-sm font-semibold text-gray-500">User
                                                 signups this week</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="{{ route('permintaan') }}">
-                                <div class="bg-white shadow rounded-box p-4 sm:p-6 xl:p-8">
-                                    <div class="flex items-center">
-                                        <div class="flex-shrink-0">
-                                            <span
-                                                class="text-md leading-none font-bold text-gray-900 mb-1">Permintaan</span>
-                                            <h3 class="text-xs xl:text-sm md:text-sm font-semibold text-gray-500">
-                                                Visitors this week</h3>
                                         </div>
                                     </div>
                                 </div>

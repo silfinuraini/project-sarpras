@@ -74,6 +74,7 @@ class PengadaanController extends Controller
         $item = Item::all();
         $detailPengadaan = DetailPengadaan::with('item')->get();
         $pegawai = Pegawai::all();
+        $user = User::all();
 
         $pengadaan = Pengadaan::with('pegawai')
             ->where('kode', $kode)
