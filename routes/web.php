@@ -15,12 +15,15 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\Unit\PengadaanController;
 use App\Http\Controllers\Unit\PermintaanController as UnitPermintaanController;
 use App\Http\Controllers\Unit\TransaksiController;
+use App\Models\Item;
 use App\Models\Keranjang;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    $items = Item::all();
+    return view('welcome', compact('items'));
 });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

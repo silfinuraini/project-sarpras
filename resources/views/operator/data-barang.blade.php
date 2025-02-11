@@ -39,10 +39,10 @@
                     </div>
                     <span> &RightArrow;</span>
                 </a> --}}
-                <label class="input w-full flex items-center gap-2 bg-white ">
+                <label class="input w-full flex items-center gap-2 bg-white border-purple-700 ">
                     <input type="text" id="searchInput" onkeyup="filterTable()"
-                        class="input grow  text-sm text-gray-600 border-none" placeholder="Cari..." />
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="" class="h-4 w-4 opacity-70">
+                        class="input grow  text-sm text-gray-600 border-none " placeholder="Cari..." />
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 opacity-70 text-purple-700">
                         <path fill-rule="evenodd"
                             d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
                             clip-rule="evenodd" />
@@ -223,13 +223,14 @@
                                         <td class="px-4 py-3">
                                             <div class="flex items-center text-sm">
                                                 <!-- Avatar with inset shadow -->
-                                                <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                                    <img class="object-cover w-full h-full rounded-full"
+                                                <div class="relative hidden w-12 h-12 mr-3 rounded-lg md:block">
+                                                    <img class="object-cover w-full h-full rounded-lg"
                                                         src={{ asset('storage/' . $item->gambar) }} alt=""
                                                         loading="lazy" />
                                                     <div class="absolute inset-0 rounded-full shadow-inner"
                                                         aria-hidden="true"></div>
                                                 </div>
+                                                
                                                 <div>
                                                     <p class="font-semibold">{{ $item->nama }}</p>
                                                     <p class="text-xs text-gray-800 dark:text-gray-400">
