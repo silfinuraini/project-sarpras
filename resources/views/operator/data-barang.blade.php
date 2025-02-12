@@ -201,8 +201,8 @@
                                     <th class="px-4 py-3">Merk</th>
                                     <th class="px-4 py-3 text-center">Stok</th>
                                     <th class="px-4 py-3 text-center">Stok Minimum</th>
-                                    <th class="px-4 py-3">Satuan</th>
-                                    <th class="px-4 py-3">Aksi</th>
+                                    <th class="px-4 py-3 text-center">Satuan</th>
+                                    <th class="px-4 py-3"></th>
                                 </tr>
                             </thead>
 
@@ -239,11 +239,11 @@
                                         <td class="px-4 py-3 text-xs text-center">
                                             {{ $item->stok_minimum }}
                                         </td>
-                                        <td class="px-4 py-3 text-xs">
+                                        <td class="px-4 py-3 text-xs text-center">
                                             {{ $item->satuan }}
                                         </td>
                                         <td class="px-4 py-3">
-                                            <div class="flex items-center space-x-4 text-sm">
+                                            <div class="flex items-center justify-center space-x-4 text-sm">
                                                 <button onclick="modalItem{{ $item->kode }}.showModal()"
                                                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                                     aria-label="Delete">
@@ -459,7 +459,9 @@
                             @endforeach
                         </table>
                     </div>
-                    {{ $items->links() }}
+                    <div class="mx-4 my-2">
+                        {{ $items->links() }}
+                    </div>
                 </div>
             </div>
         </div>

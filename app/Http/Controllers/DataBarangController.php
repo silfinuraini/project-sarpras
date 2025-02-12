@@ -25,7 +25,7 @@ class  DataBarangController extends Controller
             ->when($selectedCategory, function ($query) use ($selectedCategory) {
                 $query->where('kategori_id', $selectedCategory);
             })
-            ->paginate(6); // Paginate to display 5 items per page
+            ->paginate(5); // Paginate to display 5 items per page
 
         // Check if it's an AJAX request
         if ($request->ajax()) {
