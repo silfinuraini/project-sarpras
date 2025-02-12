@@ -23,7 +23,7 @@
     <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)">
         @if (session('success'))
             <div class="toast z-[999]">
-                <div class="alert alert-success">
+                <div class="alert bg-green-500">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -35,7 +35,7 @@
         @endif
         @if (session('error'))
             <div class="toast z-[999]">
-                <div class="alert alert-error">
+                <div class="alert bg-red-500">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

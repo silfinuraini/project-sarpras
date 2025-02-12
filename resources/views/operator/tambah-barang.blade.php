@@ -33,7 +33,7 @@
             <form action="{{ route('item.store') }}" id="formStoreItem" method="POST" enctype="multipart/form-data">
                 @csrf
                 {{-- Form kategori --}}
-                <div class="px-4 py-3 mb-6 bg-white rounded-lg shadow-xl dark:bg-gray-800">
+                <div class="px-4 py-3 mb-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
                     <div class="grid gap-6 mt-4 md:grid-cols-4">
                         <div>
                             <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
@@ -57,7 +57,7 @@
                 </div>
 
                 {{-- Detail barang --}}
-                <div class="px-4 py-3 mb-6 bg-white rounded-lg shadow-xl dark:bg-gray-800">
+                <div class="px-4 py-3 mb-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
                     <div class="grid ms-4 mt-2 md:grid-cols-4">
                         <div class="col-span-4 p-4">
                             <h4 class="font-semibold text-gray-800 dark:text-gray-300">
@@ -204,7 +204,7 @@
                 </div>
 
                 {{-- Pengelolaan barang --}}
-                <div class="px-4 py-3 mb-6 bg-white rounded-lg shadow-xl dark:bg-gray-800">
+                <div class="px-4 py-3 mb-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
                     <div class="grid ms-4 mt-2 md:grid-cols-3">
                         <div class="col-span-3 p-4">
                             <h4 class="font-semibold text-gray-800 dark:text-gray-300">

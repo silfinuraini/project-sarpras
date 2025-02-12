@@ -129,10 +129,35 @@ class  DataBarangController extends Controller
      */
     public function update(Request $request, string $kode)
     {
-        $items = Item::where('kode', $kode)->first();
-        $items->update($request->all());
-
-        return redirect()->route('databarang');
+        try {
+            $request->validate([
+                'nama' => 'required|min:3',
+                'merk' => 'required|min:3',
+                'satuan' => 'required',
+                'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'harga' => 'required|numeric|min:3',
+                'stok' => 'required|integer|min:0',
+                'stok_minimum' => 'required|integer|min:0',
+                'kategori_id' => 'required',
+            ]);
+        
+            $items = Item::where('kode', $kode)->firstOrFail();
+        
+            if ($request->hasFile('gambar')) {
+                $image = ImageHelper::handleImage($request->gambar);
+                $requestData = $request->all();
+                $requestData['gambar'] = $image;
+            } else {
+                $requestData = $request->except('gambar'); // Don't update image if not provided
+            }
+        
+            $items->update($requestData);
+        
+            return redirect()->route('databarang')->with('success', 'Barang berhasil diperbarui.');
+        } catch (\Throwable $th) {
+            return redirect()->route('databarang')->with('error', $th->getMessage());
+        }
+        
     }
 
     /**

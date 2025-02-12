@@ -220,7 +220,7 @@
                     <a class="btn btn-ghost text-xl font-bold">Sarpras </a>
                 </div>
                 <div class="navbar-center hidden gap-1 lg:flex">
-                    <label class="input input-bordered flex items-center">
+                    <label class="input input-bordered flex items-center ">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                             class="h-4 w-4 opacity-70">
                             <path fill-rule="evenodd"
@@ -230,14 +230,6 @@
 
                         <input type="text" class="grow border-none input input-sm w-80" placeholder="Cari.." />
                     </label>
-
-                    {{-- <button
-                        class="btn flex items-center justify-between px-4 py-2 text-sm font-medium  text-purple-700 transition-colors duration-150 bg-transparent border border-gray-300 rounded-lg active:bg-transparent hover:bg-transparent focus:outline-none focus:shadow-outline-transparent">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 opacity-70" viewBox="0 0 16 16">
-                            <path
-                                d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5" />
-                        </svg>
-                    </button> --}}
 
                     <div class="dropdown dropdown-hover">
                         <div tabindex="0" role="button"
@@ -304,22 +296,6 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <ul
-                        class="flex flex-col md:p-0 mt-4 font-medium border text-sm border-gray-100 rounded-box bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                        <li>
-                            <a href="kepala-unit-index.html"
-                                class="block py-2 px-3 font-bold bg-transparent rounded md:bg-transparent text-purple-700 md:p-0 md:dark:text-purple-500"
-                                aria-current="page">Home</a>
-                        </li>
-                        <li>
-                            <a href="produk.html"
-                                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-purple-700 md:p-0 md:dark:hover:text-purple-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Produk</a>
-                        </li>
-                        <li>
-                            <a href="kontak.html"
-                                class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-purple-700 md:p-0 md:dark:hover:purple-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Kontak</a>
-                        </li>
-                    </ul> --}}
                 </div>
                 <div class="navbar-end mr-6">
                     <ul class="flex items-center flex-shrink-0 space-x-6">
@@ -455,14 +431,14 @@
                 {{-- Hero Section End --}}
 
                 {{-- Product Display Start --}}
-                <section class="mx-10 my-10">
+                <section class="mx-5 md:mx-10 lg:mx-10 my-10">
                     <h3 class="text-xl font-bold text-gray-900 mb-2 mt-2">Produk Display</h3>
                     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
                         @foreach ($items as $item)
                             <div
                                 class="max-w-sm bg-white border border-gray-200 rounded-box shadow dark:bg-gray-800 dark:border-gray-700">
                                 <a href="#">
-                                    <img src={{ asset('storage/' . $item->gambar) }} class="rounded-t-lg w-60 h-60"
+                                    <img src={{ asset('storage/' . $item->gambar) }} class="rounded-t-lg aspect-square"
                                         alt="https://i.pinimg.com/564x/84/8e/62/848e62247384ee45350877695994a4cb.jpg" />
                                 </a>
                                 <div class="p-5">

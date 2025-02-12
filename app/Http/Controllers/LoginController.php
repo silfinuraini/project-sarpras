@@ -62,6 +62,8 @@ class LoginController extends Controller
             $user = User::all();
             // dd($user);
 
+            $almostOut = Item::whereColumn('stok', '<=', 'stok_minimum')->count();
+
             $incomingItems = DetailBarangMasuk::selectRaw('MONTH(created_at) as month, SUM(kuantiti) as total')
                 ->groupBy('month')
                 ->orderBy('month')
@@ -105,6 +107,8 @@ class LoginController extends Controller
             $barang = Item::count();
 
             return view('operator.dashboard', ([
+                'item' => $item,
+                'almostOut' => $almostOut,
                 'permintaan' => $permintaan,
                 'pengadaan' => $pengadaan,
                 'chart' => $chart,

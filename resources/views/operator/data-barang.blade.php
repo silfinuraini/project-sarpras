@@ -24,25 +24,12 @@
                     </li>
                 </ul>
             </div>
-            <!-- CTA -->
-            <div class="flex gap-2">
 
-                {{-- <a class="flex w-full items-center justify-between p-4 mb-2 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple"
-                    href="tambah-barang">
-                    <div class="flex items-center">
-                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                            </path>
-                        </svg>
-                        <span>Tambah barang</span>
-                    </div>
-                    <span> &RightArrow;</span>
-                </a> --}}
-                <label class="input w-full flex items-center gap-2 bg-white border-purple-700 ">
+            <div class="flex gap-2">
+                <label class="input input-bordered w-full flex items-center gap-2 bg-white shadow-md">
                     <input type="text" id="searchInput" onkeyup="filterTable()"
-                        class="input grow  text-sm text-gray-600 border-none " placeholder="Cari..." />
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-4 w-4 opacity-70 text-purple-700">
+                        class="input grow text-sm text-gray-600 border-none" placeholder="Cari..." />
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="" class="h-4 w-4 opacity-70">
                         <path fill-rule="evenodd"
                             d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
                             clip-rule="evenodd" />
@@ -50,7 +37,7 @@
                 </label>
                 <div class="dropdown dropdown-end dropdown-hover">
                     <div tabindex="0" role="button"
-                        class="btn border-purple-700 bg-white flex items-center justify-between px-4 py-2 text-sm font-medium text-purple-700 transition-colors duration-150 bg-transparent border rounded-lg active:bg-transparent hover:bg-transparent focus:outline-none focus:shadow-outline-transparent">
+                        class="shadow-md btn border-gray-300 bg-white flex items-center justify-between px-4 py-2 text-sm font-medium  transition-colors duration-150 bg-transparent border rounded-lg active:bg-transparent hover:bg-transparent focus:outline-none focus:shadow-outline-transparent">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-70" fill="currentColor"
                             viewBox="0 0 16 16">
                             <path
@@ -64,10 +51,12 @@
                             <div class="space-y-4">
                                 <form method="GET" action="{{ route('databarang') }}">
                                     <p class="mb-1 font-medium">Kategori</p>
-                                    <select class="select bg-white select-bordered w-full" name="category_id" id="category" onchange="this.form.submit()">
+                                    <select class="select bg-white select-bordered w-full" name="category_id" id="category"
+                                        onchange="this.form.submit()">
                                         <option value="">Tampilkan semua</option>
                                         @foreach ($kategori as $category)
-                                            <option value="{{ $category->id }}" {{ $selectedCategory == $category->id ? 'selected' : '' }}>
+                                            <option value="{{ $category->id }}"
+                                                {{ $selectedCategory == $category->id ? 'selected' : '' }}>
                                                 {{ $category->nama }}
                                             </option>
                                         @endforeach
@@ -115,8 +104,9 @@
                         </div>
                     </div>
                 </div>
+
                 <a href="tambah-barang"
-                    class=" btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                    class="shadow-md btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1 -ml-1" fill="currentColor"
                         aria-hidden="true" viewBox="0 0 16 16">
                         <path
@@ -125,7 +115,7 @@
                     <span>Tambah barang</span>
                 </a>
                 <button onclick="my_modal_1.showModal()"
-                    class=" btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                    class="shadow-md btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 -ml-1" fill="currentColor"
                         aria-hidden="true"
                         viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
@@ -198,8 +188,9 @@
                 </button>
             </div>
 
-            <div class="flex items-center p-4 bg-white rounded-box shadow-xs dark:bg-gray-800 mt-2">
-                <div class="w-full overflow-hidden rounded-lg shadow-xs mb-2">
+            <div class="flex items-center bg-white border border-gray-300 rounded-box shadow-md dark:bg-gray-800 mt-5">
+
+                <div class="w-full overflow-hidden rounded-lg mb-2">
                     <div class="w-full overflow-x-auto">
                         <table class="w-full whitespace-no-wrap" id="itemsTable">
                             <thead>
@@ -208,7 +199,8 @@
                                     <th class="px-4 py-3">Kode</th>
                                     <th class="px-4 py-3">Barang</th>
                                     <th class="px-4 py-3">Merk</th>
-                                    <th class="px-4 py-3">Stok</th>
+                                    <th class="px-4 py-3 text-center">Stok</th>
+                                    <th class="px-4 py-3 text-center">Stok Minimum</th>
                                     <th class="px-4 py-3">Satuan</th>
                                     <th class="px-4 py-3">Aksi</th>
                                 </tr>
@@ -223,15 +215,13 @@
                                         <td class="px-4 py-3">
                                             <div class="flex items-center text-sm">
                                                 <!-- Avatar with inset shadow -->
-                                                <div class="relative hidden w-12 h-12 mr-3 rounded-lg md:block">
-                                                    <img class="object-cover w-full h-full rounded-lg"
-                                                        src={{ asset('storage/' . $item->gambar) }} alt=""
-                                                        loading="lazy" />
-                                                    <div class="absolute inset-0 rounded-full shadow-inner"
-                                                        aria-hidden="true"></div>
+                                                <div class="avatar">
+                                                    <div class="mask mask-squircle h-12 w-12">
+                                                        <img src={{ asset('storage/' . $item->gambar) }}
+                                                            alt="Avatar Tailwind CSS Component" />
+                                                    </div>
                                                 </div>
-                                                
-                                                <div>
+                                                <div class="ml-2">
                                                     <p class="font-semibold">{{ $item->nama }}</p>
                                                     <p class="text-xs text-gray-800 dark:text-gray-400">
                                                         {{ $item->kategori->nama }}
@@ -242,8 +232,12 @@
                                         <td class="px-4 py-3 text-xs">
                                             {{ $item->merk }}
                                         </td>
-                                        <td class="px-4 py-3 text-xs">
+                                        <td class="px-4 py-3 text-xs text-center">
                                             {{ $item->stok }}
+                                        </td>
+
+                                        <td class="px-4 py-3 text-xs text-center">
+                                            {{ $item->stok_minimum }}
                                         </td>
                                         <td class="px-4 py-3 text-xs">
                                             {{ $item->satuan }}
@@ -359,7 +353,7 @@
 
 
                                                                 <div
-                                                                    class="min-w-0 p-1 my-2 bg-white border-gray-800 rounded-lg shadow-xs dark:bg-gray-800">
+                                                                    class="min-w-0 p-1 my-2 bg-white border-gray-800 rounded-lg dark:bg-gray-800">
                                                                     <table class="my-2">
                                                                         <tr
                                                                             class="text-gray-800 text-xs mt-1 dark:text-gray-400 mb-1">
@@ -401,165 +395,7 @@
                                                                 </div>
 
                                                                 <div
-                                                                    class="min-w-0 p-1 text-xs bg-white rounded-lg shadow-xs outline-gray-800 border-gray-800 dark:bg-gray-800">
-                                                                    <h4
-                                                                        class="mb-2 font-semibold text-gray-800 dark:text-gray-300">
-                                                                        Deskripsi
-                                                                    </h4>
-                                                                    <p class="text-gray-800 dark:text-gray-400">
-                                                                        {{ $item->deskripsi }}
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <form method="dialog" class="modal-backdrop">
-                                                        <button>close</button>
-                                                    </form>
-                                                </dialog>
-                                                <dialog id="" class="modal">
-                                                    <div class="modal-box w-11/12 max-w-2xl rounded-box bg-white">
-                                                        <div class="grid grid-cols-2 ">
-                                                            <div
-                                                                class="carousel rounded-box w-64 justify-center items-center">
-                                                                <div class="carousel-item w-full">
-                                                                    <img src="https://i.pinimg.com/564x/84/8e/62/848e62247384ee45350877695994a4cb.jpg"
-                                                                        class="w-full"
-                                                                        alt="Tailwind CSS Carousel component" />
-                                                                </div>
-                                                            </div>
-                                                            <div>
-                                                                <div class="flex gap-1">
-                                                                    <h4
-                                                                        class="mb-4 font-bold text-base text-gray-800 dark:text-gray-300">
-                                                                        {{ $item->nama }}
-                                                                    </h4>
-                                                                    <div
-                                                                        class="badge bg-purple-700 text-white border-none text-xs">
-                                                                        {{ $item->kode }}</div>
-                                                                </div>
-                                                                <p
-                                                                    class="text-gray-800 text-xs dark:text-gray-400 flex gap-1 mb-1">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                                        width="16" height="16"
-                                                                        fill="currentColor" class="bi bi-tag"
-                                                                        viewBox="0 0 16 16">
-                                                                        <path
-                                                                            d="M6 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m-1 0a.5.5 0 1 0-1 0 .5.5 0 0 0 1 0" />
-                                                                        <path
-                                                                            d="M2 1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 1 6.586V2a1 1 0 0 1 1-1m0 5.586 7 7L13.586 9l-7-7H2z" />
-                                                                    </svg>
-                                                                    Rp{{ number_format($item->harga, 0, ',', '.') }},00
-                                                                </p>
-                                                                <p
-                                                                    class="text-gray-800 text-xs dark:text-gray-400 flex gap-1 mb-1">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                                        width="16" height="16"
-                                                                        fill="currentColor" class="bi bi-puzzle"
-                                                                        viewBox="0 0 16 16">
-                                                                        <path
-                                                                            d="M3.112 3.645A1.5 1.5 0 0 1 4.605 2H7a.5.5 0 0 1 .5.5v.382c0 .696-.497 1.182-.872 1.469a.5.5 0 0 0-.115.118l-.012.025L6.5 4.5v.003l.003.01q.005.015.036.053a.9.9 0 0 0 .27.194C7.09 4.9 7.51 5 8 5c.492 0 .912-.1 1.19-.24a.9.9 0 0 0 .271-.194.2.2 0 0 0 .039-.063v-.009l-.012-.025a.5.5 0 0 0-.115-.118c-.375-.287-.872-.773-.872-1.469V2.5A.5.5 0 0 1 9 2h2.395a1.5 1.5 0 0 1 1.493 1.645L12.645 6.5h.237c.195 0 .42-.147.675-.48.21-.274.528-.52.943-.52.568 0 .947.447 1.154.862C15.877 6.807 16 7.387 16 8s-.123 1.193-.346 1.638c-.207.415-.586.862-1.154.862-.415 0-.733-.246-.943-.52-.255-.333-.48-.48-.675-.48h-.237l.243 2.855A1.5 1.5 0 0 1 11.395 14H9a.5.5 0 0 1-.5-.5v-.382c0-.696.497-1.182.872-1.469a.5.5 0 0 0 .115-.118l.012-.025.001-.006v-.003a.2.2 0 0 0-.039-.064.9.9 0 0 0-.27-.193C8.91 11.1 8.49 11 8 11s-.912.1-1.19.24a.9.9 0 0 0-.271.194.2.2 0 0 0-.039.063v.003l.001.006.012.025c.016.027.05.068.115.118.375.287.872.773.872 1.469v.382a.5.5 0 0 1-.5.5H4.605a1.5 1.5 0 0 1-1.493-1.645L3.356 9.5h-.238c-.195 0-.42.147-.675.48-.21.274-.528.52-.943.52-.568 0-.947-.447-1.154-.862C.123 9.193 0 8.613 0 8s.123-1.193.346-1.638C.553 5.947.932 5.5 1.5 5.5c.415 0 .733.246.943.52.255.333.48.48.675.48h.238zM4.605 3a.5.5 0 0 0-.498.55l.001.007.29 3.4A.5.5 0 0 1 3.9 7.5h-.782c-.696 0-1.182-.497-1.469-.872a.5.5 0 0 0-.118-.115l-.025-.012L1.5 6.5h-.003a.2.2 0 0 0-.064.039.9.9 0 0 0-.193.27C1.1 7.09 1 7.51 1 8s.1.912.24 1.19c.07.14.14.225.194.271a.2.2 0 0 0 .063.039H1.5l.006-.001.025-.012a.5.5 0 0 0 .118-.115c.287-.375.773-.872 1.469-.872H3.9a.5.5 0 0 1 .498.542l-.29 3.408a.5.5 0 0 0 .497.55h1.878c-.048-.166-.195-.352-.463-.557-.274-.21-.52-.528-.52-.943 0-.568.447-.947.862-1.154C6.807 10.123 7.387 10 8 10s1.193.123 1.638.346c.415.207.862.586.862 1.154 0 .415-.246.733-.52.943-.268.205-.415.39-.463.557h1.878a.5.5 0 0 0 .498-.55l-.001-.007-.29-3.4A.5.5 0 0 1 12.1 8.5h.782c.696 0 1.182.497 1.469.872.05.065.091.099.118.115l.025.012.006.001h.003a.2.2 0 0 0 .064-.039.9.9 0 0 0 .193-.27c.14-.28.24-.7.24-1.191s-.1-.912-.24-1.19a.9.9 0 0 0-.194-.271.2.2 0 0 0-.063-.039H14.5l-.006.001-.025.012a.5.5 0 0 0-.118.115c-.287.375-.773.872-1.469.872H12.1a.5.5 0 0 1-.498-.543l.29-3.407a.5.5 0 0 0-.497-.55H9.517c.048.166.195.352.463.557.274.21.52.528.52.943 0 .568-.447.947-.862 1.154C9.193 5.877 8.613 6 8 6s-1.193-.123-1.638-.346C5.947 5.447 5.5 5.068 5.5 4.5c0-.415.246-.733.52-.943.268-.205.415-.39.463-.557z" />
-                                                                    </svg>
-                                                                    {{ $item->kategori->nama }}
-                                                                </p>
-                                                                {{-- <p
-                                                                class="text-gray-800 text-xs dark:text-gray-400 flex gap-1 mb-1">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                    height="16" fill="currentColor"
-                                                                    class="bi bi-palette" viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M8 5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3m4 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3M5.5 7a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m.5 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3" />
-                                                                    <path
-                                                                        d="M16 8c0 3.15-1.866 2.585-3.567 2.07C11.42 9.763 10.465 9.473 10 10c-.603.683-.475 1.819-.351 2.92C9.826 14.495 9.996 16 8 16a8 8 0 1 1 8-8m-8 7c.611 0 .654-.171.655-.176.078-.146.124-.464.07-1.119-.014-.168-.037-.37-.061-.591-.052-.464-.112-1.005-.118-1.462-.01-.707.083-1.61.704-2.314.369-.417.845-.578 1.272-.618.404-.038.812.026 1.16.104.343.077.702.186 1.025.284l.028.008c.346.105.658.199.953.266.653.148.904.083.991.024C14.717 9.38 15 9.161 15 8a7 7 0 1 0-7 7" />
-                                                                </svg>
-                                                                {{ $item->warna }}
-                                                            </p>
-                                                            <p
-                                                                class="text-gray-800 text-xs dark:text-gray-400 flex gap-1 mb-1">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                    height="16" fill="currentColor"
-                                                                    class="bi bi-gear" viewBox="0 0 16 16">
-                                                                    <path
-                                                                        d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0" />
-                                                                    <path
-                                                                        d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z" />
-                                                                </svg>
-                                                                {{ $item->jenis }}
-                                                            </p> --}}
-                                                                <div
-                                                                    class="min-w-0 p-1 bg-white border-gray-800 rounded-lg shadow-xs dark:bg-gray-800">
-                                                                    <table class="my-2">
-                                                                        <tr
-                                                                            class="text-gray-800 text-xs dark:text-gray-400 mb-1">
-                                                                            <td class="text-semibold">
-                                                                                Warna
-                                                                            </td>
-                                                                            <td>
-                                                                                :
-                                                                            </td>
-                                                                            <td>
-                                                                                {{ $item->warna }}
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr
-                                                                            class="text-gray-800 text-xs dark:text-gray-400 mb-1">
-                                                                            <td class="text-semibold">
-                                                                                Jenis
-                                                                            </td>
-                                                                            <td>
-                                                                                :
-                                                                            </td>
-                                                                            <td>
-                                                                                {{ $item->jenis }}
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </div>
-
-                                                                <div
-                                                                    class="min-w-0 p-1 bg-white border-gray-800 rounded-lg shadow-xs dark:bg-gray-800">
-                                                                    <table class="my-2">
-                                                                        <tr
-                                                                            class="text-gray-800 text-xs dark:text-gray-400 mb-1">
-                                                                            <td class="text-semibold">
-                                                                                Stok
-                                                                            </td>
-                                                                            <td>
-                                                                                :
-                                                                            </td>
-                                                                            <td>
-                                                                                {{ $item->stok }}
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr
-                                                                            class="text-gray-800 text-xs dark:text-gray-400 mb-1">
-                                                                            <td class="text-semibold">
-                                                                                Stok minimum
-                                                                            </td>
-                                                                            <td>
-                                                                                :
-                                                                            </td>
-                                                                            <td>
-                                                                                {{ $item->stok_minimum }}
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr
-                                                                            class="text-gray-800 text-xs dark:text-gray-400 mb-1">
-                                                                            <td class="text-semibold">
-                                                                                Satuan
-                                                                            </td>
-                                                                            <td>
-                                                                                :
-                                                                            </td>
-                                                                            <td>
-                                                                                {{ $item->satuan }}
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </div>
-
-                                                                <div
-                                                                    class="min-w-0 p-1 text-xs bg-white rounded-lg shadow-xs outline-gray-800 border-gray-800 dark:bg-gray-800">
+                                                                    class="min-w-0 p-1 text-xs bg-white rounded-lg outline-gray-800 border-gray-800 dark:bg-gray-800">
                                                                     <h4
                                                                         class="mb-2 font-semibold text-gray-800 dark:text-gray-300">
                                                                         Deskripsi
@@ -576,20 +412,45 @@
                                                     </form>
                                                 </dialog>
 
-                                                <form action="{{ route('item.destroy', $item->kode) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit"
-                                                        class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                                                        aria-label="Delete">
-                                                        <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
-                                                            viewBox="0 0 20 20">
-                                                            <path fill-rule="evenodd"
-                                                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                                                clip-rule="evenodd"></path>
-                                                        </svg>
-                                                    </button>
-                                                </form>
+                                                <button type="button"
+                                                    onclick="deleteConfirmation{{ $item->kode }}.showModal()"
+                                                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                                                    aria-label="Delete">
+                                                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
+                                                        viewBox="0 0 20 20">
+                                                        <path fill-rule="evenodd"
+                                                            d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                            clip-rule="evenodd"></path>
+                                                    </svg>
+                                                </button>
+
+                                                <dialog id="deleteConfirmation{{ $item->kode }}" class="modal">
+                                                    <div class="modal-box">
+                                                        <div class="flex items-center justify-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="50" class="text-purple-700"
+                                                                height="50" viewBox="0 0 24 24">
+                                                                <rect width="24" height="24" fill="none" />
+                                                                <path fill="currentColor"
+                                                                    d="M2.725 21q-.275 0-.5-.137t-.35-.363t-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3t.488.125t.387.375l9.25 16q.15.25.138.513t-.138.487t-.35.363t-.5.137zM12 18q.425 0 .713-.288T13 17t-.288-.712T12 16t-.712.288T11 17t.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10t-.712.288T11 11v3q0 .425.288.713T12 15" />
+                                                            </svg>
+                                                        </div>
+                                                        <p class="py-4 text-center text-gray-600 text-sm">Apakah anda yakin untuk menghapus <span class="font-semibold">{{ $item->nama }}</span> ?</p>
+                                                        <div class="flex gap-2"></div>
+                                                        <div class="modal-action">
+                                                            <form method="dialog">
+                                                                <!-- if there is a button in form, it will close the modal -->
+                                                                <button class="btn">Close</button>
+                                                            </form>
+                                                            <form action="{{ route('item.destroy', $item->kode) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="btn bg-purple-700 text-white" type="submit">Hapus</button>
+                                                            </form>
+                                                        </div>
+
+                                                    </div>
+                                                </dialog>
                                             </div>
                                         </td>
                                     </tr>
@@ -603,6 +464,7 @@
             </div>
         </div>
     </main>
+
     <script>
         function filterTable() {
             // Get the input value and table elements
@@ -625,5 +487,4 @@
             }
         }
     </script>
-    
 @endsection

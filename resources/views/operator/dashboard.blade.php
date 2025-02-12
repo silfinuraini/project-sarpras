@@ -4,18 +4,24 @@
     <main class="h-full bg-gray-100 overflow-y-auto">
         <div class="container px-6 mx-auto grid">
 
+            {{-- {{ dd($almostOut) }} --}}
             {{-- Alert --}}
-            <div role="alert" class="transition-all duration-200 alert shadow-lg mt-3 bg-white text-gray-700 border-none">
-                <span class="relative flex h-3 w-3">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-warning opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-3 w-3 bg-warning"></span>
-                </span>
-                <div>
-                    <h3 class="font-bold">Hampir habis!</h3>
-                    <div class="text-xs">Ada .. barang hampir habis</div>
+
+            @if ($almostOut > 0)
+                <div role="alert"
+                    class="transition-all duration-200 alert shadow-lg mt-3 bg-white text-gray-700 border-none">
+                    <span class="relative flex h-3 w-3">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-warning opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-warning"></span>
+                    </span>
+                    <div>
+                        <h3 class="font-bold">Hampir habis!</h3>
+                        <div class="text-xs">Ada {{ $almostOut }} barang hampir habis</div>
+                    </div>
+                    <a href="{{ route('databarang') }}" class="btn btn-link border-none btn-sm">Lihat</a>
                 </div>
-                <a href="{{ route('databarang') }}" class="btn btn-link border-none btn-sm">Lihat</a>
-            </div>
+            @endif
 
             {{-- Stats --}}
             <div class="stats shadow my-5 bg-white text-gray-700">

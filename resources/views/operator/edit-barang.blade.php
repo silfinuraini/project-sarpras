@@ -32,12 +32,12 @@
 
             <!-- General elements -->
 
-            <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+            <div class="px-4 py-3 mb-8">
                 <form action="{{ route('item.update', $items->kode) }}" method="POST">
                     @csrf
                     @method('PUT')
                     {{-- Form kategori --}}
-                    <div class="px-4 py-3 mb-6 bg-white rounded-lg shadow-xl dark:bg-gray-800">
+                    <div class="px-4 py-3 mb-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
                         <div class="grid gap-6 mt-4 md:grid-cols-4">
                             <div>
                                 <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
@@ -50,18 +50,22 @@
                                 <div>
                                     <select class="select select-bordered w-full bg-white text-sm text-gray-700"
                                         name="kategori_id">
-                                        <option disabled selected>Pilih kategori</option>
+                                        <option disabled>Pilih kategori</option>
                                         @foreach ($kategori as $k)
-                                            <option value="{{ $k->id }}">{{ $k->nama }}</option>
+                                            <option value="{{ $k->id }}"
+                                                {{ $items->kategori_id == $k->id ? 'selected' : '' }}>
+                                                {{ $k->nama }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
+
                         </div>
                     </div>
 
                     {{-- Detail barang --}}
-                    <div class="px-4 py-3 mb-6 bg-white rounded-lg shadow-xl dark:bg-gray-800">
+                    <div class="px-4 py-3 mb-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
                         <div class="grid ms-4 mt-2 md:grid-cols-4">
                             <div class="col-span-4 p-4">
                                 <h4 class="font-semibold text-gray-800 dark:text-gray-300">
@@ -81,12 +85,15 @@
                                 </div>
                             </div>
                             <div class="col-span-3 flex gap-4 p-4">
-                                <div
-                                    class="relative w-40 h-40 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center text-gray-400 hover:border-purple-700 hover:text-purple-700 transition-colors duration-300 overflow-hidden">
+                                <div class="relative w-40 h-40 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center text-gray-400 hover:border-purple-700 hover:text-purple-700 transition-colors duration-300 overflow-hidden"
+                                    id="imageContainer">
+
                                     <input type="file" accept="image/*" name="gambar"
                                         class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                                         id="fileInput" />
-                                    <div id="placeholder" class="flex flex-col items-center justify-center w-full h-full">
+
+                                    <div id="placeholder"
+                                        class="flex flex-col items-center justify-center w-full h-full {{ $items->gambar ? 'hidden' : '' }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-2" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -94,10 +101,14 @@
                                         </svg>
                                         <span class="text-sm font-semibold">Foto Utama</span>
                                     </div>
-                                    <img id="preview" class="absolute inset-0 w-full h-full object-cover hidden"
+
+                                    <img id="preview"
+                                        class="absolute inset-0 w-full h-full object-cover {{ $items->gambar ? '' : 'hidden' }}"
+                                        src="{{ $items->gambar ? asset('storage/' . $items->gambar) : '' }}"
                                         alt="Uploaded image preview" />
                                 </div>
                             </div>
+
                             <div>
                                 <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
                                     <h4 class="mb-4 font-semibold text-sm text-gray-800 dark:text-gray-300">
@@ -186,7 +197,7 @@
                                     </span>
                                     <input type="text" placeholder="0"
                                         class="input text-sm input-bordered text-gray-700 bg-white pl-10 pr-3 text-right"
-                                        name="harga" id="hargaInput" value="{{ $items->harga }}"/>
+                                        name="harga" id="hargaInput" value="{{ $items->harga }}" />
                                 </div>
                             </div>
                             <div>
@@ -207,7 +218,7 @@
                     </div>
 
                     {{-- Pengelolaan barang --}}
-                    <div class="px-4 py-3 mb-6 bg-white rounded-lg shadow-xl dark:bg-gray-800">
+                    <div class="px-4 py-3 mb-6 bg-white rounded-lg shadow-md dark:bg-gray-800">
                         <div class="grid ms-4 mt-2 md:grid-cols-3">
                             <div class="col-span-3 p-4">
                                 <h4 class="font-semibold text-gray-800 dark:text-gray-300">
@@ -252,7 +263,8 @@
                             </div>
                             <div class="p-4">
                                 <div class="form-control w-full relative">
-                                    <input type="text" placeholder=" " name="stok_minimum" value="{{ $items->stok_minimum }}"
+                                    <input type="text" placeholder=" " name="stok_minimum"
+                                        value="{{ $items->stok_minimum }}"
                                         class="input text-sm bg-white text-gray-800 input-bordered w-full pt-4 pb-1" />
                                     <label
                                         class="absolute text-md text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Stok
@@ -272,7 +284,7 @@
                         class="mt-2 mb-2 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
                         style="width: 100%;" type="submit">
                         Tambahkan
-                    </button>   
+                    </button>
                 </form>
             </div>
         </div>
@@ -280,7 +292,7 @@
 
     <script>
         document.getElementById('fileInput').addEventListener('change', function(e) {
-            const parentDiv = this.parentElement;
+            const parentDiv = document.getElementById('imageContainer');
             const placeholder = document.getElementById('placeholder');
             const preview = document.getElementById('preview');
 
@@ -296,14 +308,9 @@
                 }
 
                 reader.readAsDataURL(this.files[0]);
-            } else {
-                preview.src = '';
-                preview.classList.add('hidden');
-                placeholder.classList.remove('hidden');
-                parentDiv.classList.remove('border-purple-700');
-                parentDiv.classList.add('border-gray-300', 'text-gray-400');
             }
         });
+
 
         const hargaInput = document.getElementById('hargaInput');
 
