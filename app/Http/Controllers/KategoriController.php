@@ -12,7 +12,7 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        $kategori=Kategori::paginate(5);
+        $kategori = Kategori::paginate(5);
         return view('operator.kategori', compact('kategori'));
     }
 
@@ -46,7 +46,9 @@ class KategoriController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $kategori = Kategori::findOrFail($id);
+        $allKategori = Kategori::paginate(5);
+        return view('operator.kategori', compact('kategori', 'allKategori'));
     }
 
     /**
@@ -54,7 +56,10 @@ class KategoriController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $kategori = Kategori::findOrFail($id);
+        $kategori->update($request->all());
+
+        return redirect()->back()->with('success', 'Kategori berhasil diperbarui.');
     }
 
     /**
@@ -62,9 +67,9 @@ class KategoriController extends Controller
      */
     public function destroy(string $id)
     {
-        $kategori=Kategori::find($id);
+        $kategori = Kategori::find($id);
 
-        if($kategori){
+        if ($kategori) {
             $kategori->delete();
             return redirect()->back();
         }

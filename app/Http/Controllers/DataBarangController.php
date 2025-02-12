@@ -25,7 +25,14 @@ class  DataBarangController extends Controller
             ->when($selectedCategory, function ($query) use ($selectedCategory) {
                 $query->where('kategori_id', $selectedCategory);
             })
-            ->paginate(5); // Paginate to display 5 items per page
+            ->orderByRaw('stok <= stok_minimum DESC') 
+            ->orderBy('nama', 'ASC') 
+            ->paginate(5);
+
+
+
+        // Alternatif untuk withQueryString()
+        $items->appends(request()->query());
 
         // Check if it's an AJAX request
         if ($request->ajax()) {
@@ -140,9 +147,9 @@ class  DataBarangController extends Controller
                 'stok_minimum' => 'required|integer|min:0',
                 'kategori_id' => 'required',
             ]);
-        
+
             $items = Item::where('kode', $kode)->firstOrFail();
-        
+
             if ($request->hasFile('gambar')) {
                 $image = ImageHelper::handleImage($request->gambar);
                 $requestData = $request->all();
@@ -150,14 +157,13 @@ class  DataBarangController extends Controller
             } else {
                 $requestData = $request->except('gambar'); // Don't update image if not provided
             }
-        
+
             $items->update($requestData);
-        
+
             return redirect()->route('databarang')->with('success', 'Barang berhasil diperbarui.');
         } catch (\Throwable $th) {
             return redirect()->route('databarang')->with('error', $th->getMessage());
         }
-        
     }
 
     /**

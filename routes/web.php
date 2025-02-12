@@ -71,6 +71,8 @@ Route::delete('operator/{kode}', [DataBarangController::class, 'destroy'])->name
 
 Route::get('operator/kategori', [KategoriController::class, 'index'])->name('kategori');
 Route::post('operator/kategori', [KategoriController::class, 'store'])->name('kategori.store');
+Route::get('oprator/kategori/{id}/edit', [KategoriController::class, 'edit'])->name('kategori.edit');
+Route::put('operator/kategori/{id}', [KategoriController::class, 'update'])->name('kategori.update');
 Route::delete('operator/kategori/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
 
 Route::get('operator/kelola-akun', [KelolaAkunController::class, 'index'])->name('kelolaakun');

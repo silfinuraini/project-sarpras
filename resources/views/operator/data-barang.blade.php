@@ -174,7 +174,7 @@
 
                     </div>
                     <form method="dialog" class="modal-backdrop">
-                        <button>close</button>
+                        <button>Tutup</button>
                     </form>
                 </dialog>
 
@@ -189,7 +189,6 @@
             </div>
 
             <div class="flex items-center bg-white border border-gray-300 rounded-box shadow-md dark:bg-gray-800 mt-5">
-
                 <div class="w-full overflow-hidden rounded-lg mb-2">
                     <div class="w-full overflow-x-auto">
                         <table class="w-full whitespace-no-wrap" id="itemsTable">
@@ -205,6 +204,8 @@
                                     <th class="px-4 py-3"></th>
                                 </tr>
                             </thead>
+
+
 
                             @foreach ($items as $item)
                                 <tbody class="bg-white divide-y dark:divide-gray-600 dark:bg-gray-800">
@@ -222,7 +223,16 @@
                                                     </div>
                                                 </div>
                                                 <div class="ml-2">
-                                                    <p class="font-semibold">{{ $item->nama }}</p>
+                                                    <p class="font-semibold flex gap-1">{{ $item->nama }} @if ($item->stok <= $item->stok_minimum)
+                                                            <span class="text-red-500"><svg xmlns="http://www.w3.org/2000/svg" width="13"
+                                                                class="text-warning" height="13"
+                                                                viewBox="0 0 24 24">
+                                                                <rect width="13" height="13" fill="none" />
+                                                                <path fill="currentColor"
+                                                                    d="M2.725 21q-.275 0-.5-.137t-.35-.363t-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3t.488.125t.387.375l9.25 16q.15.25.138.513t-.138.487t-.35.363t-.5.137zM12 18q.425 0 .713-.288T13 17t-.288-.712T12 16t-.712.288T11 17t.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10t-.712.288T11 11v3q0 .425.288.713T12 15" />
+                                                            </svg></span>
+                                                        @endif
+                                                    </p>
                                                     <p class="text-xs text-gray-800 dark:text-gray-400">
                                                         {{ $item->kategori->nama }}
                                                     </p>
@@ -408,7 +418,7 @@
                                                         </div>
                                                     </div>
                                                     <form method="dialog" class="modal-backdrop">
-                                                        <button>close</button>
+                                                        <button>Tutup</button>
                                                     </form>
                                                 </dialog>
 
@@ -427,25 +437,29 @@
                                                 <dialog id="deleteConfirmation{{ $item->kode }}" class="modal">
                                                     <div class="modal-box">
                                                         <div class="flex items-center justify-center">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="50" class="text-purple-700"
-                                                                height="50" viewBox="0 0 24 24">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="50"
+                                                                class="text-purple-700" height="50"
+                                                                viewBox="0 0 24 24">
                                                                 <rect width="24" height="24" fill="none" />
                                                                 <path fill="currentColor"
                                                                     d="M2.725 21q-.275 0-.5-.137t-.35-.363t-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3t.488.125t.387.375l9.25 16q.15.25.138.513t-.138.487t-.35.363t-.5.137zM12 18q.425 0 .713-.288T13 17t-.288-.712T12 16t-.712.288T11 17t.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10t-.712.288T11 11v3q0 .425.288.713T12 15" />
                                                             </svg>
                                                         </div>
-                                                        <p class="py-4 text-center text-gray-600 text-sm">Apakah anda yakin untuk menghapus <span class="font-semibold">{{ $item->nama }}</span> ?</p>
+                                                        <p class="py-4 text-center text-gray-600 text-sm">Apakah anda yakin
+                                                            untuk menghapus <span
+                                                                class="font-semibold">{{ $item->nama }}</span> ?</p>
                                                         <div class="flex gap-2"></div>
                                                         <div class="modal-action">
                                                             <form method="dialog">
-                                                                <!-- if there is a button in form, it will close the modal -->
-                                                                <button class="btn">Close</button>
+                                                                <!-- if there is a button in form, it will Tutup the modal -->
+                                                                <button class="btn">Tutup</button>
                                                             </form>
                                                             <form action="{{ route('item.destroy', $item->kode) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <button class="btn bg-purple-700 text-white" type="submit">Hapus</button>
+                                                                <button class="btn bg-purple-700 text-white"
+                                                                    type="submit">Hapus</button>
                                                             </form>
                                                         </div>
 
