@@ -83,6 +83,7 @@ Route::post('operator/kelola-akun/tambah-akun', [KelolaAkunController::class, 's
 
 Route::get('operator/supplier', [SupplierController::class, 'index'])->name('supplier');
 Route::post('operator/supplier', [SupplierController::class, 'store'])->name('supplier.store');
+Route::get('oprator/supplier/{kode}/edit', [SupplierController::class, 'edit'])->name('kategori.edit');
 Route::put('operator/supplier/{kode}', [SupplierController::class, 'update'])->name('supplier.update');
 Route::delete('operator/supplier/{kode}', [SupplierController::class, 'destroy'])->name('supplier.destroy');
 
