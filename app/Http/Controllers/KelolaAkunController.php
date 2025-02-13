@@ -24,7 +24,11 @@ class KelolaAkunController extends Controller
      */
     public function create()
     {
-        $pegawai = Pegawai::all();
+        $pegawai = Pegawai::leftJoin('users', 'pegawai.nip', '=', 'users.nip')
+            ->whereNull('users.nip')
+            ->select('pegawai.*')
+            ->get();
+
         return view('operator.tambah-akun', compact('pegawai'));
     }
 
@@ -66,13 +70,25 @@ class KelolaAkunController extends Controller
      */
     public function update(Request $request, string $nip)
     {
-        $user = User::where('nip', $nip)->first();
-        $user->update($request->all());
-
-        return redirect()->route('kelolaakun');
-
+        $validatedData = $request->validate([
+            'username' => 'required|string|max:50',
+            'password' => 'nullable|string|min:6',
+            'role' => 'required|in:admin,unit,pengawas',
+        ]);
+    
+        $user = User::where('nip', $nip)->firstOrFail();
+    
+        if ($request->filled('password')) {
+            $validatedData['password'] = bcrypt($validatedData['password']);
+        } else {
+            unset($validatedData['password']); 
+        }
+    
+        $user->update($validatedData);
+    
+        return redirect()->route('kelolaakun')->with('success', 'User updated successfully');
     }
-
+    
     /**
      * Remove the specified resource from storage.
      */
