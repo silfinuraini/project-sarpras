@@ -31,8 +31,6 @@
             {{-- Form Section Start --}}
             <form action="{{ route('akun.store') }}" method="POST">
                 @csrf
-                <input type="hidden" name="_method" value="POST" id="methodField">
-                <input type="hidden" name="id">
 
                 <div
                     class="px-4 py-3 mb-6 bg-white text-white border border-gray-300 rounded-box shadow-md dark:bg-gray-800">
@@ -45,7 +43,7 @@
                             <div class="label">
                                 <span class="label-text">Pegawai</span>
                             </div>
-                            <select name="nip" class="select select-bordered">
+                            <select name="nip" class="select select-bordered text-sm">
                                 <option disabled selected>Nama pegawai</option>
                                 @foreach ($pegawai as $p)
                                     <option value="{{ $p->nip }}">{{ $p->nama }}</option>
@@ -57,7 +55,7 @@
                             <div class="label">
                                 <span class="label-text">Role</span>
                             </div>
-                            <select name="role" class="select select-bordered">
+                            <select name="role" class="select select-bordered text-sm">
                                 <option value="unit">Unit</option>
                                 <option value="pengawas">Pengawas</option>
                                 <option value="admin">Admin</option>
@@ -72,7 +70,7 @@
                             <span class="label-text">Username</span>
                         </div>
                         <input name="username" type="text" placeholder="admin@localhost"
-                            class="input input-bordered w-full text-gray-700" />
+                            class="input input-bordered text-sm w-full text-gray-700" />
                     </label>
 
                     <label class="form-control w-full">
@@ -80,7 +78,7 @@
                             <span class="label-text">Password</span>
                         </div>
                         <input name="password" type="text" placeholder="password"
-                            class="input input-bordered w-full text-gray-700" />
+                            class="input input-bordered text-sm w-full text-gray-700" />
                     </label>
 
                     <div class="">

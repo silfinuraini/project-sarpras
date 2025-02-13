@@ -12,7 +12,7 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        $pegawais = Pegawai::all();
+        $pegawais = Pegawai::paginate(5);
         return view('operator.pegawai', compact('pegawais'));
     }
 
@@ -53,9 +53,12 @@ class PegawaiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $nip)
     {
-        //
+        $pegawai = Pegawai::where('nip', $nip)->first();
+        $pegawai->update($request->all());
+
+        return redirect()->back();
     }
 
     /**

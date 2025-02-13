@@ -72,7 +72,7 @@ class KelolaAkunController extends Controller
     {
         $validatedData = $request->validate([
             'username' => 'required|string|max:50',
-            'password' => 'nullable|string|min:6',
+            'password' => 'nullable|string|min:8',
             'role' => 'required|in:admin,unit,pengawas',
         ]);
     

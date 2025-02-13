@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('jumlah_item')->default(0);
             $table->timestamps();
 
-            $table->foreign('nip')->references('nip')->on('pegawai')->cascadeOnDelete();
+            $table->foreign('nip')->references('nip')->on('pegawai')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('kode_supplier')->references('kode')->on('supplier')->cascadeOnDelete();
         });
 

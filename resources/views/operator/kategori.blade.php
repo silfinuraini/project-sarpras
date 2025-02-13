@@ -91,7 +91,6 @@
                     document.getElementById("submitButton").textContent = "Tambahkan";
                 }
             </script>
-
             {{-- Form Section End --}}
 
             <h4 class="font-semibold text-gray-800">

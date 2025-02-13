@@ -1,7 +1,7 @@
 @extends('layouts.operator-main')
 
 @section('content')
-    <main class="h-full my-6 bg-gray-50 overflow-y-auto">
+    <main class="h-full bg-gray-50 overflow-y-auto">
         <div class="container my-4 px-6 mx-auto grid">
             <div class="text-sm mb-4 breadcrumbs text-gray-600">
                 <ul>
@@ -114,7 +114,7 @@
                                                             <div class="label">
                                                                 <span class="label-text">Pegawai</span>
                                                             </div>
-                                                            <select name="nip" class="select select-bordered">
+                                                            <select name="nip" class="select select-bordered text-sm">
                                                                 <option disabled selected>Nama pegawai</option>
                                                                 @foreach ($pegawai as $p)
                                                                     <option value="{{ $p->nip }}"
@@ -129,7 +129,7 @@
                                                             <div class="label">
                                                                 <span class="label-text">Role</span>
                                                             </div>
-                                                            <select name="role" class="select select-bordered">
+                                                            <select name="role" class="select select-bordered text-sm">
                                                                 <option value="unit">Unit</option>
                                                                 <option value="pengawas">Pengawas</option>
                                                                 <option value="admin">Admin</option>
@@ -145,7 +145,7 @@
                                                         </div>
                                                         <input name="username" value="{{ $user->username }}" type="text"
                                                             placeholder="admin@localhost"
-                                                            class="input input-bordered w-full text-gray-700" />
+                                                            class="input input-bordered text-sm w-full text-gray-700" />
                                                     </label>
 
                                                     <label class="form-control w-full">
@@ -153,7 +153,7 @@
                                                             <span class="label-text">Password</span>
                                                         </div>
                                                         <input name="password" type="text" placeholder="password"
-                                                            class="input input-bordered w-full text-gray-700" />
+                                                            class="input input-bordered text-sm w-full text-gray-700" />
                                                     </label>
 
                                                     <div class="">

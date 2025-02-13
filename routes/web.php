@@ -89,6 +89,7 @@ Route::delete('operator/supplier/{kode}', [SupplierController::class, 'destroy']
 
 Route::get('operator/pegawai', [PegawaiController::class, 'index'])->name('pegawai');
 Route::post('operator/pegawai', [PegawaiController::class, 'store'])->name('pegawai.store');
+Route::put('operator/pegawai/{nip}', [PegawaiController::class, 'update'])->name('pegawai.update');
 Route::delete('operator/pegawai/{nip}', [PegawaiController::class, 'destroy'])->name('pegawai.destroy');
 
 Route::get('operator/barang-masuk', [BarangMasukController::class, 'index'])->name('barangmasuk');
