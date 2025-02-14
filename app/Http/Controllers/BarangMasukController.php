@@ -45,89 +45,61 @@ class BarangMasukController extends Controller
      */
     public function store(Request $request)
     {
-        $randomNumber = rand(1000, 9999);
-        $kode = 'BM' . $randomNumber;
 
-        $nip = Auth::user()->nip;
-
-        $kodeBarang = $request->input('item');
-        $jumlah = count($kodeBarang);
-
-        $kuantiti =  $request->kuantiti;
-
-        $barangmasuk = BarangMasuk::create([
-            'kode' => $kode,
-            'nip' => $nip,
-            'kode_supplier' => $request->kode_supplier,
-            'jumlah_item' => $jumlah
-        ]);
-
-
-        for ($i = 0; $i < count($kodeBarang); $i++) {
-            $detailBM = DetailBarangMasuk::create([
-                'kode_barang_masuk' => $barangmasuk->kode,
-                'kode_item' => $kodeBarang[$i],
-                'kuantiti' => $kuantiti[$i]
+        try {
+            $request->validate([
+                'kode_supplier' => 'required',
+                'item' => 'required|array|min:1',
+                'kuantiti' => 'required|array|min:1',
             ]);
 
-            $item = Item::where('kode', $detailBM->kode_item)->first();
-    
-            if ($item) {
-                $item->update([
-                    'stok' => $item->stok + $detailBM->kuantiti
+            $randomNumber = rand(1000, 9999);
+            $kode = 'BM' . $randomNumber;
+
+            $nip = Auth::user()->nip;
+
+            $kodeBarang = $request->input('item');
+            $jumlah = count($kodeBarang);
+            $kuantiti = $request->input('kuantiti');
+            
+            $barangmasuk = BarangMasuk::create([
+                'kode' => $kode,
+                'nip' => $nip,
+                'kode_supplier' => $request->kode_supplier,
+                'jumlah_item' => $jumlah
+            ]);
+
+            foreach ($kodeBarang as $i => $kodeItem) {
+                $detailBM = DetailBarangMasuk::create([
+                    'kode_barang_masuk' => $barangmasuk->kode,
+                    'kode_item' => $kodeItem,
+                    'kuantiti' => $kuantiti[$i]
                 ]);
+
+                $item = Item::where('kode', $kodeItem)->first();
+                if ($item) {
+                    $item->update([
+                        'stok' => $item->stok + $detailBM->kuantiti
+                    ]);
+                }
             }
+
+            return redirect()->route('barangmasuk')->with('success', 'Barang masuk berhasil ditambahkan.');
+        } catch (\Throwable $th) {
+            return redirect()->route('barangmasuk')->with('error', 'Terjadi kesalahan: ' . $th->getMessage());
         }
-
-        // dd($detailBM->kode_item);
-
-
-        // $randomNumber = rand(1000, 9999);
-        // $kode = 'BM' . $randomNumber;
-        // $nip = Auth::user()->nip;
-        // $kodeBarang = $request->input('item', []);
-        // $jumlah = count($kodeBarang);
-        // $kuantiti = $request->input('kuantiti', []);
-
-        // $barangmasuk = BarangMasuk::create([
-        //     'kode' => $kode,
-        //     'nip' => $nip,
-        //     'kode_supplier' => $request->kode_supplier,
-        //     'jumlah_item' => $jumlah
-        // ]);
-
-        // foreach ($kodeBarang as $i => $kode) {
-        //     if (isset($kuantiti[$i])) {
-        //         $detailBM = DetailBarangMasuk::create([
-        //             'kode_barang_masuk' => $barangmasuk->kode,
-        //             'kode_item' => $kode,
-        //             'kuantiti' => $kuantiti[$i]
-        //         ]);
-
-        //         $barang = Item::where('kode', $kode)->first();
-        //         if ($barang) {
-        //             $barang->stok += $kuantiti[$i];
-        //             $barang->save();
-        //         }
-        //     }
-        // }
-
-
-        return redirect()->back();
     }
+
 
     /**
      * Display the specified resource.
      */
-    public function show()
-    {
-
-    }
+    public function show() {}
 
     /**
      * Show the form for editing the specified resource.
      */
-    
+
     // public function edit(string $kode)
     // {
     //     $supplier = Supplier::all();
@@ -147,11 +119,10 @@ class BarangMasukController extends Controller
         $item = Item::all();
         $barangmasuk = BarangMasuk::where('kode', $kode)->with('supplier')->where('kode', $kode)->first();
         $detailBM = DetailBarangMasuk::where('kode_barang_masuk', $kode)
-        ->with('item') 
-        ->get();
+            ->with('item')
+            ->get();
 
         return view('operator.edit-barang-masuk', compact('supplier', 'item', 'barangmasuk', 'detailBM'));
-
     }
 
     /**
@@ -169,23 +140,21 @@ class BarangMasukController extends Controller
                 $item->update([
                     'stok' => $item->stok -  (abs($detailBM->kuantiti - $request->kuantiti)),
                 ]);
-            }
-            else if ($detailBM->kuantiti < $request->kuantiti) {
+            } else if ($detailBM->kuantiti < $request->kuantiti) {
                 $item->update([
                     'stok' => $item->stok +  (abs($detailBM->kuantiti - $request->kuantiti)),
                 ]);
-            }
-            else if ($detailBM->kuantiti == $request->kuantiti) {
+            } else if ($detailBM->kuantiti == $request->kuantiti) {
                 $item->update([
                     'stok' => $item->stok,
                 ]);
             }
         }
-        
+
         $detailBM->update([
             'kuantiti' => $request->kuantiti,
-        ]); 
-        
+        ]);
+
         return redirect()->route('barangmasuk');
     }
 
@@ -203,7 +172,7 @@ class BarangMasukController extends Controller
     //     $barangmasuk->update([
     //         'jumlah_item' => ''
     //     ]);
-        
+
     //     return redirect()->back();
     // }
 
