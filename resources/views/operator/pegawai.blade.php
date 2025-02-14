@@ -30,7 +30,7 @@
             </div>
 
             {{-- Form Section Start --}}
-            <form id="pegawaiForm"  action="{{ route('pegawai.store') }}" method="POST">
+            <form id="pegawaiForm"  action="{{ route('pegawai.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <input type="hidden" name="_method" value="POST" id="methodField">
@@ -42,7 +42,7 @@
 
                         <div
                             class="relative w-48 h-48 border-2 border-dashed border-gray-300 rounded-full flex items-center justify-center text-gray-400 hover:border-purple-700 hover:text-purple-700 transition-colors duration-300 overflow-hidden">
-                            <input type="file" accept="image/*" name="gambar"
+                            <input type="file" name="avatar" accept="image/*"
                                 class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" id="fileInput" />
                             <div id="placeholder" class="flex flex-col items-center justify-center w-full h-full">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-2" fill="none"
@@ -218,8 +218,7 @@
                                                     <div class="modal-box">
                                                         <div class="flex items-center justify-center">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="50"
-                                                                class="text-purple-700" height="50"
-                                                                viewBox="0 0 24 24">
+                                                                class="text-purple-700" height="50" viewBox="0 0 24 24">
                                                                 <rect width="24" height="24" fill="none" />
                                                                 <path fill="currentColor"
                                                                     d="M2.725 21q-.275 0-.5-.137t-.35-.363t-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3t.488.125t.387.375l9.25 16q.15.25.138.513t-.138.487t-.35.363t-.5.137zM12 18q.425 0 .713-.288T13 17t-.288-.712T12 16t-.712.288T11 17t.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10t-.712.288T11 11v3q0 .425.288.713T12 15" />
@@ -263,18 +262,3 @@
         </div>
     </main>
 @endsection
-
-@if (!empty($peg))
-    <form id="formHapus" action="{{ route('pegawai.destroy', $peg->nip) }}" method="POST">
-        @csrf
-        @method('DELETE')
-    </form>
-@endif
-
-<script>
-    function addDataToForm(nip, nama, email) {
-        document.getElementById('nip-pegawai').value = nip
-        document.getElementById('nama-pegawai').value = nama
-        document.getElementById('email-pegawai').value = email
-    }
-</script>

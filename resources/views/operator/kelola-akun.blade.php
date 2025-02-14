@@ -69,8 +69,9 @@
                         <div class="p-4">
                             <div class="avatar ">
                                 <div class="w-full rounded-box">
-                                    <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                                    <img src="{{ $user->pegawai->avatar ? asset('storage/' . $user->pegawai->avatar) : 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp' }}"
                                         class="aspect-square" />
+
                                 </div>
                             </div>
                             <div class="my-6 ms-2">
@@ -152,15 +153,18 @@
                                                         <div class="label">
                                                             <span class="label-text">Password</span>
                                                         </div>
-                                                        <input name="password" type="text" placeholder="password"
+                                                        <input name="password" type="text"
+                                                            placeholder="isi password jika ingin dirubah"
                                                             class="input input-bordered text-sm w-full text-gray-700" />
                                                     </label>
 
-                                                    <div class="">
+                                                    <div class="flex gap-2">
                                                         <button type="submit" id="submitButton"
                                                             class="mt-4 ml-auto flex min-w-xs px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                                                             Perbarui
                                                         </button>
+                                                        <a href="{{ route('kelolaakun') }}"
+                                                            class="mt-4 ml-auto flex min-w-xs px-4 py-2 text-sm font-medium leading-5 text-gray-900 transition-colors duration-150 bg-gray-200 border border-transparent rounded-lg active:bg-gray-200 hover:bg-gray-300 focus:outline-none focus:shadow-outline-gray">Close</a>
                                                     </div>
                                                 </div>
                                             </form>

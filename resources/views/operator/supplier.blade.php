@@ -96,7 +96,7 @@
                 {{-- Form Section End --}}
 
                 {{-- Table Section Start --}}
-                <div class="flex items-center bg-white border border-gray-300 rounded-box shadow-md dark:bg-gray-800">
+                <div class="flex  bg-white border border-gray-300 rounded-box shadow-md dark:bg-gray-800">
                     <div class="w-full overflow-hidden rounded-lg mb-2">
                         <div class="w-full overflow-x-auto">
                             <table class="w-full whitespace-no-wrap" id="itemsTable">

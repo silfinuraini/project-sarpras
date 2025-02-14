@@ -89,6 +89,7 @@
                                         <option value="{{ $supp->kode }}">{{ $supp->nama }}</option>
                                     @endforeach
                                 </select>
+                                
                             </label>
                             <div class="items-center p-4 bg-white rounded-box shadow-xs dark:bg-gray-800">
                                 <div id="dynamic-form-container">

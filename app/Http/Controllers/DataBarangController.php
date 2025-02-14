@@ -65,6 +65,8 @@ class  DataBarangController extends Controller
      */
     public function store(Request $request)
     {
+
+        // dd($request);
         try {
             $request->validate([
                 // 'kode' => 'required|min:6',

@@ -46,6 +46,7 @@ class Pegawai extends Model
     [
        'nip',
        'nama',
-       'email' 
+       'email',
+       'avatar'
     ];
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ImageHelper;
 use App\Models\Pegawai;
 use Illuminate\Http\Request;
 
@@ -29,9 +30,32 @@ class PegawaiController extends Controller
      */
     public function store(Request $request)
     {
-        $pegawais = Pegawai::create($request->all());
 
-        return redirect()->back();
+        // dd($request);
+        try {
+            $request->validate([
+                'nip' => 'required|string|max:20|unique:pegawai,nip',
+                'email' => 'required|email|max:50|unique:pegawai,email',
+                'avatar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'nama' => 'required|string|max:50',
+            ]);
+
+            if ($request->hasFile('avatar')) {
+                $avatarPath = ImageHelper::handleImage($request->avatar);
+            }
+
+            $pegawai = Pegawai::create([
+                'nip' => $request->nip,
+                'email' => $request->email,
+                'avatar' => $avatarPath ?? null, 
+                'nama' => $request->nama,
+            ]);
+
+
+            return redirect()->back()->with('success', 'Pegawai berhasil ditambahkan.');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 
     /**
@@ -55,8 +79,8 @@ class PegawaiController extends Controller
      */
     public function update(Request $request, string $nip)
     {
-        $pegawai = Pegawai::where('nip', $nip)->first();
-        $pegawai->update($request->all());
+        $supplier = Pegawai::where('nip', $nip)->first();
+        $supplier->update($request->all());
 
         return redirect()->back();
     }
@@ -68,13 +92,11 @@ class PegawaiController extends Controller
     {
         $pegawais = Pegawai::find($nip);
 
-        if($nip)
-        {
+        if ($nip) {
             $pegawais->delete();
             return redirect()->back();
         }
 
         return redirect()->back();
     }
-
 }
