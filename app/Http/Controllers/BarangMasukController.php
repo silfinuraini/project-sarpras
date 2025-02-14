@@ -23,7 +23,7 @@ class BarangMasukController extends Controller
         $item = Item::all();
         $supplier = Supplier::all();
         $pegawai = Pegawai::all();
-        $barangmasuk = BarangMasuk::with('pegawai', 'supplier')->orderBy('created_at', 'DESC')->get();
+        $barangmasuk = BarangMasuk::with('pegawai', 'supplier')->orderBy('created_at', 'DESC')->paginate(5);
         $detailBM = DetailBarangMasuk::with('item')->get();
 
         return view('operator.barang-masuk', compact('item', 'barangmasuk', 'supplier', 'detailBM'));
@@ -34,7 +34,10 @@ class BarangMasukController extends Controller
      */
     public function create()
     {
-        //
+        $item = Item::all();
+        $supplier = Supplier::all();
+
+        return view('operator.tambah-barang-masuk', compact('item', 'supplier'));
     }
 
     /**

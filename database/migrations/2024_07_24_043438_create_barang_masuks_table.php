@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('nip', 20);
             $table->string('kode_supplier', 20);
             $table->integer('jumlah_item')->default(0);
+            $table->string('pemeriksaan')->nullable();
+            $table->string('serah_terima')->nullable();
             $table->timestamps();
 
             $table->foreign('nip')->references('nip')->on('pegawai')->cascadeOnDelete()->cascadeOnUpdate();

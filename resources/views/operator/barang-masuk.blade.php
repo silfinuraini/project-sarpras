@@ -1,7 +1,7 @@
 @extends('layouts.operator-main')
 
 @section('content')
-    <main class="h-full overflow-y-auto">
+    <main class="h-full bg-gray-50 overflow-y-auto">
         <div class="container my-4 px-6 mx-auto grid">
 
             {{-- Breadcrumb --}}
@@ -30,8 +30,9 @@
             </div>
 
             <div class="flex gap-2">
+
                 {{-- Button formTambah --}}
-                <button onclick="formTambah.showModal()"
+                <a href="{{ route('barangmasuk.create') }}" {{-- onclick="formTambah.showModal()" --}}
                     class="flex w-full items-center justify-between p-4 mb-2 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">
                     <div class="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="currentColor"
@@ -43,7 +44,62 @@
                         </svg>
                         <span>Tambah barang</span>
                     </div>
-                </button>
+                </a>
+
+                {{-- Modal formTambah --}}
+                <dialog id="formTambah" class="modal">
+                    <div class="modal-box text-gray-700 shadow-md">
+
+                        <form action="{{ route('barangmasuk.store') }}" method="POST">
+                            @csrf
+
+                            <div
+                                class="px-4 py-3 mb-6 bg-white text-white border border-gray-300 rounded-box shadow-md dark:bg-gray-800">
+                                <h4 class="mb-4 font-semibold text-gray-800">
+                                    Barang Masuk
+                                </h4>
+                                <label class="form-control w-full text-gray-700">
+                                    <div class="label">
+                                        <span class="label-text">Supplier</span>
+                                    </div>
+                                    <select name="kode_supplier" class="select select-bordered">
+                                        <option disabled selected>Pilih supplier</option>
+                                        @foreach ($supplier as $supp)
+                                            <option value="{{ $supp->kode }}">{{ $supp->nama }}</option>
+                                        @endforeach
+                                    </select>
+                                </label>
+
+                                <div class="items-center mt-4 p-4 bg-white rounded-lg border border-gray-300 shadow-md dark:bg-gray-800">
+                                    <div class="label">
+                                        <span class="label-text">List Barang</span>
+                                    </div>
+                                    <div id="dynamic-form-container">
+                                        <!-- Dynamic form rows will be added here -->
+                                    </div>
+                                    <div class="justify-center flex">
+                                        <button type="button" id="add-form-row"
+                                            class="mt-4 px-4 py-2 text-sm font-medium leading-5 text-purple-600 hover:text-white active:text-white transition-colors duration-150 bg-transparent border border-purple-600 rounded-box active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                                            style="width: 60%;">
+                                            Tambah form
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="">
+                                    <button type="submit" id="submitButton"
+                                        class="mt-4 ml-auto flex min-w-xs px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                                        Tambahkan
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                    <form method="dialog" class="modal-backdrop">
+                        <button>close</button>
+                    </form>
+                </dialog>
 
                 {{-- Button formImport --}}
                 <button onclick="formImport.showModal()"
@@ -57,66 +113,9 @@
                     <span>Import</span>
                 </button>
 
-                {{-- Button export --}}
-                <button
-                    class=" btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple ml-auto">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" aria-hidden="true"
-                        viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                        <path
-                            d="M288 109.3V352c0 17.7-14.3 32-32 32s-32-14.3-32-32V109.3l-73.4 73.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l128-128c12.5-12.5 32.8-12.5 45.3 0l128 128c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L288 109.3zM64 352H192c0 35.3 28.7 64 64 64s64-28.7 64-64H448c35.3 0 64 28.7 64 64v32c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V416c0-35.3 28.7-64 64-64zM432 456a24 24 0 1 0 0-48 24 24 0 1 0 0 48z" />
-                    </svg>
-                </button>
-
-                {{-- Modal formTambah --}}
-                <dialog id="formTambah" class="modal">
-                    <div class="modal-box bg-gray-100 text-gray-700">
-                        <div class="flex justify-between mb-2">
-                            <h3 class="text-lg font-bold">Barang Masuk</h3>
-                        </div>
-                        <form action="{{ route('barangmasuk.store') }}" method="POST">
-                            @csrf
-                            <label
-                                class="input w-full input-bordered flex focus:outline-none items-center mb-2 bg-white text-gray-700">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-70" style="fill: #430A5D;"
-                                    viewBox="0 0 16 16">
-                                    <path
-                                        d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z" />
-                                </svg>
-                                <select name="kode_supplier"
-                                    class="bg-white ms-2 outline-none border-none text-sm w-full text-gray-700">
-                                    <option selected hidden>Supplier</option>
-                                    @foreach ($supplier as $supp)
-                                        <option value="{{ $supp->kode }}">{{ $supp->nama }}</option>
-                                    @endforeach
-                                </select>
-                                
-                            </label>
-                            <div class="items-center p-4 bg-white rounded-box shadow-xs dark:bg-gray-800">
-                                <div id="dynamic-form-container">
-                                    <!-- Dynamic form rows will be added here -->
-                                </div>
-                                <div class="justify-center flex">
-                                    <button type="button" id="add-form-row"
-                                        class="mt-4 px-4 py-2 text-sm font-medium leading-5 text-purple-600 hover:text-white active:text-white transition-colors duration-150 bg-transparent border border-purple-600 rounded-box active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-                                        style="width: 60%;">
-                                        Tambah form
-                                    </button>
-                                </div>
-                            </div>
-                            <button type="submit"
-                                class="w-full my-2 px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-box active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                                Buat
-                            </button>
-                        </form>
-                    </div>
-                    <form method="dialog" class="modal-backdrop">
-                        <button>close</button>
-                    </form>
-                </dialog>
-
                 {{-- Modal formImport --}}
                 <dialog id="formImport" class="modal">
-                    <div class="modal-box bg-white text-gray-700">
+                    <div class="modal-box bg-white text-gray-700 shadow-md">
                         <h3 class="font-bold text-lg mb-4">Import data</h3>
                         <div class="flex items-center justify-center w-full">
                             <label for="dropzone-file"
@@ -165,12 +164,24 @@
                         <button>close</button>
                     </form>
                 </dialog>
+
+                {{-- Button export --}}
+                <button
+                    class="shadow-md btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple ml-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" aria-hidden="true"
+                        viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                        <path
+                            d="M288 109.3V352c0 17.7-14.3 32-32 32s-32-14.3-32-32V109.3l-73.4 73.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l128-128c12.5-12.5 32.8-12.5 45.3 0l128 128c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L288 109.3zM64 352H192c0 35.3 28.7 64 64 64s64-28.7 64-64H448c35.3 0 64 28.7 64 64v32c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V416c0-35.3 28.7-64 64-64zM432 456a24 24 0 1 0 0-48 24 24 0 1 0 0 48z" />
+                    </svg>
+                </button>
+
             </div>
 
             <div class="flex mb-2 gap-2">
                 {{-- Search bar --}}
-                <label class="input w-full flex items-center gap-2 bg-white ">
-                    <input type="text" class="grow border-none input" placeholder="Search" />
+                <label class="input input-bordered w-full flex items-center gap-2 bg-white shadow-md">
+                    <input type="text" id="searchInput" onkeyup="filterTable()"
+                        class="input grow text-sm text-gray-600 border-none" placeholder="Cari..." />
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill=""
                         class="h-4 w-4 opacity-70">
                         <path fill-rule="evenodd"
@@ -180,59 +191,64 @@
                 </label>
 
                 {{-- Filter --}}
-                <select class="select select-bordered max-w-xs bg-white text-gray-700">
+                <select class="select select-bordered max-w-xs bg-white text-gray-700 shadow-md">
                     <option disabled selected>Kategori</option>
                     <option>ATK</option>
                     <option>Alat kebersihan</option>
                 </select>
-                <select class="select select-bordered max-w-xs bg-white text-gray-700">
+
+                <select class="select select-bordered max-w-xs bg-white text-gray-700 shadow-md">
                     <option disabled selected>Order by</option>
                     <option>1 Tahun</option>
                     <option>Semester</option>
                     <option>Trimester</option>
                     <option>1 Bulan</option>
                 </select>
-                <input type="date" class="input input-bordered max-w-xs bg-white text-gray-700">
+
+                <input type="date" class="input input-bordered max-w-xs bg-white text-gray-700 shadow-md">
             </div>
 
-            {{-- Tabel barang masuk --}}
-            <div class="flex items-center p-4 bg-white rounded-box shadow-xs dark:bg-gray-800">
-                <div class="w-full overflow-hidden rounded-lg shadow-xs mb-2">
+            {{-- Table Section Start --}}
+            <div class="flex items-center bg-white border border-gray-300 rounded-box shadow-md dark:bg-gray-800 mt-2">
+                <div class="w-full overflow-hidden rounded-lg mb-2">
                     <div class="w-full overflow-x-auto">
-                        <table class="w-full whitespace-no-wrap">
+                        <table class="w-full whitespace-no-wrap" id="itemsTable">
                             <thead>
                                 <tr
-                                    class="text-xs text-left font-semibold tracking-wide text-gray-500 uppercase border-b dark:border-gray-700  dark:text-gray-400 dark:bg-gray-800">
-                                    <th class="px-4 py-3 text-center">Kode</th>
+                                    class="text-xs font-semibold tracking-wide text-left text-gray-600 uppercase border-b dark:border-gray-600  dark:text-gray-400 dark:bg-gray-800">
+                                    <th class="px-4 py-3">Kode</th>
                                     <th class="px-4 py-3 text-center">Petugas</th>
                                     <th class="px-4 py-3 text-center">Jumlah Item</th>
                                     <th class="px-4 py-3 text-center">Supplier</th>
                                     <th class="px-4 py-3 text-center">Tanggal</th>
-                                    <th class="px-4 py-3 text-center">Aksi</th>
+                                    <th class="px-4 py-3"></th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                                @foreach ($barangmasuk as $bm)
-                                    <tr class="text-gray-700 dark:text-gray-400">
-                                        <td class="px-4 py-3 text-sm font-semibold text-center">
+
+                            @foreach ($barangmasuk as $bm)
+                                <tbody class="bg-white divide-y dark:divide-gray-600 dark:bg-gray-800">
+                                    <tr class="text-gray-600 dark:text-gray-400">
+                                        <td class="px-4 py-3 text-sm font-semibold">
                                             {{ $bm->kode }}
                                         </td>
-                                        <td class="px-4 py-3 text-sm text-center">
+
+                                        <td class="px-4 py-3 text-xs text-center">
                                             {{ $bm->pegawai->nama }}
                                         </td>
-                                        <td class="px-4 py-3 text-sm text-center">
+                                        <td class="px-4 py-3 text-xs text-center">
                                             {{ $bm->jumlah_item }}
                                         </td>
-                                        <td class="px-4 py-3 text-sm text-center">
+                                        <td class="px-4 py-3 text-xs text-center">
                                             {{ $bm->supplier->nama }}
                                         </td>
-                                        <td class="px-4 py-3 text-sm text-center">
+                                        <td class="px-4 py-3 text-xs text-center">
                                             {{ $bm->created_at }}
                                         </td>
                                         <td class="px-4 py-3">
                                             <div class="flex items-center justify-center space-x-4 text-sm">
+
                                                 <!-- Button beritaAcara -->
-                                                <button onclick="beritaAcara.showModal()"
+                                                <button onclick="beritaAcara{{ $bm->kode }}.showModal()"
                                                     class="flex items-center justify-center w-8 h-8 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                                     aria-label="Upload">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
@@ -243,7 +259,7 @@
                                                 </button>
 
                                                 {{-- Modal beritaAcara --}}
-                                                <dialog id="beritaAcara" class="modal">
+                                                <dialog id="beritaAcara{{ $bm->kode }}" class="modal">
                                                     <div class="modal-box bg-white">
                                                         <h3 class="font-bold text-lg mb-4">Upload berita acara</h3>
                                                         <label class="text-sm font-semibold mb-2">Pemeriksaan</label>
@@ -320,7 +336,7 @@
                                                 </dialog>
 
                                                 <!-- Button lihatFile -->
-                                                <button onclick="lihatFile.showModal()"
+                                                <button onclick="lihatFile{{ $bm->kode }}.showModal()"
                                                     class="flex items-center justify-center w-8 h-8 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                                     aria-label="View">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
@@ -331,8 +347,8 @@
                                                 </button>
 
                                                 {{-- Modal lihatFile --}}
-                                                <dialog id="lihatFile" class="modal">
-                                                    <div class="modal-box w-11/12 max-w-5xl bg-white text-gray-700">
+                                                <dialog id="lihatFile{{ $bm->kode }}" class="modal">
+                                                    <div class="modal-box w-11/12 max-w-5lg bg-white text-gray-700">
                                                         <h3 class="font-bold text-lg">Berita acara</h3>
                                                         <div class="grid grid-cols-2">
                                                             <div>
@@ -372,7 +388,8 @@
                                                         <div class="flex justify-between mb-2">
                                                             <h3 class="text-lg font-bold">Barang Masuk</h3>
                                                             <p class="mt-1">
-                                                                <a class="text-sm font-normal text-purple-600 dark:text-purple-400 hover:underline" href="{{ route('barangmasuk.edit', $bm->kode) }}">
+                                                                <a class="text-sm font-normal text-purple-600 dark:text-purple-400 hover:underline"
+                                                                    href="{{ route('barangmasuk.edit', $bm->kode) }}">
                                                                     Edit barang masuk
                                                                 </a>
                                                             </p>
@@ -516,161 +533,64 @@
                                                     </form>
                                                 </dialog>
 
+                                                {{-- <button type="button"
+                                                    onclick="deleteConfirmation{{ $bm->id }}.showModal()"
+                                                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                                                    aria-label="Delete">
+                                                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor"
+                                                        viewBox="0 0 20 20">
+                                                        <path fill-rule="evenodd"
+                                                            d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                            clip-rule="evenodd"></path>
+                                                    </svg>
+                                                </button>
+
+                                                <dialog id="deleteConfirmation{{ $bm->kode }}" class="modal">
+                                                    <div class="modal-box">
+                                                        <div class="flex items-center justify-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="50"
+                                                                class="text-purple-700" height="50"
+                                                                viewBox="0 0 24 24">
+                                                                <rect width="24" height="24" fill="none" />
+                                                                <path fill="currentColor"
+                                                                    d="M2.725 21q-.275 0-.5-.137t-.35-.363t-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3t.488.125t.387.375l9.25 16q.15.25.138.513t-.138.487t-.35.363t-.5.137zM12 18q.425 0 .713-.288T13 17t-.288-.712T12 16t-.712.288T11 17t.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10t-.712.288T11 11v3q0 .425.288.713T12 15" />
+                                                            </svg>
+                                                        </div>
+                                                        <p class="py-4 text-center text-gray-600 text-sm">Apakah anda yakin
+                                                            untuk menghapus <span
+                                                                class="font-semibold">{{ $bm->nama }}</span> ?</p>
+                                                        <div class="flex gap-2"></div>
+                                                        <div class="modal-action">
+                                                            <form method="dialog">
+                                                                <!-- if there is a button in form, it will Tutup the modal -->
+                                                                <button class="btn">Tutup</button>
+                                                            </form>
+                                                            <form action="{{ route('barangmasuk.destroy', $bm->kode) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="btn bg-purple-700 text-white"
+                                                                    type="submit">Hapus</button>
+                                                            </form>
+                                                        </div>
+
+                                                    </div>
+                                                </dialog> --}}
                                             </div>
                                         </td>
                                     </tr>
-                                @endforeach
 
-                            </tbody>
+                                </tbody>
+                            @endforeach
                         </table>
                     </div>
-                    {{-- <div
-                        class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700  sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-                        <span class="flex items-center col-span-3">
-                            Showing 21-30 of 100
-                        </span>
-                        <span class="col-span-2"></span>
-                        <!-- Pagination -->
-                        <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
-                            <nav aria-label="Table navigation">
-                                <ul class="inline-flex items-center">
-                                    <li>
-                                        <button
-                                            class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
-                                            aria-label="Previous">
-                                            <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
-                                                <path
-                                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                                    clip-rule="evenodd" fill-rule="evenodd"></path>
-                                            </svg>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button
-                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                            1
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button
-                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                            2
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button
-                                            class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                            3
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button
-                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                            4
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <span class="px-3 py-1">...</span>
-                                    </li>
-                                    <li>
-                                        <button
-                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                            8
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button
-                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                            9
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button
-                                            class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
-                                            aria-label="Next">
-                                            <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
-                                                <path
-                                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                                    clip-rule="evenodd" fill-rule="evenodd"></path>
-                                            </svg>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </span>
-                    </div> --}}
+                    <div class="mx-4 my-2">
+                        {{ $barangmasuk->links() }}
+                    </div>
                 </div>
             </div>
+            {{-- Table Section End --}}
+
         </div>
     </main>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const container = document.getElementById('dynamic-form-container');
-            const addButton = document.getElementById('add-form-row');
-
-            function createFormRow() {
-                const newRow = document.createElement('div');
-                newRow.className = 'flex gap-2 mb-2 items-center dynamic-form-row';
-                newRow.innerHTML = `
-                    <label class="input w-full input-bordered flex focus:outline-none items-center bg-white text-gray-700 h-10">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-70" style="fill: #430A5D;" viewBox="0 0 16 16">
-                            <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464z" />
-                        </svg>
-                        <select name="item[]" class="bg-white ms-2 outline-none border-none text-sm w-full text-gray-700">
-                            @foreach ($item as $item)
-                                <option value="{{ $item->kode }}">{{ $item->nama }}</option>
-                            @endforeach
-                        </select>
-                    </label>
-                    <div class="h-10 bg-white border border-gray-200 rounded-xl flex items-center">
-                        <button type="button" class="px-2 h-full inline-flex justify-center items-center text-sm font-medium rounded-l-xl border-r border-gray-200 bg-white text-gray-800 hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none decrement-btn">
-                            <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M5 12h14"></path>
-                            </svg>
-                        </button>
-                        <input class="p-0 w-8 bg-transparent border-0 text-gray-800 text-center focus:ring-0" type="text" name="kuantiti[]" value="0">
-                        <button type="button" class="px-2 h-full inline-flex justify-center items-center text-sm font-medium rounded-r-xl border-l border-gray-200 bg-white text-gray-800 hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none increment-btn">
-                            <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M5 12h14"></path>
-                                <path d="M12 5v14"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    <button type="button" class="h-10 px-4 text-sm font-medium leading-5 text-gray-700 transition-colors duration-150 bg-transparent border border-gray-200 rounded-xl hover:bg-gray-50 focus:outline-none focus:shadow-outline-red remove-form-row">
-                        X
-                    </button>
-                `;
-
-                // Add event listeners for the new row
-                newRow.querySelector('.decrement-btn').addEventListener('click', function() {
-                    const input = this.parentNode.querySelector('input[name="kuantiti[]"]');
-                    input.value = Math.max(0, parseInt(input.value) - 1);
-                });
-
-                newRow.querySelector('.increment-btn').addEventListener('click', function() {
-                    const input = this.parentNode.querySelector('input[name="kuantiti[]"]');
-                    input.value = parseInt(input.value) + 1;
-                });
-
-                newRow.querySelector('.remove-form-row').addEventListener('click', function() {
-                    if (container.children.length > 1) {
-                        container.removeChild(newRow);
-                    } else {
-                        alert('Minimal harus ada satu form barang.');
-                    }
-                });
-
-                return newRow;
-            }
-
-            // Add initial form row
-            container.appendChild(createFormRow());
-
-            // Add new form row when "Tambah form" button is clicked
-            addButton.addEventListener('click', function() {
-                container.appendChild(createFormRow());
-            });
-        });
-    </script>
 @endsection

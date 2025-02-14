@@ -93,6 +93,7 @@ Route::put('operator/pegawai/{nip}', [PegawaiController::class, 'update'])->name
 Route::delete('operator/pegawai/{nip}', [PegawaiController::class, 'destroy'])->name('pegawai.destroy');
 
 Route::get('operator/barang-masuk', [BarangMasukController::class, 'index'])->name('barangmasuk');
+Route::get('operator/barang-masuk/tambah', [BarangMasukController::class, 'create'])->name('barangmasuk.create');
 Route::get('operator/{kode}/barang-masuk', [BarangMasukController::class, 'edit'])->name('barangmasuk.edit');
 Route::put('operator/{kode}/barang-masuk', [BarangMasukController::class, 'update'])->name('barangmasuk.update');
 Route::post('operator/barang-masuk', action: [BarangMasukController::class, 'store'])->name('barangmasuk.store');
