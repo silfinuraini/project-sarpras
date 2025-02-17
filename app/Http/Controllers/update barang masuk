@@ -1,0 +1,66 @@
+public function update(Request $request, string $kode)
+    {
+        $detailBM = DetailBarangMasuk::where('kode_barang_masuk', $kode)->get(); 
+
+        if ($detailBM->isEmpty()) {
+            return back()->with('error', 'Detail barang tidak ditemukan.');
+        }
+
+        $item = Item::where('kode', $detailBM->first()->kode_item)->first();
+
+        if (!$item) {
+            return back()->with('error', 'Item tidak ditemukan.');
+        }
+
+        $reqQty = is_array($request->kuantiti) ? $request->kuantiti[0] : $request->kuantiti;
+
+        foreach ($detailBM as $detail) {
+            $oldQty = $detail->kuantiti;
+
+            if ($oldQty > $reqQty) {
+                $item->update([
+                    'stok' => $item->stok + ($oldQty - $reqQty),
+                ]);
+            } elseif ($oldQty < $reqQty) {
+                $item->update([
+                    'stok' => $item->stok - ($reqQty - $oldQty),
+                ]);
+            }
+
+            $detail->update([
+                'kuantiti' => $reqQty,
+            ]);
+        }
+
+        return redirect()->route('barangmasuk')->with('success', 'Data berhasil diperbarui.');
+    }
+
+    public function update(Request $request, string $kode)
+    {
+        // dd($request);
+        $detailBM = DetailBarangMasuk::where('kode_barang_masuk', $kode)->first();
+
+        $item = Item::where('kode', $detailBM->kode_item)->first();
+        if ($item == true) {
+            // dd($request->kuantiti);
+            if ($detailBM->kuantiti > $request->kuantiti) {
+                $item->update([
+                    'stok' => $item->stok -  (abs($detailBM->kuantiti - $request->kuantiti)),
+                ]);
+            } else if ($detailBM->kuantiti < $request->kuantiti) {
+                $item->update([
+                    'stok' => $item->stok +  (abs($detailBM->kuantiti - $request->kuantiti)),
+                ]);
+            } else if ($detailBM->kuantiti == $request->kuantiti) {
+                $item->update([
+                    'stok' => $item->stok,
+                ]);
+            }
+        }
+
+        $detailBM->update([
+            'kuantiti' => $request->kuantiti,
+        ]);
+
+        return redirect()->route('barangmasuk');
+    }

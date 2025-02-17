@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ImageHelper;
 use App\Models\BarangMasuk;
 use App\Models\DetailBarangMasuk;
 use App\Models\DetailPengadaan;
@@ -61,7 +62,7 @@ class BarangMasukController extends Controller
             $kodeBarang = $request->input('item');
             $jumlah = count($kodeBarang);
             $kuantiti = $request->input('kuantiti');
-            
+
             $barangmasuk = BarangMasuk::create([
                 'kode' => $kode,
                 'nip' => $nip,
@@ -89,6 +90,39 @@ class BarangMasukController extends Controller
             return redirect()->route('barangmasuk')->with('error', 'Terjadi kesalahan: ' . $th->getMessage());
         }
     }
+
+    public function updateBeritaAcara(Request $request, $kode)
+    {
+
+        // dd($request);
+        try {
+            $request->validate([
+                'pemeriksaan' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'serah_terima' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            // Cari data yang akan diupdate
+            $beritaAcara = BarangMasuk::findOrFail($kode);
+
+            // Simpan gambar baru jika ada, gunakan gambar lama jika tidak ada perubahan
+            if ($request->hasFile('pemeriksaan')) {
+                $beritaAcara->pemeriksaan = ImageHelper::handleImage($request->file('pemeriksaan'));
+            }
+
+            if ($request->hasFile('serah_terima')) {
+                $beritaAcara->serah_terima = ImageHelper::handleImage($request->file('serah_terima'));
+            }
+
+            // Simpan perubahan ke database
+            $beritaAcara->save();
+
+            return redirect()->route('barangmasuk')->with('success', 'Berita Acara berhasil diperbarui.');
+        } catch (\Exception $e) {
+            return redirect()->route('barangmasuk')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+    }
+
+
 
 
     /**
@@ -129,34 +163,40 @@ class BarangMasukController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $kode)
-    {
-        // dd($request);
-        $detailBM = DetailBarangMasuk::where('kode_barang_masuk', $kode)->first();
+{
+    try {
+        $detailBM = DetailBarangMasuk::where('kode_barang_masuk', $kode)->get();
 
-        $item = Item::where('kode', $detailBM->kode_item)->first();
-        if ($item == true) {
-            // dd($request->kuantiti);
-            if ($detailBM->kuantiti > $request->kuantiti) {
-                $item->update([
-                    'stok' => $item->stok -  (abs($detailBM->kuantiti - $request->kuantiti)),
-                ]);
-            } else if ($detailBM->kuantiti < $request->kuantiti) {
-                $item->update([
-                    'stok' => $item->stok +  (abs($detailBM->kuantiti - $request->kuantiti)),
-                ]);
-            } else if ($detailBM->kuantiti == $request->kuantiti) {
-                $item->update([
-                    'stok' => $item->stok,
+        for ($i = 0; $i < count($detailBM); $i++) {
+            $item = Item::where('kode', $detailBM[$i]->kode_item)->first();
+            $kuantiti = $request->input('kuantiti.' . $i);
+
+            if ($item) {
+                if ($detailBM[$i]->kuantiti > $kuantiti) {
+                    $item->update([
+                        'stok' => $item->stok - abs($detailBM[$i]->kuantiti - $kuantiti),
+                    ]);
+                } elseif ($detailBM[$i]->kuantiti < $kuantiti) {
+                    $item->update([
+                        'stok' => $item->stok + abs($detailBM[$i]->kuantiti - $kuantiti),
+                    ]);
+                } else {
+                    $item->update([
+                        'stok' => $item->stok,
+                    ]);
+                }
+                $detailBM[$i]->update([
+                    'kuantiti' => $kuantiti,
                 ]);
             }
         }
 
-        $detailBM->update([
-            'kuantiti' => $request->kuantiti,
-        ]);
-
-        return redirect()->route('barangmasuk');
+        return redirect()->route('barangmasuk')->with('success', 'Barang berhasil diperbarui.');
+    } catch (\Throwable $th) {
+        return redirect()->route('barangmasuk')->with('error', $th->getMessage());
     }
+}
+
 
 
     /**
@@ -179,7 +219,7 @@ class BarangMasukController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $kode)
     {
         //
     }

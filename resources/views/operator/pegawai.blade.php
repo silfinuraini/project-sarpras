@@ -42,7 +42,7 @@
 
                         <div
                             class="relative w-48 h-48 border-2 border-dashed border-gray-300 rounded-full flex items-center justify-center text-gray-400 hover:border-purple-700 hover:text-purple-700 transition-colors duration-300 overflow-hidden">
-                            <input type="file" name="avatar" accept="image/*"
+                            <input type="file" name="avatar" 
                                 class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" id="fileInput" />
                             <div id="placeholder" class="flex flex-col items-center justify-center w-full h-full">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-2" fill="none"

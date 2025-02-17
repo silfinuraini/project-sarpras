@@ -14,15 +14,14 @@
     <script src="{{ asset('src/js/charts-pie.js') }}" defer></script>
     <script src="{{ asset('src/js/focus-trap.js') }}" defer></script>
 
-    <!-- Select2 CSS -->
+    <!-- Select2 -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
-
-    <!-- jQuery (Diperlukan oleh Select2) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
+    {{-- Dropzone --}}
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 
     @vite('resources/css/app.css')
 </head>
@@ -67,11 +66,12 @@
         <div class="flex flex-col flex-1 w-full">
             @include('patrials.navbar')
 
+           
+
             @yield('content')
 
         </div>
     </div>
-
 
 </body>
 

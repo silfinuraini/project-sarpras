@@ -50,3 +50,4 @@ class Pegawai extends Model
        'avatar'
     ];
 }
+ 
