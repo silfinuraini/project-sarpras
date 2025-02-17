@@ -32,6 +32,52 @@
 
             <!-- General elements -->
 
+            <form action="{{ route('barangmasuk.store') }}" method="POST">
+                @csrf
+
+                <div
+                    class="px-4 py-3 mb-6 bg-white text-white border border-gray-300 rounded-box shadow-md dark:bg-gray-800">
+                    <h4 class="mb-4 font-semibold text-gray-800">
+                        Barang Masuk
+                    </h4>
+                    <label class="form-control w-full text-gray-700">
+                        <div class="label">
+                            <span class="label-text">Supplier</span>
+                        </div>
+                        <select name="kode_supplier" class="select select-bordered">
+                            <option disabled selected>Pilih supplier</option>
+                            @foreach ($supplier as $supp)
+                                <option value="{{ $supp->kode }}">{{ $supp->nama }}</option>
+                            @endforeach
+                        </select>
+                    </label>
+
+                    <div
+                        class="items-center mt-4 p-4 bg-white rounded-lg border border-gray-300 shadow-md dark:bg-gray-800">
+                        <div class="label">
+                            <span class="label-text">List Barang</span>
+                        </div>
+                        <div id="dynamic-form-container">
+                            <!-- Dynamic form rows will be added here -->
+                        </div>
+                        <div class="justify-center flex">
+                            <button type="button" id="add-form-row"
+                                class="max-w-xs mt-4 px-4 py-2 text-sm font-medium leading-5 text-purple-600 hover:text-white active:text-white transition-colors duration-150 bg-transparent border border-purple-600 rounded-box active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                                style="width: 60%;">
+                                Tambah form
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="">
+                        <button type="submit" id="submitButton"
+                            class="mt-4 ml-auto flex min-w-xs px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                            Tambahkan
+                        </button>
+                    </div>
+                </div>
+            </form>
+
             <div class="px-4 py-3 mb-8">
                 <form action="{{ route('item.update', $items->kode) }}" method="POST">
                     @csrf

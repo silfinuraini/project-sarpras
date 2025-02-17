@@ -35,7 +35,7 @@
                     <h4 class="mb-4 font-semibold text-gray-800">
                         Barang Masuk
                     </h4>
-                    <label class="form-control w-full text-gray-700">
+                    <label class="form-control w-full text-gray-700 max-w-xs">
                         <div class="label">
                             <span class="label-text">Supplier</span>
                         </div>

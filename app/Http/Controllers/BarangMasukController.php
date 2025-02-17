@@ -150,13 +150,13 @@ class BarangMasukController extends Controller
     public function edit(string $kode)
     {
         $supplier = Supplier::all();
-        $item = Item::all();
+        $items = Item::all();
         $barangmasuk = BarangMasuk::where('kode', $kode)->with('supplier')->where('kode', $kode)->first();
         $detailBM = DetailBarangMasuk::where('kode_barang_masuk', $kode)
             ->with('item')
             ->get();
 
-        return view('operator.edit-barang-masuk', compact('supplier', 'item', 'barangmasuk', 'detailBM'));
+        return view('operator.edit-barang-masuk', compact('supplier', 'items', 'barangmasuk', 'detailBM'));
     }
 
     /**
