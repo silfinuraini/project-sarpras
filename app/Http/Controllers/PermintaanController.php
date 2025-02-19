@@ -23,17 +23,11 @@ class PermintaanController extends Controller
         $pegawai = Pegawai::all();
         $user = User::with('pegawai')->get();
 
-        $menunggu = Permintaan::with('pegawai')
-            ->where('status', 'menunggu')
-            ->orderBy('created_at', 'desc')
-            ->get();
-
-        $others = Permintaan::with('pegawai')
-            ->whereIn('status', ['ditolak', 'disetujui'])
-            ->orderBy('created_at', 'desc')
-            ->get();
-
-        $permintaan = $menunggu->concat($others);
+        $permintaan = Permintaan::with('pegawai')
+        ->whereIn('status', ['menunggu', 'ditolak', 'disetujui'])
+        ->orderByRaw("FIELD(status, 'menunggu', 'disetujui', 'ditolak')")
+        ->orderBy('created_at', 'desc')
+        ->paginate(10); 
 
         return view('operator.permintaan', compact('item', 'permintaan', 'pegawai', 'user'));
     }
@@ -108,32 +102,25 @@ class PermintaanController extends Controller
      */
     public function update(Request $request, string $kode)
     {
-        // Update status of Permintaan
         Permintaan::where('kode', $kode)->update([
             'status' => $request->input('status'),
         ]);
     
-        // If status is 'ditolak', update the 'kuantiti_disetujui' in DetailPermintaan
         if ($request->input('status') === 'ditolak') {
             DetailPermintaan::where('kode_permintaan', $kode)->update([
                 'kuantiti_disetujui' => 0,
             ]);
         }
     
-        // Get all detail permintaan records based on kode_permintaan
         $detailPermintaans = DetailPermintaan::where('kode_permintaan', $kode)->get();
     
-        // Get the related permintaan record
         $permintaan = Permintaan::where('kode', $kode)->first();
         
-        // Generate kode for BarangKeluar
         $kodeBk = 'BK' . rand(1000, 9999);
     
         foreach ($detailPermintaans as $detailPermintaan) {
-            // Find if BarangKeluar already exists
             $barangKeluar = BarangKeluar::where('kode_permintaan', $permintaan->kode)->first();
     
-            // If it doesn't exist, create it
             if (!$barangKeluar) {
                 $barangKeluar = BarangKeluar::create([
                     'kode' => $kodeBk,
@@ -146,7 +133,6 @@ class PermintaanController extends Controller
                 ]);
             }
     
-            // Create or update the related DetailBarangKeluar entry
             $barangKeluarDetail = DetailBarangKeluar::create([
                 'kode_barang_keluar' => $barangKeluar->kode,
                 'kode_item' => $detailPermintaan->kode_item,
@@ -170,10 +156,9 @@ class PermintaanController extends Controller
         ]);
 
         $item = Item::where('kode', $detailPermintaan->kode_item)->first();
-        // dd($item);
         if ($item == true) {
             $item->update([
-                'stok' => $item->stok - $detailPermintaan->kuantiti
+                'stok' => $item->stok - $request->kuantiti_disetujui
             ]);
         }
 

@@ -3,6 +3,8 @@
 @section('content')
     <main class="h-full bg-gray-50 my-4 overflow-y-auto">
         <div class="container px-6 mx-auto grid">
+
+            {{-- Breadcrumbs Section Start --}}
             <div class="text-sm mb-4 breadcrumbs text-gray-800">
                 <ul>
                     <li>
@@ -22,24 +24,34 @@
                     </li>
                 </ul>
             </div>
+            {{-- Breadcrumbs Section End --}}
 
             <div class="flex mb-2 gap-2">
-                <label class="input w-full flex items-center gap-2 bg-white ">
-                    <input type="text" class="grow border-none" placeholder="Search" />
+
+                {{-- Search Start --}}
+                <label class="input input-bordered w-full flex items-center gap-2 bg-white shadow-md">
+                    <input type="text" id="searchInput" onkeyup="filterTable()"
+                        class="input grow text-sm text-gray-600 border-none" placeholder="Cari..." />
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="" class="h-4 w-4 opacity-70">
                         <path fill-rule="evenodd"
                             d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
                             clip-rule="evenodd" />
                     </svg>
                 </label>
-                <select class="ml-auto select select-bordered max-w-xs bg-white text-gray-800">
+                {{-- Search Start --}}
+
+                {{-- Filter Start --}}
+                <select class="ml-auto select select-bordered max-w-xs bg-white text-gray-800 shadow-md">
                     <option disabled selected>Status</option>
                     <option>Diterima</option>
                     <option>Ditolak</option>
                     <option>Menunggu acc</option>
                 </select>
-                <button onclick="formPengadaan.showModal()"
-                    class=" btn flex items-center justify-between px-4 py-2 text-sm font-medium border-none text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple ml-auto"
+                {{-- Filter End --}}
+
+                {{-- Form Start --}}
+                <button onclick="formPermintaan.showModal()"
+                    class=" btn flex items-center justify-between px-4 py-2 text-sm font-medium border-none text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple ml-auto shadow-md"
                     fdprocessedid="allgztj">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" aria-hidden="true" fill="currentColor"
                         viewBox="0 0 16 16">
@@ -48,8 +60,7 @@
                     </svg>
                 </button>
 
-                <!-- Open the modal using ID.showModal() method -->
-                <dialog id="formPengadaan" class="modal">
+                <dialog id="formPermintaan" class="modal">
                     <div class="modal-box bg-white text-gray-800 ">
                         <form action="{{ route('operator.tambahpermintaan') }}" method="POST">
                             @csrf
@@ -109,7 +120,10 @@
                         <button>close</button>
                     </form>
                 </dialog>
+                {{-- Form End --}}
+
             </div>
+
             <script>
                 $(document).ready(function() {
                     $('.select2').select2();
@@ -134,47 +148,44 @@
                     }
                 });
             </script>
-            <div class="flex items-center p-4 mt-2 bg-white rounded-box shadow-xs dark:bg-gray-800">
-                <div class="w-full overflow-hidden rounded-lg shadow-xs mb-2">
+
+
+            {{-- Table Section Start --}}
+            <div class="flex items-center bg-white border border-gray-300 rounded-box shadow-md dark:bg-gray-800 mt-2">
+                <div class="w-full overflow-hidden rounded-lg mb-2">
                     <div class="w-full overflow-x-auto">
-                        <table class="w-full whitespace-no-wrap">
+                        <table class="w-full whitespace-no-wrap" id="itemsTable">
                             <thead>
                                 <tr
-                                    class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-800  dark:text-gray-400 dark:bg-gray-800">
+                                    class="text-xs font-semibold tracking-wide text-left text-gray-600 uppercase border-b dark:border-gray-600  dark:text-gray-400 dark:bg-gray-800">
                                     <th class="px-4 py-3">Kode</th>
                                     <th class="px-4 py-3">Unit</th>
                                     <th class="px-4 py-3">Status</th>
                                     <th class="px-4 py-3">Tanggal</th>
-                                    {{-- @if ($permintaan->status == 'menunggu') --}}
-                                    <th class="px-4 py-3">Aksi</th>
-                                    {{-- @endif --}}
+                                    <th class="px-4 py-3"></th>
                                 </tr>
                             </thead>
-                            <tbody class="bg-white divide-y dark:divide-gray-800 dark:bg-gray-800">
-                                @foreach ($permintaan as $p)
-                                    <tr class="text-gray-800 dark:text-gray-400">
+
+                            @foreach ($permintaan as $p)
+                                <tbody class="bg-white divide-y dark:divide-gray-600 dark:bg-gray-800">
+                                    <tr class="text-gray-600 dark:text-gray-400">
                                         <td class="px-4 py-3 text-sm font-semibold">
                                             {{ $p->kode }}
                                         </td>
-                                        <td class="px-4 py-3 text-sm">
+
+                                        <td class="px-4 py-3 text-xs">
                                             {{ $p->pegawai->nama }}
                                         </td>
                                         <td class="px-4 py-3 text-xs">
                                             @if ($p->status == 'menunggu')
-                                                <span
-                                                    class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600">
-                                                    {{ $p->status }}
-                                                </span>
+                                                <div class="badge badge-outline outline-orange-500 text-orange-500 text-sm">
+                                                    {{ $p->status }}</div>
                                             @elseif ($p->status == 'disetujui')
-                                                <span
-                                                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:text-white dark:bg-green-600">
-                                                    {{ $p->status }}
-                                                </span>
+                                                <div class="badge badge-outline outline-green-500 text-green-500 text-sm">
+                                                    {{ $p->status }}</div>
                                             @elseif ($p->status == 'ditolak')
-                                                <span
-                                                    class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-white dark:bg-re-600">
-                                                    {{ $p->status }}
-                                                </span>
+                                                <div class="badge badge-outline outline-red-500 text-red-500 text-sm">
+                                                    {{ $p->status }}</div>
                                             @endif
                                         </td>
                                         <td class="px-4 py-3 text-xs">
@@ -194,89 +205,20 @@
                                                 </a>
                                             </div>
                                         </td>
-                                    </tr>
-                                @endforeach
 
-                            </tbody>
+                                    </tr>
+
+                                </tbody>
+                            @endforeach
                         </table>
                     </div>
-                    <div
-                        class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-800  sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-                        <span class="flex items-center col-span-3">
-                            Showing 21-30 of 100
-                        </span>
-                        <span class="col-span-2"></span>
-                        <!-- Pagination -->
-                        <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
-                            <nav aria-label="Table navigation">
-                                <ul class="inline-flex items-center">
-                                    <li>
-                                        <button
-                                            class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
-                                            aria-label="Previous">
-                                            <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
-                                                <path
-                                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                                    clip-rule="evenodd" fill-rule="evenodd"></path>
-                                            </svg>
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button
-                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                            1
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button
-                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                            2
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button
-                                            class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                            3
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button
-                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                            4
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <span class="px-3 py-1">...</span>
-                                    </li>
-                                    <li>
-                                        <button
-                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                            8
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button
-                                            class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                            9
-                                        </button>
-                                    </li>
-                                    <li>
-                                        <button
-                                            class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
-                                            aria-label="Next">
-                                            <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
-                                                <path
-                                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                                    clip-rule="evenodd" fill-rule="evenodd"></path>
-                                            </svg>
-                                        </button>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </span>
+                    <div class="mx-4 my-2">
+                        {{ $permintaan->links() }}
                     </div>
                 </div>
             </div>
+            {{-- Table Section End --}}
+
         </div>
     </main>
 

@@ -1,8 +1,10 @@
 @extends('layouts.operator-main')
 
 @section('content')
-    <main class="h-full bg-gray-50 my-4 overflow-y-auto">
+    <main class="h-full my-4 overflow-y-auto">
         <div class="container px-6 mx-auto grid">
+
+            {{-- Breadcrumb Section Start --}}
             <div class="text-sm mb-4 breadcrumbs">
                 <ul class="text-gray-600">
                     <li>
@@ -24,8 +26,12 @@
                     </li>
                 </ul>
             </div>
+            {{-- Breadcrumb Section End --}}
+
 
             <div class="flex gap-2">
+
+                {{-- Search Section Start --}}
                 <label class="input input-bordered w-full flex items-center gap-2 bg-white shadow-md">
                     <input type="text" id="searchInput" onkeyup="filterTable()"
                         class="input grow text-sm text-gray-600 border-none" placeholder="Cari..." />
@@ -35,6 +41,9 @@
                             clip-rule="evenodd" />
                     </svg>
                 </label>
+                {{-- Search Section End --}}
+
+                {{-- Filter Section Start --}}
                 <div class="dropdown dropdown-end dropdown-hover">
                     <div tabindex="0" role="button"
                         class="shadow-md btn border-gray-300 bg-white flex items-center justify-between px-4 py-2 text-sm font-medium  transition-colors duration-150 bg-transparent border rounded-lg active:bg-transparent hover:bg-transparent focus:outline-none focus:shadow-outline-transparent">
@@ -104,7 +113,9 @@
                         </div>
                     </div>
                 </div>
+                {{-- Filter Section End --}}
 
+                {{-- Tambah Barang Section Start --}}
                 <a href="tambah-barang"
                     class="shadow-md btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1 -ml-1" fill="currentColor"
@@ -114,6 +125,8 @@
                     </svg>
                     <span>Tambah barang</span>
                 </a>
+                {{-- Tambah Barang Section End --}}
+                
                 <button onclick="my_modal_1.showModal()"
                     class="shadow-md btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 -ml-1" fill="currentColor"
