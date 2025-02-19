@@ -528,7 +528,7 @@
                                             </a>
                                             <p
                                                 class="mb-3 font-normal text-xs xl:text-sm md:text-sm text-gray-700 dark:text-gray-400">
-                                                {{ $item->deskripsi }}
+                                                {{ Str::limit($item->deskripsi, 50, '...') }}
 
                                             </p>
                                             <div class="flex gap-2">
