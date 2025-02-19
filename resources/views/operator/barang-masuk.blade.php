@@ -412,9 +412,6 @@
                                                                                             {{ $dbm->kuantiti }}
                                                                                         </td>
                                                                                         <td class="px-4 py-3 text-xs">
-                                                                                            {{ $dbm->kuantiti }}
-                                                                                        </td>
-                                                                                        <td class="px-4 py-3 text-xs">
                                                                                             {{ $dbm->item->satuan }}
                                                                                         </td>
                                                                                     </tr>

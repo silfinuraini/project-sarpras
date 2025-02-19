@@ -13,8 +13,7 @@ class BarangKeluarController extends Controller
      */
     public function index()
     {
-        $barangKeluar = BarangKeluar::all();
-        $barangKeluar = BarangKeluar::all();
+        $barangKeluar = BarangKeluar::paginate(5);
         $detailBarangKeluar = DetailBarangKeluar::all();
         return view('operator.barang-keluar', [
             'barangKeluar' => $barangKeluar,
