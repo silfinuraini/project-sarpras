@@ -18,6 +18,34 @@
 
 <body>
     <div class="flex h-screen bg-gray-50 dark:bg-gray-900" :class="{ 'overflow-hidden': isSideMenuOpen }">
+
+        <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)">
+            @if (session('success'))
+                <div class="toast z-[999]">
+                    <div class="alert bg-green-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>{{ session('success') }}</span>
+                    </div>
+                </div>
+            @endif
+            @if (session('error'))
+                <div class="toast z-[999]">
+                    <div class="alert bg-red-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>{{ session('error') }}</span>
+                    </div>
+                </div>
+            @endif
+        </div>
+        
         <div class="flex flex-col flex-1 w-full">
             <!-- Navbar -->
             <div class="navbar bg-base-100 border">
@@ -451,21 +479,21 @@
                 <section>
                     <div class="container  mx-auto grid mt-5 my-10 p-2 ">
                         <div class="mb-5 min-w-min grid grid-cols-2 md:grid-cols-4 xl:grid-cols-4 gap-4">
-                            <div class="indicator">
-                                <span class="indicator-item badge bg-purple-700 text-white">{{ $jumlah }}</span>
+                            {{-- <div class="indicator"> --}}
+                                {{-- <span class="indicator-item badge bg-purple-700 text-white">{{ $jumlah }}</span> --}}
                                 <a href="{{ route('pengadaan') }}">
                                     <div class="bg-white shadow rounded-box p-4 sm:p-6 xl:p-8">
                                         <div class="flex items-center">
                                             <div class="flex-shrink-0">
                                                 <span
-                                                    class="text-md leading-none font-bold text-gray-900 mb-1">Pengadaan</span>
+                                                    class="text-md leading-none font-bold text-gray-900 mb-1">Pengadaan <span class="badge text-xs font-thin  bg-purple-700 text-white">{{ $jumlah }}</span></span>
                                                 <h3 class="text-xs xl:text-sm md:text-sm font-semibold text-gray-500">New
                                                     products this week</h3>
                                             </div>
                                         </div>
                                     </div>
                                 </a>
-                            </div>
+                            {{-- </div> --}}
                             
                             <a href="{{ route('permintaan') }}">
                                 <div class="bg-white shadow rounded-box p-4 sm:p-6 xl:p-8">

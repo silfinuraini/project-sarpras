@@ -42,30 +42,43 @@ class PermintaanController extends Controller
      */
     public function store(Request $request)
     {
-        $kode = 'PM' . rand(1000, 9999);
-
-        $kodePermintaan = $request->input('item');
-        $jumlah = count($kodePermintaan);
-
-        $permintaan = Permintaan::create([
-            'kode' => $kode,
-            'nip' => Auth::user()->nip,
-            'status' => 'menunggu',
-            'sifat' => $request->sifat,
-            'perihal' => $request->perihal,
-            'jumlah_item'  => $jumlah
-        ]);
-
-        for ($i = 0; $i < count($kodePermintaan); $i++) {
-            $detailPermintaan = DetailPermintaan::create([
-                'kode_permintaan' => $permintaan->kode,
-                'kode_item' => $kodePermintaan[$i],
-                'kuantiti' => $request->kuantiti[$i],
-                'kuantiti_disetujui' => 0
+        try {
+            $request->validate([
+                'sifat' => 'required|string|min:3',
+                'perihal' => 'required|string|min:3',
+                'item' => 'required|array|min:1', 
+                'kuantiti' => 'required|array|min:1',
             ]);
+        
+            $kode = 'PM' . rand(1000, 9999);
+        
+            $kodePermintaan = $request->input('item');
+            $jumlah = count($kodePermintaan);
+        
+            $permintaan = Permintaan::create([
+                'kode' => $kode,
+                'nip' => Auth::user()->nip,
+                'status' => 'menunggu',
+                'sifat' => $request->sifat,
+                'perihal' => $request->perihal,
+                'jumlah_item'  => $jumlah
+            ]);
+        
+            for ($i = 0; $i < count($kodePermintaan); $i++) {
+                DetailPermintaan::create([
+                    'kode_permintaan' => $permintaan->kode,
+                    'kode_item' => $kodePermintaan[$i],
+                    'kuantiti' => $request->kuantiti[$i],
+                    'kuantiti_disetujui' => 0
+                ]);
+            }
+        
+            return redirect()->route('dashboard.unit')->with('success', 'Permintaan berhasil dibuat.');
+        
+        } catch (\Throwable $th) {
+            return redirect()->route('dashboard.unit')->with('error', 'Terjadi kesalahan: ' . $th->getMessage());
         }
-
-        return redirect()->route('dashboard.unit');
+        
     }
 
     /**

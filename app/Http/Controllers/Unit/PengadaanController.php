@@ -21,14 +21,12 @@ class PengadaanController extends Controller
     {
         $item = Item::all();
         $nip = Auth::user()->nip;
+        $unit = Auth::user()->pegawai->nama;
         $kategori = Kategori::all(); 
-
-
-        $pegawai = Pegawai::where('nip', $nip)->get();
 
         $keranjang = Keranjang::where('nip', $nip)->get();
 
-        return view('unit.pengadaan', compact('item', 'keranjang', 'nip', 'kategori', 'pegawai'));
+        return view('unit.pengadaan', compact('item', 'keranjang', 'nip', 'kategori', 'unit'));
     }
 
     /**

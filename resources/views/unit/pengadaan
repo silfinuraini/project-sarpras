@@ -192,11 +192,13 @@
                                                         <div class="flex gap-2"></div>
                                                         <div class="modal-action">
                                                             <a href="{{ route('pengadaan') }}" class="btn">Tutup</a>
-                                                            <button type="button"
-                                                                onclick="document.getElementById('delete-form-{{ $k->id }}').submit();"
-                                                                class="btn bg-purple-700 text-white">
-                                                                Hapus
-                                                            </button>
+                                                            <form action="{{ route('keranjang.destroy', $k->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="btn bg-purple-700 text-white"
+                                                                    type="submit">Hapus</button>
+                                                            </form>
                                                         </div>
 
                                                     </div>
@@ -215,25 +217,17 @@
                     </div>
                 </div>
                 {{-- Table Section End --}}
+
+                <div class="col-span-3">
+                    <button type="submit"
+                        class="px-4 py-2 text-sm w-full font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-box active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                        Kirim
+                    </button>
+                </div>
                 
-                @if (isset($k))
-                    <div class="">
-                        <button type="submit" id="submitButton"
-                            class="mt-4 ml-auto flex min-w-xs px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                            Tambahkan
-                        </button>
-                    </div>
-                @endif
+            </div>
 
             </form>
-
-            @if (isset($k))
-                <form id="delete-form-{{ $k->id }}" action="{{ route('keranjang.destroy', $k->id) }}"
-                    method="POST">
-                    @csrf
-                    @method('DELETE')
-                </form>
-            @endif
 
             <script>
                 // Fitur Kuantiti
