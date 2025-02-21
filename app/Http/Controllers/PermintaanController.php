@@ -147,7 +147,7 @@ class PermintaanController extends Controller
         return redirect()->route('operator.permintaan');
     }
     
-    public function updateKuantiti(Request $request, string $id)
+    public function updateKuantitiDisetujui(Request $request, string $id)
     {
         $detailPermintaan = DetailPermintaan::where('id', $id)->first();
 

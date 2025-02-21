@@ -22,10 +22,10 @@ class PengadaanController extends Controller
         $user = User::with('pegawai')->get();
 
         $pengadaan = Pengadaan::with('pegawai')
-        ->whereIn('status', ['menunggu', 'ditolak', 'disetujui'])
-        ->orderByRaw("FIELD(status, 'menunggu', 'disetujui', 'ditolak')")
-        ->orderBy('created_at', 'desc')
-        ->paginate(7); 
+            ->whereIn('status', ['menunggu', 'ditolak', 'disetujui'])
+            ->orderByRaw("FIELD(status, 'menunggu', 'disetujui', 'ditolak')")
+            ->orderBy('created_at', 'desc')
+            ->paginate(7);
 
         return view('operator.pengadaan', compact('item', 'pengadaan', 'pegawai', 'user'));
     }
@@ -84,7 +84,7 @@ class PengadaanController extends Controller
         $pengadaan = Pengadaan::with('pegawai')
             ->where('kode', $kode)
             ->first();
- 
+
         return view('operator.detailpengadaan', compact('detailPengadaan', 'pengadaan', 'pegawai', 'item'));
     }
 
@@ -116,7 +116,25 @@ class PengadaanController extends Controller
         return redirect()->route('operator.pengadaan');
     }
 
-    public function updateKuantiti(Request $request, string $id)
+    public function updateKuantiti(Request $request, string $kode)
+    {
+        $pengadaan = DetailPengadaan::where('kode_pengadaan', $kode)->get();
+        // dd($pengadaan[0]);
+        for ($i = 0; $i < count($pengadaan); $i++) {
+            $detailPengadaan = DetailPengadaan::where('id', $pengadaan[$i]->id)->first();
+
+            if ($detailPengadaan) {
+                $detailPengadaan->update([
+                    'kuantiti' => $request->kuantiti[$i]
+                ]);
+            }
+        }
+
+        return redirect()->route('operator.pengadaan')->with('success', 'Kuantiti berhasil diperbarui!');
+    }
+
+
+    public function updateKuantitiDisetujui(Request $request, string $id)
     {
         DetailPengadaan::where('id', $id)->update([
             'kuantiti_disetujui' => $request->input('kuantiti_disetujui'),

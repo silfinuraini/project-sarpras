@@ -105,13 +105,14 @@ Route::post('operator/pengadaan', [App\Http\Controllers\PengadaanController::cla
 Route::get('operator/detailpengadaan/{kode}', [App\Http\Controllers\PengadaanController::class, 'show'])->name('operator.detailpengadaan');
 Route::get('operator/editpengadaan/{kode}', [App\Http\Controllers\PengadaanController::class, 'edit'])->name('operator.editpengadaan');
 Route::put('operator/{kode}/detailpengadaan', [App\Http\Controllers\PengadaanController::class, 'update'])->name('operator.updatepengadaan');
-Route::post('operator/{id}/detailpengadaan', [App\Http\Controllers\PengadaanController::class, 'updateKuantiti'])->name('operator.updatekuantitipengadaan');
+Route::post('operator/{id}/detailpengadaan', [App\Http\Controllers\PengadaanController::class, 'updateKuantitiDisetujui'])->name('operator.updatekuantitipengadaan');
+Route::put('operator/{kode}/editpengadaan', [App\Http\Controllers\PengadaanController::class, 'updateKuantiti'])->name('operator.updatekuantiti');
 
 Route::get('operator/permintaan', [PermintaanController::class, 'index'])->name('operator.permintaan');
 Route::post('operator/permintaan', [PermintaanController::class, 'store'])->name('operator.tambahpermintaan');
 Route::get('operator/detailpermintaan/{kode}', [App\Http\Controllers\PermintaanController::class, 'show'])->name('operator.detailpermintaan');
 Route::put('operator/{kode}/detailpermintaan', [App\Http\Controllers\PermintaanController::class, 'update'])->name('operator.updatepermintaan');
-Route::post('operator/{id}/detailpermintaan', [App\Http\Controllers\PermintaanController::class, 'updateKuantiti'])->name('operator.updatekuantitipermintaan');
+Route::post('operator/{id}/detailpermintaan', [App\Http\Controllers\PermintaanController::class, 'updateKuantitiDisetujui'])->name('operator.updatekuantitipermintaan');
 
 
 

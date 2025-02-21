@@ -3,6 +3,8 @@
 @section('content')
     <main class="h-full bg-gray-50 my-4 overflow-y-auto">
         <div class="container px-6 mx-auto grid">
+
+            {{-- Breadcrumbs Section Start --}}
             <div class="text-sm mb-4 breadcrumbs text-gray-800">
                 <ul>
                     <li>
@@ -22,6 +24,7 @@
                     </li>
                 </ul>
             </div>
+            {{-- Breadcrumbs Section End --}}
 
             <div class="flex mb-2 gap-2">
                 {{-- Search Start --}}
@@ -45,6 +48,7 @@
                 </select>
                 {{-- Filter End --}}
 
+                {{-- Add Submission Start --}}
                 <button onclick="formPengadaan.showModal()"
                     class=" btn flex items-center justify-between px-4 py-2 text-sm font-medium border-none text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple ml-auto"
                     fdprocessedid="allgztj">
@@ -55,7 +59,6 @@
                     </svg>
                 </button>
 
-                <!-- Open the modal using ID.showModal() method -->
                 <dialog id="formPengadaan" class="modal">
                     <div class="modal-box bg-white text-gray-800 ">
                         <form action="{{ route('operator.tambahpengadaan') }}" method="POST">
@@ -116,6 +119,8 @@
                         <button>close</button>
                     </form>
                 </dialog>
+                {{-- Add Submission Start --}}
+
             </div>
             <script>
                 $(document).ready(function() {
@@ -183,17 +188,25 @@
                                         <td class="px-4 py-3 text-xs">
                                             {{ $p->created_at }}
                                         </td>
+
                                         <td class="px-4 py-3">
                                             <div class="flex items-center space-x-4 text-sm">
-                                                <a href={{ route('operator.editpengadaan', $p->kode) }}
-                                                    class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
-                                                    aria-label="Delete">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
-                                                        aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                                                        <path
-                                                            d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
-                                                    </svg>
-                                                </a>
+
+                                                @if (Auth::user()->role == 'admin')
+                                                    @if ($p->status == 'menunggu')
+                                                        <a href={{ route('operator.editpengadaan', $p->kode) }}
+                                                            class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                                                            aria-label="Delete">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
+                                                                aria-hidden="true" fill="currentColor"
+                                                                viewBox="0 0 20 20">
+                                                                <path
+                                                                    d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
+                                                            </svg>
+                                                        </a>
+                                                    @endif
+                                                @endif
+
                                                 <a href={{ route('operator.detailpengadaan', $p->kode) }}
                                                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                                     aria-label="Delete">
