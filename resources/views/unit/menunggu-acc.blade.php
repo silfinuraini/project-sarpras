@@ -19,7 +19,7 @@
                     <div class="grid grid-cols-2 gap-4 px-4">
                         @foreach ($pengadaan as $pgd)
                             @if ($pgd->status == 'menunggu')
-                                <div class="card border border-gray-300 w-full mt-3 bg-base-100 shadow-md">
+                                <div class="card border border-gray-300 w-full mt-2 bg-base-100 shadow-md">
                                     <div class="card-body" style="padding: 1rem">
                                         <div class="flex">
                                             <p class="font-bold text-md text-purple-700">{{ ucfirst($pgd->perihal) }}</p>
@@ -53,7 +53,7 @@
                     <div class="grid grid-cols-2 gap-4 px-4">
                         @foreach ($permintaan as $pm)
                             @if ($pm->status == 'menunggu')
-                                <div class="card border border-gray-300 w-full mt-3 bg-base-100 shadow-md">
+                                <div class="card border border-gray-300 w-full mt-2 bg-base-100 shadow-md">
                                     <div class="card-body" style="padding: 1rem">
                                         <div class="flex">
                                             <p class="font-bold text-md text-purple-700">{{ ucfirst($pm->perihal) }}</p>

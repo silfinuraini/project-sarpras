@@ -79,7 +79,7 @@ class KeranjangController extends Controller
     public function destroy(string $id)
     {
 
-        dd($id);
+        // dd($id);
         $keranjang = Keranjang::find($id);
 
         // dd($keranjang);

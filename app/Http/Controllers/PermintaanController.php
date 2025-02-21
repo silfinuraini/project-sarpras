@@ -27,7 +27,7 @@ class PermintaanController extends Controller
         ->whereIn('status', ['menunggu', 'ditolak', 'disetujui'])
         ->orderByRaw("FIELD(status, 'menunggu', 'disetujui', 'ditolak')")
         ->orderBy('created_at', 'desc')
-        ->paginate(10); 
+        ->paginate(7); 
 
         return view('operator.permintaan', compact('item', 'permintaan', 'pegawai', 'user'));
     }

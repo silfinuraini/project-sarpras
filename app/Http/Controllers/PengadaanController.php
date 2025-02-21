@@ -20,7 +20,12 @@ class PengadaanController extends Controller
         $item = Item::all();
         $pegawai = Pegawai::all();
         $user = User::with('pegawai')->get();
-        $pengadaan = Pengadaan::withAggregate('pegawai', 'nama')->get();
+
+        $pengadaan = Pengadaan::with('pegawai')
+        ->whereIn('status', ['menunggu', 'ditolak', 'disetujui'])
+        ->orderByRaw("FIELD(status, 'menunggu', 'disetujui', 'ditolak')")
+        ->orderBy('created_at', 'desc')
+        ->paginate(7); 
 
         return view('operator.pengadaan', compact('item', 'pengadaan', 'pegawai', 'user'));
     }
