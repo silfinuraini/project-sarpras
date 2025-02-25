@@ -33,8 +33,8 @@
 
                 {{-- Search Section Start --}}
                 <label class="input input-bordered w-full flex items-center gap-2 bg-white shadow-md">
-                    <input type="text" id="searchInput" onkeyup="filterTable()"
-                        class="input grow text-sm text-gray-600 border-none" placeholder="Cari..." />
+                    <input type="text" id="searchInput" class="input grow text-sm text-gray-600 border-none"
+                        placeholder="Cari..." />
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="" class="h-4 w-4 opacity-70">
                         <path fill-rule="evenodd"
                             d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
@@ -126,7 +126,7 @@
                     <span>Tambah barang</span>
                 </a>
                 {{-- Tambah Barang Section End --}}
-                
+
                 <button onclick="my_modal_1.showModal()"
                     class="shadow-md btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 -ml-1" fill="currentColor"
@@ -204,7 +204,7 @@
             <div class="flex items-center bg-white border border-gray-300 rounded-box shadow-md dark:bg-gray-800 mt-5">
                 <div class="w-full overflow-hidden rounded-lg mb-2">
                     <div class="w-full overflow-x-auto">
-                        <table class="w-full whitespace-no-wrap" id="itemsTable">
+                        <table class="w-full whitespace-no-wrap" id="search-table">
                             <thead>
                                 <tr
                                     class="text-xs font-semibold tracking-wide text-left text-gray-600 uppercase border-b dark:border-gray-600  dark:text-gray-400 dark:bg-gray-800">
@@ -220,8 +220,8 @@
 
 
 
-                            @foreach ($items as $item)
-                                <tbody class="bg-white divide-y dark:divide-gray-600 dark:bg-gray-800">
+                            <tbody class="bg-white divide-y dark:divide-gray-600 dark:bg-gray-800">
+                                @foreach ($items as $item)
                                     <tr class="text-gray-600 dark:text-gray-400">
                                         <td class="px-4 py-3 text-sm font-semibold">
                                             {{ $item->kode }}
@@ -237,13 +237,14 @@
                                                 </div>
                                                 <div class="ml-2">
                                                     <p class="font-semibold flex gap-1">{{ $item->nama }} @if ($item->stok <= $item->stok_minimum)
-                                                            <span class="text-red-500"><svg xmlns="http://www.w3.org/2000/svg" width="13"
-                                                                class="text-warning" height="13"
-                                                                viewBox="0 0 24 24">
-                                                                <rect width="13" height="13" fill="none" />
-                                                                <path fill="currentColor"
-                                                                    d="M2.725 21q-.275 0-.5-.137t-.35-.363t-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3t.488.125t.387.375l9.25 16q.15.25.138.513t-.138.487t-.35.363t-.5.137zM12 18q.425 0 .713-.288T13 17t-.288-.712T12 16t-.712.288T11 17t.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10t-.712.288T11 11v3q0 .425.288.713T12 15" />
-                                                            </svg></span>
+                                                            <span class="text-red-500"><svg
+                                                                    xmlns="http://www.w3.org/2000/svg" width="13"
+                                                                    class="text-warning" height="13"
+                                                                    viewBox="0 0 24 24">
+                                                                    <rect width="13" height="13" fill="none" />
+                                                                    <path fill="currentColor"
+                                                                        d="M2.725 21q-.275 0-.5-.137t-.35-.363t-.137-.488t.137-.512l9.25-16q.15-.25.388-.375T12 3t.488.125t.387.375l9.25 16q.15.25.138.513t-.138.487t-.35.363t-.5.137zM12 18q.425 0 .713-.288T13 17t-.288-.712T12 16t-.712.288T11 17t.288.713T12 18m0-3q.425 0 .713-.288T13 14v-3q0-.425-.288-.712T12 10t-.712.288T11 11v3q0 .425.288.713T12 15" />
+                                                                </svg></span>
                                                         @endif
                                                     </p>
                                                     <p class="text-xs text-gray-800 dark:text-gray-400">
@@ -481,13 +482,12 @@
                                             </div>
                                         </td>
                                     </tr>
-
-                                </tbody>
-                            @endforeach
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
                     <div class="mx-4 my-2">
-                        {{ $items->links() }}
+                        {{-- {{ $items->links() }} --}}
                     </div>
                 </div>
             </div>
@@ -495,25 +495,23 @@
     </main>
 
     <script>
-        function filterTable() {
-            // Get the input value and table elements
-            let input = document.getElementById("searchInput");
-            let filter = input.value.toLowerCase();
-            let table = document.getElementById("itemsTable");
-            let tr = table.getElementsByTagName("tr");
-
-            // Loop through all table rows and hide those that don't match the search query
-            for (let i = 1; i < tr.length; i++) {
-                let td = tr[i].getElementsByTagName("td");
-                let found = false;
-                for (let j = 0; j < td.length; j++) {
-                    if (td[j] && td[j].innerText.toLowerCase().includes(filter)) {
-                        found = true;
-                        break;
-                    }
-                }
-                tr[i].style.display = found ? "" : "none";
-            }
+        if (document.getElementById("search-table") && typeof simpleDatatables.DataTable !== 'undefined') {
+            const dataTable = new simpleDatatables.DataTable("#search-table", {
+                searchable: false,
+                sortable: false,
+                perPageSelect: false
+            });
+    
+            document.getElementById("searchInput").addEventListener("input", (e) => dataTable.search(e.target.value));
+    
+            document.querySelector(".datatable-top")?.remove();
+            document.querySelector(".datatable-info")?.classList.add("mx-4");
+            document.querySelector("div.w-full.overflow-hidden.rounded-lg.mb-2")?.classList.replace("rounded-lg", "rounded-box");
+    
+            document.querySelector(".datatable-bottom")?.classList.forEach(cls => {
+                if (cls.startsWith("mt-")) document.querySelector(".datatable-bottom").classList.remove(cls);
+            });
         }
     </script>
+    
 @endsection

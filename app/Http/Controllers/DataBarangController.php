@@ -27,12 +27,12 @@ class  DataBarangController extends Controller
             })
             ->orderByRaw('stok <= stok_minimum DESC') 
             ->orderBy('nama', 'ASC') 
-            ->paginate(5);
+            ->get();
 
 
 
         // Alternatif untuk withQueryString()
-        $items->appends(request()->query());
+        // $items->appends(request()->query());
 
         // Check if it's an AJAX request
         if ($request->ajax()) {
