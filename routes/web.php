@@ -6,6 +6,7 @@ use App\Http\Controllers\DataBarangController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KelolaAkunController;
 use App\Http\Controllers\KeranjangController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PengadaanController as ControllersPengadaanController;
@@ -61,6 +62,9 @@ Route::middleware(['auth'])->group(function() {
 // Route::get('admin/dashboard', [LoginController::class, 'index'])->middleware(['auth', 'operator'])->name('dashboard.admin');
 // Route::get('pengawas/dashboard', [LoginController::class, 'index'])->middleware(['auth', 'operator'])->name('dashboard.pengawas');
 Route::get('operator/data-barang', [DataBarangController::class, 'index'])->name('databarang');
+
+Route::get('operator/laporan', [LaporanController::class, 'index'])->name('laporan');
+Route::get('operator/{kode}/detail-laporan', [LaporanController::class, 'detailLaporan'])->name('laporan.detail');
 
 
 Route::get('operator/tambah-barang', [DataBarangController::class, 'tambahbarang'])->name('item.index');
