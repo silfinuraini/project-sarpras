@@ -142,48 +142,36 @@
                 <dialog id="my_modal_1" class="modal">
                     <div class="modal-box">
                         <h3 class="font-bold text-lg mb-4">Import data</h3>
+                        <form action="{{ route('databarang.import') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
 
-                        <div class="flex items-center justify-center w-full">
-                            <label for="dropzone-file"
-                                class="flex flex-col items-center justify-center w-full h-55 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-600 hover:bg-gray-100 dark:border-gray-800 dark:hover:border-gray-600 dark:hover:bg-gray-800">
-                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                    <svg class="w-8 h-8 mb-4 text-gray-600 dark:text-gray-400" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                    </svg>
-                                    <p class="mb-2 text-sm text-gray-800 dark:text-gray-800 font-medium"><span
-                                            class="font-semibold text-purple-600">Click to upload</span> or drag
-                                        and drop</p>
-                                    <p class="text-xs text-gray-600 dark:text-gray-400">SVG, PNG, JPG or GIF
-                                        (MAX. 800x400px)</p>
-                                </div>
-                                <input id="dropzone-file" type="file" class="hidden" />
-                            </label>
-                        </div>
+                            <div class="flex items-center justify-center w-full">
+                                <input type="file" name="file" class="file-input file-input-ghost w-full max-w-xs" />
+                            </div>
 
-                        <div class="divider text-sm">Belum punya format?</div>
+                            <div class="divider text-sm">Belum punya format?</div>
 
-                        <a class="flex justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 transition-colors duration-150 bg-transparent border border-purple-600 rounded-lg active:bg-purple-600 active:text-white hover:text-white hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-                            aria-label="Like" href="edit-akun.html">
+                            <a class="flex justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 transition-colors duration-150 bg-transparent border border-purple-600 rounded-lg active:bg-purple-600 active:text-white hover:text-white hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                                aria-label="Like" href="edit-akun.html">
 
-                            Unduh format
-                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 384 512"
-                                class="svg-inline--fa fa-arrow-down-to-line fa-fw fa-lg">
-                                <path fill="currentColor"
-                                    d="M32 480c-17.7 0-32-14.3-32-32s14.3-32 32-32l320 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 480zM214.6 342.6c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 242.7 160 64c0-17.7 14.3-32 32-32s32 14.3 32 32l0 178.7 73.4-73.4c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3l-128 128z"
-                                    class=""></path>
-                            </svg>
+                                Unduh format
+                                <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 384 512"
+                                    class="svg-inline--fa fa-arrow-down-to-line fa-fw fa-lg">
+                                    <path fill="currentColor"
+                                        d="M32 480c-17.7 0-32-14.3-32-32s14.3-32 32-32l320 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 480zM214.6 342.6c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 242.7 160 64c0-17.7 14.3-32 32-32s32 14.3 32 32l0 178.7 73.4-73.4c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3l-128 128z"
+                                        class=""></path>
+                                </svg>
 
-                        </a>
+                            </a>
 
-                        <div class="flex">
-                            <button
-                                class="mt-4  btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                                <span>Import</span>
-                            </button>
-                        </div>
+                            <div class="flex">
+                                <button type="submit"
+                                    class="mt-4  btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                                    <span>Import</span>
+                                </button>
+                            </div>
+
+                        </form>
 
                     </div>
                     <form method="dialog" class="modal-backdrop">
@@ -191,7 +179,7 @@
                     </form>
                 </dialog>
 
-                <a href="{{ route('databarang.export') }}" 
+                <a href="{{ route('databarang.export') }}"
                     class=" btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple ml-auto">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" aria-hidden="true"
                         viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
@@ -502,17 +490,17 @@
                 sortable: false,
                 perPageSelect: false
             });
-    
+
             document.getElementById("searchInput").addEventListener("input", (e) => dataTable.search(e.target.value));
-    
+
             document.querySelector(".datatable-top")?.remove();
             document.querySelector(".datatable-info")?.classList.add("mx-4");
-            document.querySelector("div.w-full.overflow-hidden.rounded-lg.mb-2")?.classList.replace("rounded-lg", "rounded-box");
-    
+            document.querySelector("div.w-full.overflow-hidden.rounded-lg.mb-2")?.classList.replace("rounded-lg",
+                "rounded-box");
+
             document.querySelector(".datatable-bottom")?.classList.forEach(cls => {
                 if (cls.startsWith("mt-")) document.querySelector(".datatable-bottom").classList.remove(cls);
             });
         }
     </script>
-    
 @endsection

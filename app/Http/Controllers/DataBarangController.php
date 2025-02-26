@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\DataBarangExport;
 use App\Helpers\ImageHelper;
+use App\Imports\DataBarangImport;
 use App\Models\Item;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
@@ -49,7 +50,27 @@ class  DataBarangController extends Controller
 
     public function export_excel()
     {
-        return Excel::download(new DataBarangExport, 'databarang.xlsx');
+        return Excel::download(new DataBarangExport, 'data_barang.xlsx');
+    }
+
+    public function import(Request $request) 
+    {
+        // dd($request);
+        try {
+            $request->validate([
+                'file' => 'required|mimes:xlsx,csv',
+            ]);
+
+            Excel::import(new DataBarangImport, $request->file('file'));
+
+            return redirect()->route('databarang')->with('success', 'Barang berhasil ditambahkan.');
+        } catch (\Throwable $th) {
+            return redirect()->route('databarang')->with('error', $th->getMessage());
+        }
+        
+        // Excel::import(new DataBarangImport, 'data_barang.xlsx');
+        
+        // return redirect()->route('databarang')->with('success', 'Barang berhasil ditambahkan.');
     }
 
     public function tambahbarang()

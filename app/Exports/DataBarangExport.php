@@ -34,7 +34,7 @@ class DataBarangExport implements FromCollection, WithHeadings, WithMapping
             'Harga',
             'Stok',
             'Stok Minimum',
-            'Kategori',
+            'Kode Kategori',
             'Deskripsi',
             'Tanggal Dibuat',
         ];
@@ -53,10 +53,10 @@ class DataBarangExport implements FromCollection, WithHeadings, WithMapping
             $item->ukuran ?? '-',
             $item->merk,
             $item->satuan,
-            number_format($item->harga, 0, ',', '.'),
+            $item->harga,
             $item->stok,
             $item->stok_minimum,
-            optional($item->kategori)->nama ?? '-', 
+            $item->kategori_id,
             $item->deskripsi,
             $item->created_at->format('d-m-Y'),
         ];

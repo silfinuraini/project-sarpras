@@ -63,6 +63,7 @@ Route::middleware(['auth'])->group(function() {
 // Route::get('pengawas/dashboard', [LoginController::class, 'index'])->middleware(['auth', 'operator'])->name('dashboard.pengawas');
 Route::get('operator/data-barang', [DataBarangController::class, 'index'])->name('databarang');
 Route::get('operator/data-barang/export-excel', [DataBarangController::class, 'export_excel'])->name('databarang.export');
+Route::post('operator/data-barang/import', [DataBarangController::class, 'import'])->name('databarang.import');
 
 Route::get('operator/laporan', [LaporanController::class, 'index'])->name('laporan');
 Route::get('operator/{kode}/detail-laporan', [LaporanController::class, 'detailLaporan'])->name('laporan.detail');
