@@ -62,8 +62,10 @@ Route::middleware(['auth'])->group(function() {
 // Route::get('admin/dashboard', [LoginController::class, 'index'])->middleware(['auth', 'operator'])->name('dashboard.admin');
 // Route::get('pengawas/dashboard', [LoginController::class, 'index'])->middleware(['auth', 'operator'])->name('dashboard.pengawas');
 Route::get('operator/data-barang', [DataBarangController::class, 'index'])->name('databarang');
-Route::get('operator/data-barang/export-excel', [DataBarangController::class, 'export_excel'])->name('databarang.export');
+Route::get('operator/data-barang/export-excel', [DataBarangController::class, 'export_excel'])->name('databarang.excel');
+Route::get('operator/data-barang/export-pdf', [DataBarangController::class, 'export_pdf'])->name('databarang.pdf');
 Route::post('operator/data-barang/import', [DataBarangController::class, 'import'])->name('databarang.import');
+Route::get('operator/data-barang/format', [DataBarangController::class, 'format'])->name('databarang.format');
 
 Route::get('operator/laporan', [LaporanController::class, 'index'])->name('laporan');
 Route::get('operator/{kode}/detail-laporan', [LaporanController::class, 'detailLaporan'])->name('laporan.detail');

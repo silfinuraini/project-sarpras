@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Exports\DataBarangExport;
+use App\Exports\FormatBarangExport;
 use App\Helpers\ImageHelper;
 use App\Imports\DataBarangImport;
 use App\Models\Item;
 use App\Models\Kategori;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -48,9 +50,26 @@ class  DataBarangController extends Controller
         return view('operator.data-barang', compact('items', 'kategori', 'selectedCategory'));
     }
 
+    public function format() 
+    {
+        return Excel::download(new FormatBarangExport, 'format_data_barang.xlsx');
+    }
+
+
     public function export_excel()
     {
         return Excel::download(new DataBarangExport, 'data_barang.xlsx');
+    }
+
+    public function export_pdf()
+    {
+        $items = Item::with('kategori')->get();
+
+        // dd($items);
+
+        $pdf = Pdf::loadView('operator.pdf.data-barang', ['items'=>$items])->setPaper('A4', 'potrait');
+        
+        return $pdf->download('laporan_data_barang.pdf');
     }
 
     public function import(Request $request) 
