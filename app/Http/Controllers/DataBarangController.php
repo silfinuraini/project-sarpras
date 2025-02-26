@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DataBarangExport;
 use App\Helpers\ImageHelper;
 use App\Models\Item;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class  DataBarangController extends Controller
 {
@@ -45,6 +47,10 @@ class  DataBarangController extends Controller
         return view('operator.data-barang', compact('items', 'kategori', 'selectedCategory'));
     }
 
+    public function export_excel()
+    {
+        return Excel::download(new DataBarangExport, 'databarang.xlsx');
+    }
 
     public function tambahbarang()
     {
