@@ -9,6 +9,9 @@ use Maatwebsite\Excel\Concerns\ToModel;
 
 class DataBarangImport implements ToModel
 {
+
+    private $isFirstRow = true;
+
     /**
     * @param array $row
     *
@@ -16,6 +19,12 @@ class DataBarangImport implements ToModel
     */
     public function model(array $row)
     {
+        if ($this->isFirstRow) {
+            $this->isFirstRow = false;
+            return null;
+        }
+
+
         $kategori = Kategori::find($row[10]); 
 
         $namaKode = $kategori ? $kategori->alias : 'UNK';

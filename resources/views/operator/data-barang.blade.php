@@ -510,8 +510,8 @@
                 searchable: true,
                 sortable: false,
                 paging: true, // enable or disable pagination
-                perPage: 4, // set the number of rows per page
-                perPageSelect: [4, 5, 10, 20, 50], // set the number of rows per page options
+                perPage: 5, // set the number of rows per page
+                perPageSelect: [ 5, 10, 20, 50], // set the number of rows per page options
                 firstLast: true, // enable or disable the first and last buttons
                 nextPrev: true,
             });
