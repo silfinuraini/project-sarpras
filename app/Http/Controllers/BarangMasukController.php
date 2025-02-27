@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BarangMasukExport;
 use App\Helpers\ImageHelper;
 use App\Models\BarangMasuk;
 use App\Models\DetailBarangMasuk;
@@ -11,8 +12,10 @@ use App\Models\Pegawai;
 use App\Models\Pengadaan;
 use App\Models\Supplier;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BarangMasukController extends Controller
 {
@@ -24,7 +27,7 @@ class BarangMasukController extends Controller
         $item = Item::all();
         $supplier = Supplier::all();
         $pegawai = Pegawai::all();
-        $barangmasuk = BarangMasuk::with('pegawai', 'supplier')->orderBy('created_at', 'DESC')->paginate(5);
+        $barangmasuk = BarangMasuk::with('pegawai', 'supplier')->orderBy('created_at', 'DESC')->get();
         $detailBM = DetailBarangMasuk::with('item')->get();
 
         return view('operator.barang-masuk', compact('item', 'barangmasuk', 'supplier', 'detailBM'));
@@ -223,4 +226,19 @@ class BarangMasukController extends Controller
     {
         //
     }
+
+    public function export_excel() 
+    {
+        return Excel::download(new BarangMasukExport, 'barang_masuk.xlsx');
+    }
+
+    public function export_pdf() 
+    {
+        $barangMasuk = BarangMasuk::with('pegawai', 'supplier')->get();
+
+        $pdf = Pdf::loadview('operator.pdf.barang-masuk', ['barangMasuk' => $barangMasuk])->setPaper('A4', 'potrait');
+
+        return $pdf->download('laporan_barang_masuk.pdf');
+    }
+
 }

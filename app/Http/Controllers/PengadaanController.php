@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PengadaanExport;
 use App\Models\BarangKeluar;
 use App\Models\DetailPengadaan;
 use App\Models\Item;
 use App\Models\Pegawai;
 use App\Models\Pengadaan;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PengadaanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $item = Item::all();
@@ -25,24 +25,12 @@ class PengadaanController extends Controller
             ->whereIn('status', ['menunggu', 'ditolak', 'disetujui'])
             ->orderByRaw("FIELD(status, 'menunggu', 'disetujui', 'ditolak')")
             ->orderBy('created_at', 'desc')
-            ->paginate(7);
+            ->get();
 
+            // dd($pengadaan);
         return view('operator.pengadaan', compact('item', 'pengadaan', 'pegawai', 'user'));
     }
 
-    public function detail() {}
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $kode = 'PGD' . rand(1000, 9999);
@@ -71,9 +59,6 @@ class PengadaanController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $kode)
     {
         $item = Item::all();
@@ -88,9 +73,6 @@ class PengadaanController extends Controller
         return view('operator.detailpengadaan', compact('detailPengadaan', 'pengadaan', 'pegawai', 'item'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $kode)
     {
         $pengadaan = Pengadaan::with('pegawai')->where('kode', $kode)->first();
@@ -98,9 +80,6 @@ class PengadaanController extends Controller
         return view('operator.edit-pengadaan', compact('pengadaan', 'detailPengadaan'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $kode)
     {
         Pengadaan::where('kode', $kode)->update([
@@ -144,11 +123,16 @@ class PengadaanController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function export_excel()
     {
-        //
+        return Excel::download(new PengadaanExport, 'pengadaan.xlsx');
+    }
+
+    public function export_pdf()
+    {
+        $pengadaan = Pengadaan::with('pegawai')->get();
+ 
+    	$pdf = Pdf::loadview('operator.pdf.pengadaan',['pengadaan'=>$pengadaan]);
+    	return $pdf->download('laporan_pengadaan.pdf');
     }
 }

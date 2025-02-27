@@ -33,7 +33,7 @@
 
                 {{-- Button formTambah --}}
                 <a href="{{ route('barangmasuk.create') }}" {{-- onclick="formTambah.showModal()" --}}
-                    class="flex w-full items-center justify-between p-4 mb-2 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">
+                    class="flex items-center justify-between p-4 mb-2 text-sm font-semibold text-purple-100 bg-purple-600 rounded-lg shadow-md focus:outline-none focus:shadow-outline-purple">
                     <div class="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="currentColor"
                             class="bi bi-clipboard-plus-fill" viewBox="0 0 16 16">
@@ -102,99 +102,27 @@
                     </form>
                 </dialog>
 
-                {{-- Button formImport --}}
-                <button onclick="formImport.showModal()"
-                    class="ml-auto btn border-none flex items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2 -ml-1" fill="currentColor"
-                        aria-hidden="true"
-                        viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                        <path
-                            d="M128 64c0-35.3 28.7-64 64-64H352V128c0 17.7 14.3 32 32 32H512V448c0 35.3-28.7 64-64 64H192c-35.3 0-64-28.7-64-64V336H302.1l-39 39c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l80-80c9.4-9.4 9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l39 39H128V64zm0 224v48H24c-13.3 0-24-10.7-24-24s10.7-24 24-24H128zM512 128H384V0L512 128z" />
-                    </svg>
-                    <span>Import</span>
-                </button>
-
-                {{-- Modal formImport --}}
-                <dialog id="formImport" class="modal">
-                    <div class="modal-box bg-white text-gray-700 shadow-md">
-                        <h3 class="font-bold text-lg mb-4">Import data</h3>
-                        <div class="flex items-center justify-center w-full">
-                            <label for="dropzone-file"
-                                class="flex flex-col items-center justify-center w-full h-55 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer  dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                    <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                    </svg>
-                                    <p class="mb-2 text-sm text-gray-800 dark:text-gray-800 font-medium"><span
-                                            class="font-semibold text-purple-600">Click to upload</span> or drag
-                                        and drop</p>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF
-                                        (MAX. 800x400px)</p>
-                                </div>
-                                <input id="dropzone-file" type="file" class="hidden" />
-                            </label>
-                        </div>
-
-                        <div class="divider text-sm">Belum punya format?</div>
-
-                        <a class="flex justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 transition-colors duration-150 bg-transparent border border-purple-600 rounded-lg active:bg-purple-600 active:text-white hover:text-white hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-                            aria-label="Like" href="edit-akun.html">
-
-                            Unduh format
-                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 384 512"
-                                class="svg-inline--fa fa-arrow-down-to-line fa-fw fa-lg">
-                                <path fill="currentColor"
-                                    d="M32 480c-17.7 0-32-14.3-32-32s14.3-32 32-32l320 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 480zM214.6 342.6c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 242.7 160 64c0-17.7 14.3-32 32-32s32 14.3 32 32l0 178.7 73.4-73.4c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3l-128 128z"
-                                    class=""></path>
-                            </svg>
-
-                        </a>
-
-                        <div class="flex">
-                            <button
-                                class="mt-4 ml-auto btn flex items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                                <span>Import</span>
-                            </button>
-                        </div>
-
-                    </div>
-                    <form method="dialog" class="modal-backdrop">
-                        <button>close</button>
-                    </form>
-                </dialog>
-
                 {{-- Button export --}}
-                <button
-                    class="shadow-md btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple ml-auto">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" aria-hidden="true"
-                        viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                        <path
-                            d="M288 109.3V352c0 17.7-14.3 32-32 32s-32-14.3-32-32V109.3l-73.4 73.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l128-128c12.5-12.5 32.8-12.5 45.3 0l128 128c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L288 109.3zM64 352H192c0 35.3 28.7 64 64 64s64-28.7 64-64H448c35.3 0 64 28.7 64 64v32c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V416c0-35.3 28.7-64 64-64zM432 456a24 24 0 1 0 0-48 24 24 0 1 0 0 48z" />
-                    </svg>
-                </button>
+                <div class="dropdown dropdown-hover">
+                    <div tabindex="0" role="button"
+                        class="mb-1 btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" aria-hidden="true"
+                            viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path
+                                d="M288 109.3V352c0 17.7-14.3 32-32 32s-32-14.3-32-32V109.3l-73.4 73.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l128-128c12.5-12.5 32.8-12.5 45.3 0l128 128c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L288 109.3zM64 352H192c0 35.3 28.7 64 64 64s64-28.7 64-64H448c35.3 0 64 28.7 64 64v32c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V416c0-35.3 28.7-64 64-64zM432 456a24 24 0 1 0 0-48 24 24 0 1 0 0 48z" />
+                        </svg> 
+                        <span>Export</span>
+                    </div>
+                    <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                        <li><a href="{{ route('barangmasuk.excel') }}">Excel</a></li>
+                        <li><a href="{{ route('barangmasuk.pdf') }}">PDF</a></li>
+                    </ul>
+                </div>
 
-            </div>
-
-            <div class="flex mb-2 gap-2">
-                {{-- Search bar --}}
-                <label class="input input-bordered w-full flex items-center gap-2 bg-white shadow-md">
-                    <input type="text" id="searchInput" onkeyup="filterTable()"
-                        class="input grow text-sm text-gray-600 border-none" placeholder="Cari..." />
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill=""
-                        class="h-4 w-4 opacity-70">
-                        <path fill-rule="evenodd"
-                            d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                            clip-rule="evenodd" />
-                    </svg>
-                </label>
-
-                {{-- Filter --}}
-                <select class="select select-bordered max-w-xs bg-white text-gray-700 shadow-md">
-                    <option disabled selected>Kategori</option>
-                    <option>ATK</option>
+                 {{-- Filter --}}
+                 <select id="categoryFilter" class="select select-bordered max-w-xs bg-white text-gray-700 shadow-md ml-auto">
+                    <option disabled selected>Supplier</option>
+                    <option>Artmedia</option>
                     <option>Alat kebersihan</option>
                 </select>
 
@@ -207,13 +135,13 @@
                 </select>
 
                 <input type="date" class="input input-bordered max-w-xs bg-white text-gray-700 shadow-md">
-            </div>
 
+            </div>
             {{-- Table Section Start --}}
             <div class="flex items-center bg-white border border-gray-300 rounded-box shadow-md dark:bg-gray-800 mt-2">
-                <div class="w-full overflow-hidden rounded-lg mb-2">
+                <div class="w-full overflow-hidden rounded-lg">
                     <div class="w-full overflow-x-auto">
-                        <table class="w-full whitespace-no-wrap" id="itemsTable">
+                        <table class="w-full whitespace-no-wrap" id="search-table">
                             <thead>
                                 <tr
                                     class="text-xs font-semibold tracking-wide text-left text-gray-600 uppercase border-b dark:border-gray-600  dark:text-gray-400 dark:bg-gray-800">
@@ -226,8 +154,8 @@
                                 </tr>
                             </thead>
 
-                            @foreach ($barangmasuk as $bm)
-                                <tbody class="bg-white divide-y dark:divide-gray-600 dark:bg-gray-800">
+                            <tbody class="bg-white divide-y dark:divide-gray-600 dark:bg-gray-800">
+                                @foreach ($barangmasuk as $bm)
                                     <tr class="text-gray-600 dark:text-gray-400">
                                         <td class="px-4 py-3 text-sm font-semibold">
                                             {{ $bm->kode }}
@@ -349,106 +277,103 @@
                                                     </svg>
                                                 </button>
 
-                                                {{-- Modal detailBM --}}
-                                                <dialog id="detailBM{{ $bm->kode }}" class="modal">
-                                                    <div class="modal-box">
-                                                        <div class="flex justify-between mb-2">
-                                                            <h3 class="text-lg font-bold">Barang Masuk</h3>
-                                                            <p class="mt-1">
-                                                                <a class="text-sm font-normal text-purple-600 dark:text-purple-400 hover:underline"
-                                                                    href="{{ route('barangmasuk.edit', $bm->kode) }}">
-                                                                    Edit barang masuk
-                                                                </a>
-                                                            </p>
-                                                        </div>
-                                                        {{-- Search bar --}}
-                                                        <label
-                                                            class="input input-bordered w-full flex items-center gap-2 bg-white shadow-md">
-                                                            <input type="text" id="searchInput"
-                                                                onkeyup="filterTable()"
-                                                                class="input grow text-sm text-gray-600 border-none"
-                                                                placeholder="Cari..." />
-                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
-                                                                fill="" class="h-4 w-4 opacity-70">
-                                                                <path fill-rule="evenodd"
-                                                                    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                                                                    clip-rule="evenodd" />
-                                                            </svg>
-                                                        </label>
 
-
-                                                        {{-- Table Section Start --}}
-                                                        <div
-                                                            class="flex items-center bg-white border border-gray-300 rounded-box shadow-md dark:bg-gray-800 mt-2">
-                                                            <div class="w-full overflow-hidden rounded-lg mb-2">
-                                                                <div class="w-full overflow-x-auto">
-                                                                    <table class="w-full whitespace-no-wrap"
-                                                                        id="itemsTable">
-                                                                        <thead>
-                                                                            <tr
-                                                                                class="text-xs font-semibold tracking-wide text-left text-gray-600 uppercase border-b dark:border-gray-600  dark:text-gray-400 dark:bg-gray-800">
-                                                                                <th class="px-4 py-3">Kode</th>
-                                                                                <th class="px-4 py-3">Nama</th>
-                                                                                <th class="px-4 py-3">Stok Masuk</th>
-                                                                                <th class="px-4 py-3">Satuan</th>
-                                                                            </tr>
-                                                                        </thead>
-
-                                                                        @foreach ($detailBM as $dbm)
-                                                                            @if ($dbm->kode_barang_masuk == $bm->kode)
-                                                                                <tbody
-                                                                                    class="bg-white divide-y dark:divide-gray-600 dark:bg-gray-800">
-                                                                                    <tr
-                                                                                        class="text-gray-600 dark:text-gray-400">
-                                                                                        <td
-                                                                                            class="px-4 py-3 text-sm font-semibold">
-                                                                                            {{ $dbm->item->kode }}
-                                                                                        </td>
-
-                                                                                        <td class="px-4 py-3 text-xs">
-                                                                                            {{ $dbm->item->nama }}
-                                                                                        </td>
-                                                                                        <td class="px-4 py-3 text-xs">
-                                                                                            {{ $dbm->kuantiti }}
-                                                                                        </td>
-                                                                                        <td class="px-4 py-3 text-xs">
-                                                                                            {{ $dbm->item->satuan }}
-                                                                                        </td>
-                                                                                    </tr>
-
-                                                                                </tbody>
-                                                                            @endif
-                                                                        @endforeach
-                                                                    </table>
-                                                                </div>
-                                                                <div class="mx-4 my-2">
-                                                                    {{-- {{ $detailBM->links() }} --}}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        {{-- Table Section End --}}
-
-                                                    </div>
-                                                    <form method="dialog" class="modal-backdrop">
-                                                        <button>close</button>
-                                                    </form>
-                                                </dialog>
 
                                             </div>
                                         </td>
                                     </tr>
-
-                                </tbody>
-                            @endforeach
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
                     <div class="mx-4 my-2">
-                        {{ $barangmasuk->links() }}
+                        {{-- {{ $barangmasuk->links() }} --}}
                     </div>
                 </div>
             </div>
             {{-- Table Section End --}}
 
         </div>
+
+        {{-- Modal detailBM --}}
+        @foreach ($barangmasuk as $bm)
+            <dialog id="detailBM{{ $bm->kode }}" class="modal">
+                <div class="modal-box">
+                    <div class="flex justify-between mb-2">
+                        <h3 class="text-lg font-bold">Barang Masuk</h3>
+                        <p class="mt-1">
+                            <a class="text-sm font-normal text-purple-600 dark:text-purple-400 hover:underline"
+                                href="{{ route('barangmasuk.edit', $bm->kode) }}">
+                                Edit barang masuk
+                            </a>
+                        </p>
+                    </div>
+                    {{-- Search bar --}}
+                    <label class="input input-bordered w-full flex items-center gap-2 bg-white shadow-md">
+                        <input type="text" id="searchInput" onkeyup="filterTable()"
+                            class="input grow text-sm text-gray-600 border-none" placeholder="Cari..." />
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill=""
+                            class="h-4 w-4 opacity-70">
+                            <path fill-rule="evenodd"
+                                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </label>
+
+
+                    {{-- Table Section Start --}}
+                    <div
+                        class="flex items-center bg-white border border-gray-300 rounded-box shadow-md dark:bg-gray-800 mt-2">
+                        <div class="w-full overflow-hidden rounded-lg">
+                            <div class="w-full overflow-x-auto">
+                                <table class="w-full whitespace-no-wrap" id="itemsTable">
+                                    <thead>
+                                        <tr
+                                            class="text-xs font-semibold tracking-wide text-left text-gray-600 uppercase border-b dark:border-gray-600  dark:text-gray-400 dark:bg-gray-800">
+                                            <th class="px-4 py-3">Kode</th>
+                                            <th class="px-4 py-3">Nama</th>
+                                            <th class="px-4 py-3">Stok Masuk</th>
+                                            <th class="px-4 py-3">Satuan</th>
+                                        </tr>
+                                    </thead>
+
+                                    @foreach ($detailBM as $dbm)
+                                        @if ($dbm->kode_barang_masuk == $bm->kode)
+                                            <tbody class="bg-white divide-y dark:divide-gray-600 dark:bg-gray-800">
+                                                <tr class="text-gray-600 dark:text-gray-400">
+                                                    <td class="px-4 py-3 text-sm font-semibold">
+                                                        {{ $dbm->item->kode }}
+                                                    </td>
+
+                                                    <td class="px-4 py-3 text-xs">
+                                                        {{ $dbm->item->nama }}
+                                                    </td>
+                                                    <td class="px-4 py-3 text-xs">
+                                                        {{ $dbm->kuantiti }}
+                                                    </td>
+                                                    <td class="px-4 py-3 text-xs">
+                                                        {{ $dbm->item->satuan }}
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        @endif
+                                    @endforeach
+                                </table>
+                            </div>
+                            <div class="mx-4 my-2">
+                                {{-- {{ $detailBM->links() }} --}}
+                            </div>
+                        </div>
+                    </div>
+                    {{-- Table Section End --}}
+
+                </div>
+                <form method="dialog" class="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
+        @endforeach
+
     </main>
 @endsection

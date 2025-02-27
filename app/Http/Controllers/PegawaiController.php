@@ -13,7 +13,7 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        $pegawais = Pegawai::paginate(5);
+        $pegawais = Pegawai::get();
         return view('operator.pegawai', compact('pegawais'));
     }
 

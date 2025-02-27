@@ -27,36 +27,17 @@
             {{-- Breadcrumbs Section End --}}
 
             <div class="flex mb-2 gap-2">
-                {{-- Search Start --}}
-                <label class="input input-bordered w-full flex items-center gap-2 bg-white shadow-md">
-                    <input type="text" id="searchInput" onkeyup="filterTable()"
-                        class="input grow text-sm text-gray-600 border-none" placeholder="Cari..." />
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="" class="h-4 w-4 opacity-70">
-                        <path fill-rule="evenodd"
-                            d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                            clip-rule="evenodd" />
-                    </svg>
-                </label>
-                {{-- Search Start --}}
 
-                {{-- Filter Start --}}
-                <select class="ml-auto select select-bordered max-w-xs bg-white text-gray-800 shadow-md">
-                    <option disabled selected>Status</option>
-                    <option>Diterima</option>
-                    <option>Ditolak</option>
-                    <option>Menunggu acc</option>
-                </select>
-                {{-- Filter End --}}
 
-                {{-- Add Submission Start --}}
+                {{-- Tambah Pengadaan Section Start --}}
                 <button onclick="formPengadaan.showModal()"
-                    class=" btn flex items-center justify-between px-4 py-2 text-sm font-medium border-none text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple ml-auto"
-                    fdprocessedid="allgztj">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" aria-hidden="true" fill="currentColor"
-                        viewBox="0 0 16 16">
+                    class="shadow-md btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-1 -ml-1" fill="currentColor"
+                        aria-hidden="true" viewBox="0 0 16 16">
                         <path
-                            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                            d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0" />
                     </svg>
+                    <span>Tambah barang</span>
                 </button>
 
                 <dialog id="formPengadaan" class="modal">
@@ -119,39 +100,42 @@
                         <button>close</button>
                     </form>
                 </dialog>
-                {{-- Add Submission Start --}}
+                {{-- Tambah Pengadaan Section End --}}
+
+                {{-- Export Section Start --}}
+                <div class="dropdown dropdown-hover">
+                    <div tabindex="0" role="button"
+                        class="mb-1 btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" aria-hidden="true"
+                            viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path
+                                d="M288 109.3V352c0 17.7-14.3 32-32 32s-32-14.3-32-32V109.3l-73.4 73.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l128-128c12.5-12.5 32.8-12.5 45.3 0l128 128c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L288 109.3zM64 352H192c0 35.3 28.7 64 64 64s64-28.7 64-64H448c35.3 0 64 28.7 64 64v32c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V416c0-35.3 28.7-64 64-64zM432 456a24 24 0 1 0 0-48 24 24 0 1 0 0 48z" />
+                        </svg> 
+                        <span>Export</span>
+                    </div>
+                    <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                        <li><a href="{{ route('operator.pengadaan.excel') }}">Excel</a></li>
+                        <li><a href="{{ route('operator.pengadaan.pdf') }}">PDF</a></li>
+                    </ul>
+                </div>
+                {{-- Export Section End --}}
+
+                {{-- Filter Start --}}
+                <select class=" select select-bordered max-w-xs bg-white text-gray-800 shadow-md ml-auto">
+                    <option disabled selected>Status</option>
+                    <option>Diterima</option>
+                    <option>Ditolak</option>
+                    <option>Menunggu acc</option>
+                </select>
+                {{-- Filter End --}}
 
             </div>
-            <script>
-                $(document).ready(function() {
-                    $('.select2').select2();
-                });
-
-                $('.select2-ajax').select2({
-                    ajax: {
-                        url: '/api/items',
-                        dataType: 'json',
-                        delay: 250,
-                        processResults: function(data) {
-                            return {
-                                results: $.map(data, function(item) {
-                                    return {
-                                        text: item.nama,
-                                        kode: item.kode
-                                    }
-                                })
-                            };
-                        },
-                        cache: true
-                    }
-                });
-            </script>
 
             {{-- Table Section Start --}}
             <div class="flex items-center bg-white border border-gray-300 rounded-box shadow-md dark:bg-gray-800 mt-2">
-                <div class="w-full overflow-hidden rounded-lg mb-2">
+                <div class="w-full overflow-hidden rounded-lg">
                     <div class="w-full overflow-x-auto">
-                        <table class="w-full whitespace-no-wrap" id="itemsTable">
+                        <table class="w-full whitespace-no-wrap" id="search-table">
                             <thead>
                                 <tr
                                     class="text-xs font-semibold tracking-wide text-left text-gray-600 uppercase border-b dark:border-gray-600  dark:text-gray-400 dark:bg-gray-800">
@@ -163,8 +147,8 @@
                                 </tr>
                             </thead>
 
-                            @foreach ($pengadaan as $p)
-                                <tbody class="bg-white divide-y dark:divide-gray-600 dark:bg-gray-800">
+                            <tbody class="bg-white divide-y dark:divide-gray-600 dark:bg-gray-800">
+                                @foreach ($pengadaan as $p)
                                     <tr class="text-gray-600 dark:text-gray-400">
                                         <td class="px-4 py-3 text-sm font-semibold">
                                             {{ $p->kode }}
@@ -198,8 +182,7 @@
                                                             class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                                             aria-label="Delete">
                                                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
-                                                                aria-hidden="true" fill="currentColor"
-                                                                viewBox="0 0 20 20">
+                                                                aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                                                                 <path
                                                                     d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z" />
                                                             </svg>
@@ -220,12 +203,12 @@
                                             </div>
                                         </td>
                                     </tr>
-                                </tbody>
-                            @endforeach
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
                     <div class="mx-4 my-2">
-                        {{ $pengadaan->links() }}
+                        {{-- {{ $pengadaan->links() }} --}}
                     </div>
                 </div>
             </div>

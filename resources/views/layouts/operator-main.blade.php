@@ -20,7 +20,6 @@
     <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@9.0.3"></script>
 
-
     <!-- Select2 -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -79,6 +78,81 @@
 
         </div>
     </div>
+
+    <script>
+        if (document.getElementById("search-table") && typeof simpleDatatables.DataTable !== 'undefined') {
+            const dataTable = new simpleDatatables.DataTable("#search-table", {
+                searchable: true,
+                sortable: false,
+                paging: true, // enable or disable pagination
+                perPage: 10, // set the number of rows per page
+                perPageSelect: [ 5, 10, 20, 50], // set the number of rows per page options
+                firstLast: true, // enable or disable the first and last buttons
+                nextPrev: true,
+            });
+
+            // document.getElementById("searchInput").addEventListener("input", (e) => dataTable.search(e.target.value));
+
+            const styleDataTable = () => {
+                const datatableTop = document.querySelector(".datatable-top");
+                if (datatableTop) {
+                    datatableTop.style.marginBottom = "0"; // Hilangkan margin bottom
+                }
+
+                const searchContainer = document.querySelector(".datatable-search");
+                if (searchContainer) {
+                    searchContainer.classList.add("my-3", "mx-4");
+
+                    const searchInput = searchContainer.querySelector(".datatable-input");
+                    if (searchInput) {
+                        searchInput.classList.add("input", "input-bordered", "w-full", "max-w-xs", "input-sm");
+                        searchInput.style.borderRadius = "0.5rem";
+                        searchInput.style.padding = "1.1rem 1rem";
+
+                        // Tambahkan ikon search jika diinginkan
+                        searchContainer.style.position = "relative";
+
+
+                    }
+                }
+
+                // Style untuk dropdown perPageSelect
+                const dropdownContainer = document.querySelector(".datatable-dropdown");
+                if (dropdownContainer) {
+                    dropdownContainer.classList.add("my-3", "mx-4");
+
+                    const selector = dropdownContainer.querySelector(".datatable-selector");
+                    if (selector) {
+                        selector.classList.add("select", "select-bordered", "select-sm", "mr-2");
+                        selector.style.borderRadius = "0.5rem";
+                        selector.style.padding = "0 1rem";
+                        selector.style.minHeight = "2rem";
+                        selector.style.height = "2rem";
+                    }
+                }
+            };
+
+            // Style saat inisialisasi
+            styleDataTable();
+
+            // Perbaikan tampilan container
+            const tableContainer = document.querySelector("div.w-full.overflow-hidden.mb-2");
+            if (tableContainer) {
+                tableContainer.classList.add("rounded-box", "shadow-md", "border", "border-gray-200");
+                tableContainer.classList.remove("rounded-lg");
+            }
+
+            // document.querySelector(".datatable-top")?.remove();
+            document.querySelector(".datatable-info")?.classList.add("mx-4");
+            document.querySelector(".datatable-pagination")?.classList.add("mx-4");
+            document.querySelector("div.w-full.overflow-hidden.rounded-lg.mb-2")?.classList.replace("rounded-lg",
+                "rounded-box");
+
+            document.querySelector(".datatable-bottom")?.classList.forEach(cls => {
+                if (cls.startsWith("mt-")) document.querySelector(".datatable-bottom").classList.remove(cls);
+            });
+        }
+    </script>
 
     <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>

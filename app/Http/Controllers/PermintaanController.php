@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PermintaanExport;
 use App\Models\BarangKeluar;
 use App\Models\DetailBarangKeluar;
 use App\Models\DetailPermintaan;
@@ -9,14 +10,14 @@ use App\Models\Item;
 use App\Models\Pegawai;
 use App\Models\Permintaan;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PermintaanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $item = Item::all();
@@ -27,22 +28,11 @@ class PermintaanController extends Controller
         ->whereIn('status', ['menunggu', 'ditolak', 'disetujui'])
         ->orderByRaw("FIELD(status, 'menunggu', 'disetujui', 'ditolak')")
         ->orderBy('created_at', 'desc')
-        ->paginate(7); 
+        ->get(); 
 
         return view('operator.permintaan', compact('item', 'permintaan', 'pegawai', 'user'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $kode = 'PM' . rand(1000, 9999);
@@ -71,9 +61,6 @@ class PermintaanController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $kode)
     {
         $item = Item::all();
@@ -89,17 +76,11 @@ class PermintaanController extends Controller
         return view('operator.detail-permintaan', compact('detailPermintaan', 'permintaan', 'pegawai', 'item'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $kode)
     {
         Permintaan::where('kode', $kode)->update([
@@ -165,11 +146,18 @@ class PermintaanController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+
+    public function export_excel() 
     {
-        //
+        return Excel::download(new PermintaanExport, 'permintaan.xlsx');
     }
+
+    public function export_pdf() 
+    {
+        $permintaan = Permintaan::with('pegawai')->get();
+ 
+    	$pdf = Pdf::loadview('operator.pdf.permintaan',['permintaan'=>$permintaan]);
+    	return $pdf->download('laporan_permintaan.pdf');
+    }
+
 }

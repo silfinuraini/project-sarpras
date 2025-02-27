@@ -71,18 +71,18 @@
                         let id = row.getAttribute("data-id");
                         let nama = row.getAttribute("data-nama");
                         let alamat = row.getAttribute("data-alamat");
-    
+
                         // Isi form dengan data dari tabel
                         document.getElementById("kodeSupplier").value = id;
                         document.getElementById("nama").value = nama;
                         document.getElementById("alamat").value = alamat;
-    
+
                         // Ubah form menjadi mode edit
                         document.getElementById("supplierForm").action = `/operator/supplier/${id}`;
                         document.getElementById("methodField").value = "PUT";
                         document.getElementById("submitButton").textContent = "Update";
                     }
-    
+
                     function resetForm() {
                         // Reset form ke mode tambah
                         document.getElementById("supplierForm").action = "{{ route('supplier.store') }}";
@@ -97,9 +97,9 @@
 
                 {{-- Table Section Start --}}
                 <div class="flex  bg-white border border-gray-300 rounded-box shadow-md dark:bg-gray-800">
-                    <div class="w-full overflow-hidden rounded-lg mb-2">
+                    <div class="w-full overflow-hidden rounded-lg">
                         <div class="w-full overflow-x-auto">
-                            <table class="w-full whitespace-no-wrap" id="itemsTable">
+                            <table class="w-full whitespace-no-wrap" id="search-table">
                                 <thead>
                                     <tr
                                         class="text-xs font-semibold tracking-wide text-left text-gray-600 uppercase border-b dark:border-gray-600  dark:text-gray-400 dark:bg-gray-800">
@@ -111,8 +111,8 @@
                                 </thead>
 
                                 {{-- {{ dd($supplier) }} --}}
-                                @foreach ($supplier as $s)
-                                    <tbody class="bg-white divide-y dark:divide-gray-600 dark:bg-gray-800">
+                                <tbody class="bg-white divide-y dark:divide-gray-600 dark:bg-gray-800">
+                                    @foreach ($supplier as $s)
                                         <tr class="text-gray-600 dark:text-gray-400">
                                             <td class="px-4 py-3 text-sm font-semibold">
                                                 {{ $s->kode }}
@@ -186,13 +186,12 @@
                                                 </div>
                                             </td>
                                         </tr>
-
-                                    </tbody>
-                                @endforeach
+                                    @endforeach
+                                </tbody>
                             </table>
                         </div>
                         <div class="mx-4 my-2">
-                            {{ $supplier->links() }}
+                            {{-- {{ $supplier->links() }} --}}
                         </div>
                     </div>
                 </div>
@@ -203,6 +202,79 @@
         </div>
         <!-- </div> -->
 
-        <!-- With actions -->
+        <script>
+            if (document.getElementById("search-table") && typeof simpleDatatables.DataTable !== 'undefined') {
+                const dataTable = new simpleDatatables.DataTable("#search-table", {
+                    searchable: true,
+                    sortable: false,
+                    paging: true, // enable or disable pagination
+                    perPage: 5, // set the number of rows per page
+                    perPageSelect: [5, 10, 20, 50], // set the number of rows per page options
+                    firstLast: true, // enable or disable the first and last buttons
+                    nextPrev: true,
+                });
+
+                // document.getElementById("searchInput").addEventListener("input", (e) => dataTable.search(e.target.value));
+
+                const styleDataTable = () => {
+                    const datatableTop = document.querySelector(".datatable-top");
+                    if (datatableTop) {
+                        datatableTop.style.marginBottom = "0"; // Hilangkan margin bottom
+                    }
+
+                    const searchContainer = document.querySelector(".datatable-search");
+                    if (searchContainer) {
+                        searchContainer.classList.add("my-3", "mx-4");
+
+                        const searchInput = searchContainer.querySelector(".datatable-input");
+                        if (searchInput) {
+                            searchInput.classList.add("input", "input-bordered", "w-full", "max-w-xs", "input-sm");
+                            searchInput.style.borderRadius = "0.5rem";
+                            searchInput.style.padding = "1.1rem 1rem";
+
+                            // Tambahkan ikon search jika diinginkan
+                            searchContainer.style.position = "relative";
+
+
+                        }
+                    }
+
+                    // Style untuk dropdown perPageSelect
+                    const dropdownContainer = document.querySelector(".datatable-dropdown");
+                    if (dropdownContainer) {
+                        dropdownContainer.classList.add("my-3", "mx-4");
+
+                        const selector = dropdownContainer.querySelector(".datatable-selector");
+                        if (selector) {
+                            selector.classList.add("select", "select-bordered", "select-sm", "mr-2");
+                            selector.style.borderRadius = "0.5rem";
+                            selector.style.padding = "0 1rem";
+                            selector.style.minHeight = "2rem";
+                            selector.style.height = "2rem";
+                        }
+                    }
+                };
+
+                // Style saat inisialisasi
+                styleDataTable();
+
+                // Perbaikan tampilan container
+                const tableContainer = document.querySelector("div.w-full.overflow-hidden.mb-2");
+                if (tableContainer) {
+                    tableContainer.classList.add("rounded-box", "shadow-md", "border", "border-gray-200");
+                    tableContainer.classList.remove("rounded-lg");
+                }
+
+                // document.querySelector(".datatable-top")?.remove();
+                document.querySelector(".datatable-info")?.classList.add("mx-4");
+                document.querySelector(".datatable-pagination")?.classList.add("mx-4");
+                document.querySelector("div.w-full.overflow-hidden.rounded-lg.mb-2")?.classList.replace("rounded-lg",
+                    "rounded-box");
+
+                document.querySelector(".datatable-bottom")?.classList.forEach(cls => {
+                    if (cls.startsWith("mt-")) document.querySelector(".datatable-bottom").classList.remove(cls);
+                });
+            }
+        </script>
     </main>
 @endsection

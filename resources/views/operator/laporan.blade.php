@@ -1,8 +1,8 @@
 @extends('layouts.operator-main')
 
 @section('content')
-    <main class="h-full my-4 overflow-y-auto">
-        <div class="container px-6 mx-auto grid">
+    <main class="h-full overflow-y-auto">
+        <div class="container my-4  px-6 mx-auto grid">
 
             {{-- Breadcrumb Section Start --}}
             <div class="text-sm mb-4 breadcrumbs">
@@ -29,22 +29,26 @@
             {{-- Breadcrumb Section End --}}
 
 
-            <div class="flex justify-end gap-2">
+            <div class="flex gap-2">
 
-                {{-- Search Section Start --}}
-                <label class="input input-bordered w-full flex items-center gap-2 bg-white shadow-md max-w-xs">
-                    <input type="text" id="searchInput" onkeyup="filterTable()"
-                        class="input grow text-sm text-gray-600 border-none" placeholder="Cari..." />
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="" class="h-4 w-4 opacity-70">
-                        <path fill-rule="evenodd"
-                            d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                            clip-rule="evenodd" />
-                    </svg>
-                </label>
-                {{-- Search Section End --}}
+                <div class="dropdown dropdown-hover">
+                    <div tabindex="0" role="button"
+                        class="mb-1 btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" aria-hidden="true"
+                            viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                            <path
+                                d="M288 109.3V352c0 17.7-14.3 32-32 32s-32-14.3-32-32V109.3l-73.4 73.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l128-128c12.5-12.5 32.8-12.5 45.3 0l128 128c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L288 109.3zM64 352H192c0 35.3 28.7 64 64 64s64-28.7 64-64H448c35.3 0 64 28.7 64 64v32c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V416c0-35.3 28.7-64 64-64zM432 456a24 24 0 1 0 0-48 24 24 0 1 0 0 48z" />
+                        </svg>
+                        <span>Export</span>
+                    </div>
+                    <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                        <li><a href="{{ route('laporan.excel') }}">Excel</a></li>
+                        <li><a href="{{ route('laporan.pdf') }}">PDF</a></li>
+                    </ul>
+                </div>
 
                 {{-- Filter Section Start --}}
-                <div class="dropdown dropdown-end dropdown-hover">
+                <div class="dropdown dropdown-end dropdown-hover ml-auto">
                     <div tabindex="0" role="button"
                         class="shadow-md btn border-gray-300 bg-white flex items-center justify-between px-4 py-2 text-sm font-medium  transition-colors duration-150 bg-transparent border rounded-lg active:bg-transparent hover:bg-transparent focus:outline-none focus:shadow-outline-transparent">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-70" fill="currentColor"
@@ -115,13 +119,13 @@
                 </div>
                 {{-- Filter Section End --}}
 
-               
+
             </div>
 
             <div class="flex items-center bg-white border border-gray-300 rounded-box shadow-md dark:bg-gray-800 mt-5">
-                <div class="w-full overflow-hidden rounded-lg mb-2">
+                <div class="w-full overflow-hidden rounded-lg">
                     <div class="w-full overflow-x-auto">
-                        <table class="w-full whitespace-no-wrap" id="itemsTable">
+                        <table class="w-full whitespace-no-wrap" id="search-table">
                             <thead>
                                 <tr
                                     class="text-xs font-semibold tracking-wide text-left text-gray-600 uppercase border-b dark:border-gray-600  dark:text-gray-400 dark:bg-gray-800">
@@ -137,8 +141,8 @@
 
 
 
-                            @foreach ($data as $item)
-                                <tbody class="bg-white divide-y dark:divide-gray-600 dark:bg-gray-800">
+                            <tbody class="bg-white divide-y dark:divide-gray-600 dark:bg-gray-800">
+                                @foreach ($data as $item)
                                     <tr class="text-gray-600 dark:text-gray-400">
                                         <td class="px-4 py-3 text-sm font-semibold">
                                             {{ $item->kode }}
@@ -177,8 +181,8 @@
                                             <a href="{{ route('laporan.detail', $item->kode) }}"
                                                 class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                                 aria-label="Delete">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5"
-                                                    aria-hidden="true" fill="currentColor"
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" aria-hidden="true"
+                                                    fill="currentColor"
                                                     viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                                                     <path
                                                         d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z" />
@@ -187,9 +191,8 @@
                                         </td>
 
                                     </tr>
-
-                                </tbody>
-                            @endforeach
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
                     <div class="mx-4 my-2">
@@ -200,26 +203,4 @@
         </div>
     </main>
 
-    <script>
-        function filterTable() {
-            // Get the input value and table elements
-            let input = document.getElementById("searchInput");
-            let filter = input.value.toLowerCase();
-            let table = document.getElementById("itemsTable");
-            let tr = table.getElementsByTagName("tr");
-
-            // Loop through all table rows and hide those that don't match the search query
-            for (let i = 1; i < tr.length; i++) {
-                let td = tr[i].getElementsByTagName("td");
-                let found = false;
-                for (let j = 0; j < td.length; j++) {
-                    if (td[j] && td[j].innerText.toLowerCase().includes(filter)) {
-                        found = true;
-                        break;
-                    }
-                }
-                tr[i].style.display = found ? "" : "none";
-            }
-        }
-    </script>
 @endsection
