@@ -33,7 +33,7 @@
             <!-- General elements -->
 
             <div class="px-4 py-3 mb-8">
-                <form action="{{ route('item.update', $items->kode) }}" method="POST">
+                <form action="{{ route('item.update', $items->kode) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     {{-- Form kategori --}}
@@ -288,7 +288,7 @@
                 </form>
             </div>
         </div>
-    </main>;
+    </main>
 
     <script>
         document.getElementById('fileInput').addEventListener('change', function(e) {

@@ -30,8 +30,8 @@ class  DataBarangController extends Controller
             ->when($selectedCategory, function ($query) use ($selectedCategory) {
                 $query->where('kategori_id', $selectedCategory);
             })
-            ->orderByRaw('stok <= stok_minimum DESC') 
-            ->orderBy('nama', 'ASC') 
+            ->orderByRaw('stok <= stok_minimum DESC')
+            ->orderBy('nama', 'ASC')
             ->get();
 
 
@@ -50,7 +50,7 @@ class  DataBarangController extends Controller
         return view('operator.data-barang', compact('items', 'kategori', 'selectedCategory'));
     }
 
-    public function format() 
+    public function format()
     {
         return Excel::download(new FormatBarangExport, 'format_data_barang.xlsx');
     }
@@ -67,12 +67,12 @@ class  DataBarangController extends Controller
 
         // dd($items);
 
-        $pdf = Pdf::loadView('operator.pdf.data-barang', ['items'=>$items])->setPaper('A4', 'potrait');
-        
+        $pdf = Pdf::loadView('operator.pdf.data-barang', ['items' => $items])->setPaper('A4', 'potrait');
+
         return $pdf->download('laporan_data_barang.pdf');
     }
 
-    public function import(Request $request) 
+    public function import(Request $request)
     {
         // dd($request);
         try {
@@ -86,9 +86,9 @@ class  DataBarangController extends Controller
         } catch (\Throwable $th) {
             return redirect()->route('databarang')->with('error', $th->getMessage());
         }
-        
+
         // Excel::import(new DataBarangImport, 'data_barang.xlsx');
-        
+
         // return redirect()->route('databarang')->with('success', 'Barang berhasil ditambahkan.');
     }
 
@@ -138,6 +138,8 @@ class  DataBarangController extends Controller
                 $image = ImageHelper::handleImage($request->gambar);
             }
 
+            // dd($image);
+
             $item = Item::create([
                 'kode' => $code,
                 'gambar' => $image ?? null,
@@ -182,8 +184,10 @@ class  DataBarangController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $kode)
+    public function update(Request $request, $kode)
     {
+
+        // dd($request);
         try {
             $request->validate([
                 'nama' => 'required|min:3',
@@ -196,23 +200,35 @@ class  DataBarangController extends Controller
                 'kategori_id' => 'required',
             ]);
 
-            $items = Item::where('kode', $kode)->firstOrFail();
+            $item = Item::findOrFail($kode);
 
             if ($request->hasFile('gambar')) {
                 $image = ImageHelper::handleImage($request->gambar);
-                $requestData = $request->all();
-                $requestData['gambar'] = $image;
-            } else {
-                $requestData = $request->except('gambar'); // Don't update image if not provided
+                $item->gambar = $image;
             }
 
-            $items->update($requestData);
+            // dd($image);
+
+            $item->update([
+                'nama' => $request->nama,
+                'jenis' => $request->jenis,
+                'ukuran' => $request->ukuran,
+                'merk' => $request->merk,
+                'warna' => $request->warna,
+                'satuan' => $request->satuan,
+                'harga' => $request->harga,
+                'stok' => $request->stok,
+                'stok_minimum' => $request->stok_minimum,
+                'kategori_id' => $request->kategori_id,
+                'deskripsi' => $request->deskripsi,
+            ]);
 
             return redirect()->route('databarang')->with('success', 'Barang berhasil diperbarui.');
         } catch (\Throwable $th) {
             return redirect()->route('databarang')->with('error', $th->getMessage());
         }
     }
+
 
     /**
      * Remove the specified resource wfrom storage.
