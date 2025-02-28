@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\BarangKeluarExport;
+use App\Exports\DetailBarangKeluarExport;
 use App\Models\BarangKeluar;
 use App\Models\DetailBarangKeluar;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -11,9 +12,6 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class BarangKeluarController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $barangKeluar = BarangKeluar::with('pegawai')->get();
@@ -24,57 +22,9 @@ class BarangKeluarController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function export_excel_detail(string $kode) 
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
-
-    public function export_excel() 
-    {
-        return Excel::download(new BarangKeluarExport, 'barang_keluar.xlsx');
+        return Excel::download(new DetailBarangKeluarExport($kode), 'detail_barang_keluar.xlsx');
     }
 
     public function export_pdf() 
@@ -85,4 +35,11 @@ class BarangKeluarController extends Controller
         return $pdf->download('laporan_barang_keluar.pdf');
     }
 
+    public function export_pdf_detail(string $kode) 
+    {
+        $detailBarangKeluar = DetailBarangKeluar::where('kode_barang_keluar', $kode)->with('item')->get();
+
+        $pdf = Pdf::loadView('operator.pdf.detail-barang-keluar', ['detailBarangKeluar' => $detailBarangKeluar]);
+        return $pdf->download('laporan_barang_keluar.pdf');
+    }
 }

@@ -152,16 +152,22 @@
                 <div class="modal-box">
 
                     {{-- Search Bar Start --}}
-                    <label class="input input-bordered w-full flex items-center gap-2 bg-white shadow-md">
-                        <input type="text" id="searchInput" onkeyup="filterTable()"
-                            class="input grow text-sm text-gray-600 border-none" placeholder="Cari..." />
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill=""
-                            class="h-4 w-4 opacity-70">
-                            <path fill-rule="evenodd"
-                                d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </label>
+                    <div class="dropdown dropdown-hover ml-auto">
+                        <div tabindex="0" role="button"
+                            class="mb-1 btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor"
+                                aria-hidden="true"
+                                viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                <path
+                                    d="M288 109.3V352c0 17.7-14.3 32-32 32s-32-14.3-32-32V109.3l-73.4 73.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l128-128c12.5-12.5 32.8-12.5 45.3 0l128 128c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L288 109.3zM64 352H192c0 35.3 28.7 64 64 64s64-28.7 64-64H448c35.3 0 64 28.7 64 64v32c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V416c0-35.3 28.7-64 64-64zM432 456a24 24 0 1 0 0-48 24 24 0 1 0 0 48z" />
+                            </svg>
+                            <span>Export</span>
+                        </div>
+                        <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                            <li><a href="{{ route('barangkeluar.detail.excel', ['kode' => $bk->kode]) }}">Excel</a></li>
+                            <li><a href="{{ route('barangkeluar.detail.pdf', ['kode' => $bk->kode]) }}">PDF</a></li>
+                        </ul>
+                    </div>
                     {{-- Search Bar Start --}}
 
                     <div
@@ -222,7 +228,7 @@
                     {{-- Table Section Start --}}
                     <div
                         class="flex items-center bg-white border border-gray-300 rounded-box shadow-md dark:bg-gray-800 mt-5">
-                        <div class="w-full overflow-hidden rounded-lg mb-2">
+                        <div class="w-full overflow-hidden rounded-lg">
                             <div class="w-full overflow-x-auto">
                                 <table class="w-full whitespace-no-wrap" id="itemsTable">
                                     <thead>

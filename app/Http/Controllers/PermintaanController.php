@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DetailPermintaanExport;
 use App\Exports\PermintaanExport;
 use App\Models\BarangKeluar;
 use App\Models\DetailBarangKeluar;
@@ -64,7 +65,7 @@ class PermintaanController extends Controller
     public function show(string $kode)
     {
         $item = Item::all();
-        $detailPermintaan = DetailPermintaan::with('item')->get();
+        $detailPermintaan = DetailPermintaan::where('kode_permintaan', $kode)->with('item')->get();
         $pegawai = Pegawai::all();
         $user = User::all();
 
@@ -152,12 +153,25 @@ class PermintaanController extends Controller
         return Excel::download(new PermintaanExport, 'permintaan.xlsx');
     }
 
+    public function export_excel_detail(string $kode) 
+    {
+        return Excel::download(new DetailPermintaanExport($kode), 'detail_permintaan.xlsx');
+    }
+
     public function export_pdf() 
     {
         $permintaan = Permintaan::with('pegawai')->get();
  
     	$pdf = Pdf::loadview('operator.pdf.permintaan',['permintaan'=>$permintaan]);
     	return $pdf->download('laporan_permintaan.pdf');
+    }
+
+    public function export_pdf_detail(string $kode)
+    {
+        $detailPermintaan = DetailPermintaan::where('kode_permintaan', $kode)->with('item')->get();
+ 
+    	$pdf = Pdf::loadview('operator.pdf.detail-permintaan',['detailPermintaan'=>$detailPermintaan]);
+    	return $pdf->download('laporan_detail_permintaan.pdf');
     }
 
 }

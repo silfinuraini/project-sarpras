@@ -81,27 +81,22 @@
 
     <script>
         if (document.getElementById("search-table") && typeof simpleDatatables.DataTable !== 'undefined') {
-            // Add a configuration variable to control firstLast and nextPrev options
             const dataTable = new simpleDatatables.DataTable("#search-table", {
                 searchable: true,
                 sortable: false,
                 paging: true,
                 perPage: 10,
                 perPageSelect: [5, 10, 20, 50],
-                // Set these to false instead of removing elements after creation
                 firstLast: false,
                 nextPrev: true,
             });
 
-            // Enhanced function to style the DataTable
             const styleDataTable = () => {
-                // Style datatable-top container
                 const datatableTop = document.querySelector(".datatable-top");
                 if (datatableTop) {
                     datatableTop.style.marginBottom = "0";
                 }
 
-                // Style search container
                 const searchContainer = document.querySelector(".datatable-search");
                 if (searchContainer) {
                     searchContainer.classList.add("my-3", "mx-4");
@@ -115,7 +110,6 @@
                     }
                 }
 
-                // Style dropdown perPageSelect
                 const dropdownContainer = document.querySelector(".datatable-dropdown");
                 if (dropdownContainer) {
                     dropdownContainer.classList.add("my-3", "mx-4");
@@ -130,7 +124,6 @@
                     }
                 }
 
-                // Style pagination container
                 const paginationContainer = document.querySelector(".datatable-pagination");
                 if (paginationContainer) {
                     paginationContainer.classList.add("mx-4", "my-3", "flex", "justify-center");
@@ -139,34 +132,26 @@
                     if (paginationList) {
                         paginationList.classList.add("flex", "gap-1");
 
-                        // Style all pagination buttons
                         const paginationItems = paginationList.querySelectorAll(".datatable-pagination-list-item");
                         paginationItems.forEach(item => {
-                            // Add our custom class
                             item.classList.add("pagination-item");
 
                             const button = item.querySelector(".datatable-pagination-list-item-link");
                             if (button) {
-                                // First, remove any potentially conflicting classes
                                 button.classList.remove("bg-purple-700", "text-white", "btn-ghost",
                                     "btn-disabled", "opacity-0", "cursor-not-allowed");
 
-                                // Add base button styles
                                 button.classList.add("btn", "btn-sm");
                                 button.style.minHeight = "2rem";
                                 button.style.height = "2rem";
                                 button.style.borderRadius = "0.375rem";
 
-                                // Apply specific styles based on button state
                                 if (item.classList.contains("datatable-active")) {
-                                    // Active page
                                     button.classList.add("bg-purple-700", "text-white");
                                 } else if (item.classList.contains("datatable-disabled")) {
-                                    // Disabled navigation button
                                     button.classList.add("btn-ghost", "btn-disabled", "opacity-0",
                                         "cursor-not-allowed");
                                 } else {
-                                    // Regular navigation button
                                     button.classList.add("btn-ghost");
                                 }
                             }

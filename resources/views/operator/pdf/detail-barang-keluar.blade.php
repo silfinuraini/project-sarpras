@@ -121,7 +121,7 @@
 
     <p>Disampaikan dengan hormat, kami dari Unit Kerja Sarana SMKN 11 Bandung sampaikan laporan data barang untuk periode
         {{ Date::now()->format('F Y') }}.</p>
-    <p>Dengan ini kami sampaikan laporan barang keluar sebagai berikut:</p>
+    <p>Dengan ini kami sampaikan laporan detail barang keluar sebagai berikut:</p>
 
 
     <table class="table">
@@ -129,26 +129,20 @@
             <tr>
                 <td style="font-size: 13px; text-align: center">No</td>
                 <td style="font-size: 13px; text-align: center">KODE</td>
-                <td style="font-size: 13px; text-align: center">PETUGAS</td>
-                <td style="font-size: 13px; text-align: center">JUMLAH ITEM</td>
-                <td style="font-size: 13px; text-align: center">PERIHAL</td>
-                <td style="font-size: 13px; text-align: center">SIFAT</td>
-                <td style="font-size: 13px; text-align: center">STATUS</td>
-                <td style="font-size: 13px; text-align: center">TANGGAL</td>
+                <td style="font-size: 13px; text-align: center">BARANG</td>
+                <td style="font-size: 13px; text-align: center">KUANTITI</td>
+                <td style="font-size: 13px; text-align: center">SATUAN</td>
                 <td style="font-size: 13px; text-align: center">KETERANGAN</td>
             </tr>
         </thead>
         <tbody>
-            @foreach ($barangKeluar as $index => $bk)
+            @foreach ($detailBarangKeluar as $index => $bm)
                 <tr>
                     <td style="font-size: 13px; text-align: center">{{ $index + 1 }}</td>
-                    <td style="font-size: 13px; text-align: center">{{ $bk->kode }}</td>
-                    <td style="font-size: 13px; text-align: center">{{ $bk->pegawai->nama ?? '' }}</td>
-                    <td style="font-size: 13px; text-align: center">{{ $bk->jumlah_item ?? '' }}</td>
-                    <td style="font-size: 13px; text-align: center">{{ $bk->perihal ?? '' }}</td>
-                    <td style="font-size: 13px; text-align: center">{{ $bk->sifat ?? '' }}</td>
-                    <td style="font-size: 13px; text-align: center">{{ $bk->status ?? '' }}</td>
-                    <td style="font-size: 13px; text-align: center">{{ $bk->created_at->format('d-m-Y') ?? '' }}</td>
+                    <td style="font-size: 13px; text-align: center">{{ $bm->item->kode }}</td>
+                    <td style="font-size: 13px; text-align: center">{{ $bm->item->nama ?? '' }}</td>
+                    <td style="font-size: 13px; text-align: center">{{ $bm->kuantiti ?? '' }}</td>
+                    <td style="font-size: 13px; text-align: center">{{ $bm->item->satuan ?? '' }}</td>
                     <td style="font-size: 13px; text-align: center"></td>
                 </tr>
             @endforeach

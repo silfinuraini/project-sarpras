@@ -108,13 +108,16 @@ Route::put('operator/{kode}/barang-masuk', [BarangMasukController::class, 'updat
 Route::post('operator/barang-masuk',  [BarangMasukController::class, 'store'])->name('barangmasuk.store');
 Route::put('operator/{kode}/barang-masuk/berita-acara', [BarangMasukController::class, 'updateBeritaAcara'])->name('barangmasuk.berita.acara');
 Route::get('operator/barang-masuk/export-excel', [BarangMasukController::class, 'export_excel'])->name('barangmasuk.excel');
+Route::get('operator/detail-barang-masuk/export-excel/{kode}', [BarangMasukController::class, 'export_excel_detail'])->name('barangmasuk.detail.excel');
 Route::get('operator/barang-masuk/export-pdf', [BarangMasukController::class, 'export_pdf'])->name('barangmasuk.pdf');
+Route::get('operator/detail-barang-masuk/export-pdf/{kode}', [BarangMasukController::class, 'export_pdf_detail'])->name('barangmasuk.detail.pdf');
 
 Route::get('operator/pengadaan', [App\Http\Controllers\PengadaanController::class, 'index'])->name('operator.pengadaan');
 Route::post('operator/pengadaan', [App\Http\Controllers\PengadaanController::class, 'store'])->name('operator.tambahpengadaan');
 Route::get('operator/pengadaan/export-excel', [App\Http\Controllers\PengadaanController::class, 'export_excel'])->name('operator.pengadaan.excel');
+Route::get('operator/detail-pengadaan/export-excel/{kode}', [App\Http\Controllers\PengadaanController::class, 'export_excel_detail'])->name('operator.pengadaan.detail.excel');
 Route::get('operator/pengadaan/export-pdf', [App\Http\Controllers\PengadaanController::class, 'export_pdf'])->name('operator.pengadaan.pdf');
-
+Route::get('operator/detail-pengadaan/export-pdf/{kode}', [App\Http\Controllers\PengadaanController::class, 'export_pdf_detail'])->name('operator.pengadaan.detail.pdf');
 
 Route::get('operator/detailpengadaan/{kode}', [App\Http\Controllers\PengadaanController::class, 'show'])->name('operator.detailpengadaan');
 Route::get('operator/editpengadaan/{kode}', [App\Http\Controllers\PengadaanController::class, 'edit'])->name('operator.editpengadaan');
@@ -128,16 +131,15 @@ Route::get('operator/detailpermintaan/{kode}', [PermintaanController::class, 'sh
 Route::put('operator/{kode}/detailpermintaan', [PermintaanController::class, 'update'])->name('operator.updatepermintaan');
 Route::post('operator/{id}/detailpermintaan', [PermintaanController::class, 'updateKuantitiDisetujui'])->name('operator.updatekuantitipermintaan');
 Route::get('operator/permintaan/export-excel', [PermintaanController::class, 'export_excel'])->name('operator.permintaan.excel');
+Route::get('operator/detail-permintaan/export-excel/{kode}', [PermintaanController::class, 'export_excel_detail'])->name('operator.permintaan.detail.excel');
 Route::get('operator/permintaan/export-pdf', [PermintaanController::class, 'export_pdf'])->name('operator.permintaan.pdf');
+Route::get('operator/detail-permintaan/export-pdf/{kode}', [PermintaanController::class, 'export_pdf_detail'])->name('operator.permintaan.detail.pdf');
 
-
-
-
-Route::get('/barang-keluar', [BarangKeluarController::class, 'index'])->name('barangkeluar');
-Route::get('/barang-keluar/export-excel', [BarangKeluarController::class, 'export_excel'])->name('barangkeluar.excel');
-Route::get('/barang-keluar/export-pdf', [BarangKeluarController::class, 'export_pdf'])->name('barangkeluar.pdf');
-
-
+Route::get('barang-keluar', [BarangKeluarController::class, 'index'])->name('barangkeluar');
+Route::get('barang-keluar/export-excel', [BarangKeluarController::class, 'export_excel'])->name('barangkeluar.excel');
+Route::get('barang-keluar/detail-export-excel/{kode}', [BarangKeluarController::class, 'export_excel_detail'])->name('barangkeluar.detail.excel');
+Route::get('barang-keluar/export-pdf', [BarangKeluarController::class, 'export_pdf'])->name('barangkeluar.pdf');
+Route::get('detail-barang-keluar/export-pdf/{kode}', [BarangKeluarController::class, 'export_pdf_detail'])->name('barangkeluar.detail.pdf');
 
 // UNIT
 // Route::get('unit/dashboard', [LoginController::class, 'unit'])->name('dashboard.unit');

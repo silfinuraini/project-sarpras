@@ -121,7 +121,7 @@
 
     <p>Disampaikan dengan hormat, kami dari Unit Kerja Sarana SMKN 11 Bandung sampaikan laporan data barang untuk periode
         {{ Date::now()->format('F Y') }}.</p>
-    <p>Dengan ini kami sampaikan laporan barang sebagai berikut:</p>
+    <p>Dengan ini kami sampaikan laporan permintaan sebagai berikut:</p>
 
 
     <table class="table">

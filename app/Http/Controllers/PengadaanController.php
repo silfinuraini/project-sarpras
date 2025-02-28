@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DetailPengadaanExport;
 use App\Exports\PengadaanExport;
 use App\Models\BarangKeluar;
 use App\Models\DetailPengadaan;
@@ -62,7 +63,7 @@ class PengadaanController extends Controller
     public function show(string $kode)
     {
         $item = Item::all();
-        $detailPengadaan = DetailPengadaan::with('item')->get();
+        $detailPengadaan = DetailPengadaan::where('kode_pengadaan', $kode)->with('item')->get();
         $pegawai = Pegawai::all();
         $user = User::all();
 
@@ -70,7 +71,7 @@ class PengadaanController extends Controller
             ->where('kode', $kode)
             ->first();
 
-        return view('operator.detailpengadaan', compact('detailPengadaan', 'pengadaan', 'pegawai', 'item'));
+        return view('operator.detail-pengadaan', compact('detailPengadaan', 'pengadaan', 'pegawai', 'item'));
     }
 
     public function edit(string $kode)
@@ -128,11 +129,24 @@ class PengadaanController extends Controller
         return Excel::download(new PengadaanExport, 'pengadaan.xlsx');
     }
 
+    public function export_excel_detail(string $kode)
+    {
+        return Excel::download(new DetailPengadaanExport($kode), 'detail_pengadaan.xlsx');
+    }
+
     public function export_pdf()
     {
         $pengadaan = Pengadaan::with('pegawai')->get();
  
     	$pdf = Pdf::loadview('operator.pdf.pengadaan',['pengadaan'=>$pengadaan]);
     	return $pdf->download('laporan_pengadaan.pdf');
+    }
+
+    public function export_pdf_detail(string $kode)
+    {
+        $detailPengadaan = DetailPengadaan::where('kode_pengadaan', $kode)->with('item')->get();
+ 
+    	$pdf = Pdf::loadview('operator.pdf.detail-pengadaan',['detailPengadaan'=>$detailPengadaan]);
+    	return $pdf->download('laporan_detail_pengadaan.pdf');
     }
 }

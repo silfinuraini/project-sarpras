@@ -105,8 +105,8 @@
                     </svg>
                 </button>
                 <div x-show="isPengajuanMenuOpen" x-transition class="p-2 mt-2 space-y-2 text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900">
-                    <a class="block px-2 py-1 hover:text-gray-800 dark:hover:text-gray-200" href="{{ route('databarang') }}">Pengadaan</a>
-                    <a class="block px-2 py-1 hover:text-gray-800 dark:hover:text-gray-200" href="{{ route('barangkeluar') }}">Permintaan</a>
+                    <a class="block px-2 py-1 hover:text-gray-800 dark:hover:text-gray-200" href="{{ route('operator.pengadaan') }}">Pengadaan</a>
+                    <a class="block px-2 py-1 hover:text-gray-800 dark:hover:text-gray-200" href="{{ route('operator.permintaan') }}">Permintaan</a>
                 </div>
             </li>
         </ul>

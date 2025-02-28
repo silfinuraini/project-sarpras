@@ -1,10 +1,9 @@
 @extends('layouts.operator-main')
 
 @section('content')
-    <main class="h-full my-4 overflow-y-auto">
+    <main class="h-full overflow-y-auto">
         <div class="container my-4 grid px-6 mx-auto">
 
-            {{-- Breadcrumbs Section Start --}}
             <div class="text-sm mb-4 breadcrumbs text-gray-800">
                 <ul>
                     <li>
@@ -28,11 +27,10 @@
                     </li>
                 </ul>
             </div>
-            {{-- Breadcrumbs Section Start --}}
 
             {{-- Export Section Start --}}
-            @foreach ($detailPermintaan as $dp)
-                <div class="flex justify-end mb-3">
+            <div class="flex justify-end mb-5">
+                @foreach ($detailPengadaan as $dp)
                     <div class="dropdown dropdown-end dropdown-hover">
                         <div tabindex="0" role="button"
                             class="mb-1 btn flex border-none items-center justify-between px-4 py-2 text-sm font-medium  text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
@@ -45,15 +43,15 @@
                         </div>
                         <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                             <li><a
-                                    href="{{ route('operator.permintaan.detail.excel', ['kode' => $dp->kode_permintaan]) }}">Excel</a>
+                                    href="{{ route('operator.pengadaan.detail.excel', ['kode' => $dp->kode_pengadaan]) }}">Excel</a>
                             </li>
                             <li><a
-                                    href="{{ route('operator.permintaan.detail.pdf', ['kode' => $dp->kode_permintaan]) }}">PDF</a>
+                                    href="{{ route('operator.pengadaan.detail.pdf', ['kode' => $dp->kode_pengadaan]) }}">PDF</a>
                             </li>
                         </ul>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
             {{-- Export Section End --}}
 
             {{-- Nota Dinas Section Start --}}
@@ -61,7 +59,7 @@
                 <div class="flex items-center justify-between">
                     <h3 class="text-lg font-bold text-gray-800 mb-2">Nota Dinas</h3>
                     <h4 class="mb-4 flex ml-auto font-sans text-sm text-gray-800 dark:text-gray-300">
-                        {{ $permintaan->created_at }}
+                        {{ $pengadaan->created_at }}
                     </h4>
                 </div>
                 <div class="grid mt-2 md:grid-cols-4">
@@ -76,7 +74,7 @@
                         </div>
                     </div>
                     <div class="col-span-3 p-4 justify-center items-center">
-                        <input type="text" placeholder="" value=": {{ $permintaan->pegawai->nama }}" readonly
+                        <input type="text" placeholder="" value=": {{ $pengadaan->pegawai->nama }}" readonly
                             class="input w-full flex focus:outline-none items-center text-sm bg-white text-gray-700 h-10">
                     </div>
                     <div class="mx-4">
@@ -90,7 +88,7 @@
                         </div>
                     </div>
                     <div class="col-span-3 px-4 justify-center items-center">
-                        <input type="text" placeholder="" value=": {{ $permintaan->sifat }}" name="sifat" readonly
+                        <input type="text" placeholder="" value=": {{ $pengadaan->sifat }}" name="sifat" readonly
                             class="input max-w-xs flex focus:outline-none items-center text-sm bg-white text-gray-700 h-10">
                     </div>
                     <div class="mx-4">
@@ -105,14 +103,14 @@
                     </div>
                     <div class="col-span-3 px-4 justify-center items-center">
                         <textarea type="text" placeholder="" name="perihal" readonly
-                            class="input min-h-20 max-h-20 textarea w-full flex focus:outline-none items-center text-sm bg-white text-gray-700 h-10">: {{ $permintaan->perihal }}
+                            class="input min-h-20 max-h-20 textarea w-full flex focus:outline-none items-center text-sm bg-white text-gray-700 h-10">: {{ $pengadaan->perihal }}
                         </textarea>
                     </div>
                 </div>
             </div>
             {{-- Nota Dinas Section End --}}
 
-
+            
             {{-- Table Section Start --}}
             <div class="flex items-center bg-white border border-gray-300 rounded-box shadow-md dark:bg-gray-800 mt-5">
                 <div class="w-full overflow-hidden rounded-lg">
@@ -131,7 +129,7 @@
                             </thead>
 
                             <tbody class="bg-white divide-y dark:divide-gray-600 dark:bg-gray-800">
-                                @foreach ($detailPermintaan as $dp)
+                                    @foreach ($detailPengadaan as $dp)
                                     <tr class="text-gray-600 dark:text-gray-400">
                                         <td class="px-4 py-3 text-sm font-semibold">
                                             {{ $dp->kode_item }}
@@ -170,10 +168,11 @@
                                         </td>
                                         <td class="px-4 py-3">
                                             @if (Auth::user()->role == 'pengawas')
-                                                <div class="flex justify-center items-center space-x-4 text-sm">
-                                                    @if ($permintaan->status == 'menunggu' && $dp->kuantiti_disetujui == 0)
+                                            <td class="px-4 py-3">
+                                                @if ($pengadaan->status == 'menunggu')
+                                                    <div class="flex justify-center items-center space-x-4 text-sm">
                                                         <form class="flex gap-3.5"
-                                                            action="{{ route('operator.updatekuantitipermintaan', $dp->id) }}"
+                                                            action="{{ route('operator.updatekuantitipengadaan', $dp->id) }}"
                                                             method="POST">
                                                             @csrf
 
@@ -201,16 +200,8 @@
                                                                     </svg>
                                                                 </button>
                                                                 <dialog id="modal-{{ $dp->id }}" class="modal">
-                                                                    <div class="modal-box bg-white text-gray-800"
-                                                                        x-data="{
-                                                                            kuantiti: {{ $dp->kuantiti > $dp->item->stok ? $dp->item->stok : $dp->kuantiti }},
-                                                                            stok: {{ $dp->item->stok }},
-                                                                            stokMinimum: {{ $dp->item->stok_minimum }}
-                                                                        }">
-
+                                                                    <div class="modal-box bg-white text-gray-800">
                                                                         <h3 class="font-bold text-sm">Jumlah</h3>
-
-                                                                        <!-- Stok -->
                                                                         <p
                                                                             class="text-xs mt-2 text-gray-800 dark:text-gray-400 flex gap-1">
                                                                             <svg xmlns="http://www.w3.org/2000/svg"
@@ -219,51 +210,27 @@
                                                                                 <path
                                                                                     d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5 8 5.961 14.154 3.5zM15 4.239l-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464z" />
                                                                             </svg>
-                                                                            Stok: <span x-text="stok"></span>
+                                                                            Stok: {{ $dp->item->stok }}
                                                                         </p>
-
-                                                                        <!-- Stok Minimum (Warna Berubah Real-Time) -->
-                                                                        <p class="text-xs mt-2 flex gap-1"
-                                                                            :class="kuantiti > (stok - stokMinimum) ?
-                                                                                'text-red-600' :
-                                                                                'text-gray-800 dark:text-gray-400'">
-                                                                            <svg class="w-4 h-4"
-                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                width="16" height="16"
-                                                                                fill="currentColor" viewBox="0 0 16 16"
-                                                                                :class="kuantiti > (stok - stokMinimum) ?
-                                                                                    'text-red-600' : 'text-gray-800'">
-                                                                                <path
-                                                                                    d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
-                                                                                <path
-                                                                                    d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0" />
-                                                                            </svg>
-                                                                            Stok Minimum: <span
-                                                                                x-text="stokMinimum"></span>
-                                                                        </p>
-
-                                                                        <!-- Input dan Button -->
                                                                         <div class="flex gap-2">
-                                                                            <input type="number" x-model="kuantiti"
-                                                                                :max="stok" min="1"
+                                                                            <input type="number"
+                                                                                value="{{ $dp->kuantiti }}"
+                                                                                min=1
                                                                                 name="kuantiti_disetujui"
-                                                                                class="input bg-white text-gray-800 mt-4 input-bordered w-full"
-                                                                                value="{{ $dp->kuantiti > $dp->item->stok ? $dp->item->stok : $dp->kuantiti }}" />
+                                                                                class="input bg-white text-gray-800 mt-4 input-bordered w-full" />
                                                                             <button type="submit"
                                                                                 class="btn px-5 mt-4 border-none py-3 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-xl active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                                                                                 Acc
                                                                             </button>
                                                                         </div>
                                                                     </div>
-
                                                                     <form method="dialog" class="modal-backdrop">
                                                                         <button>close</button>
                                                                     </form>
-
                                                                 </dialog>
                                                             @endif
 
-                                                            <button value="0" name="kuantiti_disetujui"
+                                                            <button value=0 name="kuantiti_disetujui"
                                                                 class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-xl active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
                                                                 aria-label="Like" type="submit">
 
@@ -275,14 +242,15 @@
                                                                 </svg>
                                                             </button>
                                                         </form>
-                                                    @endif
-                                                </div>
-                                            @endif
+                                                    </div>
+                                                @endif
+                                            </td>
+                                        @endif
                                         </td>
 
                                     </tr>
-                                @endforeach
-                            </tbody>
+                                    @endforeach
+                                </tbody>
                         </table>
                     </div>
                     <div class="mx-4 my-2">
@@ -292,8 +260,8 @@
             {{-- Table Section End --}}
 
             @if (Auth::user()->role == 'pengawas')
-                @if ($permintaan->status == 'menunggu')
-                    <form action="{{ route('operator.updatepermintaan', $permintaan->kode) }}" method="POST">
+                @if ($pengadaan->status == 'menunggu')
+                    <form action="{{ route('operator.updatepengadaan', $pengadaan->kode) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="grid grid-cols-2 gap-2">
@@ -311,7 +279,6 @@
                     </form>
                 @endif
             @endif
-
         </div>
     </main>
 @endsection

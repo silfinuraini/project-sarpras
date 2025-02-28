@@ -306,21 +306,21 @@
                                     @can('isAdmin')
                                         <a href="{{ route('dashboard.admin') }}"
                                             class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                                             Dashboard
+                                            Dashboard
                                         </a>
                                     @endcan
 
                                     @can('isPengawas')
                                         <a href="{{ route('dashboard.pengawas') }}"
                                             class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                                             Dashboard
+                                            Dashboard
                                         </a>
                                     @endcan
 
                                     @can('isUnit')
                                         <a href="{{ route('dashboard.unit') }}"
                                             class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                                             Dashboard
+                                            Dashboard
                                         </a>
                                     @endcan
                                 @else
@@ -455,8 +455,9 @@
                             <div
                                 class="max-w-sm bg-white border border-gray-200 rounded-box shadow dark:bg-gray-800 dark:border-gray-700">
                                 <a href="#">
-                                    <img src={{ asset('storage/' . $item->gambar) }} class="rounded-t-lg aspect-square"
-                                        alt="https://i.pinimg.com/564x/84/8e/62/848e62247384ee45350877695994a4cb.jpg" />
+                                    <img class="rounded-t-lg aspect-square"
+                                        src="{{ $item->gambar ? asset('storage/' . $item->gambar) : 'https://i.pinimg.com/564x/84/8e/62/848e62247384ee45350877695994a4cb.jpg' }}"
+                                        alt="Item Image">
                                 </a>
                                 <div class="p-5">
                                     <a href="#">
@@ -466,7 +467,7 @@
                                     </a>
                                     <p
                                         class="mb-3 font-normal text-xs xl:text-sm md:text-sm text-gray-700 dark:text-gray-400">
-                                        {{ $item->deskripsi }}
+                                        {{ Str::limit($item->deskripsi, 50, '...') }}
 
                                     </p>
                                     <div class="flex gap-2">
@@ -643,13 +644,10 @@
                                             class="inline-flex w-full justify-center items-center px-3 py-2 text-xs xl:text-sm md:text-sm font-medium text-center text-white bg-purple-700 rounded-box hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
                                             Tambahkan
                                         </button>
-
-
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-
                     </div>
                 </section>
                 {{-- Product Display End --}}
